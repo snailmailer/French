@@ -8,9 +8,9 @@ export const a1Data: LevelData = {
         { id: 'greetings-1', title: 'Greetings, how are you', description: 'Salutations de base.', translation: 'Salutations', blocks: [{ type: 'examples', list: [{ french: 'Bonjour, comment ça va ?', translation: 'Hello, how are you?' }] }] },
         {
             id: 'nombres-0-69',
-            title: 'Les nombres 0-69',
-            description: 'Compter jusqu\'à 69.',
-            translation: 'Numbers 0-69',
+            title: 'Les nombres 0-100',
+            description: 'Compter jusqu\'à 100.',
+            translation: 'Numbers 0-100',
             blocks: [{
                 type: 'markdown',
                 content: `<table style="width:100%; border-collapse:collapse; margin-bottom:1rem;">
@@ -18,7 +18,7 @@ export const a1Data: LevelData = {
 <tbody>
 <tr><td style="padding:8px; border-bottom:1px solid #444;">0</td><td style="padding:8px; border-bottom:1px solid #444;">zéro</td><td style="padding:8px; border-bottom:1px solid #444;">zay-ro</td></tr>
 <tr><td style="padding:8px; border-bottom:1px solid #444;">1</td><td style="padding:8px; border-bottom:1px solid #444;">un</td><td style="padding:8px; border-bottom:1px solid #444;">uh</td></tr>
-<tr><td style="padding:8px; border-bottom:1px solid #444;">2</td><td style="padding:8px; border-bottom:1px solid #444;">deux</td><td style="padding:8px; border-bottom:1px solid #444;">uh</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">2</td><td style="padding:8px; border-bottom:1px solid #444;">deux</td><td style="padding:8px; border-bottom:1px solid #444;">duh</td></tr>
 <tr><td style="padding:8px; border-bottom:1px solid #444;">3</td><td style="padding:8px; border-bottom:1px solid #444;">trois</td><td style="padding:8px; border-bottom:1px solid #444;">twah</td></tr>
 <tr><td style="padding:8px; border-bottom:1px solid #444;">4</td><td style="padding:8px; border-bottom:1px solid #444;">quatre</td><td style="padding:8px; border-bottom:1px solid #444;">katr</td></tr>
 <tr><td style="padding:8px; border-bottom:1px solid #444;">5</td><td style="padding:8px; border-bottom:1px solid #444;">cinq</td><td style="padding:8px; border-bottom:1px solid #444;">sank</td></tr>
@@ -37,10 +37,37 @@ export const a1Data: LevelData = {
 <tr><td style="padding:8px; border-bottom:1px solid #444;">18</td><td style="padding:8px; border-bottom:1px solid #444;">dix-huit</td><td style="padding:8px; border-bottom:1px solid #444;">dees-weet</td></tr>
 <tr><td style="padding:8px; border-bottom:1px solid #444;">19</td><td style="padding:8px; border-bottom:1px solid #444;">dix-neuf</td><td style="padding:8px; border-bottom:1px solid #444;">dees-nuhf</td></tr>
 <tr><td style="padding:8px; border-bottom:1px solid #444;">20</td><td style="padding:8px; border-bottom:1px solid #444;">vingt</td><td style="padding:8px; border-bottom:1px solid #444;">van</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">21</td><td style="padding:8px; border-bottom:1px solid #444;">vingt et un</td><td style="padding:8px; border-bottom:1px solid #444;">van-tay-uh</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">22</td><td style="padding:8px; border-bottom:1px solid #444;">vingt-deux</td><td style="padding:8px; border-bottom:1px solid #444;">van-duh</td></tr>
 <tr><td style="padding:8px; border-bottom:1px solid #444;">30</td><td style="padding:8px; border-bottom:1px solid #444;">trente</td><td style="padding:8px; border-bottom:1px solid #444;">trant</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">31</td><td style="padding:8px; border-bottom:1px solid #444;">trente et un</td><td style="padding:8px; border-bottom:1px solid #444;">trant-tay-uh</td></tr>
 <tr><td style="padding:8px; border-bottom:1px solid #444;">40</td><td style="padding:8px; border-bottom:1px solid #444;">quarante</td><td style="padding:8px; border-bottom:1px solid #444;">ka-rant</td></tr>
 <tr><td style="padding:8px; border-bottom:1px solid #444;">50</td><td style="padding:8px; border-bottom:1px solid #444;">cinquante</td><td style="padding:8px; border-bottom:1px solid #444;">san-kant</td></tr>
 <tr><td style="padding:8px; border-bottom:1px solid #444;">60</td><td style="padding:8px; border-bottom:1px solid #444;">soixante</td><td style="padding:8px; border-bottom:1px solid #444;">swa-sant</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">70</td><td style="padding:8px; border-bottom:1px solid #444;">soixante-dix</td><td style="padding:8px; border-bottom:1px solid #444;">swa-sant-dees</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">71</td><td style="padding:8px; border-bottom:1px solid #444;">soixante et onze</td><td style="padding:8px; border-bottom:1px solid #444;">swa-sant-ay-onz</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">72</td><td style="padding:8px; border-bottom:1px solid #444;">soixante-douze</td><td style="padding:8px; border-bottom:1px solid #444;">swa-sant-dooz</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">73</td><td style="padding:8px; border-bottom:1px solid #444;">soixante-treize</td><td style="padding:8px; border-bottom:1px solid #444;">swa-sant-trez</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">74</td><td style="padding:8px; border-bottom:1px solid #444;">soixante-quatorze</td><td style="padding:8px; border-bottom:1px solid #444;">swa-sant-ka-torz</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">75</td><td style="padding:8px; border-bottom:1px solid #444;">soixante-quinze</td><td style="padding:8px; border-bottom:1px solid #444;">swa-sant-kanz</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">76</td><td style="padding:8px; border-bottom:1px solid #444;">soixante-seize</td><td style="padding:8px; border-bottom:1px solid #444;">swa-sant-sez</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">77</td><td style="padding:8px; border-bottom:1px solid #444;">soixante-dix-sept</td><td style="padding:8px; border-bottom:1px solid #444;">swa-sant-dees-set</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">78</td><td style="padding:8px; border-bottom:1px solid #444;">soixante-dix-huit</td><td style="padding:8px; border-bottom:1px solid #444;">swa-sant-dees-weet</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">79</td><td style="padding:8px; border-bottom:1px solid #444;">soixante-dix-neuf</td><td style="padding:8px; border-bottom:1px solid #444;">swa-sant-dees-nuhf</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">80</td><td style="padding:8px; border-bottom:1px solid #444;">quatre-vingts</td><td style="padding:8px; border-bottom:1px solid #444;">katr-van</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">81</td><td style="padding:8px; border-bottom:1px solid #444;">quatre-vingt-un</td><td style="padding:8px; border-bottom:1px solid #444;">katr-van-uh</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">82</td><td style="padding:8px; border-bottom:1px solid #444;">quatre-vingt-deux</td><td style="padding:8px; border-bottom:1px solid #444;">katr-van-duh</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">90</td><td style="padding:8px; border-bottom:1px solid #444;">quatre-vingt-dix</td><td style="padding:8px; border-bottom:1px solid #444;">katr-van-dees</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">91</td><td style="padding:8px; border-bottom:1px solid #444;">quatre-vingt-onze</td><td style="padding:8px; border-bottom:1px solid #444;">katr-van-onz</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">92</td><td style="padding:8px; border-bottom:1px solid #444;">quatre-vingt-douze</td><td style="padding:8px; border-bottom:1px solid #444;">katr-van-dooz</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">93</td><td style="padding:8px; border-bottom:1px solid #444;">quatre-vingt-treize</td><td style="padding:8px; border-bottom:1px solid #444;">katr-van-trez</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">94</td><td style="padding:8px; border-bottom:1px solid #444;">quatre-vingt-quatorze</td><td style="padding:8px; border-bottom:1px solid #444;">katr-van-ka-torz</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">95</td><td style="padding:8px; border-bottom:1px solid #444;">quatre-vingt-quinze</td><td style="padding:8px; border-bottom:1px solid #444;">katr-van-kanz</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">96</td><td style="padding:8px; border-bottom:1px solid #444;">quatre-vingt-seize</td><td style="padding:8px; border-bottom:1px solid #444;">katr-van-sez</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">97</td><td style="padding:8px; border-bottom:1px solid #444;">quatre-vingt-dix-sept</td><td style="padding:8px; border-bottom:1px solid #444;">katr-van-dees-set</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">98</td><td style="padding:8px; border-bottom:1px solid #444;">quatre-vingt-dix-huit</td><td style="padding:8px; border-bottom:1px solid #444;">katr-van-dees-weet</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">99</td><td style="padding:8px; border-bottom:1px solid #444;">quatre-vingt-dix-neuf</td><td style="padding:8px; border-bottom:1px solid #444;">katr-van-dees-nuhf</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">100</td><td style="padding:8px; border-bottom:1px solid #444;">cent</td><td style="padding:8px; border-bottom:1px solid #444;">san</td></tr>
 </tbody></table>`,
                 translation: 'Les bases des nombres.'
             }]
@@ -58,9 +85,7 @@ export const a1Data: LevelData = {
         { id: 'prep-pays-ville', title: 'Les Prépositions + les pays, la ville', description: 'En, Au, Aux, À.', translation: 'Prepositions + Countries/Cities', blocks: [{ type: 'markdown', content: '<b>À</b> Paris. <b>En</b> France (F). <b>Au</b> Canada (M).', translation: 'Je vais à Paris.' }] },
         { id: 'demo-adj', title: 'Les adjectifs démonstratifs', description: 'Ce, Cet, Cette, Ces.', translation: 'Demonstrative Adjectives', blocks: [{ type: 'markdown', content: 'Ce (M), Cet (M+Vowel), Cette (F), Ces (Pl).', translation: 'Ce livre. Cette table.' }] },
         { id: 'sappeler-only', title: 'S\'appeler', description: 'Se présenter (Rappel).', translation: 'To be named', blocks: [{ type: 'examples', list: [{ french: 'Je m\'appelle Marie.', translation: 'My name is Marie.' }] }] },
-        { id: 'nombres-dates-full', title: 'Les nombres (0-20), jours, mois, date', description: 'Calendrier.', translation: 'Numbers 0-20, Days, Months', blocks: [{ type: 'markdown', content: 'Lundi, Mardi, Mercredi... Janvier, Février...', translation: 'C\'est le 12 mars.' }] },
-        { id: 'nombres-21-69', title: 'Les nombres 21-69', description: 'Compter (Suite).', translation: 'Numbers 21-69', blocks: [{ type: 'markdown', content: 'Vingt et un, Vingt-deux...', translation: 'Pratique des dizaines.' }] },
-        { id: 'nombres-70-100', title: 'Les nombres (70-100)', description: 'Nombres complexes.', translation: 'Numbers 70-100', blocks: [{ type: 'markdown', content: '70 (soixante-dix), 80 (quatre-vingts), 90 (quatre-vingt-dix).', translation: 'Attention aux exceptions belges/suisses (septante/nonante).' }] },
+
         { id: 'comment-ca-va-2', title: 'Comment ça va ?', description: 'Salutations informelles.', translation: 'How are you?', blocks: [{ type: 'examples', list: [{ french: 'Ça roule ?', translation: 'How\'s it going?' }, { french: 'Ça va fort.', translation: 'Going strong.' }] }] },
         { id: 'pays-article', title: 'Les Pays, l\'article défini', description: 'Le Japon, La France.', translation: 'Countries & Definite Articles', blocks: [{ type: 'markdown', content: 'Le (M), La (F), Les (Pl) devant les pays.', translation: 'La France est belle.' }] },
         { id: 'pronoms-sujets', title: 'Les pronoms sujets, s\'appeler, être', description: 'Révision.', translation: 'Subject Pronouns, etc.', blocks: [{ type: 'markdown', content: 'Je, Tu, Il, Elle, On, Nous, Vous, Ils, Elles.', translation: 'Révision des bases.' }] },
