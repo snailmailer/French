@@ -34,7 +34,16 @@ const LevelPage = () => {
             </Link>
 
             <header style={{ marginBottom: '3rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>
-                <h1 style={{ color: 'var(--accent-color)', marginBottom: '0.5rem' }}>{levelData.title}</h1>
+                <h1 style={{ color: 'var(--accent-color)', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    {levelData.title}
+                    <button
+                        onClick={() => speak(levelData.title)}
+                        style={{ background: 'transparent', border: '1px solid #4CAF50', borderRadius: '50%', cursor: 'pointer', padding: '0.4rem', color: '#4CAF50', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        title="Listen"
+                    >
+                        <span style={{ fontSize: '1.2rem' }}>🔊</span>
+                    </button>
+                </h1>
                 <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)' }}>{levelData.description}</p>
             </header>
 
@@ -42,7 +51,16 @@ const LevelPage = () => {
                 {levelData.topics.map((topic) => (
                     <section key={topic.id} style={{ marginBottom: '4rem', background: 'var(--bg-secondary)', padding: '2rem', borderRadius: '16px' }}>
                         <h2 style={{ borderLeft: '4px solid var(--accent-color)', paddingLeft: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span>{topic.title}</span>
+                            <span style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                {topic.title}
+                                <button
+                                    onClick={() => speak(topic.title)}
+                                    style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50', padding: 0 }}
+                                    title="Listen"
+                                >
+                                    🔊
+                                </button>
+                            </span>
                             <span style={{ fontSize: '1rem', fontWeight: 'normal', color: 'var(--text-secondary)' }}>{topic.translation}</span>
                         </h2>
 
@@ -89,7 +107,7 @@ const LevelPage = () => {
                                                             <button
                                                                 onClick={() => speak(`${row.pronoun} ${row.form}`)}
                                                                 title="Listen"
-                                                                style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--accent-color)' }}
+                                                                style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50' }}
                                                             >
                                                                 🔊
                                                             </button>
@@ -111,7 +129,7 @@ const LevelPage = () => {
                                                         <span style={{ fontWeight: '500', fontSize: '1.1em' }}>{ex.french}</span>
                                                         <button
                                                             onClick={() => speak(ex.french)}
-                                                            style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}
+                                                            style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, color: '#4CAF50' }}
                                                         >
                                                             🔊
                                                         </button>

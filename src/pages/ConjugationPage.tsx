@@ -134,6 +134,7 @@ const ConjugationPage = () => {
                                             <ConjugationTable
                                                 key={tense}
                                                 verb={selectedVerb.infinitive}
+                                                translation={selectedVerb.translation}
                                                 tense={tense}
                                                 conjugations={data}
                                                 pronunciations={{}}
