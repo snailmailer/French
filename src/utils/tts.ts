@@ -25,8 +25,8 @@ export const speakFrench = (text: string) => {
         return;
     }
 
-    // Cancel active speech to prevent queue buildup/lag on mobile
-    window.speechSynthesis.cancel();
+    // Removing cancel() as it causes audio cutoff on some devices/browsers
+    // window.speechSynthesis.cancel(); 
 
     const utterance = new SpeechSynthesisUtterance(text);
 
