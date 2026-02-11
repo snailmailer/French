@@ -58,6 +58,32 @@ const ConjugationPage = () => {
                 />
             </div>
 
+            {/* Verb Dropdown */}
+            <div style={{ marginBottom: '3rem' }}>
+                <select
+                    value={selectedVerb?.infinitive || ''}
+                    onChange={(e) => handleSearch(e.target.value)}
+                    style={{
+                        width: '100%',
+                        padding: '1rem',
+                        fontSize: '1.2rem',
+                        borderRadius: '12px',
+                        border: '2px solid var(--border-color)',
+                        background: 'var(--bg-secondary)',
+                        color: 'var(--text-primary)',
+                        outline: 'none',
+                        cursor: 'pointer'
+                    }}
+                >
+                    <option value="">Or select a verb from the list...</option>
+                    {verbs.map((v) => (
+                        <option key={v.infinitive} value={v.infinitive}>
+                            {v.infinitive}
+                        </option>
+                    ))}
+                </select>
+            </div>
+
             {selectedVerb ? (
                 <div className="verb-details">
                     <div className="verb-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
