@@ -6,6 +6,10 @@ export const etre: VerbDefinition = {
     group: 3,
     auxiliary: 'avoir',
     rules: ['Auxiliary verb.', 'Very irregular.'],
+    examples: [
+        { sentence: "Je suis fatigué.", translation: "I am tired." },
+        { sentence: "Où es-tu ?", translation: "Where are you?" }
+    ],
     conjugations: {
         Indicatif: {
             'Présent': [

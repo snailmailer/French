@@ -5,7 +5,11 @@ export const faire: VerbDefinition = {
     translation: 'to do/make',
     group: 3,
     auxiliary: 'avoir',
-    rules: ['Irregular.', 'Used in many idioms.'],
+    rules: ['Irregular conjugation.', 'Very common regular-irregular pattern.'],
+    examples: [
+        { sentence: "Je fais du sport.", translation: "I do sports." },
+        { sentence: "Qu'est-ce que tu fais ?", translation: "What are you doing?" }
+    ],
     conjugations: {
         Indicatif: {
             'Présent': [

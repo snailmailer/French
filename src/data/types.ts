@@ -18,9 +18,13 @@ export interface VerbConjugations {
 export interface VerbDefinition {
     infinitive: string;
     translation: string;
-    group: 1 | 2 | 3;
-    auxiliary: 'avoir' | 'être';
+    group: number | string;
+    auxiliary: 'avoir' | 'etre' | string;
     rules: string[];
+    examples?: {
+        sentence: string;
+        translation: string;
+    }[];
     conjugations: VerbConjugations;
 }
 

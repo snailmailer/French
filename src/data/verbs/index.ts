@@ -10,9 +10,18 @@ import { souvenir } from './souvenir';
 import { vouloir } from './vouloir';
 
 // --- Regular Verbs from User List ---
-export const accepter = createRegularVerb('accepter', 'ER', 'avoir', 'to accept');
-export const samuser = createRegularVerb("s'amuser", 'ER', 'avoir', 'to have fun', true);
-export const sappeler = createRegularVerb("s'appeler", 'ER', 'avoir', 'to be called', true);
+export const accepter = createRegularVerb('accepter', 'ER', 'avoir', 'to accept', false, [], [
+    { sentence: "J'accepte votre proposition.", translation: "I accept your proposal." },
+    { sentence: "Nous acceptons les cartes de crédit.", translation: "We accept credit cards." }
+]);
+export const samuser = createRegularVerb("s'amuser", 'ER', 'avoir', 'to have fun', true, [], [
+    { sentence: "Les enfants s'amusent dans le parc.", translation: "The children are having fun in the park." },
+    { sentence: "Je m'amuse beaucoup avec ce jeu.", translation: "I am having a lot of fun with this game." }
+]);
+export const sappeler = createRegularVerb("s'appeler", 'ER', 'avoir', 'to be called', true, [], [
+    { sentence: "Comment vous appelez-vous ?", translation: "What is your name?" },
+    { sentence: "Je m'appelle Pierre.", translation: "My name is Pierre." }
+]);
 export const sasseoir = asseoir;
 export const attendre = createRegularVerb('attendre', 'RE', 'avoir', 'to wait');
 export const se_baigner = createRegularVerb('se baigner', 'ER', 'avoir', 'to bathe/swim', true);
@@ -46,13 +55,19 @@ export const se_laver = createRegularVerb('se laver', 'ER', 'avoir', 'to wash on
 export const se_laver_les_mains = createRegularVerb('se laver les mains', 'ER', 'avoir', 'to wash one\'s hands', true);
 export const se_laver_le_visage = createRegularVerb('se laver le visage', 'ER', 'avoir', 'to wash one\'s face', true);
 export const se_lever = createRegularVerb('se lever', 'ER', 'avoir', 'to get up', true);
-export const manger = createRegularVerb('manger', 'ER', 'avoir', 'to eat');
+export const manger = createRegularVerb('manger', 'ER', 'avoir', 'to eat', false, [], [
+    { sentence: "Je mange une pomme.", translation: "I am eating an apple." },
+    { sentence: "Nous mangeons ensemble à midi.", translation: "We eat together at noon." }
+]);
 export const se_maquiller = createRegularVerb('se maquiller', 'ER', 'avoir', 'to put on makeup', true);
 export const se_marier = createRegularVerb('se marier', 'ER', 'avoir', 'to get married', true);
 export const nettoyer = createRegularVerb('nettoyer', 'ER', 'avoir', 'to clean');
 export const offrir = createRegularVerb('offrir', 'IR_COCOS', 'avoir', 'to offer');
 export const oublier = createRegularVerb('oublier', 'ER', 'avoir', 'to forget');
-export const parler = createRegularVerb('parler', 'ER', 'avoir', 'to speak');
+export const parler = createRegularVerb('parler', 'ER', 'avoir', 'to speak', false, [], [
+    { sentence: "Je parle français un petit peu.", translation: "I speak French a little bit." },
+    { sentence: "Ils parlent de leurs vacances.", translation: "They are talking about their vacation." }
+]);
 export const se_peigner = createRegularVerb('se peigner', 'ER', 'avoir', 'to comb one\'s hair', true);
 export const perdre = createRegularVerb('perdre', 'RE', 'avoir', 'to lose');
 export const preciser = createRegularVerb('préciser', 'ER', 'avoir', 'to specify');

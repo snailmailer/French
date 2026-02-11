@@ -5,7 +5,11 @@ export const avoir: VerbDefinition = {
     translation: 'to have',
     group: 3,
     auxiliary: 'avoir',
-    rules: ['Auxiliary verb.', 'Irregular.'],
+    rules: ['Auxiliary verb.', 'Irregular roots.'],
+    examples: [
+        { sentence: "J'ai faim.", translation: "I am hungry." },
+        { sentence: "Il a une voiture.", translation: "He has a car." }
+    ],
     conjugations: {
         Indicatif: {
             'Présent': [

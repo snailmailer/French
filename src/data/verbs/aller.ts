@@ -4,8 +4,12 @@ export const aller: VerbDefinition = {
     infinitive: 'aller',
     translation: 'to go',
     group: 3,
-    auxiliary: 'être',
-    rules: ['Irregular.', 'Takes "être" in compound tenses.'],
+    auxiliary: 'etre',
+    rules: ['Irregular conjugation.', 'Uses être as auxiliary.'],
+    examples: [
+        { sentence: "Je vais au cinéma.", translation: "I am going to the cinema." },
+        { sentence: "Comment allez-vous ?", translation: "How are you?" }
+    ],
     conjugations: {
         Indicatif: {
             'Présent': [

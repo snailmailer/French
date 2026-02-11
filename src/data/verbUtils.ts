@@ -69,7 +69,7 @@ const REFLEXIVE_PRONOUNS = ['me', 'te', 'se', 'nous', 'vous', 'se'];
 const J_APOSTROPHE_VOWELS = ['a', 'e', 'i', 'o', 'u', 'y', 'h', 'ê', 'î'];
 
 
-export function createRegularVerb(infinitive: string, type: VerbEndingType, auxiliary: 'avoir' | 'etre' = 'avoir', definition: string = '', isReflexive: boolean = false, customRules: string[] = []) {
+export function createRegularVerb(infinitive: string, type: VerbEndingType, auxiliary: 'avoir' | 'etre' = 'avoir', definition: string = '', isReflexive: boolean = false, customRules: string[] = [], examples: { sentence: string, translation: string }[] = []) {
     // If reflexive, force auxiliary to be être for compound tenses
     const actualAux = isReflexive ? 'etre' : auxiliary;
 
@@ -168,6 +168,7 @@ export function createRegularVerb(infinitive: string, type: VerbEndingType, auxi
         group: type === 'ER' ? '1st' : (type === 'IR_ISS' ? '2nd' : '3rd'),
         auxiliary: isReflexive ? 'Être (Reflexive)' : (auxiliary === 'avoir' ? 'Avoir' : 'Être'),
         rules: [...generatedRules, ...customRules],
+        examples,
         conjugations: {
             Indicatif: {},
             Conditionnel: {},

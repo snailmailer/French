@@ -117,6 +117,21 @@ const ConjugationPage = () => {
                         </div>
                     </div>
 
+                    {/* Examples Section */}
+                    {selectedVerb.examples && selectedVerb.examples.length > 0 && (
+                        <div style={{ marginBottom: '2rem', background: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: '12px' }}>
+                            <h3 style={{ color: 'var(--accent-color)', marginBottom: '1rem' }}>Examples</h3>
+                            <ul style={{ listStyle: 'none', padding: 0 }}>
+                                {selectedVerb.examples.map((ex, idx) => (
+                                    <li key={idx} style={{ marginBottom: '0.8rem', display: 'flex', flexDirection: 'column' }}>
+                                        <span style={{ fontSize: '1.1rem', fontWeight: 500 }}>{ex.sentence}</span>
+                                        <span style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', fontStyle: 'italic' }}>{ex.translation}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+
                     <div className="conjugation-container">
                         {['Indicatif', 'Subjonctif', 'Conditionnel', 'Impératif', 'Participe'].map((mood) => {
                             const moodKey = mood as keyof typeof selectedVerb.conjugations;
