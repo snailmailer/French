@@ -6,6 +6,8 @@ import { b1Data } from '../data/b1';
 import { b2Data } from '../data/b2';
 import type { LevelData } from '../data/types';
 
+import { speakFrench } from '../utils/tts';
+
 const dataMap: { [key: string]: LevelData } = {
     'A1': a1Data,
     'A2': a2Data,
@@ -21,11 +23,7 @@ const LevelPage = () => {
         return <div className="container">Level not found</div>;
     }
 
-    const speak = (text: string) => {
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'fr-FR';
-        window.speechSynthesis.speak(utterance);
-    };
+    const speak = (text: string) => speakFrench(text);
 
     return (
         <div className="container">

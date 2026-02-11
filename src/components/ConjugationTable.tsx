@@ -1,5 +1,6 @@
 import React from 'react';
 import { Volume2 } from 'lucide-react';
+import { speakFrench } from '../utils/tts';
 
 interface ConjugationProps {
     verb: string;
@@ -10,11 +11,7 @@ interface ConjugationProps {
 }
 
 const ConjugationTable: React.FC<ConjugationProps> = ({ verb, translation, tense, conjugations }) => {
-    const speak = (text: string) => {
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'fr-FR';
-        window.speechSynthesis.speak(utterance);
-    };
+    const speak = (text: string) => speakFrench(text);
 
     return (
         <div className="conjugation-container" style={{ margin: '2rem 0', background: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: '12px' }}>
