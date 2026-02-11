@@ -3,178 +3,33 @@ import type { LevelData } from './types';
 export const a2Data: LevelData = {
     id: 'A2',
     title: 'A2 - Élémentaire',
-    description: 'Routine, passé, futur proche, description physique, obligations.',
+    description: 'Programme complet pas-à-pas.',
     topics: [
-        {
-            id: 'pronominal-verbs-routine',
-            title: 'Les Verbes Pronominaux & La Routine',
-            description: 'Daily routine verbs (se lever, se laver).',
-            translation: 'Reflexive Verbs & Routine',
-            formula: 'Je me + Verbe / Tu te + Verbe...',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: 'Reflexive verbs reflect the action back on the subject. Common for daily routine.',
-                    translation: 'Se lever (to get up), Se laver (to wash), S\'habiller (to get dressed).'
-                },
-                {
-                    type: 'conjugation',
-                    verb: 'Se lever',
-                    tense: 'Présent',
-                    data: [
-                        { pronoun: 'Je', form: 'me lève' }, { pronoun: 'Tu', form: 'te lèves' }, { pronoun: 'Il/Elle', form: 'se lève' },
-                        { pronoun: 'Nous', form: 'nous levons' }, { pronoun: 'Vous', form: 'vous levez' }, { pronoun: 'Ils/Elles', form: 'se lèvent' }
-                    ]
-                },
-                {
-                    type: 'examples',
-                    list: [
-                        { french: 'Je me réveille à 7h00.', translation: 'I wake up at 7:00.' },
-                        { french: 'Il se brosse les dents.', translation: 'He brushes his teeth.' }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 'body-pain-physical',
-            title: 'Le Corps, Avoir mal à, Description',
-            description: 'Body parts, physical description, expressing pain.',
-            translation: 'The Body, Pain, Physical Description',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: '<b>Body Parts</b>: La tête, le bras, la jambe, le ventre, le dos, les yeux.<br><b>Avoir mal à</b>: J\'ai mal à la tête (headache), au ventre (stomach ache).',
-                    translation: 'Description : Il est grand, elle est blonde, il a les yeux bleus.'
-                }
-            ]
-        },
-        {
-            id: 'feelings-sensations',
-            title: 'Exprimer des émotions et sensations',
-            description: 'Feeling hot, cold, happy, sad.',
-            translation: 'Emotions and Sensations',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: 'Use <b>Avoir</b> for needs/sensations (froid, chaud, faim, soif, peur).<br>Use <b>Être</b> for emotions (content, triste, fatigué).',
-                    translation: 'J\'ai faim (I am hungry). Je suis content (I am happy).'
-                }
-            ]
-        },
-        {
-            id: 'modals-propose',
-            title: 'Pouvoir, Vouloir, Devoir & Proposer',
-            description: 'Can, Want, Must. Proposing outings.',
-            translation: 'Modals & Proposing an outing',
-            blocks: [
-                {
-                    type: 'conjugation',
-                    verb: 'Pouvoir',
-                    tense: 'Présent',
-                    data: [
-                        { pronoun: 'Je', form: 'peux' }, { pronoun: 'Tu', form: 'peux' }, { pronoun: 'Il', form: 'peut' },
-                        { pronoun: 'Nous', form: 'pouvons' }, { pronoun: 'Vous', form: 'pouvez' }, { pronoun: 'Ils', form: 'peuvent' }
-                    ]
-                },
-                {
-                    type: 'examples',
-                    list: [
-                        { french: 'Tu veux aller au cinéma ?', translation: 'Do you want to go to the movies?' },
-                        { french: 'Je dois partir.', translation: 'I must leave.' },
-                        { french: 'On peut manger au resto ?', translation: 'Can we eat at the restaurant?' }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 'imperative-invitation',
-            title: 'L\'Impératif & Inviter',
-            description: 'Orders, advice, invitations (Standard & Pronominal).',
-            translation: 'The Imperative & Inviting',
-            formula: 'Verbe without subject pronoun (Tu/Nous/Vous forms)',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: 'Used for commands. Keep the verb form of Tu, Nous, Vous (drop "s" for -er verbs in Tu form).<br><b>Reflexive</b>: Lève-toi ! (Get up!)',
-                    translation: 'Entrez ! (Come in!) Assieds-toi ! (Sit down!)'
-                },
-                {
-                    type: 'examples',
-                    list: [
-                        { french: 'Viens chez moi ce soir !', translation: 'Come to my place tonight!' },
-                        { french: 'Ne fumez pas ici.', translation: 'Do not smoke here.' }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 'weather-climate',
-            title: 'Parler du climat et Les Couleurs',
-            description: 'Weather and Colors.',
-            translation: 'Weather & Colors',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: '<b>Weather</b>: Il fait beau, il pleut, il neige, il fait froid.<br><b>Colors</b>: Rouge, bleu, vert, jaune, noir, blanc (agree with noun).',
-                    translation: 'Il fait chaud aujourd\'hui.'
-                }
-            ]
-        },
-        {
-            id: 'future-proche',
-            title: 'Le Futur Proche',
-            description: 'Going to do something.',
-            translation: 'The Near Future',
-            formula: 'Aller (Present) + Infinitive',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: 'Use standard verbs or pronominal verbs.',
-                    translation: 'Je vais manger. Je vais me coucher.'
-                },
-                {
-                    type: 'examples',
-                    list: [
-                        { french: 'Qu\'est-ce que tu vas faire ce week-end ?', translation: 'What are you going to do this weekend?' },
-                        { french: 'Nous allons partir en vacances.', translation: 'We are going to go on vacation.' }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 'professions-character',
-            title: 'Les Professions & Caractériser une personne',
-            description: 'Jobs and personality traits.',
-            translation: 'Professions & Character',
-            blocks: [
-                {
-                    type: 'examples',
-                    list: [
-                        { french: 'Il est médecin.', translation: 'He is a doctor.' },
-                        { french: 'Elle est sympa et intelligente.', translation: 'She is nice and smart.' }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 'phone-questions',
-            title: 'Numéros de téléphone, Inscription, Questions',
-            description: 'Giving phone numbers and asking more questions.',
-            translation: 'Phone numbers, Registration, Questions (2)',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: 'Phone numbers in France are read in pairs (06, 12, 34, 56, 78).',
-                    translation: 'Quel est votre numéro de téléphone ?'
-                },
-                {
-                    type: 'examples',
-                    list: [
-                        { french: 'Je voudrais m\'inscrire.', translation: 'I would like to register.' },
-                        { french: 'Combien ça coûte ?', translation: 'How much does it cost?' }
-                    ]
-                }
-            ]
-        }
+        { id: 'verbes-pronominaux', title: 'Les verbes pronominaux', description: 'Se lever, Se laver.', translation: 'Reflexive Verbs', blocks: [{ type: 'conjugation', verb: 'Se laver', tense: 'Présent', data: [{ pronoun: 'Je', form: 'me lave' }, { pronoun: 'Tu', form: 'te laves' }, { pronoun: 'Il', form: 'se lave' }, { pronoun: 'Nous', form: 'nous lavons' }, { pronoun: 'Vous', form: 'vous lavez' }, { pronoun: 'Ils', form: 'se lavent' }] }] },
+        { id: 'avoir-mal', title: 'Avoir mal à', description: 'Douleur physique.', translation: 'To be in pain', blocks: [{ type: 'examples', list: [{ french: 'J\'ai mal à la tête.', translation: 'I have a headache.' }] }] },
+        { id: 'pvd', title: 'Pouvoir, Vouloir, Devoir', description: 'Modaux.', translation: 'Can, Want, Must', blocks: [{ type: 'examples', list: [{ french: 'Je peux t\'aider.', translation: 'I can help you.' }] }] },
+        { id: 'imperatif-1', title: 'Impératif 1', description: 'Ordres, Conseils.', translation: 'Imperative 1', blocks: [{ type: 'examples', list: [{ french: 'Écoute !', translation: 'Listen!' }] }] },
+        { id: 'imperatif-2', title: 'Impératif 2', description: 'Interdictions.', translation: 'Imperative 2', blocks: [{ type: 'examples', list: [{ french: 'Ne parle pas !', translation: 'Don\'t speak!' }] }] },
+        { id: 'emotions', title: 'Exprimer des émotions', description: 'Sentiments.', translation: 'Expressing emotions', blocks: [{ type: 'examples', list: [{ french: 'Je suis triste.', translation: 'I am sad.' }] }] },
+        { id: 'desc-physique', title: 'Description physique', description: 'Apparence.', translation: 'Physical Description', blocks: [{ type: 'examples', list: [{ french: 'Il est grand.', translation: 'He is tall.' }] }] },
+        { id: 'routine', title: 'Parler de la routine', description: 'Quotidien.', translation: 'Talking about routine', blocks: [{ type: 'examples', list: [{ french: 'Je me lève à 7h.', translation: 'I get up at 7.' }] }] },
+        { id: 'parler-corps', title: 'Parler de votre corps', description: 'Anatomie.', translation: 'Talking about your body', blocks: [{ type: 'markdown', content: 'La main, le pied, le nez.' }] },
+        { id: 'le-corps', title: 'Le corps', description: 'Vocabulaire.', translation: 'The Body', blocks: [{ type: 'markdown', content: '| English | French | Preposition/Article |\n|---|---|---|\n| Head | la tête | à la |\n| Face | le visage | au |\n| Hair | les cheveux | aux |\n| Eye | l’œil | à l\' |\n| Eyes | les yeux | aux |\n| Nose | le nez | au |\n| Ear | l’oreille | à l\' |\n| Mouth | la bouche | à la |\n| Tooth | la dent | à la |\n| Neck | le cou | au |\n| Shoulder | l’épaule | à l\' |\n| Arm | le bras | au |\n| Hand | la main | à la |\n| Finger | le doigt | au |\n| Chest | la poitrine | à la |\n| Back | le dos | au |\n| Leg | la jambe | à la |\n| Knee | le genou | au |\n| Foot | le pied | au |\n| Stomach | le ventre | au |' }] },
+        { id: 'pvd-sortie', title: 'Pouvoir, Vouloir, Devoir et Proposer une sortie', description: 'Social.', translation: 'Modals & Outings', blocks: [{ type: 'examples', list: [{ french: 'Tu veux aller au ciné ?', translation: 'Do you want to go to the movies?' }] }] },
+        { id: 'inviter-imperatif', title: 'Inviter , L\'impératif', description: 'Invitation.', translation: 'Inviting & Imperative', blocks: [{ type: 'examples', list: [{ french: 'Viens chez moi !', translation: 'Come to my place!' }] }] },
+        { id: 'imperatif-pronominaux', title: 'Impératif - verbes pronominaux', description: 'Lève-toi.', translation: 'Imperative (Reflexive)', blocks: [{ type: 'examples', list: [{ french: 'Dépêche-toi !', translation: 'Hurry up!' }] }] },
+        { id: 'couleurs', title: 'Les couleurs', description: 'Accords.', translation: 'Colors', blocks: [{ type: 'markdown', content: 'Rouge, Vert(e), Bleu(e), Noir(e), Blanc(he).' }] },
+        { id: 'climat', title: 'Parler du climat', description: 'Météo.', translation: 'Thinking about climate', blocks: [{ type: 'examples', list: [{ french: 'Il fait beau.', translation: 'The weather is nice.' }] }] },
+        { id: 'sensations', title: 'Les sensations', description: 'Chaud, Froid.', translation: 'Sensations', blocks: [{ type: 'examples', list: [{ french: 'J\'ai froid.', translation: 'I am cold.' }] }] },
+        { id: 'heures-prononciation', title: 'Les heures-prononciation', description: 'Pratique orale.', translation: 'Time Pronunciation', blocks: [{ type: 'examples', list: [{ french: 'Il est midi et demi.', translation: 'It is half past noon.' }] }] },
+        { id: 'futur-proche', title: 'Le futur proche', description: 'Aller + Infinitif.', translation: 'Near Future', blocks: [{ type: 'formula', items: ['Sujet + Aller + Infinitif'] }, { type: 'examples', list: [{ french: 'Je vais manger.', translation: 'I am going to eat.' }] }] },
+        { id: 'futur-proche-pronom', title: 'Le futur proche - verbes pronominaux', description: 'Placement du pronom.', translation: 'Near Future (Reflexive)', blocks: [{ type: 'formula', items: ['Je vais ME laver.'] }, { type: 'examples', list: [{ french: 'Tu vas t\'habiller.', translation: 'You are going to get dressed.' }] }] },
+        { id: 'professions', title: 'Les professions', description: 'Métiers.', translation: 'Professions', blocks: [{ type: 'examples', list: [{ french: 'Il est médecin.', translation: 'He is a doctor.' }] }] },
+        { id: 'desc-physique-2', title: 'Description Physique', description: 'Révision.', translation: 'Physical Description', blocks: [{ type: 'examples', list: [{ french: 'Elle a les cheveux longs.', translation: 'She has long hair.' }] }] },
+        { id: 'caracteriser', title: 'Caractériser une personne', description: 'Qualités/Défauts.', translation: 'Characterizing a person', blocks: [{ type: 'examples', list: [{ french: 'Il est gentil.', translation: 'He is kind.' }] }] },
+        { id: 'numeros-inscription', title: 'Les numéros de téléphone et Inscription', description: 'Administratif.', translation: 'Phone numbers & Registration', blocks: [{ type: 'examples', list: [{ french: 'Quel est votre numéro ?', translation: 'What is your number?' }] }] },
+        { id: 'audio-inscr', title: 'Audio - inscription', description: 'Écoute.', translation: 'Audio - Registration', blocks: [{ type: 'markdown', content: 'Écoute active.' }] },
+        { id: 'audio-tel', title: 'Audio - n de téléphone', description: 'Écoute.', translation: 'Audio - Phone Numbers', blocks: [{ type: 'markdown', content: 'Écoute active.' }] },
+        { id: 'questions-2', title: 'Poser des questions (2)', description: 'Avancé.', translation: 'Asking questions (2)', blocks: [{ type: 'examples', list: [{ french: 'Depuis quand habitez-vous ici ?', translation: 'Since when do you live here?' }] }] }
     ]
 };

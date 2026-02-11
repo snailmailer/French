@@ -3,149 +3,48 @@ import type { LevelData } from './types';
 export const b1Data: LevelData = {
     id: 'B1',
     title: 'B1 - Intermédiaire',
-    description: 'Récits passés, futur, conditionnel, pronoms complexes.',
+    description: 'Programme complet pas-à-pas.',
     topics: [
-        {
-            id: 'verbs-advanced',
-            title: 'Verbes (-ger, -yer, -ir, -re) & Quantités',
-            description: 'Special verb spellings, Food tastes, Shopping.',
-            translation: 'Advanced Verbs & Quantities',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: '<b>-ger</b>: mangEons. <b>-yer</b>: paie/payons. <br><b>Quantities</b>: du, de la, des, un kilo de, beaucoup de, <b>En</b> (pronoun).',
-                    translation: 'Je mange du pain. J\'en mange.'
-                }
-            ]
-        },
-        {
-            id: 'past-tenses-narrative',
-            title: 'Les Temps du Passé (PC, Imparfait, PQP, Récent)',
-            description: 'Narrating in the past: Differences and sequencing.',
-            translation: 'Past Tenses Narrative',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: '<b>Passé Composé</b>: Actions (J\'ai mangé). <br><b>Imparfait</b>: Description/Habit (Il faisait beau). <br><b>Passé Récent</b>: Venir de (Je viens de finir). <br><b>Plus-que-parfait</b>: Before past (Avaits/Etait + PP).',
-                    translation: 'Comparaison : J\'ai fini vs Je finissais.'
-                },
-                {
-                    type: 'examples',
-                    list: [
-                        { french: 'J\'avais déjà mangé quand il est arrivé.', translation: 'I had already eaten when he arrived.' },
-                        { french: 'Je regardais la télé quand il a crié.', translation: 'I was watching TV when he shouted.' }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 'advice-modals',
-            title: 'Donner des conseils & Devoir',
-            description: 'Il faut, Devoir, Imperative.',
-            translation: 'Giving Advice',
-            blocks: [
-                {
-                    type: 'examples',
-                    list: [
-                        { french: 'Il faut faire du sport.', translation: 'You must do sports.' },
-                        { french: 'Tu devrais arrêter de fumer.', translation: 'You should stop smoking.' }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 'comparison',
-            title: 'La Comparaison (Quantité & Qualité)',
-            description: 'Comparing adjectives, adverbs, and nouns.',
-            translation: 'Comparison',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: '<b>Quality</b>: Plus/Moins/Aussi + Adjective + Que. (Plus grand que).<br><b>Quantity</b>: Plus/Moins/Autant + DE + Noun + Que. (Plus de livres que).',
-                    translation: 'Prononciation : "Plus" (pronounce S if ends sentence or before vowel).'
-                }
-            ]
-        },
-        {
-            id: 'future-simple',
-            title: 'Le Futur Simple vs Futur Proche',
-            description: 'Plans vs Predictions.',
-            translation: 'Simple Future vs Near Future',
-            formula: 'Stem (-r) + ai, as, a, ons, ez, ont',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: '<b>Futur Simple</b>: Un jour, je partirai. (Distant/Formal).<br><b>Futur Proche</b>: Je vais partir. (Certain/Soon).',
-                    translation: 'Demain, il pleuvra.'
-                }
-            ]
-        },
-        {
-            id: 'conditional-present',
-            title: 'Le Conditionnel Présent',
-            description: 'Politeness and Hypothesis.',
-            translation: 'Present Conditional',
-            formula: 'Stem (-r) + impft endings (ais, ais, ait...)',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: 'Used for polite requests (Je voudrais) or advice (Tu devrais).',
-                    translation: 'Si j\'avais de l\'argent, je voyagerais.'
-                }
-            ]
-        },
-        {
-            id: 'pronouns-complex',
-            title: 'Pronoms (COD, COI, En, Y)',
-            description: 'Replacing all types of objects.',
-            translation: 'Complex Pronouns',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: '<b>COD</b>: Le/La/Les. <b>COI</b>: Lui/Leur. <b>Y</b>: Place/À. <b>En</b>: Quantity/De.',
-                    translation: 'Je lui en donne. Il y va.'
-                }
-            ]
-        },
-        {
-            id: 'pronouns-rel-demo-int',
-            title: 'Pronoms Relatifs, Démonstratifs, Interrogatifs',
-            description: 'Qui/Que/Où/Dont, Celui/Celle, Lequel.',
-            translation: 'Relative, Demonstrative, Interrogative Pronouns',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: '<b>Relatifs</b>: L\'homme qui..., Le livre que..., Le pays où..., Le film dont...<br><b>Démonstratifs</b>: Celui-ci, Celle-là.<br><b>Interrogatifs</b>: Lequel ? Laquelle ?',
-                    translation: 'Laquelle préfères-tu ?'
-                }
-            ]
-        },
-        {
-            id: 'gerondif',
-            title: 'Le Gérondif',
-            description: 'While doing...',
-            translation: 'The Gerund',
-            formula: 'En + Participe Présent (nous form -ons + ant)',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: 'Indicates simultaneous action or manner.',
-                    translation: 'Il mange en marchant (He eats while walking).'
-                }
-            ]
-        },
-        {
-            id: 'pronouns-demo-interro',
-            title: 'Les pronoms demonstratifs',
-            description: 'This one, That one, etc.',
-            translation: 'Demonstrative Pronouns',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: 'Celui-ci / Celui-là / Celle-ci / Celle-là / Ceux-ci / Ceux-là / Celles-ci / Celles-là.',
-                    translation: 'Je préfère celui-ci.'
-                }
-            ]
-        }
+        { id: 'professions-b1', title: 'Les professions', description: 'Vocabulaire avancé.', translation: 'Professions', blocks: [{ type: 'examples', list: [{ french: 'Ingénieur en informatique.', translation: 'Computer Engineer.' }] }] },
+        { id: 'desc-physique-b1', title: 'Description Physique', description: 'Détails.', translation: 'Physical Description', blocks: [{ type: 'markdown', content: 'Allure, style, visage.' }] },
+        { id: 'caracteriser-b1', title: 'Caractériser une personne', description: 'Psychologie.', translation: 'Character description', blocks: [{ type: 'examples', list: [{ french: 'Il est très ouvert d\'esprit.', translation: 'He is very open-minded.' }] }] },
+        { id: 'numeros-b1', title: 'Les numéros de téléphone et Inscription', description: 'Contexte formel.', translation: 'Phone & Registration', blocks: [{ type: 'examples', list: [{ french: 'Remplissez ce formulaire.', translation: 'Fill out this form.' }] }] },
+        { id: 'audio-inscr-b1', title: 'Audio - inscription', description: 'Pratique.', translation: 'Audio - Registration', blocks: [{ type: 'markdown', content: 'Exercice d\'écoute.' }] },
+        { id: 'audio-tel-b1', title: 'Audio - n de téléphone', description: 'Pratique.', translation: 'Audio - Phone', blocks: [{ type: 'markdown', content: 'Exercice d\'écoute.' }] },
+        { id: 'questions-b1', title: 'Poser des questions (2)', description: 'Inversion du sujet.', translation: 'Asking Questions', blocks: [{ type: 'examples', list: [{ french: 'Pourriez-vous me dire... ?', translation: 'Could you tell me...?' }] }] },
+        { id: 'verbes-ger-yer-ir', title: 'Les verbes -ger -yer -ir', description: 'Particularités.', translation: 'Verbs -ger -yer -ir', blocks: [{ type: 'markdown', content: 'Mangeons, Paie/Paye, Finissons.' }] },
+        { id: 'verbes-re', title: 'Les verbes en -RE', description: 'Prendre, Mettre, etc.', translation: '-RE Verbs', blocks: [{ type: 'conjugation', verb: 'Prendre', tense: 'Présent', data: [{ pronoun: 'Je', form: 'prends' }, { pronoun: 'Tu', form: 'prends' }, { pronoun: 'Il', form: 'prend' }, { pronoun: 'Nous', form: 'prenons' }, { pronoun: 'Vous', form: 'prenez' }, { pronoun: 'Ils', form: 'prennent' }] }] },
+        { id: 'gouts-alim', title: 'Indiquer les gouts alimentaires', description: 'Nourriture.', translation: 'Food tastes', blocks: [{ type: 'examples', list: [{ french: 'Je suis végétarien.', translation: 'I am vegetarian.' }] }] },
+        { id: 'courses-quantites', title: 'Faire les courses, les quantites, le pronom en', description: 'Shopping.', translation: 'Shopping, Quantities, En', blocks: [{ type: 'markdown', content: 'Un kilo de, Beaucoup de, J\'en veux.' }] },
+        { id: 'passe-compose-1', title: 'Le passe compose (1)', description: 'Avec Avoir.', translation: 'Passé Composé (1)', blocks: [{ type: 'formula', items: ['Avoir + Participe Passé'] }] },
+        { id: 'passe-compose-2', title: 'Le passe compose (2)', description: 'Avec Être.', translation: 'Passé Composé (2)', blocks: [{ type: 'formula', items: ['Être + Participe Passé (Accord)'] }] },
+        { id: 'pc-pronominaux', title: 'Passe Compose (Verbes pronominaux)', description: 'Toujours être.', translation: 'PC (Reflexive)', blocks: [{ type: 'examples', list: [{ french: 'Je me suis levé.', translation: 'I got up.' }] }] },
+        { id: 'imparfait', title: 'L\'Imparfait', description: 'Description passée.', translation: 'Imperfect', blocks: [{ type: 'examples', list: [{ french: 'Il faisait beau.', translation: 'It was nice out.' }] }] },
+        { id: 'diff-imp-pc', title: 'Difference - Imparfait et PC', description: 'Usage.', translation: 'Imparfait vs PC', blocks: [{ type: 'markdown', content: 'PC = Action. Imp = Contexte.' }] },
+        { id: 'video-conseils', title: 'video - Donner des conseils', description: 'Support visuel.', translation: 'Video - Advice', blocks: [{ type: 'markdown', content: 'Regardez la vidéo.' }] },
+        { id: 'donner-conseils', title: 'Donner des conseils', description: 'Devoir, Falloir.', translation: 'Giving Advice', blocks: [{ type: 'examples', list: [{ french: 'Tu devrais dormir.', translation: 'You should sleep.' }] }] },
+        { id: 'marqueurs-temporels', title: 'Les marqueurs temporels-Depuis, Il y a', description: 'Temps.', translation: 'Time Markers', blocks: [{ type: 'markdown', content: 'Depuis (continu), Il y a (fini).' }] },
+        { id: 'vacances', title: 'Parler de vos vacances', description: 'Récit.', translation: 'Talking about holidays', blocks: [{ type: 'examples', list: [{ french: 'Je suis allé en Espagne.', translation: 'I went to Spain.' }] }] },
+        { id: 'comp-quantite-1', title: 'La Comparaison - Comparer la quantité', description: 'Plus de... que.', translation: 'Comparing Quantity', blocks: [{ type: 'formula', items: ['Plus de + Nom + Que'] }] },
+        { id: 'comp-quantite-2', title: 'La Comparaison - Comparer la quantité', description: 'Pratique.', translation: 'Comparing Quantity (2)', blocks: [{ type: 'examples', list: [{ french: 'J\'ai plus de livres que toi.', translation: 'I have more books than you.' }] }] },
+        { id: 'comp-qualite-1', title: 'La Comparaison - Comparer la qualité', description: 'Plus... que.', translation: 'Comparing Quality', blocks: [{ type: 'formula', items: ['Plus + Adjectif + Que'] }] },
+        { id: 'comp-qualite-2', title: 'La Comparaison - Comparer la qualité', description: 'Pratique.', translation: 'Comparing Quality (2)', blocks: [{ type: 'examples', list: [{ french: 'Il est plus grand que moi.', translation: 'He is taller than me.' }] }] },
+        { id: 'comp-pron-plus', title: 'Comparaison - Prononciation Plus', description: 'Phonétique.', translation: 'Pronunciation of "Plus"', blocks: [{ type: 'markdown', content: 'On prononce le S final ? Parfois.' }] },
+        { id: 'audio-plus', title: 'Audio - Prononciation - plus', description: 'Écoute.', translation: 'Audio - Plus', blocks: [{ type: 'markdown', content: 'Exercice d\'écoute.' }] },
+        { id: 'pronoms-relatifs', title: 'Les Pronoms Relatifs - qui que', description: 'Sujet/Objet.', translation: 'Relative Pronouns (Qui/Que)', blocks: [{ type: 'examples', list: [{ french: 'L\'homme qui parle.', translation: 'The man who speaks.' }] }] },
+        { id: 'futur-simple', title: 'Le Futur Simple', description: 'Projets.', translation: 'Simple Future', blocks: [{ type: 'examples', list: [{ french: 'J\'irai à Paris.', translation: 'I will go to Paris.' }] }] },
+        { id: 'diff-futurs', title: 'Diff - futur proche vs futur simple', description: 'Nuance.', translation: 'Near vs Simple Future', blocks: [{ type: 'markdown', content: 'Immédiat vs Lointain.' }] },
+        { id: 'conditionnel', title: 'Le Conditionnel', description: 'Hypothèse/Politesse.', translation: 'Conditional', blocks: [{ type: 'examples', list: [{ french: 'Je voudrais un café.', translation: 'I would like a coffee.' }] }] },
+        { id: 'conseils-2', title: 'Donner des conseils (2)', description: 'Conditionnel.', translation: 'Giving Advice (2)', blocks: [{ type: 'examples', list: [{ french: 'À ta place, je ferais ça.', translation: 'If I were you, I would do that.' }] }] },
+        { id: 'pronom-y', title: 'Le pronom y', description: 'Lieu/À.', translation: 'Pronoun Y', blocks: [{ type: 'examples', list: [{ french: 'J\'y vais.', translation: 'I am going there.' }] }] },
+        { id: 'cod', title: 'Les pronoms COD', description: 'Direct.', translation: 'COD Pronouns', blocks: [{ type: 'examples', list: [{ french: 'Je le vois.', translation: 'I see him.' }] }] },
+        { id: 'coi', title: 'Les pronoms COI', description: 'Indirect.', translation: 'COI Pronouns', blocks: [{ type: 'examples', list: [{ french: 'Je lui parle.', translation: 'I speak to him.' }] }] },
+        { id: 'gerondif', title: 'Le Gérondif', description: 'En + ant.', translation: 'Gerund', blocks: [{ type: 'examples', list: [{ french: 'En marchant.', translation: 'While walking.' }] }] },
+        { id: 'passe-recent', title: 'Le Passe Recent', description: 'Venir de.', translation: 'Recent Past', blocks: [{ type: 'examples', list: [{ french: 'Je viens de manger.', translation: 'I just ate.' }] }] },
+        { id: 'present-continu', title: 'Le Present Continu', description: 'Être en train de.', translation: 'Present Continuous', blocks: [{ type: 'examples', list: [{ french: 'Je suis en train de lire.', translation: 'I am reading.' }] }] },
+        { id: 'plus-que-parfait', title: 'Le Plus-que-parfait', description: 'Passé du passé.', translation: 'Pluperfect', blocks: [{ type: 'examples', list: [{ french: 'J\'avais fini.', translation: 'I had finished.' }] }] },
+        { id: 'relatifs-ou-dont', title: 'Les pronoms relatifs OÙ et DONT', description: 'Lieu/De.', translation: 'Relative Pronouns (Où/Dont)', blocks: [{ type: 'examples', list: [{ french: 'La ville où j\'habite.', translation: 'The city where I live.' }] }] },
+        { id: 'interrogatifs', title: 'Les pronoms interrogatifs', description: 'Lequel.', translation: 'Interrogative Pronouns', blocks: [{ type: 'examples', list: [{ french: 'Lequel veux-tu ?', translation: 'Which one do you want?' }] }] },
+        { id: 'demonstratifs-b1', title: 'Les pronoms demonstratifs', description: 'Celui-ci.', translation: 'Demonstrative Pronouns', blocks: [{ type: 'examples', list: [{ french: 'Celui-ci est meilleur.', translation: 'This one is better.' }] }] }
     ]
 };
