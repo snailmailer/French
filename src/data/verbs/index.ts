@@ -1,113 +1,137 @@
 import { createRegularVerb } from '../verbUtils';
-import { aller } from './aller';
-import { asseoir } from './asseoir';
-import { avoir } from './avoir';
-import { devoir } from './devoir';
-import { etre } from './etre';
-import { faire } from './faire';
-import { pouvoir } from './pouvoir';
-import { souvenir } from './souvenir';
-import { vouloir } from './vouloir';
+import { applyExamplesToVerb } from '../../utils/exampleGenerator';
+import { aller as allerBase } from './aller';
+import { asseoir as asseoirBase } from './asseoir';
+import { avoir as avoirBase } from './avoir';
+import { devoir as devoirBase } from './devoir';
+import { etre as etreBase } from './etre';
+import { faire as faireBase } from './faire';
+import { pouvoir as pouvoirBase } from './pouvoir';
+import { souvenir as souvenirBase } from './souvenir';
+import { vouloir as vouloirBase } from './vouloir';
+
+// Helper to Create Regular Verb with Auto-Examples
+const crv = (...args: Parameters<typeof createRegularVerb>) => {
+    const verb = createRegularVerb(...args);
+    return applyExamplesToVerb(verb);
+};
+
+// Wrap Irregular Verbs
+export const aller = applyExamplesToVerb(allerBase);
+export const asseoir = applyExamplesToVerb(asseoirBase);
+export const avoir = applyExamplesToVerb(avoirBase);
+export const devoir = applyExamplesToVerb(devoirBase);
+export const etre = applyExamplesToVerb(etreBase);
+export const faire = applyExamplesToVerb(faireBase);
+export const pouvoir = applyExamplesToVerb(pouvoirBase);
+export const se_souvenir = applyExamplesToVerb(souvenirBase);
+export const vouloir = applyExamplesToVerb(vouloirBase);
 
 // --- Regular Verbs from User List ---
-export const accepter = createRegularVerb('accepter', 'ER', 'avoir', 'to accept', false, [], [
-    { sentence: "J'accepte votre proposition.", translation: "I accept your proposal." },
-    { sentence: "Nous acceptons les cartes de crédit.", translation: "We accept credit cards." }
-]);
-export const samuser = createRegularVerb("s'amuser", 'ER', 'avoir', 'to have fun', true, [], [
-    { sentence: "Les enfants s'amusent dans le parc.", translation: "The children are having fun in the park." },
-    { sentence: "Je m'amuse beaucoup avec ce jeu.", translation: "I am having a lot of fun with this game." }
-]);
-export const sappeler = createRegularVerb("s'appeler", 'ER', 'avoir', 'to be called', true, [], [
-    { sentence: "Comment vous appelez-vous ?", translation: "What is your name?" },
-    { sentence: "Je m'appelle Pierre.", translation: "My name is Pierre." }
-]);
+export const accepter = crv('accepter', 'ER', 'avoir', 'to accept');
+export const amuser = crv('amuser', 'ER', 'avoir', 'to amuse');
+export const samuser = crv("s'amuser", 'ER', 'avoir', 'to have fun', true);
+export const sappeler = crv("s'appeler", 'ER', 'avoir', 'to be called', true);
 export const sasseoir = asseoir;
-export const attendre = createRegularVerb('attendre', 'RE', 'avoir', 'to wait');
-export const se_baigner = createRegularVerb('se baigner', 'ER', 'avoir', 'to bathe/swim', true);
-export const se_brosser_les_dents = createRegularVerb('se brosser les dents', 'ER', 'avoir', 'to brush one\'s teeth', true);
-export const se_coiffer = createRegularVerb('se coiffer', 'ER', 'avoir', 'to fix one\'s hair', true);
-export const se_concentrer = createRegularVerb('se concentrer', 'ER', 'avoir', 'to concentrate', true);
-export const se_connecter = createRegularVerb('se connecter', 'ER', 'avoir', 'to connect', true);
-export const se_coucher = createRegularVerb('se coucher', 'ER', 'avoir', 'to go to bed', true);
-export const couvrir = createRegularVerb('couvrir', 'IR_COCOS', 'avoir', 'to cover');
-export const se_debrouiller = createRegularVerb('se débrouiller', 'ER', 'avoir', 'to manage/cope', true);
-export const decouvrir = createRegularVerb('découvrir', 'IR_COCOS', 'avoir', 'to discover');
-export const defendre = createRegularVerb('défendre', 'RE', 'avoir', 'to defend');
-export const dejeuner = createRegularVerb('déjeuner', 'ER', 'avoir', 'to have lunch');
-export const se_depecher = createRegularVerb('se dépêcher', 'ER', 'avoir', 'to hurry', true);
-export const dependre = createRegularVerb('dépendre', 'RE', 'avoir', 'to depend');
-export const descendre = createRegularVerb('descendre', 'RE', 'etre', 'to go down');
-export const se_deshabiller = createRegularVerb('se déshabiller', 'ER', 'avoir', 'to undress', true);
-export const diner = createRegularVerb('dîner', 'ER', 'avoir', 'to have dinner');
-export const se_disputer = createRegularVerb('se disputer', 'ER', 'avoir', 'to argue', true);
-export const se_doucher = createRegularVerb('se doucher', 'ER', 'avoir', 'to shower', true);
-export const sendormir = createRegularVerb("s'endormir", 'IR_DORMIR', 'avoir', 'to fall asleep', true);
-export const sennuyer = createRegularVerb("s'ennuyer", 'ER', 'avoir', 'to get bored', true);
-export const entendre = createRegularVerb('entendre', 'RE', 'avoir', 'to hear');
-export const se_facher = createRegularVerb('se fâcher', 'ER', 'avoir', 'to get angry', true);
-export const shabiller = createRegularVerb("s'habiller", 'ER', 'avoir', 'to get dressed', true);
-export const informer = createRegularVerb('informer', 'ER', 'avoir', 'to inform');
-export const sinquieter = createRegularVerb("s'inquiéter", 'ER', 'avoir', 'to worry', true);
-export const sinteresser = createRegularVerb("s'intéresser à", 'ER', 'avoir', 'to be interested in', true);
-export const jouer = createRegularVerb('jouer', 'ER', 'avoir', 'to play');
-export const se_laver = createRegularVerb('se laver', 'ER', 'avoir', 'to wash oneself', true);
-export const se_laver_les_mains = createRegularVerb('se laver les mains', 'ER', 'avoir', 'to wash one\'s hands', true);
-export const se_laver_le_visage = createRegularVerb('se laver le visage', 'ER', 'avoir', 'to wash one\'s face', true);
-export const se_lever = createRegularVerb('se lever', 'ER', 'avoir', 'to get up', true);
-export const manger = createRegularVerb('manger', 'ER', 'avoir', 'to eat', false, [], [
-    { sentence: "Je mange une pomme.", translation: "I am eating an apple." },
-    { sentence: "Nous mangeons ensemble à midi.", translation: "We eat together at noon." }
-]);
-export const se_maquiller = createRegularVerb('se maquiller', 'ER', 'avoir', 'to put on makeup', true);
-export const se_marier = createRegularVerb('se marier', 'ER', 'avoir', 'to get married', true);
-export const nettoyer = createRegularVerb('nettoyer', 'ER', 'avoir', 'to clean');
-export const offrir = createRegularVerb('offrir', 'IR_COCOS', 'avoir', 'to offer');
-export const oublier = createRegularVerb('oublier', 'ER', 'avoir', 'to forget');
-export const parler = createRegularVerb('parler', 'ER', 'avoir', 'to speak', false, [], [
-    { sentence: "Je parle français un petit peu.", translation: "I speak French a little bit." },
-    { sentence: "Ils parlent de leurs vacances.", translation: "They are talking about their vacation." }
-]);
-export const se_peigner = createRegularVerb('se peigner', 'ER', 'avoir', 'to comb one\'s hair', true);
-export const perdre = createRegularVerb('perdre', 'RE', 'avoir', 'to lose');
-export const preciser = createRegularVerb('préciser', 'ER', 'avoir', 'to specify');
-export const se_preparer = createRegularVerb('se préparer', 'ER', 'avoir', 'to get ready', true);
-export const se_promener = createRegularVerb('se promener', 'ER', 'avoir', 'to take a walk', true);
-export const proposer = createRegularVerb('proposer', 'ER', 'avoir', 'to propose');
-export const se_raser = createRegularVerb('se raser', 'ER', 'avoir', 'to shave', true);
-export const se_reconcilier = createRegularVerb('se réconcilier', 'ER', 'avoir', 'to reconcile', true);
-export const remercier = createRegularVerb('remercier', 'ER', 'avoir', 'to thank');
-export const rendre = createRegularVerb('rendre', 'RE', 'avoir', 'to give back');
-export const se_rendre = createRegularVerb('se rendre', 'RE', 'avoir', 'to go to', true);
-export const rentrer = createRegularVerb('rentrer', 'ER', 'etre', 'to return/go home');
-export const repondre = createRegularVerb('répondre', 'RE', 'avoir', 'to answer');
-export const se_reposer = createRegularVerb('se reposer', 'ER', 'avoir', 'to rest', true);
-export const se_reveiller = createRegularVerb('se réveiller', 'ER', 'avoir', 'to wake up', true);
-export const rouvrir = createRegularVerb('rouvrir', 'IR_COCOS', 'avoir', 'to reopen');
-export const se_secher = createRegularVerb('se sécher', 'ER', 'avoir', 'to dry oneself', true);
-export const se_secher_les_cheveux = createRegularVerb('se sécher les cheveux', 'ER', 'avoir', 'to dry one\'s hair', true);
-export const se_sentir = createRegularVerb('se sentir', 'IR_DORMIR', 'avoir', 'to feel', true);
-export const se_souvenir = souvenir;
-export const souffrir = createRegularVerb('souffrir', 'IR_COCOS', 'avoir', 'to suffer');
-export const surfer = createRegularVerb('surfer', 'ER', 'avoir', 'to surf');
-export const terminer = createRegularVerb('terminer', 'ER', 'avoir', 'to finish');
-export const toucher = createRegularVerb('toucher', 'ER', 'avoir', 'to touch');
-export const se_tromper = createRegularVerb('se tromper', 'ER', 'avoir', 'to be mistaken', true);
-export const vendre = createRegularVerb('vendre', 'RE', 'avoir', 'to sell');
+export const attendre = crv('attendre', 'RE', 'avoir', 'to wait');
+export const baigner = crv('baigner', 'ER', 'avoir', 'to bathe');
+export const se_baigner = crv('se baigner', 'ER', 'avoir', 'to bathe/swim', true);
+export const se_brosser_les_dents = crv('se brosser les dents', 'ER', 'avoir', 'to brush one\'s teeth', true);
+export const coiffer = crv('coiffer', 'ER', 'avoir', 'to style hair');
+export const se_coiffer = crv('se coiffer', 'ER', 'avoir', 'to fix one\'s hair', true);
+export const se_concentrer = crv('se concentrer', 'ER', 'avoir', 'to concentrate', true);
+export const connecter = crv('connecter', 'ER', 'avoir', 'to connect');
+export const se_connecter = crv('se connecter', 'ER', 'avoir', 'to connect', true);
+export const coucher = crv('coucher', 'ER', 'avoir', 'to put to bed');
+export const se_coucher = crv('se coucher', 'ER', 'avoir', 'to go to bed', true);
+export const couvrir = crv('couvrir', 'IR_COCOS', 'avoir', 'to cover');
+export const se_debrouiller = crv('se débrouiller', 'ER', 'avoir', 'to manage/cope', true);
+export const decouvrir = crv('découvrir', 'IR_COCOS', 'avoir', 'to discover');
+export const defendre = crv('défendre', 'RE', 'avoir', 'to defend');
+export const dejeuner = crv('déjeuner', 'ER', 'avoir', 'to have lunch');
+export const se_depecher = crv('se dépêcher', 'ER', 'avoir', 'to hurry', true);
+export const dependre = crv('dépendre', 'RE', 'avoir', 'to depend');
+export const descendre = crv('descendre', 'RE', 'etre', 'to go down');
+export const deshabiller = crv('déshabiller', 'ER', 'avoir', 'to undress');
+export const se_deshabiller = crv('se déshabiller', 'ER', 'avoir', 'to undress', true);
+export const diner = crv('dîner', 'ER', 'avoir', 'to have dinner');
+export const se_disputer = crv('se disputer', 'ER', 'avoir', 'to argue', true);
+export const doucher = crv('doucher', 'ER', 'avoir', 'to shower');
+export const se_doucher = crv('se doucher', 'ER', 'avoir', 'to shower', true);
+export const endormir = crv('endormir', 'IR_DORMIR', 'avoir', 'to put to sleep');
+export const sendormir = crv("s'endormir", 'IR_DORMIR', 'avoir', 'to fall asleep', true);
+export const sennuyer = crv("s'ennuyer", 'ER', 'avoir', 'to get bored', true);
+export const entendre = crv('entendre', 'RE', 'avoir', 'to hear');
+export const se_facher = crv('se fâcher', 'ER', 'avoir', 'to get angry', true);
+export const habiller = crv('habiller', 'ER', 'avoir', 'to dress');
+export const shabiller = crv("s'habiller", 'ER', 'avoir', 'to get dressed', true);
+export const informer = crv('informer', 'ER', 'avoir', 'to inform');
+export const sinquieter = crv("s'inquiéter", 'ER', 'avoir', 'to worry', true);
+export const sinteresser = crv("s'intéresser à", 'ER', 'avoir', 'to be interested in', true);
+export const jouer = crv('jouer', 'ER', 'avoir', 'to play');
+export const laver = crv('laver', 'ER', 'avoir', 'to wash');
+export const se_laver = crv('se laver', 'ER', 'avoir', 'to wash oneself', true);
+export const se_laver_les_mains = crv('se laver les mains', 'ER', 'avoir', 'to wash one\'s hands', true);
+export const se_laver_le_visage = crv('se laver le visage', 'ER', 'avoir', 'to wash one\'s face', true);
+export const lever = crv('lever', 'ER', 'avoir', 'to lift/raise');
+export const se_lever = crv('se lever', 'ER', 'avoir', 'to get up', true);
+export const manger = crv('manger', 'ER', 'avoir', 'to eat');
+export const maquiller = crv('maquiller', 'ER', 'avoir', 'to make up');
+export const se_maquiller = crv('se maquiller', 'ER', 'avoir', 'to put on makeup', true);
+export const se_marier = crv('se marier', 'ER', 'avoir', 'to get married', true);
+export const nettoyer = crv('nettoyer', 'ER', 'avoir', 'to clean');
+export const offrir = crv('offrir', 'IR_COCOS', 'avoir', 'to offer');
+export const oublier = crv('oublier', 'ER', 'avoir', 'to forget');
+export const parler = crv('parler', 'ER', 'avoir', 'to speak');
+export const peigner = crv('peigner', 'ER', 'avoir', 'to comb');
+export const se_peigner = crv('se peigner', 'ER', 'avoir', 'to comb one\'s hair', true);
+export const perdre = crv('perdre', 'RE', 'avoir', 'to lose');
+export const preciser = crv('préciser', 'ER', 'avoir', 'to specify');
+export const se_preparer = crv('se préparer', 'ER', 'avoir', 'to get ready', true);
+export const promener = crv('promener', 'ER', 'avoir', 'to walk');
+export const se_promener = crv('se promener', 'ER', 'avoir', 'to take a walk', true);
+export const proposer = crv('proposer', 'ER', 'avoir', 'to propose');
+export const raser = crv('raser', 'ER', 'avoir', 'to shave');
+export const se_raser = crv('se raser', 'ER', 'avoir', 'to shave', true);
+export const se_reconcilier = crv('se réconcilier', 'ER', 'avoir', 'to reconcile', true);
+export const remercier = crv('remercier', 'ER', 'avoir', 'to thank');
+export const rendre = crv('rendre', 'RE', 'avoir', 'to give back');
+export const se_rendre = crv('se rendre', 'RE', 'avoir', 'to go to', true);
+export const rentrer = crv('rentrer', 'ER', 'etre', 'to return/go home');
+export const repondre = crv('répondre', 'RE', 'avoir', 'to answer');
+export const se_reposer = crv('se reposer', 'ER', 'avoir', 'to rest', true);
+export const reveiller = crv('réveiller', 'ER', 'avoir', 'to wake someone');
+export const se_reveiller = crv('se réveiller', 'ER', 'avoir', 'to wake up', true);
+export const rouvrir = crv('rouvrir', 'IR_COCOS', 'avoir', 'to reopen');
+export const secher = crv('sécher', 'ER', 'avoir', 'to dry');
+export const se_secher = crv('se sécher', 'ER', 'avoir', 'to dry oneself', true);
+export const se_secher_les_cheveux = crv('se sécher les cheveux', 'ER', 'avoir', 'to dry one\'s hair', true);
+export const se_sentir = crv('se sentir', 'IR_DORMIR', 'avoir', 'to feel', true);
+export const souffrir = crv('souffrir', 'IR_COCOS', 'avoir', 'to suffer');
+export const surfer = crv('surfer', 'ER', 'avoir', 'to surf');
+export const terminer = crv('terminer', 'ER', 'avoir', 'to finish');
+export const toucher = crv('toucher', 'ER', 'avoir', 'to touch');
+export const se_tromper = crv('se tromper', 'ER', 'avoir', 'to be mistaken', true);
+export const vendre = crv('vendre', 'RE', 'avoir', 'to sell');
 
 export const verbs = [
     accepter,
     aller,
+    amuser,
     samuser,
     sappeler,
     sasseoir,
     attendre,
     avoir,
+    baigner,
     se_baigner,
     se_brosser_les_dents,
+    coiffer,
     se_coiffer,
     se_concentrer,
+    connecter,
     se_connecter,
+    coucher,
     se_coucher,
     couvrir,
     se_debrouiller,
@@ -117,40 +141,50 @@ export const verbs = [
     se_depecher,
     dependre,
     descendre,
+    deshabiller,
     se_deshabiller,
     devoir,
     diner,
     se_disputer,
+    doucher,
     se_doucher,
+    endormir,
     sendormir,
     sennuyer,
     entendre,
     etre,
     se_facher,
     faire,
+    habiller,
     shabiller,
     informer,
     sinquieter,
     sinteresser,
     jouer,
+    laver,
     se_laver,
     se_laver_les_mains,
     se_laver_le_visage,
+    lever,
     se_lever,
     manger,
+    maquiller,
     se_maquiller,
     se_marier,
     nettoyer,
     offrir,
     oublier,
     parler,
+    peigner,
     se_peigner,
     perdre,
     pouvoir,
     preciser,
     se_preparer,
+    promener,
     se_promener,
     proposer,
+    raser,
     se_raser,
     se_reconcilier,
     remercier,
@@ -159,8 +193,10 @@ export const verbs = [
     rentrer,
     repondre,
     se_reposer,
+    reveiller,
     se_reveiller,
     rouvrir,
+    secher,
     se_secher,
     se_secher_les_cheveux,
     se_sentir,
