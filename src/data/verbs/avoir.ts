@@ -13,8 +13,12 @@ export const avoir: VerbDefinition = {
     conjugations: {
         Indicatif: {
             'Présent': [
-                { pronoun: 'j\'', form: 'ai' }, { pronoun: 'tu', form: 'as' }, { pronoun: 'il/elle', form: 'a' },
-                { pronoun: 'nous', form: 'avons' }, { pronoun: 'vous', form: 'avez' }, { pronoun: 'ils/elles', form: 'ont' }
+                { pronoun: 'j\'', form: 'ai', example: 'J\'ai un chat.' },
+                { pronoun: 'tu', form: 'as', example: 'Tu as raison.' },
+                { pronoun: 'il/elle', form: 'a', example: 'Elle a 20 ans.' },
+                { pronoun: 'nous', form: 'avons', example: 'Nous avons le temps.' },
+                { pronoun: 'vous', form: 'avez', example: 'Vous avez faim ?' },
+                { pronoun: 'ils/elles', form: 'ont', example: 'Ils ont une maison.' }
             ],
             'Passé Composé': [
                 { pronoun: 'j\'', form: 'ai eu' }, { pronoun: 'tu', form: 'as eu' }, { pronoun: 'il/elle', form: 'a eu' },

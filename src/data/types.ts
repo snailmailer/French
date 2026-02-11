@@ -1,6 +1,7 @@
 export interface ConjugationRow {
     pronoun: string;
     form: string;
+    example?: string; // Sentence using this specific form
 }
 
 export interface VerbMood {

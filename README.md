@@ -1,73 +1,83 @@
-# React + TypeScript + Vite
+# Le Français - French Learning Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A comprehensive, interactive web application for learning French, built with React, TypeScript, and Vite.
 
-Currently, two official plugins are available:
+## 🚀 Live Website
+Access the live application here: **[Le Français](https://snailmailer.github.io/French/)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📖 User Guide
 
-## React Compiler
+### 1. Choose Your Level
+The home page presents four learning paths based on the CEFR standard:
+- **A1 (Absolute Beginner)**: Basics like greetings, numbers, and simple verbs.
+- **A2 (Elementary)**: Daily routines, past tense (Passé Composé), and reflexive verbs.
+- **B1 (Intermediate)**: Complex grammar, future tense, and expressing opinions.
+- **B2 (Upper Intermediate)**: Nuanced speech, subjunctive, and advanced vocabulary.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Click on a card to enter that level's specific curriculum.
 
-## Expanding the ESLint configuration
+### 2. The Conjugation Tool
+Accessible via the **Green Button** in the top navigation bar.
+- **Search**: Type any verb (e.g., *manger*, *être*, *se lever*) to see its full conjugation.
+- **Tenses**: View conjugations for all moods (Indicatif, Subjonctif, Conditionnel, Impératif).
+- **Audio**: Click the **Speaker Icon** next to any conjugation to hear the pronunciation.
+- **Rules & Notes**: Automatically updates to show specific rules for the selected verb (e.g., stem changes).
+- **Examples**: See sample sentences with translations for key verbs.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 3. Integrated Audio (Text-to-Speech)
+- **Pronunciation**: Click the speaker icon 🔊 next to vocabulary lists, conjugation tables, or examples to hear the correct French pronunciation.
+- **Mobile Friendly**: The audio is optimized to work smoothly on mobile devices.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 4. Grammar & Vocabulary
+Each level contains detailed sections on:
+- **Vocabulary Lists**: Grouped by topic (e.g., Food, Travel).
+- **Grammar Rules**: Explanations with examples (e.g., *Passé Composé vs Imparfait*).
+- **Pronouns**: Comprehensive guides on COD, COI, y, en, and more.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠️ For Developers
+
+### Prerequisites
+- Node.js (v16+)
+- npm
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/snailmailer/French.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd French
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Running Locally
+To start the development server:
+```bash
+npm run dev
 ```
+Open your browser to `http://localhost:5173/French/`.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Building for Production
+To build the project for deployment:
+```bash
+npm run build
 ```
+The output will be in the `dist` directory.
+
+### Deployment
+This project is configured for GitHub Pages.
+1. Commit your changes.
+2. Push to the `main` branch.
+3. The GitHub Action (if configured) or manual deployment will publish the `dist` folder to the `gh-pages` branch.
+
+## 🤝 Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+This project is open source and available under the [MIT License](LICENSE).

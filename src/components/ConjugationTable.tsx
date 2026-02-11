@@ -7,7 +7,7 @@ interface ConjugationProps {
     translation?: string; // Added translation
     tense: string;
     pronunciations: { [key: string]: string };
-    conjugations: { pronoun: string; form: string }[];
+    conjugations: { pronoun: string; form: string; example?: string }[];
 }
 
 const ConjugationTable: React.FC<ConjugationProps> = ({ verb, translation, tense, conjugations }) => {
@@ -24,20 +24,22 @@ const ConjugationTable: React.FC<ConjugationProps> = ({ verb, translation, tense
             <table className="conjugation-table">
                 <thead>
                     <tr>
-                        <th>Pronoun</th>
-                        <th>Form</th>
-                        <th>Listen</th>
+                        <th style={{ textAlign: 'left', padding: '0.5rem' }}>Pronoun</th>
+                        <th style={{ textAlign: 'left', padding: '0.5rem' }}>Form</th>
+                        <th style={{ textAlign: 'left', padding: '0.5rem' }}>Example</th>
+                        <th style={{ textAlign: 'right', padding: '0.5rem' }}>Listen</th>
                     </tr>
                 </thead>
                 <tbody>
                     {conjugations.map((item, index) => (
                         <tr key={index} className="conjugation-row">
-                            <td style={{ fontWeight: 'bold', color: 'var(--accent-color)' }}>{item.pronoun}</td>
-                            <td>{item.form}</td>
-                            <td>
+                            <td style={{ fontWeight: 'bold', color: 'var(--accent-color)', padding: '0.5rem' }}>{item.pronoun}</td>
+                            <td style={{ padding: '0.5rem' }}>{item.form}</td>
+                            <td style={{ padding: '0.5rem', fontStyle: 'italic', color: 'var(--text-secondary)', fontSize: '0.9em' }}>{item.example}</td>
+                            <td style={{ textAlign: 'right', padding: '0.5rem' }}>
                                 <button
                                     onClick={() => speak(`${item.pronoun} ${item.form}`)}
-                                    style={{ background: 'transparent', padding: '0.2rem', color: '#4CAF50' }}
+                                    style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50' }}
                                     aria-label={`Listen to ${item.pronoun} ${item.form}`}
                                 >
                                     <Volume2 size={16} />
