@@ -232,6 +232,76 @@ export const a1Data: LevelData = {
                     ]
                 }
             ]
+        },
+        {
+            id: 'numbers-0-100',
+            title: 'Les Nombres (0-100+)',
+            description: 'Counting from 0 to 1 million.',
+            translation: 'Numbers (0-100+)',
+            blocks: [
+                {
+                    type: 'markdown',
+                    content: '<h3>0 - 20</h3><p>0 (zéro), 1 (un), 2 (deux), 3 (trois), 4 (quatre), 5 (cinq), 6 (six), 7 (sept), 8 (huit), 9 (neuf), 10 (dix), 11 (onze), 12 (douze), 13 (treize), 14 (quatorze), 15 (quinze), 16 (seize), 17 (dix-sept), 18 (dix-huit), 19 (dix-neuf), 20 (vingt).</p>',
+                    translation: 'The basics needed for all other numbers.'
+                },
+                {
+                    type: 'markdown',
+                    content: '<h3>Tens (Les dizaines)</h3><p>10 (dix), 20 (vingt), 30 (trente), 40 (quarante), 50 (cinquante), 60 (soixante), 70 (soixante-dix), 80 (quatre-vingts), 90 (quatre-vingt-dix), 100 (cent).</p>'
+                },
+                {
+                    type: 'markdown',
+                    content: '<h3>Big Numbers</h3><ul><li>1 000 = mille</li><li>10 000 = dix mille</li><li>100 000 = cent mille</li><li>1 000 000 = un million</li></ul>',
+                    translation: 'Note: "mille" takes no "s" in the plural, but "million" does (deux millions).'
+                }
+            ]
+        },
+        {
+            id: 'family-possessives',
+            title: 'La Famille et les Adjectifs Possessifs',
+            description: 'Talking about family members and possession.',
+            translation: 'Family and Possessive Adjectives',
+            formula: 'Possessive + Noun (agrees with noun, not owner)',
+            blocks: [
+                {
+                    type: 'markdown',
+                    content: 'The possessive adjective depends on the gender/number of the **object/person** possessed.<br><br><b>Mon, Ma, Mes</b> (My)<br><b>Ton, Ta, Tes</b> (Your)<br><b>Son, Sa, Ses</b> (His/Her/Its)<br><b>Notre, Nos</b> (Our)<br><b>Votre, Vos</b> (Your)<br><b>Leur, Leurs</b> (Their)',
+                    translation: 'Examples: Mon père (M), Ma mère (F), Mes parents (Pl).'
+                },
+                {
+                    type: 'examples',
+                    list: [
+                        { french: 'C\'est mon frère.', translation: 'This is my brother.' },
+                        { french: 'Elle aime sa soeur.', translation: 'She loves her sister.' },
+                        { french: 'Ce sont nos cousins.', translation: 'These are our cousins.' }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'body-parts',
+            title: 'Les parties du corps',
+            description: 'Vocabulary for the human body.',
+            translation: 'Body Parts',
+            blocks: [
+                {
+                    type: 'markdown',
+                    content: '<ul><li>La tête (head)</li><li>Le bras (arm)</li><li>La main (hand)</li><li>La jambe (leg)</li><li>Le pied (foot)</li><li>Le ventre (stomach)</li><li>Le dos (back)</li><li>Les yeux (eyes)</li></ul>',
+                    translation: 'Use "avoir mal à..." to say something hurts (J\'ai mal à la tête).'
+                }
+            ]
+        },
+        {
+            id: 'verbs-ger-yer-ir-re-details',
+            title: 'Verbes en -ger, -yer, -ir, -re (Détails)',
+            description: 'Specific spelling changes and regular patterns.',
+            translation: 'Verbs in -ger, -yer, -ir, -re (Details)',
+            blocks: [
+                {
+                    type: 'markdown',
+                    content: '<b>-ger verbs</b> (manger): Add "e" before "ons" (nous mang<b>e</b>ons).<br><b>-yer verbs</b> (payer): "y" becomes "i" in boot forms (je paie).<br><b>-ir verbs</b> (finir): Regular Type 2 (iss extensions).',
+                    translation: 'These are predictable patterns once memorized.'
+                }
+            ]
         }
     ]
 };

@@ -181,6 +181,26 @@ export const b1Data: LevelData = {
                     ]
                 }
             ]
+        },
+        {
+            id: 'pronouns-interrogative',
+            title: 'Pronoms Interrogatifs (Lequel...)',
+            description: 'Which one?',
+            translation: 'Interrogative Pronouns',
+            blocks: [
+                {
+                    type: 'markdown',
+                    content: '<b>Lequel</b> (M), <b>Laquelle</b> (F), <b>Lesquels</b> (M.Pl), <b>Lesquelles</b> (F.Pl). Contracts with à (Auquel...) and de (Duquel...).',
+                    translation: 'Lequel, Laquelle... s\'accordent avec le nom remplacé.'
+                },
+                {
+                    type: 'examples',
+                    list: [
+                        { french: 'Voici deux livres. Lequel veux-tu?', translation: 'Here are two books. Which one do you want?' },
+                        { french: 'Auquel penses-tu?', translation: 'Which one are you thinking about?' }
+                    ]
+                }
+            ]
         }
     ]
 };

@@ -231,6 +231,47 @@ export const a2Data: LevelData = {
                     ]
                 }
             ]
+        },
+        {
+            id: 'pronouns-en-y',
+            title: 'Les Pronoms En et Y',
+            description: 'Replacing places and quantities.',
+            translation: 'The Pronouns En and Y',
+            formula: 'Y = à + place / En = de + noun',
+            blocks: [
+                {
+                    type: 'markdown',
+                    content: '<b>Y</b>: Replaces "à + location" or "à + thing". (J\'y vais = I go there).<br><b>En</b>: Replaces "de + noun" or quantities. (J\'en veux = I want some).',
+                    translation: 'Tu vas à Paris? Oui, j\'y vais. Tu veux du pain? Oui, j\'en veux.'
+                },
+                {
+                    type: 'examples',
+                    list: [
+                        { french: 'Il pense à son travail? Oui, il y pense.', translation: 'Is he thinking about his job? Yes, he is thinking about it.' },
+                        { french: 'Tu as des frères? Oui, j\'en ai deux.', translation: 'Do you have brothers? Yes, I have two (of them).' }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'demonstrative-pronouns',
+            title: 'Pronoms Démonstratifs (Celui, celle...)',
+            description: 'This one, That one.',
+            translation: 'Demonstrative Pronouns',
+            blocks: [
+                {
+                    type: 'markdown',
+                    content: 'Use <b>Celui</b> (M), <b>Celle</b> (F), <b>Ceux</b> (M.Pl), <b>Celles</b> (F.Pl) to replace a noun mentioned before. Often combined with -ci (here) or -là (there).',
+                    translation: 'Utilisez Celui, Celle, Ceux, Celles pour remplacer un nom.'
+                },
+                {
+                    type: 'examples',
+                    list: [
+                        { french: 'Quelle voiture aimes-tu? Celle-ci ou celle-là?', translation: 'Which car do you like? This one or that one?' },
+                        { french: 'Je préfère celui de gauche.', translation: 'I prefer the one on the left.' }
+                    ]
+                }
+            ]
         }
     ]
 };

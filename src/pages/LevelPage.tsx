@@ -48,8 +48,9 @@ const LevelPage = () => {
 
                         {/* Topic-level Formula */}
                         {topic.formula && (
-                            <div style={{ background: 'rgba(100, 108, 255, 0.1)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--accent-color)', margin: '1.5rem 0', fontFamily: 'monospace', fontWeight: 'bold', color: 'var(--accent-hover)' }}>
-                                Formula: {topic.formula}
+                            <div style={{ background: '#1e1e1e', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid #4CAF50', marginBottom: '1.5rem' }}>
+                                <h4 style={{ margin: '0 0 0.5rem 0', color: '#4CAF50', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Formula</h4>
+                                <div style={{ fontFamily: 'monospace', fontSize: '1.1rem', color: '#e0e0e0' }}>{topic.formula}</div>
                             </div>
                         )}
 
