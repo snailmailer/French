@@ -2,107 +2,101 @@ import type { LevelData } from './types';
 
 export const b2Data: LevelData = {
     id: 'B2',
-    title: 'B2 - Upper-Intermediate',
-    description: 'Focus: nuance, complex pronouns, advanced tenses and conditionals.',
+    title: 'B2 - Avancé & TEF/TCF Prep',
+    description: 'Nuances, Conditionnel Passé, et Préparation à l\'oral.',
     topics: [
-        {
-            id: 'relative-pronouns-composed',
-            title: 'Pronoms Relatifs Composés',
-            description: 'Compound relative pronouns (lequel, auquel, duquel).',
-            translation: 'Compound Relative Pronouns',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: '<p>Used after prepositions (avec, pour, sur, sans...). They agree in gender and number with the antecedent.</p>',
-                    translation: '<p>Utilisés après des prépositions. Ils s\'accordent en genre et en nombre avec l\'antécédent.</p>'
-                },
-                {
-                    type: 'examples',
-                    list: [
-                        { french: "La chaise sur laquelle je suis assis.", translation: "The chair on which I am sitting." },
-                        { french: "Le projet auquel je pense.", translation: "The project about which I am thinking." }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 'demonstrative-pronouns',
-            title: 'Pronoms Démonstratifs',
-            description: 'Celui, celle, ceux, celles.',
-            translation: 'Demonstrative Pronouns',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: '<p>Replaces a noun previously mentioned. Followed by -ci/-la, or "de", or a relative pronoun (qui/que).</p>',
-                    translation: '<p>Remplace un nom mentionné précédemment.</p>'
-                },
-                {
-                    type: 'examples',
-                    list: [
-                        { french: "Quel livre veux-tu ? Celui-ci ou celui-là ?", translation: "Which book do you want? This one or that one?" },
-                        { french: "Ceux qui travaillent dur réussiront.", translation: "Those who work hard will succeed." }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 'interrogative-pronouns',
-            title: 'Pronoms Interrogatifs Complexes',
-            description: 'Lequel, auxquels, etc.',
-            translation: 'Complex Interrogative Pronouns',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: '<p>Used to ask questions about a specific choice among a group.</p>',
-                    translation: '<p>Pour poser des questions sur un choix spécifique.</p>'
-                },
-                {
-                    type: 'examples',
-                    list: [
-                        { french: "Lequel préfères-tu ?", translation: "Which one do you prefer?" },
-                        { french: "Auxquels penses-tu ?", translation: "Which ones are you thinking of?" }
-                    ]
-                }
-            ]
-        },
         {
             id: 'conditionnel-passe',
             title: 'Le Conditionnel Passé',
-            description: 'Regrets and hypothetical past.',
+            description: 'Regrets and unverified information.',
             translation: 'Past Conditional',
-            formula: 'Auxiliary (Conditional) + Past Participle',
+            formula: 'Avoir/Être (Conditional) + Past Participle',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Formed with Conditional Present of auxiliary + Past Participle. Used to express regrets or things that would have happened under different circumstances.</p>',
-                    translation: '<p>Pour exprimer des regrets ou des hypothèses passées.</p>'
+                    content: 'Used to express regrets ("I should have...") or unverified news ("The president reportedly...").',
+                    translation: 'J\'aurais dû étudier. (I should have studied).'
                 },
                 {
                     type: 'examples',
                     list: [
-                        { french: "J'aurais dû étudier plus.", translation: "I should have studied more." },
-                        { french: "Si j'avais su, je serais venu.", translation: "If I had known, I would have come." }
+                        { french: 'Il serait parti hier.', translation: 'He reportedly left yesterday.' },
+                        { french: 'Nous aurions aimé venir.', translation: 'We would have liked to come.' }
                     ]
                 }
             ]
         },
         {
-            id: 'gerondif',
-            title: 'Le Gérondif',
-            description: 'Simultaneous actions and manner.',
-            translation: 'The Gerund',
-            formula: 'En + Present Participle (-ant)',
+            id: 'tef-tcf-personal',
+            title: 'TEF/TCF - Information Personnelle',
+            description: 'Speaking Practice: Introduce yourself.',
+            translation: 'Personal Information',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Formed with "en" + present participle (-ant). Indicates simultaneous action ("while doing") or method ("by doing").</p>',
-                    translation: '<p>Indique une action simultanée ou la manière.</p>'
+                    content: 'Practice answering these questions fluently.',
+                    translation: 'Entraînement à l\'oral.'
                 },
                 {
                     type: 'examples',
                     list: [
-                        { french: "Il mange en regardant la télé.", translation: "He eats while watching TV." },
-                        { french: "C'est en forgeant qu'on devient forgeron.", translation: "Practice makes perfect (lit: It is by forging that one becomes a blacksmith)." }
+                        { french: 'Comment tu t’appelles ?', translation: 'What is your name?' },
+                        { french: 'Quel est ton prénom et ton nom ?', translation: 'What is your first and last name?' },
+                        { french: 'Quel âge as-tu ?', translation: 'How old are you?' },
+                        { french: 'D’où viens-tu ?', translation: 'Where do you come from?' },
+                        { french: 'Où habites-tu ?', translation: 'Where do you live?' },
+                        { french: 'Quelle est ta nationalité ?', translation: 'What is your nationality?' }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'tef-tcf-routine',
+            title: 'TEF/TCF - La Routine & Travail',
+            description: 'Speaking Practice: Daily life.',
+            translation: 'Routine & Work',
+            blocks: [
+                {
+                    type: 'examples',
+                    list: [
+                        { french: 'Que fais-tu dans la vie ?', translation: 'What do you do for a living?' },
+                        { french: 'Est-ce que tu travailles ou est-ce que tu étudies ?', translation: 'Do you work or study?' },
+                        { french: 'À quelle heure te lèves-tu ?', translation: 'What time do you get up?' },
+                        { french: 'Que fais-tu le matin / le soir ?', translation: 'What do you do in the morning/evening?' },
+                        { french: 'Que fais-tu le week-end ?', translation: 'What do you do on the weekend?' }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'tef-tcf-tastes',
+            title: 'TEF/TCF - Goûts et Loisirs',
+            description: 'Speaking Practice: Preferences.',
+            translation: 'Tastes & Hobbies',
+            blocks: [
+                {
+                    type: 'examples',
+                    list: [
+                        { french: 'Qu’est-ce que tu aimes ?', translation: 'What do you like?' },
+                        { french: 'Qu’est-ce que tu n’aimes pas ?', translation: 'What do you don\'t like?' },
+                        { french: 'Quel est ton plat préféré ?', translation: 'What is your favorite dish?' },
+                        { french: 'Quel est ton loisir préféré ?', translation: 'What is your favorite hobby?' }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 'tef-tcf-family',
+            title: 'TEF/TCF - Famille & Description',
+            description: 'Speaking Practice: Describing people.',
+            translation: 'Family & Description',
+            blocks: [
+                {
+                    type: 'examples',
+                    list: [
+                        { french: 'As-tu des frères et sœurs ?', translation: 'Do you have brothers and sisters?' },
+                        { french: 'Combien de personnes y a-t-il dans ta famille ?', translation: 'How many people are there in your family?' },
+                        { french: 'Peux-tu décrire ton ami(e) ?', translation: 'Can you describe your friend?' }
                     ]
                 }
             ]

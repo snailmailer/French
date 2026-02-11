@@ -2,203 +2,148 @@ import type { LevelData } from './types';
 
 export const b1Data: LevelData = {
     id: 'B1',
-    title: 'B1 - Intermediate',
-    description: 'Focus: narrative pasts, advice, future, more complex speech.',
+    title: 'B1 - Intermédiaire',
+    description: 'Récits passés, futur, conditionnel, pronoms complexes.',
     topics: [
         {
-            id: 'imparfait-pc-narrative',
-            title: 'Parler de vos vacances',
-            description: 'Narratives using Passé Composé and Imparfait.',
-            translation: 'Talking about your holidays',
+            id: 'verbs-advanced',
+            title: 'Verbes (-ger, -yer, -ir, -re) & Quantités',
+            description: 'Special verb spellings, Food tastes, Shopping.',
+            translation: 'Advanced Verbs & Quantities',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Detailed narratives mix PC for events and Imparfait for descriptions/states to tell a story.</p>',
-                    translation: '<p>Les récits détaillés mélangent le Passé Composé (événements) et l\'Imparfait (descriptions) pour raconter une histoire.</p>'
+                    content: '<b>-ger</b>: mangEons. <b>-yer</b>: paie/payons. <br><b>Quantities</b>: du, de la, des, un kilo de, beaucoup de, <b>En</b> (pronoun).',
+                    translation: 'Je mange du pain. J\'en mange.'
+                }
+            ]
+        },
+        {
+            id: 'past-tenses-narrative',
+            title: 'Les Temps du Passé (PC, Imparfait, PQP, Récent)',
+            description: 'Narrating in the past: Differences and sequencing.',
+            translation: 'Past Tenses Narrative',
+            blocks: [
+                {
+                    type: 'markdown',
+                    content: '<b>Passé Composé</b>: Actions (J\'ai mangé). <br><b>Imparfait</b>: Description/Habit (Il faisait beau). <br><b>Passé Récent</b>: Venir de (Je viens de finir). <br><b>Plus-que-parfait</b>: Before past (Avaits/Etait + PP).',
+                    translation: 'Comparaison : J\'ai fini vs Je finissais.'
                 },
                 {
                     type: 'examples',
                     list: [
-                        { french: "Il faisait beau quand nous sommes arrivés.", translation: "The weather was nice when we arrived." }
+                        { french: 'J\'avais déjà mangé quand il est arrivé.', translation: 'I had already eaten when he arrived.' },
+                        { french: 'Je regardais la télé quand il a crié.', translation: 'I was watching TV when he shouted.' }
                     ]
                 }
             ]
         },
         {
-            id: 'passe-recent',
-            title: 'Le Passé Récent',
-            description: 'Venir de + infinitive.',
-            translation: 'The Recent Past',
-            formula: 'Subject + Venir (present) + de + Infinitive',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: '<p>Use "venir de" + infinitive to say you just did something.</p>',
-                    translation: '<p>Utilisez "venir de" + infinitif pour dire que vous venez juste de faire quelque chose.</p>'
-                },
-                {
-                    type: 'conjugation',
-                    verb: 'Venir de...',
-                    tense: 'Présent',
-                    data: [
-                        { pronoun: 'Je', form: 'viens de...' },
-                        { pronoun: 'Tu', form: 'viens de...' },
-                        { pronoun: 'Il', form: 'vient de...' },
-                        { pronoun: 'Nous', form: 'venons de...' },
-                        { pronoun: 'Vous', form: 'venez de...' },
-                        { pronoun: 'Ils', form: 'viennent de...' }
-                    ]
-                },
-                {
-                    type: 'examples',
-                    list: [
-                        { french: "Je viens de finir.", translation: "I just finished." }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 'plus-que-parfait',
-            title: 'Le Plus-que-parfait',
-            description: 'Action before another past action.',
-            translation: 'The Pluperfect (Past Perfect)',
-            formula: 'Subject + Auxiliary (Imperfect) + Past Participle',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: '<p>Formed with Imperfect of auxiliary (avoir/être) + Past Participle. Used for actions that happened <strong>before</strong> another past action.</p>',
-                    translation: '<p>Formé avec l\'imparfait de l\'auxiliaire + participe passé. Pour des actions antérieures à une autre action passée.</p>'
-                },
-                {
-                    type: 'examples',
-                    list: [
-                        { french: "J'avais déjà mangé quand il est arrivé.", translation: "I had already eaten when he arrived." }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 'futur-simple',
-            title: 'Le Futur Simple',
-            description: 'Projections and plans.',
-            translation: 'The Simple Future',
-            formula: 'Infinitive + ai, as, a, ons, ez, ont',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: '<p>Formed by adding endings (-ai, -as, -a, -ons, -ez, -ont) to the infinitive (for regular verbs).</p>',
-                    translation: '<p>Formé en ajoutant les terminaisons à l\'infinitif.</p>'
-                },
-                {
-                    type: 'conjugation',
-                    verb: 'Parler',
-                    tense: 'Futur Simple',
-                    data: [
-                        { pronoun: 'Je', form: 'parlerai' },
-                        { pronoun: 'Tu', form: 'parleras' },
-                        { pronoun: 'Il', form: 'parlera' },
-                        { pronoun: 'Nous', form: 'parlerons' },
-                        { pronoun: 'Vous', form: 'parlerez' },
-                        { pronoun: 'Ils', form: 'parleront' }
-                    ]
-                }
-            ]
-        },
-        {
-            id: 'futur-proche-simple',
-            title: 'Futur Proche vs Futur Simple',
-            description: 'Immediate vs Distant/Formal future.',
-            translation: 'Near Future vs Simple Future',
-            blocks: [
-                {
-                    type: 'markdown',
-                    content: '<p><strong>Futur Proche</strong> (aller + inf): More certain, immediate.<br/><strong>Futur Simple</strong>: More distant, formal, or conditional.</p>',
-                    translation: '<p><strong>Futur Proche</strong> : Certain, immédiat.<br/><strong>Futur Simple</strong> : Lointain, formel ou conditionnel.</p>'
-                }
-            ]
-        },
-        {
-            id: 'conseils-1',
-            title: 'Donner des conseils (1)',
-            description: 'Devoir, il faut, impératif.',
-            translation: 'Giving advice (1)',
+            id: 'advice-modals',
+            title: 'Donner des conseils & Devoir',
+            description: 'Il faut, Devoir, Imperative.',
+            translation: 'Giving Advice',
             blocks: [
                 {
                     type: 'examples',
                     list: [
-                        { french: "Il faut étudier.", translation: "You must study." },
-                        { french: "Tu dois manger.", translation: "You have to eat." },
-                        { french: "Fais attention !", translation: "Be careful!" }
+                        { french: 'Il faut faire du sport.', translation: 'You must do sports.' },
+                        { french: 'Tu devrais arrêter de fumer.', translation: 'You should stop smoking.' }
                     ]
                 }
             ]
         },
         {
-            id: 'conditionnel-present',
+            id: 'comparison',
+            title: 'La Comparaison (Quantité & Qualité)',
+            description: 'Comparing adjectives, adverbs, and nouns.',
+            translation: 'Comparison',
+            blocks: [
+                {
+                    type: 'markdown',
+                    content: '<b>Quality</b>: Plus/Moins/Aussi + Adjective + Que. (Plus grand que).<br><b>Quantity</b>: Plus/Moins/Autant + DE + Noun + Que. (Plus de livres que).',
+                    translation: 'Prononciation : "Plus" (pronounce S if ends sentence or before vowel).'
+                }
+            ]
+        },
+        {
+            id: 'future-simple',
+            title: 'Le Futur Simple vs Futur Proche',
+            description: 'Plans vs Predictions.',
+            translation: 'Simple Future vs Near Future',
+            formula: 'Stem (-r) + ai, as, a, ons, ez, ont',
+            blocks: [
+                {
+                    type: 'markdown',
+                    content: '<b>Futur Simple</b>: Un jour, je partirai. (Distant/Formal).<br><b>Futur Proche</b>: Je vais partir. (Certain/Soon).',
+                    translation: 'Demain, il pleuvra.'
+                }
+            ]
+        },
+        {
+            id: 'conditional-present',
             title: 'Le Conditionnel Présent',
-            description: 'Politeness, advice, hypothesis.',
+            description: 'Politeness and Hypothesis.',
             translation: 'Present Conditional',
-            formula: 'Infinitive + Imparfait endings',
+            formula: 'Stem (-r) + impft endings (ais, ais, ait...)',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Used for politeness ("Je voudrais"), advice ("Tu devrais"), or hypothetical situations.</p>',
-                    translation: '<p>Pour la politesse, les conseils ou les hypothèses.</p>'
-                },
-                {
-                    type: 'conjugation',
-                    verb: 'Aimer',
-                    tense: 'Conditionnel',
-                    data: [
-                        { pronoun: 'J\'', form: 'aimerais' },
-                        { pronoun: 'Tu', form: 'aimerais' },
-                        { pronoun: 'Il', form: 'aimerait' },
-                        { pronoun: 'Nous', form: 'aimerions' },
-                        { pronoun: 'Vous', form: 'aimeriez' },
-                        { pronoun: 'Ils', form: 'aimeraient' }
-                    ]
+                    content: 'Used for polite requests (Je voudrais) or advice (Tu devrais).',
+                    translation: 'Si j\'avais de l\'argent, je voyagerais.'
                 }
             ]
         },
         {
-            id: 'relative-pronouns',
-            title: 'Pronoms Relatifs (qui, que, où, dont)',
-            description: 'Linking sentences.',
-            translation: 'Relative Pronouns',
+            id: 'pronouns-complex',
+            title: 'Pronoms (COD, COI, En, Y)',
+            description: 'Replacing all types of objects.',
+            translation: 'Complex Pronouns',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p><strong>Qui</strong>: Subject.<br/><strong>Que</strong>: Direct Object.<br/><strong>Où</strong>: Time or Place.<br/><strong>Dont</strong>: Replaces "de".</p>',
-                    translation: '<p><strong>Qui</strong> : Sujet.<br/><strong>Que</strong> : Objet Direct.<br/><strong>Où</strong> : Temps ou Lieu.<br/><strong>Dont</strong> : Remplace "de".</p>'
-                },
-                {
-                    type: 'examples',
-                    list: [
-                        { french: "L'homme qui parle.", translation: "The man who is speaking." },
-                        { french: "Le livre que je lis.", translation: "The book that I am reading." },
-                        { french: "Le moment où je suis parti.", translation: "The moment when I left." },
-                        { french: "Le film dont je te parle.", translation: "The film I am talking to you about." }
-                    ]
+                    content: '<b>COD</b>: Le/La/Les. <b>COI</b>: Lui/Leur. <b>Y</b>: Place/À. <b>En</b>: Quantity/De.',
+                    translation: 'Je lui en donne. Il y va.'
                 }
             ]
         },
         {
-            id: 'pronouns-interrogative',
-            title: 'Pronoms Interrogatifs (Lequel...)',
-            description: 'Which one?',
-            translation: 'Interrogative Pronouns',
+            id: 'pronouns-rel-demo-int',
+            title: 'Pronoms Relatifs, Démonstratifs, Interrogatifs',
+            description: 'Qui/Que/Où/Dont, Celui/Celle, Lequel.',
+            translation: 'Relative, Demonstrative, Interrogative Pronouns',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<b>Lequel</b> (M), <b>Laquelle</b> (F), <b>Lesquels</b> (M.Pl), <b>Lesquelles</b> (F.Pl). Contracts with à (Auquel...) and de (Duquel...).',
-                    translation: 'Lequel, Laquelle... s\'accordent avec le nom remplacé.'
-                },
+                    content: '<b>Relatifs</b>: L\'homme qui..., Le livre que..., Le pays où..., Le film dont...<br><b>Démonstratifs</b>: Celui-ci, Celle-là.<br><b>Interrogatifs</b>: Lequel ? Laquelle ?',
+                    translation: 'Laquelle préfères-tu ?'
+                }
+            ]
+        },
+        {
+            id: 'gerondif',
+            title: 'Le Gérondif',
+            description: 'While doing...',
+            translation: 'The Gerund',
+            formula: 'En + Participe Présent (nous form -ons + ant)',
+            blocks: [
                 {
-                    type: 'examples',
-                    list: [
-                        { french: 'Voici deux livres. Lequel veux-tu?', translation: 'Here are two books. Which one do you want?' },
-                        { french: 'Auquel penses-tu?', translation: 'Which one are you thinking about?' }
-                    ]
+                    type: 'markdown',
+                    content: 'Indicates simultaneous action or manner.',
+                    translation: 'Il mange en marchant (He eats while walking).'
+                }
+            ]
+        },
+        {
+            id: 'pronouns-demo-interro',
+            title: 'Les pronoms demonstratifs',
+            description: 'This one, That one, etc.',
+            translation: 'Demonstrative Pronouns',
+            blocks: [
+                {
+                    type: 'markdown',
+                    content: 'Celui-ci / Celui-là / Celle-ci / Celle-là / Ceux-ci / Ceux-là / Celles-ci / Celles-là.',
+                    translation: 'Je préfère celui-ci.'
                 }
             ]
         }
