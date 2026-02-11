@@ -14,7 +14,29 @@ export const a2Data: LevelData = {
         { id: 'desc-physique', title: 'Description physique', description: 'Apparence.', translation: 'Physical Description', blocks: [{ type: 'examples', list: [{ french: 'Il est grand.', translation: 'He is tall.' }] }] },
         { id: 'routine', title: 'Parler de la routine', description: 'Quotidien.', translation: 'Talking about routine', blocks: [{ type: 'examples', list: [{ french: 'Je me lève à 7h.', translation: 'I get up at 7.' }] }] },
         { id: 'parler-corps', title: 'Parler de votre corps', description: 'Anatomie.', translation: 'Talking about your body', blocks: [{ type: 'markdown', content: 'La main, le pied, le nez.' }] },
-        { id: 'le-corps', title: 'Le corps', description: 'Vocabulaire.', translation: 'The Body', blocks: [{ type: 'markdown', content: '| English | French | Preposition/Article |\n|---|---|---|\n| Head | la tête | à la |\n| Face | le visage | au |\n| Hair | les cheveux | aux |\n| Eye | l’œil | à l\' |\n| Eyes | les yeux | aux |\n| Nose | le nez | au |\n| Ear | l’oreille | à l\' |\n| Mouth | la bouche | à la |\n| Tooth | la dent | à la |\n| Neck | le cou | au |\n| Shoulder | l’épaule | à l\' |\n| Arm | le bras | au |\n| Hand | la main | à la |\n| Finger | le doigt | au |\n| Chest | la poitrine | à la |\n| Back | le dos | au |\n| Leg | la jambe | à la |\n| Knee | le genou | au |\n| Foot | le pied | au |\n| Stomach | le ventre | au |' }] },
+        {
+            id: 'le-corps',
+            title: 'Le corps',
+            description: 'Vocabulaire.',
+            translation: 'The Body',
+            blocks: [{
+                type: 'markdown',
+                content: `<table style="width:100%; border-collapse:collapse;">
+<thead><tr style="background:#333; color:white;"><th style="padding:8px;">English</th><th style="padding:8px;">French</th><th style="padding:8px;">Prep/Article</th></tr></thead>
+<tbody>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">Head</td><td style="padding:8px; border-bottom:1px solid #444;">la tête</td><td style="padding:8px; border-bottom:1px solid #444;">à la</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">Face</td><td style="padding:8px; border-bottom:1px solid #444;">le visage</td><td style="padding:8px; border-bottom:1px solid #444;">au</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">Hair</td><td style="padding:8px; border-bottom:1px solid #444;">les cheveux</td><td style="padding:8px; border-bottom:1px solid #444;">aux</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">Eyes</td><td style="padding:8px; border-bottom:1px solid #444;">les yeux</td><td style="padding:8px; border-bottom:1px solid #444;">aux</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">Nose</td><td style="padding:8px; border-bottom:1px solid #444;">le nez</td><td style="padding:8px; border-bottom:1px solid #444;">au</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">Mouth</td><td style="padding:8px; border-bottom:1px solid #444;">la bouche</td><td style="padding:8px; border-bottom:1px solid #444;">à la</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">Arm</td><td style="padding:8px; border-bottom:1px solid #444;">le bras</td><td style="padding:8px; border-bottom:1px solid #444;">au</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">Hand</td><td style="padding:8px; border-bottom:1px solid #444;">la main</td><td style="padding:8px; border-bottom:1px solid #444;">à la</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">Leg</td><td style="padding:8px; border-bottom:1px solid #444;">la jambe</td><td style="padding:8px; border-bottom:1px solid #444;">à la</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">Foot</td><td style="padding:8px; border-bottom:1px solid #444;">le pied</td><td style="padding:8px; border-bottom:1px solid #444;">au</td></tr>
+</tbody></table>`
+            }]
+        },
         { id: 'pvd-sortie', title: 'Pouvoir, Vouloir, Devoir et Proposer une sortie', description: 'Social.', translation: 'Modals & Outings', blocks: [{ type: 'examples', list: [{ french: 'Tu veux aller au ciné ?', translation: 'Do you want to go to the movies?' }] }] },
         { id: 'inviter-imperatif', title: 'Inviter , L\'impératif', description: 'Invitation.', translation: 'Inviting & Imperative', blocks: [{ type: 'examples', list: [{ french: 'Viens chez moi !', translation: 'Come to my place!' }] }] },
         { id: 'imperatif-pronominaux', title: 'Impératif - verbes pronominaux', description: 'Lève-toi.', translation: 'Imperative (Reflexive)', blocks: [{ type: 'examples', list: [{ french: 'Dépêche-toi !', translation: 'Hurry up!' }] }] },

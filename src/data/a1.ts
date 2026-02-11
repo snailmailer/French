@@ -6,7 +6,45 @@ export const a1Data: LevelData = {
     description: 'Programme complet pas-à-pas.',
     topics: [
         { id: 'greetings-1', title: 'Greetings, how are you', description: 'Salutations de base.', translation: 'Salutations', blocks: [{ type: 'examples', list: [{ french: 'Bonjour, comment ça va ?', translation: 'Hello, how are you?' }] }] },
-        { id: 'nombres-0-69', title: 'Les nombres 0-69', description: 'Compter jusqu\'à 69.', translation: 'Numbers 0-69', blocks: [{ type: 'markdown', content: '| Number | French | Pronunciation |\n|---|---|---|\n| 0 | zéro | zay-ro |\n| 1 | un | uh |\n| 2 | deux | duh |\n| 3 | trois | twah |\n| 4 | quatre | katr |\n| 5 | cinq | sank |\n| 6 | six | sees |\n| 7 | sept | set |\n| 8 | huit | weet |\n| 9 | neuf | nuhf |\n| 10 | dix | dees |\n| 11 | onze | onz |\n| 12 | douze | dooz |\n| 13 | treize | trez |\n| 14 | quatorze | ka-torz |\n| 15 | quinze | kanz |\n| 16 | seize | sez |\n| 17 | dix-sept | dees-set |\n| 18 | dix-huit | dees-weet |\n| 19 | dix-neuf | dees-nuhf |\n| 20 | vingt | van |\n| 30 | trente | trant |\n| 40 | quarante | ka-rant |\n| 50 | cinquante | san-kant |\n| 60 | soixante | swa-sant |', translation: 'Les bases des nombres.' }] },
+        {
+            id: 'nombres-0-69',
+            title: 'Les nombres 0-69',
+            description: 'Compter jusqu\'à 69.',
+            translation: 'Numbers 0-69',
+            blocks: [{
+                type: 'markdown',
+                content: `<table style="width:100%; border-collapse:collapse; margin-bottom:1rem;">
+<thead><tr style="background:#333; color:white;"><th style="padding:8px;">Number</th><th style="padding:8px;">French</th><th style="padding:8px;">Pronunciation</th></tr></thead>
+<tbody>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">0</td><td style="padding:8px; border-bottom:1px solid #444;">zéro</td><td style="padding:8px; border-bottom:1px solid #444;">zay-ro</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">1</td><td style="padding:8px; border-bottom:1px solid #444;">un</td><td style="padding:8px; border-bottom:1px solid #444;">uh</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">2</td><td style="padding:8px; border-bottom:1px solid #444;">deux</td><td style="padding:8px; border-bottom:1px solid #444;">uh</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">3</td><td style="padding:8px; border-bottom:1px solid #444;">trois</td><td style="padding:8px; border-bottom:1px solid #444;">twah</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">4</td><td style="padding:8px; border-bottom:1px solid #444;">quatre</td><td style="padding:8px; border-bottom:1px solid #444;">katr</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">5</td><td style="padding:8px; border-bottom:1px solid #444;">cinq</td><td style="padding:8px; border-bottom:1px solid #444;">sank</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">6</td><td style="padding:8px; border-bottom:1px solid #444;">six</td><td style="padding:8px; border-bottom:1px solid #444;">sees</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">7</td><td style="padding:8px; border-bottom:1px solid #444;">sept</td><td style="padding:8px; border-bottom:1px solid #444;">set</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">8</td><td style="padding:8px; border-bottom:1px solid #444;">huit</td><td style="padding:8px; border-bottom:1px solid #444;">weet</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">9</td><td style="padding:8px; border-bottom:1px solid #444;">neuf</td><td style="padding:8px; border-bottom:1px solid #444;">nuhf</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">10</td><td style="padding:8px; border-bottom:1px solid #444;">dix</td><td style="padding:8px; border-bottom:1px solid #444;">dees</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">11</td><td style="padding:8px; border-bottom:1px solid #444;">onze</td><td style="padding:8px; border-bottom:1px solid #444;">onz</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">12</td><td style="padding:8px; border-bottom:1px solid #444;">douze</td><td style="padding:8px; border-bottom:1px solid #444;">dooz</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">13</td><td style="padding:8px; border-bottom:1px solid #444;">treize</td><td style="padding:8px; border-bottom:1px solid #444;">trez</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">14</td><td style="padding:8px; border-bottom:1px solid #444;">quatorze</td><td style="padding:8px; border-bottom:1px solid #444;">ka-torz</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">15</td><td style="padding:8px; border-bottom:1px solid #444;">quinze</td><td style="padding:8px; border-bottom:1px solid #444;">kanz</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">16</td><td style="padding:8px; border-bottom:1px solid #444;">seize</td><td style="padding:8px; border-bottom:1px solid #444;">sez</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">17</td><td style="padding:8px; border-bottom:1px solid #444;">dix-sept</td><td style="padding:8px; border-bottom:1px solid #444;">dees-set</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">18</td><td style="padding:8px; border-bottom:1px solid #444;">dix-huit</td><td style="padding:8px; border-bottom:1px solid #444;">dees-weet</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">19</td><td style="padding:8px; border-bottom:1px solid #444;">dix-neuf</td><td style="padding:8px; border-bottom:1px solid #444;">dees-nuhf</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">20</td><td style="padding:8px; border-bottom:1px solid #444;">vingt</td><td style="padding:8px; border-bottom:1px solid #444;">van</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">30</td><td style="padding:8px; border-bottom:1px solid #444;">trente</td><td style="padding:8px; border-bottom:1px solid #444;">trant</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">40</td><td style="padding:8px; border-bottom:1px solid #444;">quarante</td><td style="padding:8px; border-bottom:1px solid #444;">ka-rant</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">50</td><td style="padding:8px; border-bottom:1px solid #444;">cinquante</td><td style="padding:8px; border-bottom:1px solid #444;">san-kant</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">60</td><td style="padding:8px; border-bottom:1px solid #444;">soixante</td><td style="padding:8px; border-bottom:1px solid #444;">swa-sant</td></tr>
+</tbody></table>`,
+                translation: 'Les bases des nombres.'
+            }]
+        },
         { id: 'verbes-sappeler-etre', title: 'Les verbes - s\'appeler, être', description: 'Se présenter.', translation: 'Verbs: To be named, To be', blocks: [{ type: 'conjugation', verb: 'S\'appeler', tense: 'Présent', data: [{ pronoun: 'Je', form: 'm\'appelle' }, { pronoun: 'Tu', form: 't\'appelles' }, { pronoun: 'Il', form: 's\'appelle' }, { pronoun: 'Nous', form: 'nous appelons' }, { pronoun: 'Vous', form: 'vous appelez' }, { pronoun: 'Ils', form: 's\'appellent' }] }, { type: 'conjugation', verb: 'Être', tense: 'Présent', data: [{ pronoun: 'Je', form: 'suis' }, { pronoun: 'Tu', form: 'es' }, { pronoun: 'Il', form: 'est' }, { pronoun: 'Nous', form: 'sommes' }, { pronoun: 'Vous', form: 'êtes' }, { pronoun: 'Ils', form: 'sont' }] }] },
         { id: 'articles-indefinis', title: 'Les articles indéfinis', description: 'Un, Une, Des.', translation: 'Indefinite Articles', blocks: [{ type: 'markdown', content: '<b>Un</b> (Masc), <b>Une</b> (Fem), <b>Des</b> (Plural).', translation: 'C\'est un livre. C\'est une chaise.' }] },
         { id: 'nationalities-1', title: 'Les nationalités', description: 'Pays et adjectifs.', translation: 'Nationalities', blocks: [{ type: 'examples', list: [{ french: 'Il est français / Elle est française.', translation: 'He is French / She is French.' }] }] },
@@ -30,7 +68,26 @@ export const a1Data: LevelData = {
         { id: 'quest-ce-que-cest', title: 'Qu\'est-ce que c\'est et les articles indéfinis', description: 'Identifier des objets.', translation: 'What is it?', blocks: [{ type: 'examples', list: [{ french: 'Qu\'est-ce que c\'est ? C\'est un livre.', translation: 'What is it? It\'s a book.' }] }] },
         { id: 'nat-avoir', title: 'Les nationalités et avoir', description: 'Avoir + Age/Caractéristique.', translation: 'Nationalities & To Have', blocks: [{ type: 'examples', list: [{ french: 'J\'ai un passeport français.', translation: 'I have a French passport.' }] }] },
         { id: 'nat-only', title: 'Les nationalités', description: 'Adjectifs de nationalité.', translation: 'Nationalities', blocks: [{ type: 'markdown', content: 'Masculin vs Féminin (Français / Française).', translation: 'Accord avec le sujet.' }] },
-        { id: 'famille-mon-ton', title: 'La famille et les adjectifs possessifs - mon, ton, son', description: 'Singulier.', translation: 'Family & Possessives (Singular)', blocks: [{ type: 'markdown', content: '| Subject | Masc. Sing. | Fem. Sing. | Plural | English |\n|---|---|---|---|---|\n| Je | mon | ma | mes | my |\n| Tu | ton | ta | tes | your |\n| Il/Elle | son | sa | ses | his/her/its |\n| Nous | notre | notre | nos | our |\n| Vous | votre | votre | vos | your |\n| Ils/Elles | leur | leur | leurs | their |', translation: 'Possession au singulier.' }] },
+        {
+            id: 'famille-mon-ton',
+            title: 'La famille et les adjectifs possessifs - mon, ton, son',
+            description: 'Singulier.',
+            translation: 'Family & Possessives (Singular)',
+            blocks: [{
+                type: 'markdown',
+                content: `<table style="width:100%; border-collapse:collapse;">
+<thead><tr style="background:#333; color:white;"><th style="padding:8px;">Subject</th><th style="padding:8px;">Masc.</th><th style="padding:8px;">Fem.</th><th style="padding:8px;">Plural</th><th style="padding:8px;">English</th></tr></thead>
+<tbody>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">Je</td><td style="padding:8px; border-bottom:1px solid #444;">mon</td><td style="padding:8px; border-bottom:1px solid #444;">ma</td><td style="padding:8px; border-bottom:1px solid #444;">mes</td><td style="padding:8px; border-bottom:1px solid #444;">my</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">Tu</td><td style="padding:8px; border-bottom:1px solid #444;">ton</td><td style="padding:8px; border-bottom:1px solid #444;">ta</td><td style="padding:8px; border-bottom:1px solid #444;">tes</td><td style="padding:8px; border-bottom:1px solid #444;">your</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">Il/Elle</td><td style="padding:8px; border-bottom:1px solid #444;">son</td><td style="padding:8px; border-bottom:1px solid #444;">sa</td><td style="padding:8px; border-bottom:1px solid #444;">ses</td><td style="padding:8px; border-bottom:1px solid #444;">his/her</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">Nous</td><td style="padding:8px; border-bottom:1px solid #444;">notre</td><td style="padding:8px; border-bottom:1px solid #444;">notre</td><td style="padding:8px; border-bottom:1px solid #444;">nos</td><td style="padding:8px; border-bottom:1px solid #444;">our</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">Vous</td><td style="padding:8px; border-bottom:1px solid #444;">votre</td><td style="padding:8px; border-bottom:1px solid #444;">votre</td><td style="padding:8px; border-bottom:1px solid #444;">vos</td><td style="padding:8px; border-bottom:1px solid #444;">your</td></tr>
+<tr><td style="padding:8px; border-bottom:1px solid #444;">Ils/Elles</td><td style="padding:8px; border-bottom:1px solid #444;">leur</td><td style="padding:8px; border-bottom:1px solid #444;">leur</td><td style="padding:8px; border-bottom:1px solid #444;">leurs</td><td style="padding:8px; border-bottom:1px solid #444;">their</td></tr>
+</tbody></table>`,
+                translation: 'Possession au singulier.'
+            }]
+        },
         { id: 'heure-possessifs-pluriel', title: 'L\'heure et les possessifs - nos, vos, leurs', description: 'Pluriel.', translation: 'Time & Possesives (Plural)', blocks: [{ type: 'markdown', content: 'Nos parents, Vos enfants.', translation: 'Possession au pluriel.' }] },
         { id: 'verbes-er-2', title: 'Les verbes en -er', description: 'Révision.', translation: '-er Verbs', blocks: [{ type: 'markdown', content: 'Manger, Chanter, Danser.', translation: 'Verbes réguliers.' }] },
         { id: 'parler-ecouter', title: 'Parler, écouter', description: 'Compétences.', translation: 'Speaking, Listening', blocks: [{ type: 'examples', list: [{ french: 'Écoutez le dialogue.', translation: 'Listen to the dialogue.' }] }] },
