@@ -10,10 +10,20 @@ export const a1Data: LevelData = {
             title: 'Les verbes -er / -ir / -re (au présent)',
             description: 'Introduction to the three main groups of verbs in French.',
             translation: 'The verbs -er / -ir / -re (in the present tense)',
+            formula: 'Subject + Verb Stem + Ending',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>In French, regular verbs are grouped by their endings: -er, -ir, and -re. The present tense is used to describe actions happening now or general truths.</p>'
+                    content: '<p>In French, regular verbs are grouped by their endings: -er, -ir, and -re. The present tense describes actions happening now or general truths.</p>',
+                    translation: '<p>En français, les verbes réguliers sont groupés par leurs terminaisons : -er, -ir et -re. Le présent décrit des actions en cours ou des vérités générales.</p>'
+                },
+                {
+                    type: 'formula',
+                    items: [
+                        '-er verbs: e, es, e, ons, ez, ent',
+                        '-ir verbs: is, is, it, issons, issez, issent',
+                        '-re verbs: s, s, -, ons, ez, ent'
+                    ]
                 },
                 {
                     type: 'conjugation',
@@ -58,7 +68,7 @@ export const a1Data: LevelData = {
                     type: 'examples',
                     list: [
                         { french: "Je parle français.", translation: "I speak French." },
-                        { french: "nous finissons le travail.", translation: "We are finishing the work." },
+                        { french: "Nous finissons le travail.", translation: "We are finishing the work." },
                         { french: "Ils vendent des fruits.", translation: "They sell fruits." }
                     ]
                 }
@@ -72,7 +82,8 @@ export const a1Data: LevelData = {
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Some -er verbs have slight spelling changes to maintain pronunciation. Verbs ending in -ger add an "e" before "ons" in the "nous" form to keep the soft "g" sound. Verbs in -yer change "y" to "i" in singular forms and the third person plural.</p>'
+                    content: '<p>Some -er verbs have slight spelling changes to maintain pronunciation. Verbs ending in -ger add an "e" before "ons" in the "nous" form to keep the soft "g" sound. Verbs in -yer change "y" to "i" in singular forms and the third person plural.</p>',
+                    translation: '<p>Des verbes en -er changent pour la prononciation. -ger ajoute un "e" avec "nous". -yer change "y" en "i" au singulier et à la 3e personne du pluriel.</p>'
                 },
                 {
                     type: 'conjugation',
@@ -110,7 +121,8 @@ export const a1Data: LevelData = {
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Use verbs like "aimer" (to like), "adorer" (to love), "détester" (to hate), and "préférer" (to prefer) to talk about food.</p>'
+                    content: '<p>Use verbs like "aimer" (to like), "adorer" (to love), "détester" (to hate), and "préférer" (to prefer) to talk about food.</p>',
+                    translation: '<p>Utilisez "aimer", "adorer", "détester" et "préférer" pour parler de nourriture.</p>'
                 },
                 {
                     type: 'examples',
@@ -131,7 +143,8 @@ export const a1Data: LevelData = {
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>When talking about quantities, we use expressions like "un kilo de", "bouteille de", "beaucoup de". The pronoun "en" replaces "de" + noun, often used for quantities.</p>'
+                    content: '<p>When talking about quantities, we use expressions like "un kilo de", "bouteille de", "beaucoup de". The pronoun "en" replaces "de" + noun, often used for quantities.</p>',
+                    translation: '<p>Pour les quantités : "un kilo de", "beaucoup de". Le pronom "en" remplace "de" + nom.</p>'
                 },
                 {
                     type: 'examples',
@@ -148,10 +161,12 @@ export const a1Data: LevelData = {
             title: 'Les pronoms COD (me, te, le, la)',
             description: 'Direct Object Pronouns in the present.',
             translation: 'COD Pronouns',
+            formula: 'Subject + COD + Verb',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Direct object pronouns replace nouns that are directly acted upon by the verb. They are placed <strong>before</strong> the conjugated verb.</p>'
+                    content: '<p>Direct object pronouns replace nouns that are directly acted upon by the verb. They are placed <strong>before</strong> the conjugated verb.</p>',
+                    translation: '<p>Les pronoms COD remplacent les noms objets directs. Ils se placent <strong>devant</strong> le verbe conjugué.</p>'
                 },
                 {
                     type: 'examples',
@@ -168,10 +183,12 @@ export const a1Data: LevelData = {
             title: 'Négation de base (ne...pas)',
             description: 'Basic negation.',
             translation: 'Basic negation',
+            formula: 'Subject + ne + Verb + pas',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>To make a sentence negative, place "ne" before the verb and "pas" after it. (ne -> n\' before a vowel).</p>'
+                    content: '<p>To make a sentence negative, place "ne" before the verb and "pas" after it. (ne -> n\' before a vowel).</p>',
+                    translation: '<p>Pour la négation, placez "ne" avant le verbe et "pas" après.</p>'
                 },
                 {
                     type: 'examples',
@@ -187,10 +204,12 @@ export const a1Data: LevelData = {
             title: 'Le présent continu',
             description: 'Expressing ongoing actions.',
             translation: 'Present continuous',
+            formula: 'Subject + être (conjugated) + en train de + Infinitive',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Use "être en train de" + infinitive to say you are currently in the middle of doing something.</p>'
+                    content: '<p>Use "être en train de" + infinitive to say you are currently in the middle of doing something.</p>',
+                    translation: '<p>Utilisez "être en train de" + infinitif pour une action en cours.</p>'
                 },
                 {
                     type: 'conjugation',

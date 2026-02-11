@@ -13,7 +13,8 @@ export const b1Data: LevelData = {
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Detailed narratives mix PC for events and Imparfait for descriptions/states to tell a story.</p>'
+                    content: '<p>Detailed narratives mix PC for events and Imparfait for descriptions/states to tell a story.</p>',
+                    translation: '<p>Les récits détaillés mélangent le Passé Composé (événements) et l\'Imparfait (descriptions) pour raconter une histoire.</p>'
                 },
                 {
                     type: 'examples',
@@ -28,10 +29,12 @@ export const b1Data: LevelData = {
             title: 'Le Passé Récent',
             description: 'Venir de + infinitive.',
             translation: 'The Recent Past',
+            formula: 'Subject + Venir (present) + de + Infinitive',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Use "venir de" + infinitive to say you just did something.</p>'
+                    content: '<p>Use "venir de" + infinitive to say you just did something.</p>',
+                    translation: '<p>Utilisez "venir de" + infinitif pour dire que vous venez juste de faire quelque chose.</p>'
                 },
                 {
                     type: 'conjugation',
@@ -59,10 +62,12 @@ export const b1Data: LevelData = {
             title: 'Le Plus-que-parfait',
             description: 'Action before another past action.',
             translation: 'The Pluperfect (Past Perfect)',
+            formula: 'Subject + Auxiliary (Imperfect) + Past Participle',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Formed with Imperfect of auxiliary (avoir/être) + Past Participle. Used for actions that happened <strong>before</strong> another past action.</p>'
+                    content: '<p>Formed with Imperfect of auxiliary (avoir/être) + Past Participle. Used for actions that happened <strong>before</strong> another past action.</p>',
+                    translation: '<p>Formé avec l\'imparfait de l\'auxiliaire + participe passé. Pour des actions antérieures à une autre action passée.</p>'
                 },
                 {
                     type: 'examples',
@@ -77,10 +82,12 @@ export const b1Data: LevelData = {
             title: 'Le Futur Simple',
             description: 'Projections and plans.',
             translation: 'The Simple Future',
+            formula: 'Infinitive + ai, as, a, ons, ez, ont',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Formed by adding endings (-ai, -as, -a, -ons, -ez, -ont) to the infinitive (for regular verbs).</p>'
+                    content: '<p>Formed by adding endings (-ai, -as, -a, -ons, -ez, -ont) to the infinitive (for regular verbs).</p>',
+                    translation: '<p>Formé en ajoutant les terminaisons à l\'infinitif.</p>'
                 },
                 {
                     type: 'conjugation',
@@ -105,7 +112,8 @@ export const b1Data: LevelData = {
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p><strong>Futur Proche</strong> (aller + inf): More certain, immediate.<br/><strong>Futur Simple</strong>: More distant, formal, or conditional.</p>'
+                    content: '<p><strong>Futur Proche</strong> (aller + inf): More certain, immediate.<br/><strong>Futur Simple</strong>: More distant, formal, or conditional.</p>',
+                    translation: '<p><strong>Futur Proche</strong> : Certain, immédiat.<br/><strong>Futur Simple</strong> : Lointain, formel ou conditionnel.</p>'
                 }
             ]
         },
@@ -130,10 +138,12 @@ export const b1Data: LevelData = {
             title: 'Le Conditionnel Présent',
             description: 'Politeness, advice, hypothesis.',
             translation: 'Present Conditional',
+            formula: 'Infinitive + Imparfait endings',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Used for politeness ("Je voudrais"), advice ("Tu devrais"), or hypothetical situations.</p>'
+                    content: '<p>Used for politeness ("Je voudrais"), advice ("Tu devrais"), or hypothetical situations.</p>',
+                    translation: '<p>Pour la politesse, les conseils ou les hypothèses.</p>'
                 },
                 {
                     type: 'conjugation',
@@ -158,7 +168,8 @@ export const b1Data: LevelData = {
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p><strong>Qui</strong>: Subject.<br/><strong>Que</strong>: Direct Object.<br/><strong>Où</strong>: Time or Place.<br/><strong>Dont</strong>: Replaces "de".</p>'
+                    content: '<p><strong>Qui</strong>: Subject.<br/><strong>Que</strong>: Direct Object.<br/><strong>Où</strong>: Time or Place.<br/><strong>Dont</strong>: Replaces "de".</p>',
+                    translation: '<p><strong>Qui</strong> : Sujet.<br/><strong>Que</strong> : Objet Direct.<br/><strong>Où</strong> : Temps ou Lieu.<br/><strong>Dont</strong> : Remplace "de".</p>'
                 },
                 {
                     type: 'examples',

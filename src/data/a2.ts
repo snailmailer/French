@@ -10,10 +10,12 @@ export const a2Data: LevelData = {
             title: 'Le Passé Composé (avec Avoir)',
             description: 'The past tense with Avoir.',
             translation: 'The Compound Past (with Avoir)',
+            formula: 'Subject + Avoir (Present) + Past Participle',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>The "Passé Composé" is used for completed actions in the past. Most verbs use "avoir" as an auxiliary verb followed by the past participle (-é, -i, -u).</p>'
+                    content: '<p>The "Passé Composé" is used for completed actions in the past. Most verbs use "avoir" as an auxiliary verb followed by the past participle (-é, -i, -u).</p>',
+                    translation: '<p>Le Passé Composé s\'utilise pour des actions terminées. La plupart des verbes utilisent "avoir" + participe passé.</p>'
                 },
                 {
                     type: 'conjugation',
@@ -42,10 +44,12 @@ export const a2Data: LevelData = {
             title: 'Le Passé Composé (avec Être)',
             description: 'The past tense with Être and agreement.',
             translation: 'The Compound Past (with Être)',
+            formula: 'Subject + Être (Present) + Past Participle (agreed)',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Some verbs of movement and state change (Dr. Mrs. Vandertramp verbs) use "être". The past participle must agree in gender and number with the subject.</p>'
+                    content: '<p>Some verbs of movement and state change (Dr. Mrs. Vandertramp verbs) use "être". The past participle must agree in gender and number with the subject.</p>',
+                    translation: '<p>Certains verbes (mouvement, état) utilisent "être". Le participe passé s\'accorde avec le sujet.</p>'
                 },
                 {
                     type: 'conjugation',
@@ -74,10 +78,12 @@ export const a2Data: LevelData = {
             title: 'Passé Composé (Verbes Pronominaux)',
             description: 'Reflexive verbs in the past.',
             translation: 'Compound Past (Reflexive Verbs)',
+            formula: 'Subject + Reflexive Pronoun + Être + Past Participle',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Reflexive verbs always use "être" in the passé composé. The reflexive pronoun comes before the auxiliary verb.</p>'
+                    content: '<p>Reflexive verbs always use "être" in the passé composé. The reflexive pronoun comes before the auxiliary verb.</p>',
+                    translation: '<p>Les verbes pronominaux utilisent toujours "être". Le pronom réfléchi se place avant l\'auxiliaire.</p>'
                 },
                 {
                     type: 'conjugation',
@@ -99,10 +105,12 @@ export const a2Data: LevelData = {
             title: 'L\'Imparfait',
             description: 'Used for descriptions and repeated actions in the past.',
             translation: 'The Imperfect',
+            formula: 'Nous form stem + ais, ais, ait, ions, iez, aient',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>The imparfait is used for setting the scene, descriptions, and habitual actions in the past. It is formed by taking the "nous" form of the present, removing -ons, and adding endings: -ais, -ais, -ait, -ions, -iez, -aient.</p>'
+                    content: '<p>The imparfait is used for setting the scene, descriptions, and habitual actions in the past. It is formed by taking the "nous" form of the present, removing -ons, and adding endings: -ais, -ais, -ait, -ions, -iez, -aient.</p>',
+                    translation: '<p>L\'imparfait décrit le décor ou les habitudes. On prend le radical de "nous" au présent + terminaisons.</p>'
                 },
                 {
                     type: 'conjugation',
@@ -134,7 +142,8 @@ export const a2Data: LevelData = {
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p><strong>Passé Composé</strong>: Specific completed events, main storyline. <br/><strong>Imparfait</strong>: Background, ongoing state, habits.</p>'
+                    content: '<p><strong>Passé Composé</strong>: Specific completed events, main storyline. <br/><strong>Imparfait</strong>: Background, ongoing state, habits.</p>',
+                    translation: '<p><strong>Passé Composé</strong> : Actions finies, histoire principale.<br/><strong>Imparfait</strong> : Contexte, état, habitudes.</p>'
                 },
                 {
                     type: 'examples',
@@ -152,7 +161,8 @@ export const a2Data: LevelData = {
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p><strong>Depuis</strong> + Present: Action started in the past and continues now.<br/><strong>Il y a</strong> + Passé Composé: Completed action that happened some time ago.</p>'
+                    content: '<p><strong>Depuis</strong> + Present: Action started in the past and continues now.<br/><strong>Il y a</strong> + Passé Composé: Completed action that happened some time ago.</p>',
+                    translation: '<p><strong>Depuis</strong> + Présent : Action commancée dans le passé qui continue.<br/><strong>Il y a</strong> + Passé : Action terminée il y a un certain temps.</p>'
                 },
                 {
                     type: 'examples',
@@ -171,7 +181,8 @@ export const a2Data: LevelData = {
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p><strong>COD</strong> (le, la, les) replace direct objects.<br/><strong>COI</strong> (lui, leur) replace indirect objects introduced by "à".</p>'
+                    content: '<p><strong>COD</strong> (le, la, les) replace direct objects.<br/><strong>COI</strong> (lui, leur) replace indirect objects introduced by "à".</p>',
+                    translation: '<p><strong>COD</strong> (le, la, les) remplacent les objets directs.<br/><strong>COI</strong> (lui, leur) remplacent les objets indirects ("à").</p>'
                 },
                 {
                     type: 'examples',
@@ -190,7 +201,8 @@ export const a2Data: LevelData = {
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>"y" replaces a place introduced by "à", "dans", "en", "chez", etc. It means "there".</p>'
+                    content: '<p>"y" replaces a place introduced by "à", "dans", "en", "chez", etc. It means "there".</p>',
+                    translation: '<p>"y" remplace un lieu introduit par une préposition. Il signifie "là-bas" ou "y".</p>'
                 },
                 {
                     type: 'examples',
@@ -208,7 +220,8 @@ export const a2Data: LevelData = {
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Plus... que (more than), moins... que (less than), aussi... que (as... as).</p>'
+                    content: '<p>Plus... que (more than), moins... que (less than), aussi... que (as... as).</p>',
+                    translation: '<p>Plus... que, moins... que, aussi... que.</p>'
                 },
                 {
                     type: 'examples',

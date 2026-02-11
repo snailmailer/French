@@ -41,12 +41,39 @@ const LevelPage = () => {
             <div className="topics-list">
                 {levelData.topics.map((topic) => (
                     <section key={topic.id} style={{ marginBottom: '4rem', background: 'var(--bg-secondary)', padding: '2rem', borderRadius: '16px' }}>
-                        <h2 style={{ borderLeft: '4px solid var(--accent-color)', paddingLeft: '1rem' }}>{topic.title}</h2>
-                        <p style={{ fontStyle: 'italic', color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>{topic.translation}</p>
+                        <h2 style={{ borderLeft: '4px solid var(--accent-color)', paddingLeft: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <span>{topic.title}</span>
+                            <span style={{ fontSize: '1rem', fontWeight: 'normal', color: 'var(--text-secondary)' }}>{topic.translation}</span>
+                        </h2>
+
+                        {/* Topic-level Formula */}
+                        {topic.formula && (
+                            <div style={{ background: 'rgba(100, 108, 255, 0.1)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--accent-color)', margin: '1.5rem 0', fontFamily: 'monospace', fontWeight: 'bold', color: 'var(--accent-hover)' }}>
+                                Formula: {topic.formula}
+                            </div>
+                        )}
 
                         {topic.blocks.map((block, idx) => {
                             if (block.type === 'markdown') {
-                                return <div key={idx} dangerouslySetInnerHTML={{ __html: block.content }} className="topic-content" style={{ marginBottom: '1.5rem' }} />;
+                                return (
+                                    <div key={idx} style={{ display: 'grid', gridTemplateColumns: block.translation ? '1fr 1fr' : '1fr', gap: '2rem', marginBottom: '2rem', alignItems: 'start' }}>
+                                        <div dangerouslySetInnerHTML={{ __html: block.content }} className="topic-content" />
+                                        {block.translation && (
+                                            <div style={{ color: 'var(--text-secondary)', fontStyle: 'italic', borderLeft: '2px solid var(--border-color)', paddingLeft: '1rem' }}>
+                                                <div dangerouslySetInnerHTML={{ __html: block.translation }} />
+                                            </div>
+                                        )}
+                                    </div>
+                                );
+                            } else if (block.type === 'formula') {
+                                return (
+                                    <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1.5rem', background: '#1e1e1e', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid #4CAF50' }}>
+                                        <h4 style={{ margin: 0, color: '#4CAF50' }}>Structure</h4>
+                                        {block.items.map((item, i) => (
+                                            <div key={i} style={{ fontFamily: 'monospace', fontSize: '1.1rem' }}>{item}</div>
+                                        ))}
+                                    </div>
+                                );
                             } else if (block.type === 'conjugation') {
                                 return (
                                     <div key={idx} style={{ margin: '2rem 0' }}>

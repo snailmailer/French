@@ -13,7 +13,8 @@ export const b2Data: LevelData = {
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Used after prepositions (avec, pour, sur, sans...). They agree in gender and number with the antecedent.</p>'
+                    content: '<p>Used after prepositions (avec, pour, sur, sans...). They agree in gender and number with the antecedent.</p>',
+                    translation: '<p>Utilisés après des prépositions. Ils s\'accordent en genre et en nombre avec l\'antécédent.</p>'
                 },
                 {
                     type: 'examples',
@@ -32,7 +33,8 @@ export const b2Data: LevelData = {
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Replaces a noun previously mentioned. Followed by -ci/-la, or "de", or a relative pronoun (qui/que).</p>'
+                    content: '<p>Replaces a noun previously mentioned. Followed by -ci/-la, or "de", or a relative pronoun (qui/que).</p>',
+                    translation: '<p>Remplace un nom mentionné précédemment.</p>'
                 },
                 {
                     type: 'examples',
@@ -51,7 +53,8 @@ export const b2Data: LevelData = {
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Used to ask questions about a specific choice among a group.</p>'
+                    content: '<p>Used to ask questions about a specific choice among a group.</p>',
+                    translation: '<p>Pour poser des questions sur un choix spécifique.</p>'
                 },
                 {
                     type: 'examples',
@@ -67,10 +70,12 @@ export const b2Data: LevelData = {
             title: 'Le Conditionnel Passé',
             description: 'Regrets and hypothetical past.',
             translation: 'Past Conditional',
+            formula: 'Auxiliary (Conditional) + Past Participle',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Formed with Conditional Present of auxiliary + Past Participle. Used to express regrets or things that would have happened under different circumstances.</p>'
+                    content: '<p>Formed with Conditional Present of auxiliary + Past Participle. Used to express regrets or things that would have happened under different circumstances.</p>',
+                    translation: '<p>Pour exprimer des regrets ou des hypothèses passées.</p>'
                 },
                 {
                     type: 'examples',
@@ -86,10 +91,12 @@ export const b2Data: LevelData = {
             title: 'Le Gérondif',
             description: 'Simultaneous actions and manner.',
             translation: 'The Gerund',
+            formula: 'En + Present Participle (-ant)',
             blocks: [
                 {
                     type: 'markdown',
-                    content: '<p>Formed with "en" + present participle (-ant). Indicates simultaneous action ("while doing") or method ("by doing").</p>'
+                    content: '<p>Formed with "en" + present participle (-ant). Indicates simultaneous action ("while doing") or method ("by doing").</p>',
+                    translation: '<p>Indique une action simultanée ou la manière.</p>'
                 },
                 {
                     type: 'examples',
