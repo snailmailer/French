@@ -18,7 +18,14 @@ const Layout = () => {
                 </Link>
                 <nav>
                     <nav style={{ display: 'flex', gap: '1.5rem' }}>
-                        <Link to="/conjugation" style={{ color: 'var(--text-primary)', fontWeight: 500 }}>
+                        <Link to="/conjugation" style={{
+                            color: 'white',
+                            fontWeight: 500,
+                            background: '#4CAF50',
+                            padding: '0.5rem 1rem',
+                            borderRadius: '8px',
+                            transition: 'background 0.2s'
+                        }}>
                             Conjugation Tool
                         </Link>
                     </nav>        </nav>
