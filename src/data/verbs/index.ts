@@ -14,64 +14,115 @@ import { venir } from './venir';
 import { voir } from './voir';
 import { vouloir } from './vouloir';
 
-// --- Regular ER ---
+// --- Regular Verbs ---
 export const accepter = createRegularVerb('accepter', 'ER');
-export const amuser = createRegularVerb('amuser', 'ER');
-export const baigner = createRegularVerb('baigner', 'ER');
-export const coiffer = createRegularVerb('coiffer', 'ER');
+export const amuser = createRegularVerb('amuser', 'ER'); // s'amuser?
+export const attendre = createRegularVerb('attendre', 'RE');
+export const baigner = createRegularVerb('baigner', 'ER'); // se baigner/baigner
+export const coiffer = createRegularVerb('coiffer', 'ER'); // se coiffer
 export const connecter = createRegularVerb('connecter', 'ER');
-export const coucher = createRegularVerb('coucher', 'ER');
-export const deshabiller = createRegularVerb('déshabiller', 'ER');
+export const coucher = createRegularVerb('coucher', 'ER'); // se coucher
+export const couvrir = createRegularVerb('couvrir', 'IR_COCOS');
+export const decouvrir = createRegularVerb('découvrir', 'IR_COCOS');
+export const defendre = createRegularVerb('défendre', 'RE');
 export const dejeuner = createRegularVerb('déjeuner', 'ER');
+export const dependre = createRegularVerb('dépendre', 'RE');
+export const descendre = createRegularVerb('descendre', 'RE', 'etre');
+export const deshabiller = createRegularVerb('déshabiller', 'ER'); // se déshabiller
 export const diner = createRegularVerb('dîner', 'ER');
-export const doucher = createRegularVerb('doucher', 'ER');
-export const habiller = createRegularVerb('habiller', 'ER');
+export const doucher = createRegularVerb('doucher', 'ER'); // se doucher
+export const endormir = createRegularVerb('endormir', 'IR_DORMIR'); // s'endormir
+export const entendre = createRegularVerb('entendre', 'RE');
+export const habiller = createRegularVerb('habiller', 'ER'); // s'habiller
 export const informer = createRegularVerb('informer', 'ER');
 export const jouer = createRegularVerb('jouer', 'ER');
-export const laver = createRegularVerb('laver', 'ER');
-export const lever = createRegularVerb('lever', 'ER');
-export const maquiller = createRegularVerb('maquiller', 'ER');
+export const laver = createRegularVerb('laver', 'ER'); // se laver
+export const lever = createRegularVerb('lever', 'ER'); // se lever
 export const manger = createRegularVerb('manger', 'ER');
+export const maquiller = createRegularVerb('maquiller', 'ER'); // se maquiller
 export const nettoyer = createRegularVerb('nettoyer', 'ER');
+export const offrir = createRegularVerb('offrir', 'IR_COCOS');
 export const oublier = createRegularVerb('oublier', 'ER');
 export const parler = createRegularVerb('parler', 'ER');
-export const peigner = createRegularVerb('peigner', 'ER');
+export const peigner = createRegularVerb('peigner', 'ER'); // se peigner
+export const perdre = createRegularVerb('perdre', 'RE');
 export const preciser = createRegularVerb('préciser', 'ER');
-export const promener = createRegularVerb('promener', 'ER');
+export const promener = createRegularVerb('promener', 'ER'); // se promener
 export const proposer = createRegularVerb('proposer', 'ER');
+export const raser = createRegularVerb('raser', 'ER'); // se raser
 export const remercier = createRegularVerb('remercier', 'ER');
+export const rendre = createRegularVerb('rendre', 'RE');
 export const rentrer = createRegularVerb('rentrer', 'ER', 'etre');
-export const reveiller = createRegularVerb('réveiller', 'ER');
-export const raser = createRegularVerb('raser', 'ER');
-export const secher = createRegularVerb('sécher', 'ER');
+export const repondre = createRegularVerb('répondre', 'RE');
+export const reveiller = createRegularVerb('réveiller', 'ER'); // se réveiller
+export const rouvrir = createRegularVerb('rouvrir', 'IR_COCOS');
+export const secher = createRegularVerb('sécher', 'ER'); // se sécher
+export const souffrir = createRegularVerb('souffrir', 'IR_COCOS');
 export const surfer = createRegularVerb('surfer', 'ER');
 export const terminer = createRegularVerb('terminer', 'ER');
 export const toucher = createRegularVerb('toucher', 'ER');
-
-// --- Regular IR ---
-export const couvrir = createRegularVerb('couvrir', 'IR_COCOS');
-export const decouvrir = createRegularVerb('découvrir', 'IR_COCOS');
-export const endormir = createRegularVerb('endormir', 'IR_ISS');
-export const offrir = createRegularVerb('offrir', 'IR_COCOS');
-export const rouvrir = createRegularVerb('rouvrir', 'IR_COCOS');
-export const souffrir = createRegularVerb('souffrir', 'IR_COCOS');
-
-// --- Regular RE ---
-export const attendre = createRegularVerb('attendre', 'RE');
-export const dependre = createRegularVerb('dépendre', 'RE');
-export const defendre = createRegularVerb('défendre', 'RE');
-export const descendre = createRegularVerb('descendre', 'RE', 'etre');
-export const entendre = createRegularVerb('entendre', 'RE');
-export const perdre = createRegularVerb('perdre', 'RE');
-export const rendre = createRegularVerb('rendre', 'RE');
-export const repondre = createRegularVerb('répondre', 'RE');
 export const vendre = createRegularVerb('vendre', 'RE');
 
 export const verbs = [
-    aimer, aller, avoir, devoir, dire, etre, faire, mettre, pouvoir, prendre, savoir, venir, voir, vouloir,
-    accepter, amuser, baigner, coiffer, connecter, coucher, deshabiller, dejeuner, diner, doucher,
-    habiller, informer, jouer, laver, lever, maquiller, manger, nettoyer, oublier, parler, peigner,
-    preciser, promener, proposer, remercier, rentrer, reveiller, raser, secher, surfer, terminer, toucher,
-    couvrir, decouvrir, endormir, offrir, rouvrir, souffrir,
-    attendre, dependre, defendre, descendre, entendre, perdre, rendre, repondre, vendre
+    accepter,
+    aimer,
+    aller,
+    amuser,
+    attendre,
+    avoir,
+    baigner,
+    coiffer,
+    connecter,
+    coucher,
+    couvrir,
+    decouvrir,
+    defendre,
+    dejeuner,
+    dependre,
+    descendre,
+    deshabiller,
+    devoir,
+    diner,
+    dire,
+    doucher,
+    endormir,
+    entendre,
+    etre,
+    faire,
+    habiller,
+    informer,
+    jouer,
+    laver,
+    lever,
+    manger,
+    maquiller,
+    mettre,
+    nettoyer,
+    offrir,
+    oublier,
+    parler,
+    peigner,
+    perdre,
+    pouvoir,
+    preciser,
+    prendre,
+    promener,
+    proposer,
+    raser,
+    remercier,
+    rendre,
+    rentrer,
+    repondre,
+    reveiller,
+    rouvrir,
+    savoir,
+    secher,
+    souffrir,
+    surfer,
+    terminer,
+    toucher,
+    vendre,
+    venir,
+    voir,
+    vouloir
 ];
