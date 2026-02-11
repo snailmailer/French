@@ -69,7 +69,7 @@ const REFLEXIVE_PRONOUNS = ['me', 'te', 'se', 'nous', 'vous', 'se'];
 const J_APOSTROPHE_VOWELS = ['a', 'e', 'i', 'o', 'u', 'y', 'h', 'ê', 'î'];
 
 
-export function createRegularVerb(infinitive: string, type: VerbEndingType, auxiliary: 'avoir' | 'etre' = 'avoir', definition: string = '', isReflexive: boolean = false) {
+export function createRegularVerb(infinitive: string, type: VerbEndingType, auxiliary: 'avoir' | 'etre' = 'avoir', definition: string = '', isReflexive: boolean = false, customRules: string[] = []) {
     // If reflexive, force auxiliary to be être for compound tenses
     const actualAux = isReflexive ? 'etre' : auxiliary;
 
@@ -147,13 +147,27 @@ export function createRegularVerb(infinitive: string, type: VerbEndingType, auxi
         futurStem = verbPart;
     }
 
+    const generatedRules: string[] = [];
+    if (isReflexive) generatedRules.push('Reflexive verb.');
+    if (yToIStem) generatedRules.push('Stem change: y -> i (e.g. ' + yToIStem + 'e).');
+    if (doubleLStem) generatedRules.push('Stem change: l -> ll (e.g. ' + doubleLStem + 'e).');
+    if (changedStem) generatedRules.push('Stem change: e -> è (e.g. ' + changedStem + 'e).');
+    if (cleanInfinitive.endsWith('ger')) generatedRules.push('Spelling change: g -> ge before a/o (e.g. mangeons).');
+    if (cleanInfinitive.endsWith('cer')) generatedRules.push('Spelling change: c -> ç before a/o (e.g. lançons).');
+    if (type === 'IR_COCOS') generatedRules.push('Conjugates like ER verbs in Present (e.g. ouvre).');
+    if (type === 'IR_DORMIR') generatedRules.push('Short stem in Singular Present (e.g. dors).');
+
+    if (generatedRules.length === 0 && customRules.length === 0) {
+        generatedRules.push('Regular conjugation pattern.');
+    }
+
     const endings = ENDINGS[type];
     const data: any = {
         infinitive,
         translation: definition,
         group: type === 'ER' ? '1st' : (type === 'IR_ISS' ? '2nd' : '3rd'),
         auxiliary: isReflexive ? 'Être (Reflexive)' : (auxiliary === 'avoir' ? 'Avoir' : 'Être'),
-        rules: ['Regular conjugation pattern.'],
+        rules: [...generatedRules, ...customRules],
         conjugations: {
             Indicatif: {},
             Conditionnel: {},
@@ -213,8 +227,28 @@ export function createRegularVerb(infinitive: string, type: VerbEndingType, auxi
                 currentStem = tStem.slice(0, -1);
             }
 
+            // GER/CER handling
+            // manger -> mangeons (add e before a/o), manageais (add e before a/o)
+            // lancer -> lançons (c->ç before a/o), lançais (c->ç before a/o)
+            let stemToUse = currentStem;
+            if (type === 'ER') {
+                const isGer = cleanInfinitive.endsWith('ger');
+                const isCer = cleanInfinitive.endsWith('cer');
+
+                if (isGer || isCer) {
+                    const firstLetter = tEndings[i].charAt(0); // 'o' (ons) or 'a' (ais/as/a/aient)
+                    if (firstLetter === 'o' || firstLetter === 'a') {
+                        if (isGer) {
+                            stemToUse = stem + 'e'; // mang -> mange
+                        } else if (isCer) {
+                            stemToUse = stem.slice(0, -1) + 'ç'; // lanc -> lanç
+                        }
+                    }
+                }
+            }
+
             const ending = tEndings[i];
-            const verbForm = currentStem + ending + suffix;
+            const verbForm = stemToUse + ending + suffix;
             const { p, r } = getPronoun(i, verbForm);
 
             return { pronoun: p, form: r + verbForm };
