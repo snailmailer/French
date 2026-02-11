@@ -3,6 +3,28 @@ export interface ConjugationRow {
     form: string;
 }
 
+export interface VerbMood {
+    [tense: string]: ConjugationRow[];
+}
+
+export interface VerbConjugations {
+    Indicatif: VerbMood;
+    Subjonctif: VerbMood;
+    Conditionnel: VerbMood;
+    Impératif: VerbMood;
+    Participe: VerbMood;
+}
+
+export interface VerbDefinition {
+    infinitive: string;
+    translation: string;
+    group: 1 | 2 | 3;
+    auxiliary: 'avoir' | 'être';
+    rules: string[];
+    conjugations: VerbConjugations;
+}
+
+
 export type ContentBlock =
     | { type: 'markdown'; content: string; translation?: string } // Added translation for split view
     | { type: 'conjugation'; verb: string; tense: string; data: ConjugationRow[] }

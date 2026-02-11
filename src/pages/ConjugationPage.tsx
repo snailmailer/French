@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Search, Info } from 'lucide-react';
-import { verbs } from '../data/conjugations';
-import type { VerbDefinition } from '../data/conjugations';
+import { verbs } from '../data/verbs';
+import type { VerbDefinition } from '../data/types';
 import ConjugationTable from '../components/ConjugationTable';
 
 const ConjugationPage = () => {
@@ -91,16 +91,32 @@ const ConjugationPage = () => {
                         </div>
                     </div>
 
-                    <div className="conjugation-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-                        {Object.entries(selectedVerb.conjugations).map(([tense, data]) => (
-                            <ConjugationTable
-                                key={tense}
-                                verb={selectedVerb.infinitive}
-                                tense={tense}
-                                conjugations={data}
-                                pronunciations={{}} // Handled by TTS in component
-                            />
-                        ))}
+                    <div className="conjugation-container">
+                        {['Indicatif', 'Subjonctif', 'Conditionnel', 'Impératif', 'Participe'].map((mood) => {
+                            const moodKey = mood as keyof typeof selectedVerb.conjugations;
+                            const moodData = selectedVerb.conjugations[moodKey];
+
+                            if (!moodData) return null;
+
+                            return (
+                                <div key={mood} className="mood-section" style={{ marginBottom: '3rem' }}>
+                                    <h3 style={{ fontSize: '1.8rem', borderBottom: '2px solid var(--border-color)', paddingBottom: '0.5rem', marginBottom: '1.5rem', color: 'var(--accent-color)' }}>
+                                        {mood}
+                                    </h3>
+                                    <div className="conjugation-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+                                        {Object.entries(moodData).map(([tense, data]) => (
+                                            <ConjugationTable
+                                                key={tense}
+                                                verb={selectedVerb.infinitive}
+                                                tense={tense}
+                                                conjugations={data}
+                                                pronunciations={{}}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             ) : (
