@@ -17,8 +17,11 @@ const Layout = () => {
                     <span>Le Français</span>
                 </Link>
                 <nav>
-                    {/* Add more nav items here if needed */}
-                </nav>
+                    <nav style={{ display: 'flex', gap: '1.5rem' }}>
+                        <Link to="/conjugation" style={{ color: 'var(--text-primary)', fontWeight: 500 }}>
+                            Conjugation Tool
+                        </Link>
+                    </nav>        </nav>
             </header>
             <main className="container">
                 <Outlet />
