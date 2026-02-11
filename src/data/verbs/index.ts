@@ -3,6 +3,7 @@ import { aller } from './aller';
 import { asseoir } from './asseoir';
 import { avoir } from './avoir';
 import { devoir } from './devoir';
+import { etre } from './etre';
 import { faire } from './faire';
 import { pouvoir } from './pouvoir';
 import { souvenir } from './souvenir';
@@ -109,6 +110,7 @@ export const verbs = [
     sendormir,
     sennuyer,
     entendre,
+    etre,
     se_facher,
     faire,
     shabiller,
