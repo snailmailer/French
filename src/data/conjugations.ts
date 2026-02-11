@@ -214,5 +214,87 @@ export const verbs: VerbDefinition[] = [
                 { pronoun: 'ils/elles', form: 'feront' }
             ]
         }
+    },
+    {
+        infinitive: 'pouvoir',
+        translation: 'to be able to (can)',
+        group: 3,
+        auxiliary: 'avoir',
+        rules: ['Irregular.', 'Stem "peux/peu" in present, "pourr" in future.'],
+        conjugations: {
+            'Présent': [
+                { pronoun: 'je', form: 'peux' },
+                { pronoun: 'tu', form: 'peux' },
+                { pronoun: 'il/elle', form: 'peut' },
+                { pronoun: 'nous', form: 'pouvons' },
+                { pronoun: 'vous', form: 'pouvez' },
+                { pronoun: 'ils/elles', form: 'peuvent' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai pu' },
+                { pronoun: 'tu', form: 'as pu' },
+                { pronoun: 'il/elle', form: 'a pu' },
+                { pronoun: 'nous', form: 'avons pu' },
+                { pronoun: 'vous', form: 'avez pu' },
+                { pronoun: 'ils/elles', form: 'ont pu' }
+            ],
+            'Imparfait': [
+                { pronoun: 'je', form: 'pouvais' },
+                { pronoun: 'tu', form: 'pouvais' },
+                { pronoun: 'il/elle', form: 'pouvait' },
+                { pronoun: 'nous', form: 'pouvions' },
+                { pronoun: 'vous', form: 'pouviez' },
+                { pronoun: 'ils/elles', form: 'pouvaient' }
+            ],
+            'Futur Simple': [
+                { pronoun: 'je', form: 'pourrai' },
+                { pronoun: 'tu', form: 'pourras' },
+                { pronoun: 'il/elle', form: 'pourra' },
+                { pronoun: 'nous', form: 'pourrons' },
+                { pronoun: 'vous', form: 'pourrez' },
+                { pronoun: 'ils/elles', form: 'pourront' }
+            ]
+        }
+    },
+    {
+        infinitive: 'vouloir',
+        translation: 'to want',
+        group: 3,
+        auxiliary: 'avoir',
+        rules: ['Irregular.', 'Stem "veux/veu" in present, "voudr" in future.'],
+        conjugations: {
+            'Présent': [
+                { pronoun: 'je', form: 'veux' },
+                { pronoun: 'tu', form: 'veux' },
+                { pronoun: 'il/elle', form: 'veut' },
+                { pronoun: 'nous', form: 'voulons' },
+                { pronoun: 'vous', form: 'voulez' },
+                { pronoun: 'ils/elles', form: 'veulent' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai voulu' },
+                { pronoun: 'tu', form: 'as voulu' },
+                { pronoun: 'il/elle', form: 'a voulu' },
+                { pronoun: 'nous', form: 'avons voulu' },
+                { pronoun: 'vous', form: 'avez voulu' },
+                { pronoun: 'ils/elles', form: 'ont voulu' }
+            ],
+            'Imparfait': [
+                { pronoun: 'je', form: 'voulais' },
+                { pronoun: 'tu', form: 'voulais' },
+                { pronoun: 'il/elle', form: 'voulait' },
+                { pronoun: 'nous', form: 'voulions' },
+                { pronoun: 'vous', form: 'vouliez' },
+                { pronoun: 'ils/elles', form: 'voulaint' }
+            ],
+            'Futur Simple': [
+                { pronoun: 'je', form: 'voudrai' },
+                { pronoun: 'tu', form: 'voudras' },
+                { pronoun: 'il/elle', form: 'voudra' },
+                { pronoun: 'nous', form: 'voudrons' },
+                { pronoun: 'vous', form: 'voudrez' },
+                { pronoun: 'ils/elles', form: 'voudront' }
+            ]
+        }
     }
 ];
