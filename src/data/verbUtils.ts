@@ -78,25 +78,73 @@ export function createRegularVerb(infinitive: string, type: VerbEndingType, auxi
     if (infinitive.toLowerCase().startsWith('se ')) cleanInfinitive = infinitive.substring(3);
     else if (infinitive.toLowerCase().startsWith("s'")) cleanInfinitive = infinitive.substring(2);
 
-    let stem = '';
-    let futurStem = '';
+    // Handle "se sécher les cheveux" -> verb "sécher", suffix " les cheveux"
+    let verbPart = cleanInfinitive;
+    let suffix = '';
+    const spaceIndex = cleanInfinitive.indexOf(' ');
+    if (spaceIndex !== -1) {
+        verbPart = cleanInfinitive.substring(0, spaceIndex);
+        suffix = cleanInfinitive.substring(spaceIndex);
+    }
 
+    let stem = '';
+    let futurStem = verbPart;
+    let changedStem = ''; // For e->è changes (lève, sèche)
+    let yToIStem = ''; // For ayer/oyer/uyer -> ie (nettoie, ennuie)
+    let doubleLStem = ''; // For eler -> elle (appelle)
+    let futureStemHasAccent = false;
+
+    // Auto-detect stem changes for ER verbs
     if (type === 'ER') {
-        stem = cleanInfinitive.slice(0, -2);
-        futurStem = cleanInfinitive;
+        stem = verbPart.slice(0, -2);
+
+        // 1. Y -> I (oyer/uyer. ayer is optional, usually keeps y)
+        // nettoyer -> nettoie. s'ennuyer -> m'ennuie.
+        const yMatch = verbPart.match(/^(.*)(oy|uy)er$/);
+        if (yMatch) {
+            // netoy -> nettoi. Stem is 'nettoy'. 
+            // We want 'nettoi'.
+            yToIStem = stem.slice(0, -1) + 'i';
+        }
+
+        // 2. L -> LL (appeler -> appelle)
+        if (verbPart.endsWith('appeler')) {
+            doubleLStem = stem + 'l'; // appel -> appell
+        }
+
+        // 3. E -> È (lever, promener, sécher)
+        // Only if not handled by above
+        if (!doubleLStem && !yToIStem) {
+            // Regex for e..er or é..er (e.g. lever, sécher, promener)
+            // Groups: 1=Prefix, 2=Vowel(e/é), 3=Consonants
+            const match = verbPart.match(/^(.*)(e|é)([^aeiou]+)er$/);
+            if (match) {
+                const prefix = match[1];
+                const vowel = match[2];
+                const cons = match[3];
+                changedStem = `${prefix}è${cons}`; // lève, sèche
+
+                if (vowel === 'e') {
+                    // e_er (lever) -> Future uses è (lèverai)
+                    futureStemHasAccent = true;
+                } else {
+                    // é_er (sécher) -> Future keeps é (sécherai)
+                    futureStemHasAccent = false;
+                }
+            }
+        }
     } else if (type === 'RE') {
-        stem = cleanInfinitive.slice(0, -2);
-        futurStem = cleanInfinitive.slice(0, -1);
+        stem = verbPart.slice(0, -2);
+        futurStem = verbPart.slice(0, -1);
     } else if (type === 'IR_ISS') {
-        stem = cleanInfinitive.slice(0, -2);
-        futurStem = cleanInfinitive;
+        stem = verbPart.slice(0, -2);
+        futurStem = verbPart;
     } else if (type === 'IR_COCOS') {
-        stem = cleanInfinitive.slice(0, -2);
-        futurStem = cleanInfinitive;
+        stem = verbPart.slice(0, -2);
+        futurStem = verbPart;
     } else if (type === 'IR_DORMIR') {
-        // Dormir -> Dorm (Long), Dor (Short for Sg Present)
-        stem = cleanInfinitive.slice(0, -2);
-        futurStem = cleanInfinitive;
+        stem = verbPart.slice(0, -2);
+        futurStem = verbPart;
     }
 
     const endings = ENDINGS[type];
@@ -137,16 +185,36 @@ export function createRegularVerb(infinitive: string, type: VerbEndingType, auxi
         return { p, r };
     };
 
-    const conjure = (tStem: string, tEndings: string[]) => {
+    const conjure = (tStem: string, tEndings: string[], useFutureStem: boolean = false) => {
         return PRONOUNS.map((_, i) => {
             let currentStem = tStem;
+            const changes = [0, 1, 2, 5]; // Je, Tu, Il, Ils
+
+            // Handle Stem Changes (Present & Subjunctive)
+            if ((tEndings === endings.present || tEndings === endings.subjonctif)) {
+                if (changes.includes(i)) {
+                    if (yToIStem) currentStem = yToIStem;
+                    else if (doubleLStem) currentStem = doubleLStem;
+                    else if (changedStem) currentStem = changedStem;
+                }
+            }
+
+            // Future/Cond
+            if (useFutureStem) {
+                if (yToIStem) currentStem = yToIStem + 'er'; // nettoierai
+                else if (doubleLStem) currentStem = doubleLStem + 'er'; // appellerai
+                else if (changedStem && futureStemHasAccent) {
+                    currentStem = changedStem + 'er'; // lèverai
+                }
+            }
+
             // IR_DORMIR Short Stem logic for Present Singular
             if (type === 'IR_DORMIR' && tEndings === endings.present && i < 3) {
                 currentStem = tStem.slice(0, -1);
             }
 
             const ending = tEndings[i];
-            const verbForm = currentStem + ending;
+            const verbForm = currentStem + ending + suffix;
             const { p, r } = getPronoun(i, verbForm);
 
             return { pronoun: p, form: r + verbForm };
@@ -156,11 +224,11 @@ export function createRegularVerb(infinitive: string, type: VerbEndingType, auxi
     // Indicatif Présent
     data.conjugations.Indicatif['Présent'] = conjure(stem, endings.present);
     data.conjugations.Indicatif['Imparfait'] = conjure(stem, endings.imparfait);
-    data.conjugations.Indicatif['Futur Simple'] = conjure(futurStem, type === 'IR_ISS' ? ['ai', 'as', 'a', 'ons', 'ez', 'ont'] : endings.futur);
+    data.conjugations.Indicatif['Futur Simple'] = conjure(futurStem, type === 'IR_ISS' ? ['ai', 'as', 'a', 'ons', 'ez', 'ont'] : endings.futur, true);
     data.conjugations.Indicatif['Passé Simple'] = conjure(stem, endings.passe_simple);
 
     // Conditionnel Présent
-    data.conjugations.Conditionnel['Présent'] = conjure(futurStem, endings.conditionnel);
+    data.conjugations.Conditionnel['Présent'] = conjure(futurStem, endings.conditionnel, true);
 
     // Subjonctif Présent
     data.conjugations.Subjonctif['Présent'] = conjure(stem, endings.subjonctif).map((item: any) => ({ ...item, pronoun: 'que ' + item.pronoun }));
@@ -171,9 +239,9 @@ export function createRegularVerb(infinitive: string, type: VerbEndingType, auxi
     // Participle
     const ppStem = stem + endings.participe_present[0];
     const ppReflexive = isReflexive ? 'se ' + ppStem : ppStem;
-    data.conjugations.Participe['Présent'] = [{ pronoun: '', form: ppReflexive }];
+    data.conjugations.Participe['Présent'] = [{ pronoun: '', form: ppReflexive + suffix }];
 
-    const ppBase = stem + endings.participe_passe[0];
+    const ppBase = stem + endings.participe_passe[0] + suffix;
     data.conjugations.Participe['Passé'] = [{ pronoun: (actualAux === 'etre' ? '(e)(s)' : ''), form: ppBase }];
 
 
@@ -198,7 +266,7 @@ export function createRegularVerb(infinitive: string, type: VerbEndingType, auxi
             subj_imp: ['fusse', 'fusses', 'fût', 'fussions', 'fussiez', 'fussent']
         };
 
-    const pp = stem + endings.participe_passe[0];
+    const pp = stem + endings.participe_passe[0] + suffix;
 
     const compound = (auxTense: string[]) => {
         return PRONOUNS.map((_, i) => {
@@ -213,8 +281,8 @@ export function createRegularVerb(infinitive: string, type: VerbEndingType, auxi
     data.conjugations.Indicatif['Futur Antérieur'] = compound(aux.fut);
     data.conjugations.Indicatif['Passé Antérieur'] = compound(aux.passe_simple);
 
-    data.conjugations.Conditionnel['Passé'] = compound(aux.cond);
-    data.conjugations.Conditionnel['Passé - forme alternative'] = compound(aux.subj_imp);
+    data.conjugations.Conditionnel['Passé'] = compound(aux.cond); // Forme 1
+    data.conjugations.Conditionnel['Passé - forme alternative'] = compound(aux.subj_imp); // Forme 2
 
     data.conjugations.Subjonctif['Passé'] = compound(aux.subj);
     data.conjugations.Subjonctif['Plus-que-parfait'] = compound(aux.subj_imp);
@@ -226,8 +294,12 @@ export function createRegularVerb(infinitive: string, type: VerbEndingType, auxi
         const vAller = aller[i];
         let p = PRONOUNS[i];
 
-        // Je vais ME laver.
         let infPart = cleanInfinitive;
+        if (suffix) infPart = cleanInfinitive; // cleanInfinitive has suffix if I didn't slice it. But I didn't. 
+        // cleanInfinitive is full phrase minus "se ". "sécher les cheveux".
+        // check conj function logic:
+        // if (isReflexive) r + cleanInfinitive. -> "me sécher les cheveux". Correct.
+
         if (isReflexive) {
             let r = REFLEXIVE_PRONOUNS[i];
             const firstLetter = cleanInfinitive.charAt(0).toLowerCase();
@@ -245,17 +317,22 @@ export function createRegularVerb(infinitive: string, type: VerbEndingType, auxi
     else if (type === 'RE') impEndings = ['s', 'ons', 'ez'];
     else impEndings = ['is', 'issons', 'issez'];
 
+    let impStemTu = stem;
+    if (yToIStem) impStemTu = yToIStem;
+    else if (doubleLStem) impStemTu = doubleLStem;
+    else if (changedStem && type === 'ER') impStemTu = changedStem; // Lève-toi
+
     if (isReflexive) {
         data.conjugations.Impératif['Présent'] = [
-            { pronoun: '(Tu)', form: stem + impEndings[0] + '-toi' },
-            { pronoun: '(Nous)', form: stem + impEndings[1] + '-nous' },
-            { pronoun: '(Vous)', form: stem + impEndings[2] + '-vous' }
+            { pronoun: '(Tu)', form: impStemTu + impEndings[0] + suffix + '-toi' },
+            { pronoun: '(Nous)', form: stem + impEndings[1] + suffix + '-nous' },
+            { pronoun: '(Vous)', form: stem + impEndings[2] + suffix + '-vous' }
         ];
     } else {
         data.conjugations.Impératif['Présent'] = [
-            { pronoun: '(Tu)', form: stem + impEndings[0] },
-            { pronoun: '(Nous)', form: stem + impEndings[1] },
-            { pronoun: '(Vous)', form: stem + impEndings[2] }
+            { pronoun: '(Tu)', form: impStemTu + impEndings[0] + suffix },
+            { pronoun: '(Nous)', form: stem + impEndings[1] + suffix },
+            { pronoun: '(Vous)', form: stem + impEndings[2] + suffix }
         ];
     }
 
