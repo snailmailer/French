@@ -10,6 +10,7 @@ const ConjugationPage = () => {
     const [selectedVerb, setSelectedVerb] = useState<VerbDefinition | null>(null);
     const [categoryFilter, setCategoryFilter] = useState<string>('All');
     const [groupFilter, setGroupFilter] = useState<string>('All');
+    const [tenseFilter, setTenseFilter] = useState<string>('All');
 
     // Extract unique categories
     const categories = ['All', ...Array.from(new Set(verbs.map(v => v.category).filter(Boolean)))].sort();
@@ -98,6 +99,33 @@ const ConjugationPage = () => {
                 </div>
             </div>
 
+            {/* Tense Filter */}
+            <div style={{ flex: 1, position: 'relative' }}>
+                <select
+                    value={tenseFilter}
+                    onChange={(e) => setTenseFilter(e.target.value)}
+                    style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}
+                >
+                    <option value="All">All Tenses</option>
+                    <option value="Présent">Présent</option>
+                    <option value="Imparfait">Imparfait</option>
+                    <option value="Futur Simple">Futur Simple</option>
+                    <option value="Passé Composé">Passé Composé</option>
+                    <option value="Plus-que-parfait">Plus-que-parfait</option>
+                    <option value="Conditionnel">Conditionnel</option>
+                    <option value="Subjonctif">Subjonctif</option>
+                    <option value="Impératif">Impératif</option>
+                </select>
+                {tenseFilter !== 'All' && (
+                    <X
+                        size={16}
+                        style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer', color: 'var(--text-secondary)' }}
+                        onClick={() => setTenseFilter('All')}
+                    />
+                )}
+            </div>
+
+
             {/* Search Bar */}
             <div style={{ position: 'relative', marginBottom: '3rem' }}>
                 <input
@@ -175,103 +203,120 @@ const ConjugationPage = () => {
                 )}
             </div>
 
-            {selectedVerb ? (
-                <div className="verb-details">
-                    <div className="verb-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
-                        <div>
-                            <h2 style={{ fontSize: '2.5rem', margin: 0 }}>
-                                {selectedVerb.infinitive}
-                                <span style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', marginLeft: '1rem', fontWeight: 'normal' }}>
-                                    ({selectedVerb.translation})
-                                </span>
-                            </h2>
-                            <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
-                                <span className="badge" style={{ background: '#2c3e50', padding: '0.2rem 0.8rem', borderRadius: '4px', fontSize: '0.9rem' }}>
-                                    Group {selectedVerb.group}
-                                </span>
-                                <span className="badge" style={{ background: '#2c3e50', padding: '0.2rem 0.8rem', borderRadius: '4px', fontSize: '0.9rem' }}>
-                                    Auxiliary: {selectedVerb.auxiliary}
-                                </span>
+            {
+                selectedVerb ? (
+                    <div className="verb-details">
+                        <div className="verb-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
+                            <div>
+                                <h2 style={{ fontSize: '2.5rem', margin: 0 }}>
+                                    {selectedVerb.infinitive}
+                                    <span style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', marginLeft: '1rem', fontWeight: 'normal' }}>
+                                        ({selectedVerb.translation})
+                                    </span>
+                                </h2>
+                                <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+                                    <span className="badge" style={{ background: '#2c3e50', padding: '0.2rem 0.8rem', borderRadius: '4px', fontSize: '0.9rem' }}>
+                                        Group {selectedVerb.group}
+                                    </span>
+                                    <span className="badge" style={{ background: '#2c3e50', padding: '0.2rem 0.8rem', borderRadius: '4px', fontSize: '0.9rem' }}>
+                                        Auxiliary: {selectedVerb.auxiliary}
+                                    </span>
+                                </div>
+                            </div>
+
+                            {/* Rules Box */}
+                            <div style={{ background: 'rgba(100, 108, 255, 0.1)', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid var(--accent-color)', maxWidth: '300px' }}>
+                                <h4 style={{ margin: '0 0 0.5rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <Info size={16} /> Rules & Notes
+                                </h4>
+                                <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                                    {selectedVerb.rules.map((rule, idx) => (
+                                        <li key={idx}>{rule}</li>
+                                    ))}
+                                </ul>
                             </div>
                         </div>
 
-                        {/* Rules Box */}
-                        <div style={{ background: 'rgba(100, 108, 255, 0.1)', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid var(--accent-color)', maxWidth: '300px' }}>
-                            <h4 style={{ margin: '0 0 0.5rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <Info size={16} /> Rules & Notes
-                            </h4>
-                            <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                                {selectedVerb.rules.map((rule, idx) => (
-                                    <li key={idx}>{rule}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
+                        {/* Examples Section */}
+                        {selectedVerb.examples && selectedVerb.examples.length > 0 && (
+                            <div style={{ marginBottom: '2rem', background: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: '12px' }}>
+                                <h3 style={{ color: 'var(--accent-color)', marginBottom: '1rem' }}>Examples</h3>
+                                <ul style={{ listStyle: 'none', padding: 0 }}>
+                                    {selectedVerb.examples.map((ex, idx) => (
+                                        <li key={idx} style={{ marginBottom: '0.8rem', display: 'flex', flexDirection: 'column' }}>
+                                            <span style={{ fontSize: '1.1rem', fontWeight: 500 }}>{ex.sentence}</span>
+                                            <span style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', fontStyle: 'italic' }}>{ex.translation}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
 
-                    {/* Examples Section */}
-                    {selectedVerb.examples && selectedVerb.examples.length > 0 && (
-                        <div style={{ marginBottom: '2rem', background: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: '12px' }}>
-                            <h3 style={{ color: 'var(--accent-color)', marginBottom: '1rem' }}>Examples</h3>
-                            <ul style={{ listStyle: 'none', padding: 0 }}>
-                                {selectedVerb.examples.map((ex, idx) => (
-                                    <li key={idx} style={{ marginBottom: '0.8rem', display: 'flex', flexDirection: 'column' }}>
-                                        <span style={{ fontSize: '1.1rem', fontWeight: 500 }}>{ex.sentence}</span>
-                                        <span style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', fontStyle: 'italic' }}>{ex.translation}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
+                        <div className="conjugation-container">
+                            {['Indicatif', 'Subjonctif', 'Conditionnel', 'Impératif', 'Participe'].map((mood) => {
+                                const moodKey = mood as keyof typeof selectedVerb.conjugations;
+                                const moodData = selectedVerb.conjugations[moodKey];
 
-                    <div className="conjugation-container">
-                        {['Indicatif', 'Subjonctif', 'Conditionnel', 'Impératif', 'Participe'].map((mood) => {
-                            const moodKey = mood as keyof typeof selectedVerb.conjugations;
-                            const moodData = selectedVerb.conjugations[moodKey];
+                                if (!moodData) return null;
 
-                            if (!moodData) return null;
+                                return (
+                                    <div key={mood} className="mood-section" style={{ marginBottom: '3rem' }}>
+                                        <h3 style={{ fontSize: '1.8rem', borderBottom: '2px solid var(--border-color)', paddingBottom: '0.5rem', marginBottom: '1.5rem', color: 'var(--accent-color)' }}>
+                                            {mood}
+                                        </h3>
+                                        <div className="conjugation-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem' }}>
+                                            {Object.entries(moodData).map(([tense, data]) => {
+                                                if (tenseFilter !== 'All') {
+                                                    // Simple filter: Check if tense name includes filter (e.g., "Passé Composé" matches "Passé Composé")
+                                                    // Or if mood matches (e.g. "Conditionnel" matches "Conditionnel Present")
+                                                    // Let's do exact match or inclusion
+                                                    const normalizedFilter = tenseFilter.toLowerCase();
+                                                    const normalizedTense = tense.toLowerCase();
+                                                    const normalizedMood = mood.toLowerCase();
 
-                            return (
-                                <div key={mood} className="mood-section" style={{ marginBottom: '3rem' }}>
-                                    <h3 style={{ fontSize: '1.8rem', borderBottom: '2px solid var(--border-color)', paddingBottom: '0.5rem', marginBottom: '1.5rem', color: 'var(--accent-color)' }}>
-                                        {mood}
-                                    </h3>
-                                    <div className="conjugation-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem' }}>
-                                        {Object.entries(moodData).map(([tense, data]) => {
-                                            const usage = tenseUsageData.find(u => {
-                                                const normName = u.name.toLowerCase();
-                                                const normTense = tense.toLowerCase();
-                                                const normMood = mood.toLowerCase();
-                                                if (normMood === 'indicatif') {
-                                                    if (normTense === 'présent') return normName.includes('présent de l’indicatif');
-                                                    if (normTense === 'passé') return normName.includes('passé composé');
+                                                    let show = false;
+                                                    if (normalizedMood.includes(normalizedFilter)) show = true; // Show all Conditionnel if filter is Conditionnel
+                                                    if (normalizedTense.includes(normalizedFilter)) show = true; // Show Présent if filter is Présent
+
+                                                    if (!show) return null;
                                                 }
-                                                return normName.toLowerCase().includes(normTense.toLowerCase()) || normTense.toLowerCase().includes(normName.toLowerCase());
-                                            });
 
-                                            return (
-                                                <ConjugationTable
-                                                    key={tense}
-                                                    verb={selectedVerb.infinitive}
-                                                    translation={selectedVerb.translation}
-                                                    tense={tense}
-                                                    pronunciations={{}}
-                                                    conjugations={data}
-                                                    tenseUsage={usage}
-                                                />
-                                            );
-                                        })}
+                                                const usage = tenseUsageData.find(u => {
+                                                    const normName = u.name.toLowerCase();
+                                                    const normTense = tense.toLowerCase();
+                                                    const normMood = mood.toLowerCase();
+                                                    if (normMood === 'indicatif') {
+                                                        if (normTense === 'présent') return normName.includes('présent de l’indicatif');
+                                                        if (normTense === 'passé') return normName.includes('passé composé');
+                                                    }
+                                                    return normName.toLowerCase().includes(normTense.toLowerCase()) || normTense.toLowerCase().includes(normName.toLowerCase());
+                                                });
+
+                                                return (
+                                                    <ConjugationTable
+                                                        key={tense}
+                                                        verb={selectedVerb.infinitive}
+                                                        translation={selectedVerb.translation}
+                                                        tense={tense}
+                                                        pronunciations={{}}
+                                                        conjugations={data}
+                                                        tenseUsage={usage}
+                                                    />
+                                                );
+                                            })}
+                                        </div>
                                     </div>
-                                </div>
-                            );
-                        })}
+                                );
+                            })}
+                        </div>
                     </div>
-                </div>
-            ) : (
-                <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)', border: '2px dashed var(--border-color)', borderRadius: '12px' }}>
-                    {searchTerm ? 'Verb not found in database yet. Try "aimer", "aller", "avoir", "être", "faire".' : 'Type a verb to begin.'}
-                </div>
-            )}
-        </div>
+                ) : (
+                    <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)', border: '2px dashed var(--border-color)', borderRadius: '12px' }}>
+                        {searchTerm ? 'Verb not found in database yet. Try "aimer", "aller", "avoir", "être", "faire".' : 'Type a verb to begin.'}
+                    </div>
+                )
+            }
+        </div >
     );
 };
 

@@ -162,7 +162,77 @@ export const se_depecher = crv('se dépêcher', 'ER', 'avoir', 'to hurry', true,
 export const se_reposer = crv('se reposer', 'ER', 'avoir', 'to rest', true, [], [], 'Routine');
 
 // --- Housing / Logement ---
-export const vivre = crv('vivre', 'RE', 'avoir', 'to live', false, [], [], 'Housing');
+const vivreBase = crv('vivre', 'RE', 'avoir', 'to live', false, [], [], 'Housing');
+export const vivre = {
+    ...vivreBase,
+    conjugations: {
+        ...vivreBase.conjugations,
+        Indicatif: {
+            ...vivreBase.conjugations.Indicatif,
+            'Présent': [
+                { pronoun: 'je', form: 'vis' },
+                { pronoun: 'tu', form: 'vis' },
+                { pronoun: 'il/elle', form: 'vit' },
+                { pronoun: 'nous', form: 'vivons' },
+                { pronoun: 'vous', form: 'vivez' },
+                { pronoun: 'ils/elles', form: 'vivent' }
+            ],
+            'Imparfait': [
+                { pronoun: 'je', form: 'vivais' },
+                { pronoun: 'tu', form: 'vivais' },
+                { pronoun: 'il/elle', form: 'vivait' },
+                { pronoun: 'nous', form: 'vivions' },
+                { pronoun: 'vous', form: 'viviez' },
+                { pronoun: 'ils/elles', form: 'vivaient' }
+            ],
+            'Futur Simple': [
+                { pronoun: 'je', form: 'vivrai' },
+                { pronoun: 'tu', form: 'vivras' },
+                { pronoun: 'il/elle', form: 'vivra' },
+                { pronoun: 'nous', form: 'vivrons' },
+                { pronoun: 'vous', form: 'vivrez' },
+                { pronoun: 'ils/elles', form: 'vivront' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai vécu' },
+                { pronoun: 'tu', form: 'as vécu' },
+                { pronoun: 'il/elle', form: 'a vécu' },
+                { pronoun: 'nous', form: 'avons vécu' },
+                { pronoun: 'vous', form: 'avez vécu' },
+                { pronoun: 'ils/elles', form: 'ont vécu' }
+            ],
+            'Plus-que-parfait': [
+                { pronoun: 'j\'', form: 'avais vécu' },
+                { pronoun: 'tu', form: 'avais vécu' },
+                { pronoun: 'il/elle', form: 'avait vécu' },
+                { pronoun: 'nous', form: 'avions vécu' },
+                { pronoun: 'vous', form: 'aviez vécu' },
+                { pronoun: 'ils/elles', form: 'avaient vécu' }
+            ]
+        },
+        Conditionnel: {
+            ...vivreBase.conjugations.Conditionnel,
+            'Présent': [
+                { pronoun: 'je', form: 'vivrais' },
+                { pronoun: 'tu', form: 'vivrais' },
+                { pronoun: 'il/elle', form: 'vivrait' },
+                { pronoun: 'nous', form: 'vivrions' },
+                { pronoun: 'vous', form: 'vivriez' },
+                { pronoun: 'ils/elles', form: 'vivraient' }
+            ]
+        },
+        Participe: {
+            ...vivreBase.conjugations.Participe,
+            'Présent': [{ pronoun: '', form: 'vivant' }],
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'vécu' },
+                { pronoun: 'Fem. Sing.', form: 'vécu' }, // Vivre mostly intransitive or used with avoir (no agreement usually unless direct object precedes, but base form is vécu)
+                { pronoun: 'Masc. Plur.', form: 'vécus' },
+                { pronoun: 'Fem. Plur.', form: 'vécues' }
+            ]
+        }
+    }
+};
 export const habiter = crv('habiter', 'ER', 'avoir', 'to reside', false, [], [], 'Housing');
 export const demenager = crv('déménager', 'ER', 'avoir', 'to move out', false, [], [], 'Housing');
 export const louer = crv('louer', 'ER', 'avoir', 'to rent', false, [], [], 'Housing');
