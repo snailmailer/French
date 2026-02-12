@@ -22,6 +22,7 @@ export interface VerbDefinition {
     group: number | string;
     auxiliary: 'avoir' | 'etre' | string;
     rules: string[];
+    gerund?: string; // e.g. "en mangeant"
     category?: string; // e.g. 'Travail', 'Loisirs'
     examples?: {
         sentence: string;

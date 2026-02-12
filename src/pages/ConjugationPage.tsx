@@ -221,6 +221,9 @@ const ConjugationPage = () => {
                                     <span className="badge" style={{ background: '#2c3e50', padding: '0.2rem 0.8rem', borderRadius: '4px', fontSize: '0.9rem' }}>
                                         Auxiliary: {selectedVerb.auxiliary}
                                     </span>
+                                    <span className="badge" style={{ background: '#2c3e50', padding: '0.2rem 0.8rem', borderRadius: '4px', fontSize: '0.9rem' }}>
+                                        Gérondif: {selectedVerb.gerund || (selectedVerb.conjugations.Participe?.Présent?.[0]?.form ? `en ${selectedVerb.conjugations.Participe.Présent[0].form}` : 'N/A')}
+                                    </span>
                                 </div>
                             </div>
 

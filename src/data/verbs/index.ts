@@ -31,7 +31,58 @@ export const vouloir = applyExamplesToVerb({ ...vouloirBase, category: 'General'
 export const etudier = crv('étudier', 'ER', 'avoir', 'to study', false, [], [], 'Education');
 export const apprendre = crv('apprendre', 'RE', 'avoir', 'to learn', false, [], [], 'Education');
 export const reviser = crv('réviser', 'ER', 'avoir', 'to review/revise', false, [], [], 'Education');
-export const lire = crv('lire', 'RE', 'avoir', 'to read', false, [], [], 'Education');
+const lireBase = crv('lire', 'RE', 'avoir', 'to read', false, [], [], 'Education');
+export const lire = {
+    ...lireBase,
+    conjugations: {
+        ...lireBase.conjugations,
+        Indicatif: {
+            ...lireBase.conjugations.Indicatif,
+            'Présent': [
+                { pronoun: 'je', form: 'lis' },
+                { pronoun: 'tu', form: 'lis' },
+                { pronoun: 'il/elle', form: 'lit' },
+                { pronoun: 'nous', form: 'lisons' },
+                { pronoun: 'vous', form: 'lisez' },
+                { pronoun: 'ils/elles', form: 'lisent' }
+            ],
+            'Imparfait': [
+                { pronoun: 'je', form: 'lisais' },
+                { pronoun: 'tu', form: 'lisais' },
+                { pronoun: 'il/elle', form: 'lisait' },
+                { pronoun: 'nous', form: 'lisions' },
+                { pronoun: 'vous', form: 'lisiez' },
+                { pronoun: 'ils/elles', form: 'lisaient' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai lu' },
+                { pronoun: 'tu', form: 'as lu' },
+                { pronoun: 'il/elle', form: 'a lu' },
+                { pronoun: 'nous', form: 'avons lu' },
+                { pronoun: 'vous', form: 'avez lu' },
+                { pronoun: 'ils/elles', form: 'ont lu' }
+            ],
+            'Plus-que-parfait': [
+                { pronoun: 'j\'', form: 'avais lu' },
+                { pronoun: 'tu', form: 'avais lu' },
+                { pronoun: 'il/elle', form: 'avait lu' },
+                { pronoun: 'nous', form: 'avions lu' },
+                { pronoun: 'vous', form: 'aviez lu' },
+                { pronoun: 'ils/elles', form: 'avaient lu' }
+            ]
+        },
+        Participe: {
+            ...lireBase.conjugations.Participe,
+            'Présent': [{ pronoun: '', form: 'lisant' }],
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'lu' },
+                { pronoun: 'Fem. Sing.', form: 'lue' },
+                { pronoun: 'Masc. Plur.', form: 'lus' },
+                { pronoun: 'Fem. Plur.', form: 'lues' }
+            ]
+        }
+    }
+};
 const ecrireBase = crv('écrire', 'RE', 'avoir', 'to write', false, [], [], 'Education');
 export const ecrire = {
     ...ecrireBase,
@@ -206,7 +257,77 @@ export const samuser = crv("s'amuser", 'ER', 'avoir', 'to have fun', true, [], [
 
 // --- Food / Manger ---
 export const manger = crv('manger', 'ER', 'avoir', 'to eat', false, [], [], 'Food');
-export const boire = crv('boire', 'RE', 'avoir', 'to drink', false, [], [], 'Food');
+const boireBase = crv('boire', 'RE', 'avoir', 'to drink', false, [], [], 'Food');
+export const boire = {
+    ...boireBase,
+    conjugations: {
+        ...boireBase.conjugations,
+        Indicatif: {
+            ...boireBase.conjugations.Indicatif,
+            'Présent': [
+                { pronoun: 'je', form: 'bois' },
+                { pronoun: 'tu', form: 'bois' },
+                { pronoun: 'il/elle', form: 'boit' },
+                { pronoun: 'nous', form: 'buvons' },
+                { pronoun: 'vous', form: 'buvez' },
+                { pronoun: 'ils/elles', form: 'boivent' }
+            ],
+            'Imparfait': [
+                { pronoun: 'je', form: 'buvais' },
+                { pronoun: 'tu', form: 'buvais' },
+                { pronoun: 'il/elle', form: 'buvait' },
+                { pronoun: 'nous', form: 'buvions' },
+                { pronoun: 'vous', form: 'buviez' },
+                { pronoun: 'ils/elles', form: 'buvaient' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai bu' },
+                { pronoun: 'tu', form: 'as bu' },
+                { pronoun: 'il/elle', form: 'a bu' },
+                { pronoun: 'nous', form: 'avons bu' },
+                { pronoun: 'vous', form: 'avez bu' },
+                { pronoun: 'ils/elles', form: 'ont bu' }
+            ],
+            'Plus-que-parfait': [
+                { pronoun: 'j\'', form: 'avais bu' },
+                { pronoun: 'tu', form: 'avais bu' },
+                { pronoun: 'il/elle', form: 'avait bu' },
+                { pronoun: 'nous', form: 'avions bu' },
+                { pronoun: 'vous', form: 'aviez bu' },
+                { pronoun: 'ils/elles', form: 'avaient bu' }
+            ],
+            'Futur Simple': [
+                { pronoun: 'je', form: 'boirai' },
+                { pronoun: 'tu', form: 'boiras' },
+                { pronoun: 'il/elle', form: 'boira' },
+                { pronoun: 'nous', form: 'boirons' },
+                { pronoun: 'vous', form: 'boirez' },
+                { pronoun: 'ils/elles', form: 'boiront' }
+            ]
+        },
+        Subjonctif: {
+            ...boireBase.conjugations.Subjonctif,
+            'Présent': [
+                { pronoun: 'que je', form: 'boive' },
+                { pronoun: 'que tu', form: 'boives' },
+                { pronoun: 'qu\'il/elle', form: 'boive' },
+                { pronoun: 'que nous', form: 'buvions' },
+                { pronoun: 'que vous', form: 'buviez' },
+                { pronoun: 'qu\'ils/elles', form: 'boivent' }
+            ]
+        },
+        Participe: {
+            ...boireBase.conjugations.Participe,
+            'Présent': [{ pronoun: '', form: 'buvant' }],
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'bu' },
+                { pronoun: 'Fem. Sing.', form: 'bue' },
+                { pronoun: 'Masc. Plur.', form: 'bus' },
+                { pronoun: 'Fem. Plur.', form: 'bues' }
+            ]
+        }
+    }
+};
 export const preparer_repas = crv('préparer le repas', 'ER', 'avoir', 'to prepare meal', false, [], [], 'Food');
 export const gouter = crv('goûter', 'ER', 'avoir', 'to taste/snack', false, [], [], 'Food');
 export const commander = crv('commander', 'ER', 'avoir', 'to order', false, [], [], 'Food');
@@ -354,18 +475,230 @@ export const arriver = crv('arriver', 'ER', 'etre', 'to arrive', false, [], [], 
 export const attendre = crv('attendre', 'RE', 'avoir', 'to wait', false, [], [], 'General');
 export const commencer = crv('commencer', 'ER', 'avoir', 'to start', false, [], [], 'General');
 export const demander = crv('demander', 'ER', 'avoir', 'to ask', false, [], [], 'General');
-export const dire = crv('dire', 'RE', 'avoir', 'to say', false, [], [], 'General'); // Irregular! createRegularVerb(RE) might be wrong. Dire is irregular (dites).
+const direBase = crv('dire', 'RE', 'avoir', 'to say', false, [], [], 'General');
+export const dire = {
+    ...direBase,
+    conjugations: {
+        ...direBase.conjugations,
+        Indicatif: {
+            ...direBase.conjugations.Indicatif,
+            'Présent': [
+                { pronoun: 'je', form: 'dis' },
+                { pronoun: 'tu', form: 'dis' },
+                { pronoun: 'il/elle', form: 'dit' },
+                { pronoun: 'nous', form: 'disons' },
+                { pronoun: 'vous', form: 'dites' },
+                { pronoun: 'ils/elles', form: 'disent' }
+            ],
+            'Imparfait': [
+                { pronoun: 'je', form: 'disais' },
+                { pronoun: 'tu', form: 'disais' },
+                { pronoun: 'il/elle', form: 'disait' },
+                { pronoun: 'nous', form: 'disions' },
+                { pronoun: 'vous', form: 'disiez' },
+                { pronoun: 'ils/elles', form: 'disaient' }
+            ],
+            'Futur Simple': [
+                { pronoun: 'je', form: 'dirai' },
+                { pronoun: 'tu', form: 'diras' },
+                { pronoun: 'il/elle', form: 'dira' },
+                { pronoun: 'nous', form: 'dirons' },
+                { pronoun: 'vous', form: 'direz' },
+                { pronoun: 'ils/elles', form: 'diront' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai dit' },
+                { pronoun: 'tu', form: 'as dit' },
+                { pronoun: 'il/elle', form: 'a dit' },
+                { pronoun: 'nous', form: 'avons dit' },
+                { pronoun: 'vous', form: 'avez dit' },
+                { pronoun: 'ils/elles', form: 'ont dit' }
+            ],
+            'Plus-que-parfait': [
+                { pronoun: 'j\'', form: 'avais dit' },
+                { pronoun: 'tu', form: 'avais dit' },
+                { pronoun: 'il/elle', form: 'avait dit' },
+                { pronoun: 'nous', form: 'avions dit' },
+                { pronoun: 'vous', form: 'aviez dit' },
+                { pronoun: 'ils/elles', form: 'avaient dit' }
+            ]
+        },
+        Participe: {
+            ...direBase.conjugations.Participe,
+            'Présent': [{ pronoun: '', form: 'disant' }],
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'dit' },
+                { pronoun: 'Fem. Sing.', form: 'dite' },
+                { pronoun: 'Masc. Plur.', form: 'dits' },
+                { pronoun: 'Fem. Plur.', form: 'dites' }
+            ]
+        },
+        Impératif: {
+            ...direBase.conjugations.Impératif,
+            'Présent': [
+                { pronoun: '(Tu)', form: 'dis' },
+                { pronoun: '(Nous)', form: 'disons' },
+                { pronoun: '(Vous)', form: 'dites' }
+            ]
+        }
+    }
+};
 export const ecouter = crv('écouter', 'ER', 'avoir', 'to listen', false, [], [], 'General');
 export const entendre = crv('entendre', 'RE', 'avoir', 'to hear', false, [], [], 'General');
 export const finir = crv('finir', 'IR_ISS', 'avoir', 'to finish', false, [], [], 'General');
 export const grandir = crv('grandir', 'IR_ISS', 'avoir', 'to grow', false, [], [], 'General');
-export const mettre = crv('mettre', 'RE', 'avoir', 'to put', false, [], [], 'General'); // Irregular.
+const mettreBase = crv('mettre', 'RE', 'avoir', 'to put', false, [], [], 'General');
+export const mettre = {
+    ...mettreBase,
+    conjugations: {
+        ...mettreBase.conjugations,
+        Indicatif: {
+            ...mettreBase.conjugations.Indicatif,
+            'Présent': [
+                { pronoun: 'je', form: 'mets' },
+                { pronoun: 'tu', form: 'mets' },
+                { pronoun: 'il/elle', form: 'met' },
+                { pronoun: 'nous', form: 'mettons' },
+                { pronoun: 'vous', form: 'mettez' },
+                { pronoun: 'ils/elles', form: 'mettent' }
+            ],
+            'Imparfait': [
+                { pronoun: 'je', form: 'mettais' },
+                { pronoun: 'tu', form: 'mettais' },
+                { pronoun: 'il/elle', form: 'mettait' },
+                { pronoun: 'nous', form: 'mettions' },
+                { pronoun: 'vous', form: 'mettiez' },
+                { pronoun: 'ils/elles', form: 'mettaient' }
+            ],
+            'Futur Simple': [
+                { pronoun: 'je', form: 'mettrai' },
+                { pronoun: 'tu', form: 'mettras' },
+                { pronoun: 'il/elle', form: 'mettra' },
+                { pronoun: 'nous', form: 'mettrons' },
+                { pronoun: 'vous', form: 'mettrez' },
+                { pronoun: 'ils/elles', form: 'mettront' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai mis' },
+                { pronoun: 'tu', form: 'as mis' },
+                { pronoun: 'il/elle', form: 'a mis' },
+                { pronoun: 'nous', form: 'avons mis' },
+                { pronoun: 'vous', form: 'avez mis' },
+                { pronoun: 'ils/elles', form: 'ont mis' }
+            ],
+            'Plus-que-parfait': [
+                { pronoun: 'j\'', form: 'avais mis' },
+                { pronoun: 'tu', form: 'avais mis' },
+                { pronoun: 'il/elle', form: 'avait mis' },
+                { pronoun: 'nous', form: 'avions mis' },
+                { pronoun: 'vous', form: 'aviez mis' },
+                { pronoun: 'ils/elles', form: 'avaient mis' }
+            ]
+        },
+        Participe: {
+            ...mettreBase.conjugations.Participe,
+            'Présent': [{ pronoun: '', form: 'mettant' }],
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'mis' },
+                { pronoun: 'Fem. Sing.', form: 'mise' },
+                { pronoun: 'Masc. Plur.', form: 'mis' },
+                { pronoun: 'Fem. Plur.', form: 'mises' }
+            ]
+        },
+        Impératif: {
+            ...mettreBase.conjugations.Impératif,
+            'Présent': [
+                { pronoun: '(Tu)', form: 'mets' },
+                { pronoun: '(Nous)', form: 'mettons' },
+                { pronoun: '(Vous)', form: 'mettez' }
+            ]
+        }
+    }
+};
 export const offrir = crv('offrir', 'IR_COCOS', 'avoir', 'to offer', false, [], [], 'General');
 export const oublier = crv('oublier', 'ER', 'avoir', 'to forget', false, [], [], 'General');
 export const parler = crv('parler', 'ER', 'avoir', 'to speak', false, [], [], 'General');
 export const perdre = crv('perdre', 'RE', 'avoir', 'to lose', false, [], [], 'General');
 export const porter = crv('porter', 'ER', 'avoir', 'to wear/carry', false, [], [], 'General');
-export const prendre = crv('prendre', 'RE', 'avoir', 'to take', false, [], [], 'General'); // Irregular
+const prendreBase = crv('prendre', 'RE', 'avoir', 'to take', false, [], [], 'General');
+export const prendre = {
+    ...prendreBase,
+    conjugations: {
+        ...prendreBase.conjugations,
+        Indicatif: {
+            ...prendreBase.conjugations.Indicatif,
+            'Présent': [
+                { pronoun: 'je', form: 'prends' },
+                { pronoun: 'tu', form: 'prends' },
+                { pronoun: 'il/elle', form: 'prend' },
+                { pronoun: 'nous', form: 'prenons' },
+                { pronoun: 'vous', form: 'prenez' },
+                { pronoun: 'ils/elles', form: 'prennent' }
+            ],
+            'Imparfait': [
+                { pronoun: 'je', form: 'prenais' },
+                { pronoun: 'tu', form: 'prenais' },
+                { pronoun: 'il/elle', form: 'prenait' },
+                { pronoun: 'nous', form: 'prenions' },
+                { pronoun: 'vous', form: 'preniez' },
+                { pronoun: 'ils/elles', form: 'prenaient' }
+            ],
+            'Futur Simple': [
+                { pronoun: 'je', form: 'prendrai' },
+                { pronoun: 'tu', form: 'prendras' },
+                { pronoun: 'il/elle', form: 'prendra' },
+                { pronoun: 'nous', form: 'prendrons' },
+                { pronoun: 'vous', form: 'prendrez' },
+                { pronoun: 'ils/elles', form: 'prendront' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai pris' },
+                { pronoun: 'tu', form: 'as pris' },
+                { pronoun: 'il/elle', form: 'a pris' },
+                { pronoun: 'nous', form: 'avons pris' },
+                { pronoun: 'vous', form: 'avez pris' },
+                { pronoun: 'ils/elles', form: 'ont pris' }
+            ],
+            'Plus-que-parfait': [
+                { pronoun: 'j\'', form: 'avais pris' },
+                { pronoun: 'tu', form: 'avais pris' },
+                { pronoun: 'il/elle', form: 'avait pris' },
+                { pronoun: 'nous', form: 'avions pris' },
+                { pronoun: 'vous', form: 'aviez pris' },
+                { pronoun: 'ils/elles', form: 'avaient pris' }
+            ]
+        },
+        Subjonctif: {
+            ...prendreBase.conjugations.Subjonctif,
+            'Présent': [
+                { pronoun: 'que je', form: 'prenne' },
+                { pronoun: 'que tu', form: 'prennes' },
+                { pronoun: 'qu\'il/elle', form: 'prenne' },
+                { pronoun: 'que nous', form: 'prenions' },
+                { pronoun: 'que vous', form: 'preniez' },
+                { pronoun: 'qu\'ils/elles', form: 'prennent' }
+            ]
+        },
+        Participe: {
+            ...prendreBase.conjugations.Participe,
+            'Présent': [{ pronoun: '', form: 'prenant' }],
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'pris' },
+                { pronoun: 'Fem. Sing.', form: 'prise' },
+                { pronoun: 'Masc. Plur.', form: 'pris' },
+                { pronoun: 'Fem. Plur.', form: 'prises' }
+            ]
+        },
+        Impératif: {
+            ...prendreBase.conjugations.Impératif,
+            'Présent': [
+                { pronoun: '(Tu)', form: 'prends' },
+                { pronoun: '(Nous)', form: 'prenons' },
+                { pronoun: '(Vous)', form: 'prenez' }
+            ]
+        }
+    }
+};
 export const proposer = crv('proposer', 'ER', 'avoir', 'to propose', false, [], [], 'General');
 export const remercier = crv('remercier', 'ER', 'avoir', 'to thank', false, [], [], 'General');
 export const rendre = crv('rendre', 'RE', 'avoir', 'to give back', false, [], [], 'General');
@@ -426,6 +759,8 @@ export const se_preparer = crv('se préparer', 'ER', 'avoir', 'to get ready', tr
 // export const sasseoir = asseoir; // Removed alias
 // export const sentire = se_sentir; // Removed alias
 export const coucher = crv('coucher', 'ER', 'avoir', 'to put to bed', false, [], [], 'Routine');
+
+
 
 // Export Dictionary
 export const verbs = [
