@@ -25,21 +25,26 @@ export const speakFrench = (text: string) => {
         return;
     }
 
-    // Removing cancel() as it causes audio cutoff on some devices/browsers
-    // window.speechSynthesis.cancel(); 
+    // Cancel any ongoing speech to prevent queue stacking/stuck state on mobile
+    window.speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
 
     // Attempt to find a specific French voice
     // iOS/Mac often has "Amelie" or "Thomas". Android "Google français".
     // We prioritize 'fr-FR' voices.
-    if (voices.length === 0) loadVoices();
+    if (voices.length === 0) {
+        voices = window.speechSynthesis.getVoices();
+    }
 
     const frenchVoice = voices.find(v => v.lang === 'fr-FR' || v.lang === 'fr_FR') ||
         voices.find(v => v.lang.startsWith('fr'));
 
     if (frenchVoice) {
         utterance.voice = frenchVoice;
+    } else {
+        // Fallback: some mobile browsers need this explicitly unused/null to use default
+        // utterance.voice = null; 
     }
 
     utterance.lang = 'fr-FR';
