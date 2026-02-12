@@ -22,6 +22,7 @@ export interface VerbDefinition {
     group: number | string;
     auxiliary: 'avoir' | 'etre' | string;
     rules: string[];
+    category?: string; // e.g. 'Travail', 'Loisirs'
     examples?: {
         sentence: string;
         translation: string;

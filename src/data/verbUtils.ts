@@ -1,7 +1,7 @@
 
 // Utility to generate regular conjugations
 
-export type VerbEndingType = 'ER' | 'IR_ISS' | 'RE' | 'IR_COCOS' | 'IR_DORMIR';
+export type VerbEndingType = 'ER' | 'IR_ISS' | 'RE' | 'IR_COCOS' | 'IR_DORMIR' | 'IR_VENIR';
 // IR_ISS = finir (finis, finissons)
 // IR_COCOS = ouvrir (ouvre, ouvres)
 // IR_DORMIR = dormir (dors, dormons)
@@ -61,6 +61,17 @@ const ENDINGS = {
         subj_imparfait: ['isse', 'isses', 'ît', 'issions', 'issiez', 'issent'],
         participe_passe: ['i'],
         participe_present: ['ant']
+    },
+    IR_VENIR: {
+        present: ['s', 's', 't', 'ons', 'ez', 'nent'], // viens, viens, vient, ven-ons, ven-ez, vien-nent (stem logic needed)
+        imparfait: ['ais', 'ais', 'ait', 'ions', 'iez', 'aient'],
+        futur: ['drai', 'dras', 'dra', 'drons', 'drez', 'dront'], // viendrai
+        conditionnel: ['drais', 'drais', 'drait', 'drions', 'driez', 'draient'],
+        passe_simple: ['s', 's', 't', 'mes', 'tes', 'rent'], // vins, vins, vint, vînmes... irregular formatting?
+        subjonctif: ['ne', 'nes', 'ne', 'ions', 'iez', 'nent'], // vienne
+        subj_imparfait: ['sse', 'sses', 't', 'ssions', 'ssiez', 'ssent'], // vinsse
+        participe_passe: ['u'], // venu
+        participe_present: ['ant']
     }
 };
 
@@ -69,7 +80,7 @@ const REFLEXIVE_PRONOUNS = ['me', 'te', 'se', 'nous', 'vous', 'se'];
 const J_APOSTROPHE_VOWELS = ['a', 'e', 'i', 'o', 'u', 'y', 'h', 'ê', 'î'];
 
 
-export function createRegularVerb(infinitive: string, type: VerbEndingType, auxiliary: 'avoir' | 'etre' = 'avoir', definition: string = '', isReflexive: boolean = false, customRules: string[] = [], examples: { sentence: string, translation: string }[] = []) {
+export function createRegularVerb(infinitive: string, type: VerbEndingType, auxiliary: 'avoir' | 'etre' = 'avoir', definition: string = '', isReflexive: boolean = false, customRules: string[] = [], examples: { sentence: string, translation: string }[] = [], category: string = '') {
     // If reflexive, force auxiliary to be être for compound tenses
     const actualAux = isReflexive ? 'etre' : auxiliary;
 
@@ -145,6 +156,15 @@ export function createRegularVerb(infinitive: string, type: VerbEndingType, auxi
     } else if (type === 'IR_DORMIR') {
         stem = verbPart.slice(0, -2);
         futurStem = verbPart;
+    } else if (type === 'IR_VENIR') {
+        stem = verbPart.slice(0, -2); // ven
+        // Special stems for Venir
+        // Pres S: vien-s
+        // Pres P: ven-ons, vien-nent
+        // Fut: viendr-ai
+        // PS: vin-s
+        // PP: ven-u
+        futurStem = stem.replace('en', 'iend'); // viend
     }
 
     const generatedRules: string[] = [];
@@ -169,6 +189,7 @@ export function createRegularVerb(infinitive: string, type: VerbEndingType, auxi
         auxiliary: isReflexive ? 'Être (Reflexive)' : (auxiliary === 'avoir' ? 'Avoir' : 'Être'),
         rules: [...generatedRules, ...customRules],
         examples,
+        category,
         conjugations: {
             Indicatif: {},
             Conditionnel: {},

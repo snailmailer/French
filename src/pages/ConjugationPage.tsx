@@ -7,23 +7,43 @@ import ConjugationTable from '../components/ConjugationTable';
 const ConjugationPage = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedVerb, setSelectedVerb] = useState<VerbDefinition | null>(null);
+    const [categoryFilter, setCategoryFilter] = useState<string>('All');
+    const [groupFilter, setGroupFilter] = useState<string>('All');
+
+    // Extract unique categories
+    const categories = ['All', ...Array.from(new Set(verbs.map(v => v.category).filter(Boolean)))].sort();
+
+    const filteredVerbs = verbs.filter(v => {
+        const matchesSearch = v.infinitive.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            v.translation.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesCategory = categoryFilter === 'All' || v.category === categoryFilter;
+
+        let matchesGroup = true;
+        if (groupFilter !== 'All') {
+            if (groupFilter === 'Reflexive') {
+                matchesGroup = v.infinitive.startsWith('se ') || v.infinitive.startsWith("s'");
+            } else if (groupFilter === 'Irregular') {
+                matchesGroup = v.group === 3; // Check logic
+            } else if (groupFilter === '-ER') {
+                matchesGroup = v.infinitive.endsWith('er') && !v.infinitive.startsWith('se ') && !v.infinitive.startsWith("s'") && v.group !== 3;
+            } else if (groupFilter === '-IR') {
+                matchesGroup = v.infinitive.endsWith('ir') && !v.infinitive.startsWith('se ') && !v.infinitive.startsWith("s'") && v.group !== 3;
+            } else if (groupFilter === '-RE') {
+                matchesGroup = v.infinitive.endsWith('re') && !v.infinitive.startsWith('se ') && !v.infinitive.startsWith("s'") && v.group !== 3;
+            }
+        }
+
+        return matchesSearch && matchesCategory && matchesGroup;
+    });
 
     const handleSearch = (term: string) => {
         setSearchTerm(term);
-        if (!term) {
-            setSelectedVerb(null);
-            return;
-        }
+        // If term is empty, don't auto-select null, let user browse
+        if (!term) return;
 
-        // Exact match first
-        const exact = verbs.find(v => v.infinitive.toLowerCase() === term.toLowerCase());
-        if (exact) {
-            setSelectedVerb(exact);
-        } else {
-            // Or find the first partial match
-            const partial = verbs.find(v => v.infinitive.toLowerCase().includes(term.toLowerCase()));
-            setSelectedVerb(partial || null);
-        }
+        // Auto-select if exact match in filtered list
+        const exact = filteredVerbs.find(v => v.infinitive.toLowerCase() === term.toLowerCase());
+        if (exact) setSelectedVerb(exact);
     };
 
     return (
@@ -34,6 +54,30 @@ const ConjugationPage = () => {
             <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginBottom: '3rem' }}>
                 Search for a verb to see its full conjugation and rules.
             </p>
+
+            {/* Filters */}
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
+                <select
+                    value={categoryFilter}
+                    onChange={(e) => setCategoryFilter(e.target.value)}
+                    style={{ padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)', color: 'var(--text-primary)', flex: 1 }}
+                >
+                    {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+                </select>
+
+                <select
+                    value={groupFilter}
+                    onChange={(e) => setGroupFilter(e.target.value)}
+                    style={{ padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)', color: 'var(--text-primary)', flex: 1 }}
+                >
+                    <option value="All">All Groups</option>
+                    <option value="-ER">-ER Verbs</option>
+                    <option value="-IR">-IR Verbs</option>
+                    <option value="-RE">-RE Verbs</option>
+                    <option value="Irregular">Irregular</option>
+                    <option value="Reflexive">Reflexive</option>
+                </select>
+            </div>
 
             {/* Search Bar */}
             <div style={{ position: 'relative', marginBottom: '3rem' }}>
@@ -62,7 +106,10 @@ const ConjugationPage = () => {
             <div style={{ marginBottom: '3rem' }}>
                 <select
                     value={selectedVerb?.infinitive || ''}
-                    onChange={(e) => handleSearch(e.target.value)}
+                    onChange={(e) => {
+                        const v = verbs.find(verb => verb.infinitive === e.target.value);
+                        if (v) setSelectedVerb(v);
+                    }}
                     style={{
                         width: '100%',
                         padding: '1rem',
@@ -75,10 +122,10 @@ const ConjugationPage = () => {
                         cursor: 'pointer'
                     }}
                 >
-                    <option value="">Or select a verb from the list...</option>
-                    {verbs.map((v) => (
+                    <option value="">Select a verb ({filteredVerbs.length} available)...</option>
+                    {filteredVerbs.map((v) => (
                         <option key={v.infinitive} value={v.infinitive}>
-                            {v.infinitive}
+                            {v.infinitive} ({v.translation})
                         </option>
                     ))}
                 </select>
