@@ -192,17 +192,31 @@ const ConjugationPage = () => {
                                     <h3 style={{ fontSize: '1.8rem', borderBottom: '2px solid var(--border-color)', paddingBottom: '0.5rem', marginBottom: '1.5rem', color: 'var(--accent-color)' }}>
                                         {mood}
                                     </h3>
-                                    <div className="conjugation-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-                                        {Object.entries(moodData).map(([tense, data]) => (
-                                            <ConjugationTable
-                                                key={tense}
-                                                verb={selectedVerb.infinitive}
-                                                translation={selectedVerb.translation}
-                                                tense={tense}
-                                                conjugations={data}
-                                                pronunciations={{}}
-                                            />
-                                        ))}
+                                    <div className="conjugation-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem' }}>
+                                        {Object.entries(moodData).map(([tense, data]) => {
+                                            const usage = tenseUsageData.find(u => {
+                                                const normName = u.name.toLowerCase();
+                                                const normTense = tense.toLowerCase();
+                                                const normMood = mood.toLowerCase();
+                                                if (normMood === 'indicatif') {
+                                                    if (normTense === 'présent') return normName.includes('présent de l’indicatif');
+                                                    if (normTense === 'passé') return normName.includes('passé composé');
+                                                }
+                                                return normName.toLowerCase().includes(normTense.toLowerCase()) || normTense.toLowerCase().includes(normName.toLowerCase());
+                                            });
+
+                                            return (
+                                                <ConjugationTable
+                                                    key={tense}
+                                                    verb={selectedVerb.infinitive}
+                                                    translation={selectedVerb.translation}
+                                                    tense={tense}
+                                                    pronunciations={{}}
+                                                    conjugations={data}
+                                                    tenseUsage={usage}
+                                                />
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             );
@@ -214,39 +228,6 @@ const ConjugationPage = () => {
                     {searchTerm ? 'Verb not found in database yet. Try "aimer", "aller", "avoir", "être", "faire".' : 'Type a verb to begin.'}
                 </div>
             )}
-            {/* Tense Usage Guide */}
-            <div style={{ marginTop: '4rem', padding: '2rem', border: '2px solid #2ecc71', borderRadius: '12px', background: 'rgba(46, 204, 113, 0.05)' }}>
-                <h2 style={{ textAlign: 'center', color: '#27ae60', marginBottom: '2rem' }}>Tense Usage Guide</h2>
-                <div style={{ display: 'grid', gap: '2rem' }}>
-                    {tenseUsageData.map((tense, idx) => (
-                        <div key={idx} style={{ background: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
-                            <h3 style={{ marginTop: 0, color: 'var(--accent-color)', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem', marginBottom: '1rem' }}>
-                                {tense.name}
-                            </h3>
-                            <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
-                                <div>
-                                    <strong style={{ color: '#27ae60' }}>Use (FR):</strong> {tense.useFr}
-                                    <br />
-                                    <strong style={{ color: '#2980b9' }}>Use (EN):</strong> {tense.useEn}
-                                </div>
-                                <div>
-                                    <strong>Structure:</strong> <span style={{ fontStyle: 'italic', color: 'var(--text-secondary)' }}>{tense.structure}</span>
-                                </div>
-                            </div>
-                            <div style={{ marginTop: '1rem', background: 'rgba(0,0,0,0.03)', padding: '1rem', borderRadius: '6px' }}>
-                                <strong style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>Examples:</strong>
-                                <ul style={{ margin: 0, paddingLeft: '1.2rem' }}>
-                                    {tense.examples.map((ex, i) => (
-                                        <li key={i} style={{ marginBottom: '0.5rem' }}>
-                                            <strong>{ex.fr}</strong> <span style={{ color: 'var(--text-secondary)' }}>→ {ex.en}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
         </div>
     );
 };
