@@ -29,7 +29,85 @@ export const vouloir = applyExamplesToVerb({ ...vouloirBase, category: 'General'
 
 // --- Education / Apprendre ---
 export const etudier = crv('étudier', 'ER', 'avoir', 'to study', false, [], [], 'Education');
-export const apprendre = crv('apprendre', 'RE', 'avoir', 'to learn', false, [], [], 'Education');
+const apprendreBase = crv('apprendre', 'RE', 'avoir', 'to learn', false, [], [], 'Education');
+export const apprendre = {
+    ...apprendreBase,
+    conjugations: {
+        ...apprendreBase.conjugations,
+        Indicatif: {
+            ...apprendreBase.conjugations.Indicatif,
+            'Présent': [
+                { pronoun: 'je', form: 'apprends' },
+                { pronoun: 'tu', form: 'apprends' },
+                { pronoun: 'il/elle', form: 'apprend' },
+                { pronoun: 'nous', form: 'apprenons' },
+                { pronoun: 'vous', form: 'apprenez' },
+                { pronoun: 'ils/elles', form: 'apprennent' }
+            ],
+            'Imparfait': [
+                { pronoun: 'je', form: 'apprenais' },
+                { pronoun: 'tu', form: 'apprenais' },
+                { pronoun: 'il/elle', form: 'apprenait' },
+                { pronoun: 'nous', form: 'apprenions' },
+                { pronoun: 'vous', form: 'appreniez' },
+                { pronoun: 'ils/elles', form: 'apprenaient' }
+            ],
+            'Futur Simple': [
+                { pronoun: 'je', form: 'apprendrai' },
+                { pronoun: 'tu', form: 'apprendras' },
+                { pronoun: 'il/elle', form: 'apprendra' },
+                { pronoun: 'nous', form: 'apprendrons' },
+                { pronoun: 'vous', form: 'apprendrez' },
+                { pronoun: 'ils/elles', form: 'apprendront' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai appris' },
+                { pronoun: 'tu', form: 'as appris' },
+                { pronoun: 'il/elle', form: 'a appris' },
+                { pronoun: 'nous', form: 'avons appris' },
+                { pronoun: 'vous', form: 'avez appris' },
+                { pronoun: 'ils/elles', form: 'ont appris' }
+            ],
+            'Plus-que-parfait': [
+                { pronoun: 'j\'', form: 'avais appris' },
+                { pronoun: 'tu', form: 'avais appris' },
+                { pronoun: 'il/elle', form: 'avait appris' },
+                { pronoun: 'nous', form: 'avions appris' },
+                { pronoun: 'vous', form: 'aviez appris' },
+                { pronoun: 'ils/elles', form: 'avaient appris' }
+            ]
+        },
+        Subjonctif: {
+            ...apprendreBase.conjugations.Subjonctif,
+            'Présent': [
+                { pronoun: 'que je', form: 'apprenne' },
+                { pronoun: 'que tu', form: 'apprennes' },
+                { pronoun: 'qu\'il/elle', form: 'apprenne' },
+                { pronoun: 'que nous', form: 'apprenions' },
+                { pronoun: 'que vous', form: 'appreniez' },
+                { pronoun: 'qu\'ils/elles', form: 'apprennent' }
+            ]
+        },
+        Participe: {
+            ...apprendreBase.conjugations.Participe,
+            'Présent': [{ pronoun: '', form: 'apprenant' }],
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'appris' },
+                { pronoun: 'Fem. Sing.', form: 'apprise' },
+                { pronoun: 'Masc. Plur.', form: 'appris' },
+                { pronoun: 'Fem. Plur.', form: 'apprises' }
+            ]
+        },
+        Impératif: {
+            ...apprendreBase.conjugations.Impératif,
+            'Présent': [
+                { pronoun: '(Tu)', form: 'apprends' },
+                { pronoun: '(Nous)', form: 'apprenons' },
+                { pronoun: '(Vous)', form: 'apprenez' }
+            ]
+        }
+    }
+};
 export const reviser = crv('réviser', 'ER', 'avoir', 'to review/revise', false, [], [], 'Education');
 const lireBase = crv('lire', 'RE', 'avoir', 'to read', false, [], [], 'Education');
 export const lire = {
@@ -724,7 +802,41 @@ export const couvrir = crv('couvrir', 'IR_COCOS', 'avoir', 'to cover', false, []
 export const decouvrir = crv('découvrir', 'IR_COCOS', 'avoir', 'to discover', false, [], [], 'General');
 export const defendre = crv('défendre', 'RE', 'avoir', 'to defend', false, [], [], 'General');
 export const dependre = crv('dépendre', 'RE', 'avoir', 'to depend', false, [], [], 'General');
-export const descendre = crv('descendre', 'RE', 'etre', 'to go down', false, [], [], 'General');
+const descendreBase = crv('descendre', 'RE', 'etre', 'to go down', false, [], [], 'General');
+export const descendre = {
+    ...descendreBase,
+    conjugations: {
+        ...descendreBase.conjugations,
+        Indicatif: {
+            ...descendreBase.conjugations.Indicatif,
+            'Passé Composé': [
+                { pronoun: 'je', form: 'suis descendu(e)' }, // Being explicit as requested/standard for user tools
+                { pronoun: 'tu', form: 'es descendu(e)' },
+                { pronoun: 'il/elle', form: 'est descendu(e)' },
+                { pronoun: 'nous', form: 'sommes descendu(e)s' },
+                { pronoun: 'vous', form: 'êtes descendu(e)(s)' },
+                { pronoun: 'ils/elles', form: 'sont descendu(e)s' }
+            ],
+            'Plus-que-parfait': [ // Also takes être
+                { pronoun: 'j\'', form: 'étais descendu(e)' },
+                { pronoun: 'tu', form: 'étais descendu(e)' },
+                { pronoun: 'il/elle', form: 'était descendu(e)' },
+                { pronoun: 'nous', form: 'étions descendu(e)s' },
+                { pronoun: 'vous', form: 'étiez descendu(e)(s)' },
+                { pronoun: 'ils/elles', form: 'étaient descendu(e)s' }
+            ]
+        },
+        Participe: {
+            ...descendreBase.conjugations.Participe,
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'descendu' },
+                { pronoun: 'Fem. Sing.', form: 'descendue' },
+                { pronoun: 'Masc. Plur.', form: 'descendus' },
+                { pronoun: 'Fem. Plur.', form: 'descendues' }
+            ]
+        }
+    }
+};
 export const deshabiller = crv('déshabiller', 'ER', 'avoir', 'to undress', false, [], [], 'General');
 export const se_disputer = crv('se disputer', 'ER', 'avoir', 'to argue', true, [], [], 'General');
 export const doucher = crv('doucher', 'ER', 'avoir', 'to shower', false, [], [], 'General');
