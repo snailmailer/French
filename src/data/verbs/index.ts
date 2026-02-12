@@ -63,7 +63,66 @@ export const envoyer_email = crv('envoyer un e-mail', 'ER', 'avoir', 'to send an
 // --- Hobbies / Loisirs ---
 export const jouer = crv('jouer', 'ER', 'avoir', 'to play', false, [], [], 'Hobbies');
 export const dessiner = crv('dessiner', 'ER', 'avoir', 'to draw', false, [], [], 'Hobbies');
-export const peindre = crv('peindre', 'RE', 'avoir', 'to paint', false, [], [], 'Hobbies');
+const peindreBase = crv('peindre', 'RE', 'avoir', 'to paint', false, [], [], 'Hobbies');
+export const peindre = {
+    ...peindreBase,
+    conjugations: {
+        ...peindreBase.conjugations,
+        Indicatif: {
+            ...peindreBase.conjugations.Indicatif,
+            'Présent': [
+                { pronoun: 'je', form: 'peins' },
+                { pronoun: 'tu', form: 'peins' },
+                { pronoun: 'il/elle', form: 'peint' },
+                { pronoun: 'nous', form: 'peignons' },
+                { pronoun: 'vous', form: 'peignez' },
+                { pronoun: 'ils/elles', form: 'peignent' }
+            ],
+            'Imparfait': [
+                { pronoun: 'je', form: 'peignais' },
+                { pronoun: 'tu', form: 'peignais' },
+                { pronoun: 'il/elle', form: 'peignait' },
+                { pronoun: 'nous', form: 'peignions' },
+                { pronoun: 'vous', form: 'peigniez' },
+                { pronoun: 'ils/elles', form: 'peignaient' }
+            ],
+            'Futur Simple': [
+                { pronoun: 'je', form: 'peindrai' },
+                { pronoun: 'tu', form: 'peindras' },
+                { pronoun: 'il/elle', form: 'peindra' },
+                { pronoun: 'nous', form: 'peindrons' },
+                { pronoun: 'vous', form: 'peindrez' },
+                { pronoun: 'ils/elles', form: 'peindront' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai peint' },
+                { pronoun: 'tu', form: 'as peint' },
+                { pronoun: 'il/elle', form: 'a peint' },
+                { pronoun: 'nous', form: 'avons peint' },
+                { pronoun: 'vous', form: 'avez peint' },
+                { pronoun: 'ils/elles', form: 'ont peint' }
+            ],
+            'Plus-que-parfait': [
+                { pronoun: 'j\'', form: 'avais peint' },
+                { pronoun: 'tu', form: 'avais peint' },
+                { pronoun: 'il/elle', form: 'avait peint' },
+                { pronoun: 'nous', form: 'avions peint' },
+                { pronoun: 'vous', form: 'aviez peint' },
+                { pronoun: 'ils/elles', form: 'avaient peint' }
+            ]
+        },
+        Participe: {
+            ...peindreBase.conjugations.Participe,
+            'Présent': [{ pronoun: '', form: 'peignant' }],
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'peint' },
+                { pronoun: 'Fem. Sing.', form: 'peinte' },
+                { pronoun: 'Masc. Plur.', form: 'peints' },
+                { pronoun: 'Fem. Plur.', form: 'peintes' }
+            ]
+        }
+    }
+};
 export const chanter = crv('chanter', 'ER', 'avoir', 'to sing', false, [], [], 'Hobbies');
 export const danser = crv('danser', 'ER', 'avoir', 'to dance', false, [], [], 'Hobbies');
 export const regarder_film = crv('regarder un film', 'ER', 'avoir', 'to watch a movie', false, [], [], 'Hobbies');
