@@ -4,6 +4,7 @@ import LandingPage from './pages/LandingPage';
 import LevelPage from './pages/LevelPage';
 import ConjugationPage from './pages/ConjugationPage';
 import GrammarPage from './pages/GrammarPage';
+import PlaceholderPage from './pages/PlaceholderPage';
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
           <Route path="level/:levelId" element={<LevelPage />} />
           <Route path="conjugation" element={<ConjugationPage />} />
           <Route path="grammar" element={<GrammarPage />} />
+          <Route path="reading" element={<PlaceholderPage />} />
+          <Route path="writing" element={<PlaceholderPage />} />
+          <Route path="speaking" element={<PlaceholderPage />} />
         </Route>
       </Routes>
     </Router>
