@@ -3,6 +3,7 @@ import Layout from './components/Layout';
 import LandingPage from './pages/LandingPage';
 import LevelPage from './pages/LevelPage';
 import ConjugationPage from './pages/ConjugationPage';
+import GrammarPage from './pages/GrammarPage';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route index element={<LandingPage />} />
           <Route path="level/:levelId" element={<LevelPage />} />
           <Route path="conjugation" element={<ConjugationPage />} />
+          <Route path="grammar" element={<GrammarPage />} />
         </Route>
       </Routes>
     </Router>

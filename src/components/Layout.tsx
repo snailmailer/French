@@ -16,19 +16,28 @@ const Layout = () => {
                     <BookOpen size={32} color="var(--accent-color)" />
                     <span>Le Français</span>
                 </Link>
-                <nav>
-                    <nav style={{ display: 'flex', gap: '1.5rem' }}>
-                        <Link to="/conjugation" style={{
-                            color: 'white',
-                            fontWeight: 500,
-                            background: '#4CAF50',
-                            padding: '0.5rem 1rem',
-                            borderRadius: '8px',
-                            transition: 'background 0.2s'
-                        }}>
-                            Conjugation Tool
-                        </Link>
-                    </nav>        </nav>
+                <nav style={{ display: 'flex', gap: '1.5rem' }}>
+                    <Link to="/conjugation" style={{
+                        color: 'white',
+                        fontWeight: 500,
+                        background: '#4CAF50',
+                        padding: '0.5rem 1rem',
+                        borderRadius: '8px',
+                        transition: 'background 0.2s'
+                    }}>
+                        Conjugation Tool
+                    </Link>
+                    <Link to="/grammar" style={{
+                        color: 'white',
+                        fontWeight: 500,
+                        background: '#2196F3',
+                        padding: '0.5rem 1rem',
+                        borderRadius: '8px',
+                        transition: 'background 0.2s'
+                    }}>
+                        Grammar
+                    </Link>
+                </nav>
             </header>
             <main className="container">
                 <Outlet />

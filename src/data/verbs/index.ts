@@ -117,7 +117,7 @@ export const reparer = crv('réparer', 'ER', 'avoir', 'to repair', false, [], []
 export const arroser = crv('arroser les plantes', 'ER', 'avoir', 'to water plants', false, [], [], 'Housing');
 
 // --- Sport ---
-export const faire_sport = crv('faire du sport', 'RE', 'avoir', 'to do sports', false, [], [], 'Sport'); // Uses faire rules? Wait, compound verbs might need custom handling if regex fails. createRegularVerb naive.
+// export const faire_sport = crv('faire du sport', 'RE', 'avoir', 'to do sports', false, [], [], 'Sport'); // Removed duplicate
 // Actually "faire du sport" conjugates like "faire". "aller au cinema" like "aller".
 // createRegularVerb attempts to stem based on ending. "faire du sport" ends in "rt" (RE-ish?).
 // IMPORTANT: For compound verbs based on irregulars, we should probably clone the base irregular.
@@ -224,8 +224,8 @@ export const se_tromper = crv('se tromper', 'ER', 'avoir', 'to be mistaken', tru
 export const se_debrouiller = crv('se débrouiller', 'ER', 'avoir', 'to manage', true, [], [], 'General');
 export const se_marier = crv('se marier', 'ER', 'avoir', 'to get married', true, [], [], 'General');
 export const se_preparer = crv('se préparer', 'ER', 'avoir', 'to get ready', true, [], [], 'General');
-export const sasseoir = asseoir;
-export const sentire = se_sentir; // Alias for typo fix if needed, or just remove from export.
+// export const sasseoir = asseoir; // Removed alias
+// export const sentire = se_sentir; // Removed alias
 export const coucher = crv('coucher', 'ER', 'avoir', 'to put to bed', false, [], [], 'Routine');
 
 // Export Dictionary
@@ -235,7 +235,7 @@ export const verbs = [
     chanter, chercher_emploi, coiffer, se_coiffer, commander, commencer, comprendre, se_concentrer, connecter, se_connecter, se_coucher, coucher, courir, couvrir, cuisiner,
     danser, se_debrouiller, decouvrir, defendre, dejeuner, demander, demenager, se_depecher, dependre, descendre, se_deshabiller, deshabiller, dessiner, se_detendre, devoir, diner, dire, diriger, discuter, se_disputer, dormir, se_doucher, doucher,
     echouer, ecouter, ecouter_musique, ecrire, embaucher, endormir, sendormir, sennuyer, entendre, envoyer_email, etudier, etre, expliquer,
-    se_facher, faire, faire_sport, faire_du_sport, finir,
+    se_facher, faire, faire_du_sport, finir,
     gagner_argent, gouter, grandir, grignoter,
     habiter, habiller, shabiller,
     informer, sinquieter, sinteresser, inviter,
