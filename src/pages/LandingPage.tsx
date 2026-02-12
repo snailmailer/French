@@ -8,8 +8,9 @@ const features = [
         desc: 'Master French rules, pronouns, and sentence structures.',
         icon: <Book size={32} />,
         path: '/grammar',
-        color: '#E8F5E9', // Soft Green
-        textColor: '#2E7D32'
+        color: '#ffffff',
+        textColor: '#3686C9',
+        borderColor: '#3686C9'
     },
     {
         id: 'conjugation',
@@ -17,8 +18,9 @@ const features = [
         desc: 'Explore 100+ verbs with tenses, usage guides, and audio.',
         icon: <BookOpen size={32} />,
         path: '/conjugation',
-        color: '#E3F2FD', // Soft Blue
-        textColor: '#1565C0'
+        color: '#ffffff',
+        textColor: '#B4C540',
+        borderColor: '#B4C540'
     },
     {
         id: 'reading',
@@ -26,8 +28,9 @@ const features = [
         desc: 'Practice reading comprehension with engaging stories.',
         icon: <Book size={32} />,
         path: '/reading',
-        color: '#FFF3E0', // Soft Orange
-        textColor: '#EF6C00'
+        color: '#ffffff',
+        textColor: '#575A6C',
+        borderColor: '#575A6C'
     },
     {
         id: 'writing',
@@ -35,8 +38,9 @@ const features = [
         desc: 'Improve your written French with exercises and prompts.',
         icon: <PenTool size={32} />,
         path: '/writing',
-        color: '#F3E5F5', // Soft Purple
-        textColor: '#7B1FA2'
+        color: '#ffffff',
+        textColor: '#3686C9',
+        borderColor: '#3686C9'
     },
     {
         id: 'speaking',
@@ -44,8 +48,9 @@ const features = [
         desc: 'Enhance pronunciation and speaking confidence.',
         icon: <Mic size={32} />,
         path: '/speaking',
-        color: '#E0F7FA', // Soft Cyan
-        textColor: '#0097A7'
+        color: '#ffffff',
+        textColor: '#B4C540',
+        borderColor: '#B4C540'
     },
 ];
 
@@ -79,7 +84,8 @@ const LandingPage = () => {
                             flexDirection: 'column',
                             alignItems: 'center',
                             textAlign: 'center',
-                            border: '1px solid rgba(0,0,0,0.05)'
+                            borderLeft: `6px solid ${feature.borderColor}`,
+                            boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
                         }}
                         onMouseEnter={(e) => {
                             e.currentTarget.style.transform = 'translateY(-5px)';

@@ -1,12 +1,15 @@
 :root {
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #242424;
-  --bg-tertiary: #2a2a2a;
-  --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
-  --accent-color: #646cff; /* Example: Vite purple or custom blue */
-  --accent-hover: #7b83ff;
-  --border-color: #333333;
+  /* New Palette */
+  --bg-primary: #E0E2D2;
+  --bg-secondary: #ffffff;
+  /* Use white for cards against the beige background */
+  --bg-tertiary: #f0f0f0;
+  --text-primary: #575A6C;
+  --text-secondary: #7a7d8a;
+  --accent-color: #3686C9;
+  --accent-hover: #2a6db0;
+  --success-color: #B4C540;
+  --border-color: #d0d2c2;
   --font-family: 'Check it out', 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
@@ -95,7 +98,7 @@ button:focus-visible {
 
 .level-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   border-color: var(--accent-color);
 }
 
@@ -117,7 +120,8 @@ button:focus-visible {
   margin: 1rem 0;
 }
 
-.conjugation-table th, .conjugation-table td {
+.conjugation-table th,
+.conjugation-table td {
   padding: 0.75rem;
   text-align: left;
   border-bottom: 1px solid var(--border-color);
