@@ -12,8 +12,8 @@ const Layout = () => {
                 justifyContent: 'space-between',
                 background: 'var(--bg-secondary)'
             }}>
-                <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>
-                    <BookOpen size={32} color="var(--accent-color)" />
+                <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>
+                    <BookOpen size={40} color="var(--accent-color)" />
                     <span>Le Français</span>
                 </Link>
                 <nav style={{ display: 'flex', gap: '1.5rem' }}>

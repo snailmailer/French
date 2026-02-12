@@ -123,10 +123,14 @@ const GrammarPage = () => {
             {/* Topic Dropdown */}
             <div style={{ marginBottom: '3rem' }}>
                 <select
-                    value={selectedTopic?.title || ''}
+                    value={selectedTopic?.title || 'All'}
                     onChange={(e) => {
-                        const topic = pronounsData.find(t => t.title === e.target.value);
-                        if (topic) setSelectedTopic(topic);
+                        if (e.target.value === 'All') {
+                            setSelectedTopic(null); // Use null to represent 'All'
+                        } else {
+                            const topic = pronounsData.find(t => t.title === e.target.value);
+                            if (topic) setSelectedTopic(topic);
+                        }
                     }}
                     style={{
                         width: '100%',
@@ -140,7 +144,7 @@ const GrammarPage = () => {
                         cursor: 'pointer'
                     }}
                 >
-                    <option value="">Select a topic ({filteredTopics.length} available)...</option>
+                    <option value="All">Show All Topics ({filteredTopics.length})</option>
                     {filteredTopics.map((t) => (
                         <option key={t.title} value={t.title}>
                             {t.title}
@@ -150,26 +154,34 @@ const GrammarPage = () => {
             </div>
 
             {/* Content Display */}
-            {selectedTopic ? (
-                <div className="grammar-content">
+            <div className="grammar-content">
+                {selectedTopic ? (
                     <PronounSectionView section={selectedTopic} />
-                </div>
-            ) : (
-                <div style={{
-                    textAlign: 'center',
-                    padding: '4rem',
-                    color: 'var(--text-secondary)',
-                    border: '2px dashed var(--border-color)',
-                    borderRadius: '12px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: '1rem'
-                }}>
-                    <BookOpen size={48} style={{ opacity: 0.5 }} />
-                    <p>{searchTerm ? 'No topics found match your search.' : 'Select a topic to start learning.'}</p>
-                </div>
-            )}
+                ) : (
+                    <>
+                        {filteredTopics.length > 0 ? (
+                            filteredTopics.map((topic, idx) => (
+                                <PronounSectionView key={idx} section={topic} />
+                            ))
+                        ) : (
+                            <div style={{
+                                textAlign: 'center',
+                                padding: '4rem',
+                                color: 'var(--text-secondary)',
+                                border: '2px dashed var(--border-color)',
+                                borderRadius: '12px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                gap: '1rem'
+                            }}>
+                                <BookOpen size={48} style={{ opacity: 0.5 }} />
+                                <p>No topics found match your search.</p>
+                            </div>
+                        )}
+                    </>
+                )}
+            </div>
         </div>
     );
 };
