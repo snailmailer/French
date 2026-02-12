@@ -1,0 +1,65 @@
+/* Mobile Responsiveness Overrides */
+@media (max-width: 768px) {
+
+    /* Layout Header */
+    header {
+        flex-direction: column !important;
+        gap: 1rem !important;
+        padding: 1rem !important;
+        text-align: center !important;
+    }
+
+    /* Header Link (Logo area) */
+    header>a {
+        justify-content: center !important;
+        font-size: 2rem !important;
+        /* Smaller than 2.5rem */
+    }
+
+    /* Navigation */
+    header nav {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 0.5rem !important;
+    }
+
+    header nav a {
+        padding: 0.4rem 0.8rem !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* Global Container Padding */
+    .container {
+        padding: 1rem !important;
+    }
+
+    /* Conjugation Tools */
+    .verb-header {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    .verb-header>div {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .verb-header h2 {
+        font-size: 2rem !important;
+        /* Smaller header */
+    }
+
+    /* Filters wrapping */
+    select {
+        font-size: 1rem !important;
+    }
+
+    /* Conjugation Grid */
+    .conjugation-grid {
+        /* Override inline minmax(400px, ...) */
+        grid-template-columns: 1fr !important;
+    }
+}

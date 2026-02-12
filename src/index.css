@@ -1,3 +1,5 @@
+@import './mobile.css';
+
 :root {
   /* New Palette - Dark Mode */
   --bg-primary: #575A6C;
