@@ -103,7 +103,7 @@ const Layout = () => {
                                         padding: '1rem 0.5rem',
                                         borderRadius: '12px',
                                         textDecoration: 'none',
-                                        color: 'var(--text-primary)',
+                                        color: '#000000', // Darker font as requested
                                         transition: 'background 0.2s',
                                         textAlign: 'center'
                                     }}
@@ -119,7 +119,7 @@ const Layout = () => {
                                     }}>
                                         {item.icon}
                                     </div>
-                                    <span style={{ fontSize: '0.85rem', fontWeight: 500 }}>{item.label}</span>
+                                    <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>{item.label}</span>
                                 </Link>
                             ))}
                         </div>
