@@ -32,7 +32,77 @@ export const etudier = crv('étudier', 'ER', 'avoir', 'to study', false, [], [],
 export const apprendre = crv('apprendre', 'RE', 'avoir', 'to learn', false, [], [], 'Education');
 export const reviser = crv('réviser', 'ER', 'avoir', 'to review/revise', false, [], [], 'Education');
 export const lire = crv('lire', 'RE', 'avoir', 'to read', false, [], [], 'Education');
-export const ecrire = crv('écrire', 'RE', 'avoir', 'to write', false, [], [], 'Education');
+const ecrireBase = crv('écrire', 'RE', 'avoir', 'to write', false, [], [], 'Education');
+export const ecrire = {
+    ...ecrireBase,
+    conjugations: {
+        ...ecrireBase.conjugations,
+        Indicatif: {
+            ...ecrireBase.conjugations.Indicatif,
+            'Présent': [
+                { pronoun: 'j\'', form: 'écris' },
+                { pronoun: 'tu', form: 'écris' },
+                { pronoun: 'il/elle', form: 'écrit' },
+                { pronoun: 'nous', form: 'écrivons' },
+                { pronoun: 'vous', form: 'écrivez' },
+                { pronoun: 'ils/elles', form: 'écrivent' }
+            ],
+            'Imparfait': [
+                { pronoun: 'j\'', form: 'écrivais' },
+                { pronoun: 'tu', form: 'écrivais' },
+                { pronoun: 'il/elle', form: 'écrivait' },
+                { pronoun: 'nous', form: 'écrivions' },
+                { pronoun: 'vous', form: 'écriviez' },
+                { pronoun: 'ils/elles', form: 'écrivaient' }
+            ],
+            'Futur Simple': [
+                { pronoun: 'j\'', form: 'écrirai' },
+                { pronoun: 'tu', form: 'écriras' },
+                { pronoun: 'il/elle', form: 'écrira' },
+                { pronoun: 'nous', form: 'écrirons' },
+                { pronoun: 'vous', form: 'écrirez' },
+                { pronoun: 'ils/elles', form: 'écriront' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai écrit' },
+                { pronoun: 'tu', form: 'as écrit' },
+                { pronoun: 'il/elle', form: 'a écrit' },
+                { pronoun: 'nous', form: 'avons écrit' },
+                { pronoun: 'vous', form: 'avez écrit' },
+                { pronoun: 'ils/elles', form: 'ont écrit' }
+            ],
+            'Plus-que-parfait': [
+                { pronoun: 'j\'', form: 'avais écrit' },
+                { pronoun: 'tu', form: 'avais écrit' },
+                { pronoun: 'il/elle', form: 'avait écrit' },
+                { pronoun: 'nous', form: 'avions écrit' },
+                { pronoun: 'vous', form: 'aviez écrit' },
+                { pronoun: 'ils/elles', form: 'avaient écrit' }
+            ]
+        },
+        Conditionnel: {
+            ...ecrireBase.conjugations.Conditionnel,
+            'Présent': [
+                { pronoun: 'j\'', form: 'écrirais' },
+                { pronoun: 'tu', form: 'écrirais' },
+                { pronoun: 'il/elle', form: 'écrirait' },
+                { pronoun: 'nous', form: 'écririons' },
+                { pronoun: 'vous', form: 'écririez' },
+                { pronoun: 'ils/elles', form: 'écriraient' }
+            ]
+        },
+        Participe: {
+            ...ecrireBase.conjugations.Participe,
+            'Présent': [{ pronoun: '', form: 'écrivant' }],
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'écrit' },
+                { pronoun: 'Fem. Sing.', form: 'écrite' },
+                { pronoun: 'Masc. Plur.', form: 'écrits' },
+                { pronoun: 'Fem. Plur.', form: 'écrites' }
+            ]
+        }
+    }
+};
 export const souligner = crv('souligner', 'ER', 'avoir', 'to underline', false, [], [], 'Education');
 export const surligner = crv('surligner', 'ER', 'avoir', 'to highlight', false, [], [], 'Education');
 export const memoriser = crv('mémoriser', 'ER', 'avoir', 'to memorize', false, [], [], 'Education');
