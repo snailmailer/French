@@ -18,12 +18,12 @@ const Layout = () => {
                 </Link>
                 <nav style={{ display: 'flex', gap: '1.5rem' }}>
                     <Link to="/" style={{
-                        color: 'var(--text-primary)',
+                        color: 'white',
                         fontWeight: 500,
-                        background: 'transparent',
+                        background: '#333333',
                         padding: '0.5rem 1rem',
                         borderRadius: '8px',
-                        border: '1px solid var(--border-color)',
+                        border: '1px solid #ffffff',
                         transition: 'background 0.2s',
                         display: 'flex',
                         alignItems: 'center',
@@ -34,9 +34,10 @@ const Layout = () => {
                     <Link to="/conjugation" style={{
                         color: 'white',
                         fontWeight: 500,
-                        background: '#B4C540',
+                        background: '#333333',
                         padding: '0.5rem 1rem',
                         borderRadius: '8px',
+                        border: '1px solid #ffffff',
                         transition: 'background 0.2s'
                     }}>
                         Conjugation Tool
@@ -44,9 +45,10 @@ const Layout = () => {
                     <Link to="/grammar" style={{
                         color: 'white',
                         fontWeight: 500,
-                        background: '#3686C9',
+                        background: '#333333',
                         padding: '0.5rem 1rem',
                         borderRadius: '8px',
+                        border: '1px solid #ffffff',
                         transition: 'background 0.2s'
                     }}>
                         Grammar
@@ -54,9 +56,10 @@ const Layout = () => {
                     <Link to="/reading" style={{
                         color: 'white',
                         fontWeight: 500,
-                        background: '#575A6C', // Dark Grey for Reading to match Reading card text
+                        background: '#333333',
                         padding: '0.5rem 1rem',
                         borderRadius: '8px',
+                        border: '1px solid #ffffff',
                         transition: 'background 0.2s'
                     }}>
                         Reading
@@ -64,9 +67,10 @@ const Layout = () => {
                     <Link to="/writing" style={{
                         color: 'white',
                         fontWeight: 500,
-                        background: '#3686C9', // Matching Writing card
+                        background: '#333333',
                         padding: '0.5rem 1rem',
                         borderRadius: '8px',
+                        border: '1px solid #ffffff',
                         transition: 'background 0.2s'
                     }}>
                         Writing
@@ -74,9 +78,10 @@ const Layout = () => {
                     <Link to="/speaking" style={{
                         color: 'white',
                         fontWeight: 500,
-                        background: '#B4C540', // Matching Speaking card
+                        background: '#333333', // Dark Grey
                         padding: '0.5rem 1rem',
                         borderRadius: '8px',
+                        border: '1px solid #ffffff',
                         transition: 'background 0.2s'
                     }}>
                         Speaking
