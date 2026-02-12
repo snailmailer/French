@@ -33,6 +33,7 @@ const Layout = () => {
         { path: '/reading', label: 'Reading', icon: <Book size={24} />, color: '#575A6C' },
         { path: '/writing', label: 'Writing', icon: <PenTool size={24} />, color: '#3686C9' },
         { path: '/speaking', label: 'Speaking', icon: <Mic size={24} />, color: '#B4C540' },
+        { path: '/resources', label: 'Resources', icon: <BookOpen size={24} />, color: '#E67E22' },
     ];
 
     return (

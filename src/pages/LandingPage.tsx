@@ -52,6 +52,16 @@ const features = [
         textColor: '#B4C540',
         borderColor: '#B4C540'
     },
+    {
+        id: 'resources',
+        title: 'Resources',
+        desc: 'External tools, news, and practice materials.',
+        icon: <BookOpen size={32} />,
+        path: '/resources',
+        color: '#ffffff',
+        textColor: '#E67E22', // Orange for distinction
+        borderColor: '#E67E22'
+    },
 ];
 
 const LandingPage = () => {
