@@ -58,26 +58,44 @@ const ConjugationPage = () => {
 
             {/* Filters */}
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
-                <select
-                    value={categoryFilter}
-                    onChange={(e) => setCategoryFilter(e.target.value)}
-                    style={{ padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)', color: 'var(--text-primary)', flex: 1 }}
-                >
-                    {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
-                </select>
+                <div style={{ flex: 1, position: 'relative' }}>
+                    <select
+                        value={categoryFilter}
+                        onChange={(e) => setCategoryFilter(e.target.value)}
+                        style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}
+                    >
+                        {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+                    </select>
+                    {categoryFilter !== 'All' && (
+                        <X
+                            size={16}
+                            style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer', color: 'var(--text-secondary)' }}
+                            onClick={() => setCategoryFilter('All')}
+                        />
+                    )}
+                </div>
 
-                <select
-                    value={groupFilter}
-                    onChange={(e) => setGroupFilter(e.target.value)}
-                    style={{ padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)', color: 'var(--text-primary)', flex: 1 }}
-                >
-                    <option value="All">All Groups</option>
-                    <option value="-ER">-ER Verbs</option>
-                    <option value="-IR">-IR Verbs</option>
-                    <option value="-RE">-RE Verbs</option>
-                    <option value="Irregular">Irregular</option>
-                    <option value="Reflexive">Reflexive</option>
-                </select>
+                <div style={{ flex: 1, position: 'relative' }}>
+                    <select
+                        value={groupFilter}
+                        onChange={(e) => setGroupFilter(e.target.value)}
+                        style={{ width: '100%', padding: '0.8rem', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-secondary)', color: 'var(--text-primary)' }}
+                    >
+                        <option value="All">All Groups</option>
+                        <option value="-ER">-ER Verbs</option>
+                        <option value="-IR">-IR Verbs</option>
+                        <option value="-RE">-RE Verbs</option>
+                        <option value="Irregular">Irregular</option>
+                        <option value="Reflexive">Reflexive</option>
+                    </select>
+                    {groupFilter !== 'All' && (
+                        <X
+                            size={16}
+                            style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer', color: 'var(--text-secondary)' }}
+                            onClick={() => setGroupFilter('All')}
+                        />
+                    )}
+                </div>
             </div>
 
             {/* Search Bar */}
@@ -122,7 +140,7 @@ const ConjugationPage = () => {
             </div>
 
             {/* Verb Dropdown */}
-            <div style={{ marginBottom: '3rem' }}>
+            <div style={{ marginBottom: '3rem', position: 'relative' }}>
                 <select
                     value={selectedVerb?.infinitive || ''}
                     onChange={(e) => {
@@ -148,6 +166,13 @@ const ConjugationPage = () => {
                         </option>
                     ))}
                 </select>
+                {selectedVerb && (
+                    <X
+                        size={20}
+                        style={{ position: 'absolute', right: '30px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer', color: 'var(--text-secondary)' }}
+                        onClick={() => setSelectedVerb(null)}
+                    />
+                )}
             </div>
 
             {selectedVerb ? (

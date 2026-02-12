@@ -51,6 +51,36 @@ const Layout = () => {
                     }}>
                         Grammar
                     </Link>
+                    <Link to="/reading" style={{
+                        color: 'white',
+                        fontWeight: 500,
+                        background: '#575A6C', // Dark Grey for Reading to match Reading card text
+                        padding: '0.5rem 1rem',
+                        borderRadius: '8px',
+                        transition: 'background 0.2s'
+                    }}>
+                        Reading
+                    </Link>
+                    <Link to="/writing" style={{
+                        color: 'white',
+                        fontWeight: 500,
+                        background: '#3686C9', // Matching Writing card
+                        padding: '0.5rem 1rem',
+                        borderRadius: '8px',
+                        transition: 'background 0.2s'
+                    }}>
+                        Writing
+                    </Link>
+                    <Link to="/speaking" style={{
+                        color: 'white',
+                        fontWeight: 500,
+                        background: '#B4C540', // Matching Speaking card
+                        padding: '0.5rem 1rem',
+                        borderRadius: '8px',
+                        transition: 'background 0.2s'
+                    }}>
+                        Speaking
+                    </Link>
                 </nav>
             </header>
             <main className="container">
