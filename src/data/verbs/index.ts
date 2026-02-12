@@ -246,7 +246,7 @@ export const verbs = [
     offrir, organiser, oublier,
     parler, participer, passer_aspirateur, payer, peigner, se_peigner, peindre, perdre, planifier, porter, poser_question, postuler, pouvoir, preciser, prendre, preparer_repas, se_preparer, promener, se_promener, proposer,
     ranger, raser, se_raser, se_reconcilier, regarder_film, remercier, rencontrer, rendre, se_rendre, rentrer, reparer, repeter, repondre, se_reposer, respirer, rester, reussir, reveiller, se_reveiller, reviser, rouvrir,
-    samuser, sappeler, sasseoir, sauter, secher, se_secher, se_secher_les_cheveux, se_sentir, sentrainer, servir, setirer, signer, sortir, souffrir, souligner, se_souvenir, surligner,
+    samuser, sappeler, sauter, secher, se_secher, se_secher_les_cheveux, se_sentir, sentrainer, servir, setirer, signer, sortir, souffrir, souligner, se_souvenir, surligner,
     terminer, toucher, travailler, se_tromper, trouver,
     utiliser,
     vendre, venir, vivre, voir, vouloir, voyager,
