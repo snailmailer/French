@@ -4,6 +4,7 @@ import LandingPage from './pages/LandingPage';
 import LevelPage from './pages/LevelPage';
 import ConjugationPage from './pages/ConjugationPage';
 import GrammarPage from './pages/GrammarPage';
+import SpeakingPage from './pages/SpeakingPage';
 import PlaceholderPage from './pages/PlaceholderPage';
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
           <Route path="grammar" element={<GrammarPage />} />
           <Route path="reading" element={<PlaceholderPage />} />
           <Route path="writing" element={<PlaceholderPage />} />
-          <Route path="speaking" element={<PlaceholderPage />} />
+          <Route path="speaking" element={<SpeakingPage />} />
         </Route>
       </Routes>
     </Router>
