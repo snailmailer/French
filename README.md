@@ -19,16 +19,23 @@ Click on a card to enter that level's specific curriculum.
 ### 2. The Conjugation Tool
 Accessible via the **Green Button** in the top navigation bar.
 - **Search**: Type any verb (e.g., *manger*, *être*, *se lever*) to see its full conjugation.
-- **Tenses**: View conjugations for all moods (Indicatif, Subjonctif, Conditionnel, Impératif).
+- **Filters**: Quickly find verbs by **Category** (Work, Hobbies), **Group** (-ER, -IR, -RE), or **Tense** (Présent, Passé Composé, etc.).
+- **Tenses**: View conjugations for all moods (Indicatif, Subjonctif, Conditionnel, Impératif, Participe).
+- **Gérondif**: The Gérondif form (e.g., *en mangeant*) is displayed for every verb.
 - **Audio**: Click the **Speaker Icon** next to any conjugation to hear the pronunciation.
 - **Rules & Notes**: Automatically updates to show specific rules for the selected verb (e.g., stem changes).
 - **Examples**: See sample sentences with translations for key verbs.
 
-### 3. Integrated Audio (Text-to-Speech)
+### 3. Features & Resources
+- **Waffle Menu**: Toggle the waffle menu (grid icon) in the top-left to quickly access different sections like **Resources**, **Conjugation Tool**, and **Speaking Practice**.
+- **Resources Page**: A curated list of external tools (dictionaries, news, culture) to supplement your learning.
+- **Speaking Practice**: (Coming Soon) A dedicated tool to practice pronunciation and speaking.
+
+### 4. Integrated Audio (Text-to-Speech)
 - **Pronunciation**: Click the speaker icon 🔊 next to vocabulary lists, conjugation tables, or examples to hear the correct French pronunciation.
 - **Mobile Friendly**: The audio is optimized to work smoothly on mobile devices.
 
-### 4. Grammar & Vocabulary
+### 5. Grammar & Vocabulary
 Each level contains detailed sections on:
 - **Vocabulary Lists**: Grouped by topic (e.g., Food, Travel).
 - **Grammar Rules**: Explanations with examples (e.g., *Passé Composé vs Imparfait*).
