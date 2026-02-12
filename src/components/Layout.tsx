@@ -17,10 +17,24 @@ const Layout = () => {
                     <span>Le Français</span>
                 </Link>
                 <nav style={{ display: 'flex', gap: '1.5rem' }}>
+                    <Link to="/" style={{
+                        color: 'var(--text-primary)',
+                        fontWeight: 500,
+                        background: 'transparent',
+                        padding: '0.5rem 1rem',
+                        borderRadius: '8px',
+                        border: '1px solid var(--border-color)',
+                        transition: 'background 0.2s',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem'
+                    }}>
+                        Home
+                    </Link>
                     <Link to="/conjugation" style={{
                         color: 'white',
                         fontWeight: 500,
-                        background: '#4CAF50',
+                        background: '#B4C540',
                         padding: '0.5rem 1rem',
                         borderRadius: '8px',
                         transition: 'background 0.2s'
@@ -30,7 +44,7 @@ const Layout = () => {
                     <Link to="/grammar" style={{
                         color: 'white',
                         fontWeight: 500,
-                        background: '#2196F3',
+                        background: '#3686C9',
                         padding: '0.5rem 1rem',
                         borderRadius: '8px',
                         transition: 'background 0.2s'

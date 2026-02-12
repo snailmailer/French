@@ -1,15 +1,20 @@
 :root {
-  /* New Palette */
-  --bg-primary: #E0E2D2;
-  --bg-secondary: #ffffff;
-  /* Use white for cards against the beige background */
-  --bg-tertiary: #f0f0f0;
-  --text-primary: #575A6C;
-  --text-secondary: #7a7d8a;
+  /* New Palette - Dark Mode */
+  --bg-primary: #575A6C;
+  /* Dark Grey/Blue Background */
+  --bg-secondary: #4a4d5e;
+  /* Slightly lighter for cards */
+  --bg-tertiary: #3e4152;
+  /* Even darker for inputs/headers */
+  --text-primary: #E0E2D2;
+  /* Beige Text */
+  --text-secondary: #b0b2c2;
   --accent-color: #3686C9;
-  --accent-hover: #2a6db0;
+  /* Blue */
+  --accent-hover: #5DA3E0;
   --success-color: #B4C540;
-  --border-color: #d0d2c2;
+  /* Lime Green */
+  --border-color: #6a6d80;
   --font-family: 'Check it out', 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 

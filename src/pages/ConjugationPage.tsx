@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Info } from 'lucide-react';
+import { Search, Info, X } from 'lucide-react';
 import { verbs } from '../data/verbs';
 import type { VerbDefinition } from '../data/types';
 import ConjugationTable from '../components/ConjugationTable';
@@ -101,6 +101,24 @@ const ConjugationPage = () => {
                 <Search
                     style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }}
                 />
+                {searchTerm && (
+                    <X
+                        size={20}
+                        onClick={() => {
+                            setSearchTerm('');
+                            // Optional: Reset selection if you want clearing search to clear result
+                            // setSelectedVerb(null); 
+                        }}
+                        style={{
+                            position: 'absolute',
+                            right: '1rem',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                            color: 'var(--text-secondary)',
+                            cursor: 'pointer'
+                        }}
+                    />
+                )}
             </div>
 
             {/* Verb Dropdown */}
