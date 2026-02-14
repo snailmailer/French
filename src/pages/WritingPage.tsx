@@ -10,6 +10,7 @@ const WritingPage = () => {
     const [userInput, setUserInput] = useState('');
     const [showAnswer, setShowAnswer] = useState(false);
     const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
+    const [direction, setDirection] = useState<'en-to-fr' | 'fr-to-en'>('en-to-fr');
 
     // Get prompts for the selected tense
     const availablePrompts = useMemo(() => {
@@ -31,7 +32,7 @@ const WritingPage = () => {
     // Pick a prompt when tense changes or on mount
     useEffect(() => {
         pickRandomPrompt();
-    }, [selectedTense, availablePrompts]);
+    }, [selectedTense, availablePrompts, direction]);
 
     const handleCheck = () => {
         if (!currentPrompt) return;
@@ -39,7 +40,9 @@ const WritingPage = () => {
         // Simple normalization for comparison (remove extra spaces, case insensitive)
         const normalize = (str: string) => str.trim().toLowerCase().replace(/[.,!?;:]/g, '');
         const userNorm = normalize(userInput);
-        const correctNorm = normalize(currentPrompt.french);
+
+        const targetText = direction === 'en-to-fr' ? currentPrompt.french : currentPrompt.english;
+        const correctNorm = normalize(targetText);
 
         if (userNorm === correctNorm) {
             setFeedback('correct');
@@ -55,28 +58,58 @@ const WritingPage = () => {
                 Writing Practice
             </h1>
 
-            {/* Tense Selection */}
-            <div style={{ marginBottom: '2rem' }}>
-                <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
-                    Select Tense / Mood:
-                </label>
-                <select
-                    value={selectedTense}
-                    onChange={(e) => setSelectedTense(e.target.value)}
-                    style={{
-                        width: '100%',
-                        padding: '1rem',
-                        borderRadius: '12px',
-                        border: '1px solid var(--border-color)',
-                        background: 'var(--bg-secondary)',
-                        color: 'var(--text-primary)',
-                        fontSize: '1rem'
-                    }}
-                >
-                    {writingData.map(cat => (
-                        <option key={cat.name} value={cat.name}>{cat.name}</option>
-                    ))}
-                </select>
+            {/* Controls Container */}
+            <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
+                {/* Tense Selection */}
+                <div style={{ flex: 2, minWidth: '200px' }}>
+                    <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
+                        Select Tense / Mood:
+                    </label>
+                    <select
+                        value={selectedTense}
+                        onChange={(e) => setSelectedTense(e.target.value)}
+                        style={{
+                            width: '100%',
+                            padding: '1rem',
+                            borderRadius: '12px',
+                            border: '1px solid var(--border-color)',
+                            background: 'var(--bg-secondary)',
+                            color: 'var(--text-primary)',
+                            fontSize: '1rem'
+                        }}
+                    >
+                        {writingData.map(cat => (
+                            <option key={cat.name} value={cat.name}>{cat.name}</option>
+                        ))}
+                    </select>
+                </div>
+
+                {/* Direction Toggle */}
+                <div style={{ flex: 1, minWidth: '200px' }}>
+                    <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
+                        Direction:
+                    </label>
+                    <button
+                        onClick={() => setDirection(prev => prev === 'en-to-fr' ? 'fr-to-en' : 'en-to-fr')}
+                        style={{
+                            width: '100%',
+                            padding: '1rem',
+                            borderRadius: '12px',
+                            border: '1px solid var(--border-color)',
+                            background: 'var(--bg-secondary)',
+                            color: 'var(--text-primary)',
+                            fontSize: '1rem',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '0.5rem'
+                        }}
+                    >
+                        <RefreshCw size={18} />
+                        {direction === 'en-to-fr' ? 'English → French' : 'French → English'}
+                    </button>
+                </div>
             </div>
 
             {/* Practice Area */}
@@ -98,10 +131,10 @@ const WritingPage = () => {
                             fontSize: '0.875rem',
                             marginBottom: '1rem'
                         }}>
-                            Translate to French
+                            {direction === 'en-to-fr' ? 'Translate to French' : 'Translate to English'}
                         </span>
                         <h2 style={{ fontSize: '1.5rem', lineHeight: '1.4' }}>
-                            {currentPrompt.english}
+                            {direction === 'en-to-fr' ? currentPrompt.english : currentPrompt.french}
                         </h2>
                     </div>
 
@@ -109,7 +142,7 @@ const WritingPage = () => {
                         <textarea
                             value={userInput}
                             onChange={(e) => setUserInput(e.target.value)}
-                            placeholder="Type the French translation here..."
+                            placeholder={direction === 'en-to-fr' ? "Type the French translation here..." : "Type the English translation here..."}
                             rows={3}
                             style={{
                                 width: '100%',
@@ -148,7 +181,9 @@ const WritingPage = () => {
                             {feedback === 'incorrect' && (
                                 <div>
                                     <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Correct Answer:</div>
-                                    <div style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: '500' }}>{currentPrompt.french}</div>
+                                    <div style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: '500' }}>
+                                        {direction === 'en-to-fr' ? currentPrompt.french : currentPrompt.english}
+                                    </div>
                                 </div>
                             )}
                         </div>
