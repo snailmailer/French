@@ -8,6 +8,8 @@ import SpeakingPage from './pages/SpeakingPage';
 import ResourcesPage from './pages/ResourcesPage';
 import PlaceholderPage from './pages/PlaceholderPage';
 
+import WritingPage from './pages/WritingPage';
+
 function App() {
   return (
     <Router>
@@ -18,7 +20,7 @@ function App() {
           <Route path="conjugation" element={<ConjugationPage />} />
           <Route path="grammar" element={<GrammarPage />} />
           <Route path="reading" element={<PlaceholderPage />} />
-          <Route path="writing" element={<PlaceholderPage />} />
+          <Route path="writing" element={<WritingPage />} />
           <Route path="speaking" element={<SpeakingPage />} />
           <Route path="resources" element={<ResourcesPage />} />
         </Route>

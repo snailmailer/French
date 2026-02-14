@@ -1,0 +1,228 @@
+
+import { useState, useMemo, useEffect } from 'react';
+import { ArrowRight, Check, X, RefreshCw } from 'lucide-react';
+import { writingData } from '../data/writingPrompts';
+import type { WritingPrompt } from '../data/writingPrompts';
+
+const WritingPage = () => {
+    const [selectedTense, setSelectedTense] = useState<string>(writingData[0].name);
+    const [currentPrompt, setCurrentPrompt] = useState<WritingPrompt | null>(null);
+    const [userInput, setUserInput] = useState('');
+    const [showAnswer, setShowAnswer] = useState(false);
+    const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
+
+    // Get prompts for the selected tense
+    const availablePrompts = useMemo(() => {
+        const category = writingData.find(c => c.name === selectedTense);
+        return category ? category.prompts : [];
+    }, [selectedTense]);
+
+    // Function to pick a random prompt
+    const pickRandomPrompt = () => {
+        if (availablePrompts.length > 0) {
+            const randomIndex = Math.floor(Math.random() * availablePrompts.length);
+            setCurrentPrompt(availablePrompts[randomIndex]);
+            setUserInput('');
+            setShowAnswer(false);
+            setFeedback(null);
+        }
+    };
+
+    // Pick a prompt when tense changes or on mount
+    useEffect(() => {
+        pickRandomPrompt();
+    }, [selectedTense, availablePrompts]);
+
+    const handleCheck = () => {
+        if (!currentPrompt) return;
+
+        // Simple normalization for comparison (remove extra spaces, case insensitive)
+        const normalize = (str: string) => str.trim().toLowerCase().replace(/[.,!?;:]/g, '');
+        const userNorm = normalize(userInput);
+        const correctNorm = normalize(currentPrompt.french);
+
+        if (userNorm === correctNorm) {
+            setFeedback('correct');
+        } else {
+            setFeedback('incorrect');
+        }
+        setShowAnswer(true);
+    };
+
+    return (
+        <div style={{ maxWidth: '800px', margin: '0 auto', padding: '2rem' }}>
+            <h1 style={{ textAlign: 'center', marginBottom: '2rem', color: 'var(--accent-color)' }}>
+                Writing Practice
+            </h1>
+
+            {/* Tense Selection */}
+            <div style={{ marginBottom: '2rem' }}>
+                <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
+                    Select Tense / Mood:
+                </label>
+                <select
+                    value={selectedTense}
+                    onChange={(e) => setSelectedTense(e.target.value)}
+                    style={{
+                        width: '100%',
+                        padding: '1rem',
+                        borderRadius: '12px',
+                        border: '1px solid var(--border-color)',
+                        background: 'var(--bg-secondary)',
+                        color: 'var(--text-primary)',
+                        fontSize: '1rem'
+                    }}
+                >
+                    {writingData.map(cat => (
+                        <option key={cat.name} value={cat.name}>{cat.name}</option>
+                    ))}
+                </select>
+            </div>
+
+            {/* Practice Area */}
+            {currentPrompt && (
+                <div style={{
+                    background: 'var(--bg-secondary)',
+                    padding: '2rem',
+                    borderRadius: '16px',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+                    border: '1px solid var(--border-color)'
+                }}>
+                    <div style={{ marginBottom: '1.5rem' }}>
+                        <span style={{
+                            display: 'inline-block',
+                            padding: '0.25rem 0.75rem',
+                            borderRadius: '20px',
+                            background: 'rgba(54, 134, 201, 0.2)',
+                            color: '#3686C9',
+                            fontSize: '0.875rem',
+                            marginBottom: '1rem'
+                        }}>
+                            Translate to French
+                        </span>
+                        <h2 style={{ fontSize: '1.5rem', lineHeight: '1.4' }}>
+                            {currentPrompt.english}
+                        </h2>
+                    </div>
+
+                    <div style={{ marginBottom: '1.5rem' }}>
+                        <textarea
+                            value={userInput}
+                            onChange={(e) => setUserInput(e.target.value)}
+                            placeholder="Type the French translation here..."
+                            rows={3}
+                            style={{
+                                width: '100%',
+                                padding: '1rem',
+                                borderRadius: '8px',
+                                border: `2px solid ${feedback === 'correct' ? '#4CAF50' : feedback === 'incorrect' ? '#FF5252' : 'var(--border-color)'}`,
+                                background: 'var(--bg-primary)',
+                                color: 'var(--text-primary)',
+                                fontSize: '1.1rem',
+                                resize: 'vertical'
+                            }}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' && !e.shiftKey) {
+                                    e.preventDefault();
+                                    if (!showAnswer) handleCheck();
+                                    else pickRandomPrompt();
+                                }
+                            }}
+                        />
+                    </div>
+
+                    {/* Feedback Section */}
+                    {showAnswer && (
+                        <div style={{
+                            marginBottom: '1.5rem',
+                            padding: '1rem',
+                            borderRadius: '8px',
+                            background: feedback === 'correct' ? 'rgba(76, 175, 80, 0.1)' : 'rgba(255, 82, 82, 0.1)',
+                            borderLeft: `4px solid ${feedback === 'correct' ? '#4CAF50' : '#FF5252'}`
+                        }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', fontWeight: 'bold', color: feedback === 'correct' ? '#4CAF50' : '#FF5252' }}>
+                                {feedback === 'correct' ? <Check size={20} /> : <X size={20} />}
+                                {feedback === 'correct' ? 'Correct!' : 'Incorrect'}
+                            </div>
+
+                            {feedback === 'incorrect' && (
+                                <div>
+                                    <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Correct Answer:</div>
+                                    <div style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: '500' }}>{currentPrompt.french}</div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {/* Actions */}
+                    <div style={{ display: 'flex', gap: '1rem' }}>
+                        {!showAnswer ? (
+                            <button
+                                onClick={handleCheck}
+                                disabled={!userInput.trim()}
+                                style={{
+                                    flex: 1,
+                                    padding: '1rem',
+                                    borderRadius: '8px',
+                                    border: 'none',
+                                    background: '#4CAF50',
+                                    color: 'white',
+                                    fontSize: '1rem',
+                                    fontWeight: '600',
+                                    cursor: userInput.trim() ? 'pointer' : 'not-allowed',
+                                    opacity: userInput.trim() ? 1 : 0.7,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    gap: '0.5rem'
+                                }}
+                            >
+                                <Check size={20} />
+                                Check Answer
+                            </button>
+                        ) : (
+                            <button
+                                onClick={pickRandomPrompt}
+                                style={{
+                                    flex: 1,
+                                    padding: '1rem',
+                                    borderRadius: '8px',
+                                    border: 'none',
+                                    background: '#3686C9',
+                                    color: 'white',
+                                    fontSize: '1rem',
+                                    fontWeight: '600',
+                                    cursor: 'pointer',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    gap: '0.5rem'
+                                }}
+                            >
+                                <ArrowRight size={20} />
+                                Next Sentence
+                            </button>
+                        )}
+
+                        <button
+                            onClick={pickRandomPrompt}
+                            title="Skip / New Sentence"
+                            style={{
+                                padding: '1rem',
+                                borderRadius: '8px',
+                                border: '1px solid var(--border-color)',
+                                background: 'transparent',
+                                color: 'var(--text-secondary)',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            <RefreshCw size={20} />
+                        </button>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default WritingPage;
