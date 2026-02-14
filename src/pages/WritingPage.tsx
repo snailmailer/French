@@ -78,7 +78,7 @@ const WritingPage = () => {
                             fontSize: '1rem'
                         }}
                     >
-                        {writingData.map(cat => (
+                        {writingData.sort((a, b) => a.name.localeCompare(b.name)).map(cat => (
                             <option key={cat.name} value={cat.name}>{cat.name}</option>
                         ))}
                     </select>
