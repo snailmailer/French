@@ -185,7 +185,7 @@ export function createRegularVerb(infinitive: string, type: VerbEndingType, auxi
     const data: any = {
         infinitive,
         translation: definition,
-        group: type === 'ER' ? '1st' : (type === 'IR_ISS' ? '2nd' : '3rd'),
+        group: type === 'ER' ? 1 : (type === 'IR_ISS' ? 2 : 3),
         auxiliary: isReflexive ? 'Être (Reflexive)' : (auxiliary === 'avoir' ? 'Avoir' : 'Être'),
         rules: [...generatedRules, ...customRules],
         examples,

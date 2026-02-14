@@ -236,7 +236,7 @@ export const souligner = crv('souligner', 'ER', 'avoir', 'to underline', false, 
 export const surligner = crv('surligner', 'ER', 'avoir', 'to highlight', false, [], [], 'Education');
 export const memoriser = crv('mémoriser', 'ER', 'avoir', 'to memorize', false, [], [], 'Education');
 export const repeter = crv('répéter', 'ER', 'avoir', 'to repeat', false, [], [], 'Education');
-export const comprendre = crv('comprendre', 'RE', 'avoir', 'to understand', false, [], [], 'Education');
+
 export const expliquer = crv('expliquer', 'ER', 'avoir', 'to explain', false, [], [], 'Education');
 export const poser_question = crv('poser une question', 'ER', 'avoir', 'to ask a question', false, [], [], 'Education'); // Special handling for spaces? createRegularVerb handles it? regex matching endings might take last word?
 export const repondre = crv('répondre', 'RE', 'avoir', 'to answer', false, [], [], 'Education');
@@ -262,66 +262,7 @@ export const envoyer_email = crv('envoyer un e-mail', 'ER', 'avoir', 'to send an
 // --- Hobbies / Loisirs ---
 export const jouer = crv('jouer', 'ER', 'avoir', 'to play', false, [], [], 'Hobbies');
 export const dessiner = crv('dessiner', 'ER', 'avoir', 'to draw', false, [], [], 'Hobbies');
-const peindreBase = crv('peindre', 'RE', 'avoir', 'to paint', false, [], [], 'Hobbies');
-export const peindre = {
-    ...peindreBase,
-    conjugations: {
-        ...peindreBase.conjugations,
-        Indicatif: {
-            ...peindreBase.conjugations.Indicatif,
-            'Présent': [
-                { pronoun: 'je', form: 'peins' },
-                { pronoun: 'tu', form: 'peins' },
-                { pronoun: 'il/elle', form: 'peint' },
-                { pronoun: 'nous', form: 'peignons' },
-                { pronoun: 'vous', form: 'peignez' },
-                { pronoun: 'ils/elles', form: 'peignent' }
-            ],
-            'Imparfait': [
-                { pronoun: 'je', form: 'peignais' },
-                { pronoun: 'tu', form: 'peignais' },
-                { pronoun: 'il/elle', form: 'peignait' },
-                { pronoun: 'nous', form: 'peignions' },
-                { pronoun: 'vous', form: 'peigniez' },
-                { pronoun: 'ils/elles', form: 'peignaient' }
-            ],
-            'Futur Simple': [
-                { pronoun: 'je', form: 'peindrai' },
-                { pronoun: 'tu', form: 'peindras' },
-                { pronoun: 'il/elle', form: 'peindra' },
-                { pronoun: 'nous', form: 'peindrons' },
-                { pronoun: 'vous', form: 'peindrez' },
-                { pronoun: 'ils/elles', form: 'peindront' }
-            ],
-            'Passé Composé': [
-                { pronoun: 'j\'', form: 'ai peint' },
-                { pronoun: 'tu', form: 'as peint' },
-                { pronoun: 'il/elle', form: 'a peint' },
-                { pronoun: 'nous', form: 'avons peint' },
-                { pronoun: 'vous', form: 'avez peint' },
-                { pronoun: 'ils/elles', form: 'ont peint' }
-            ],
-            'Plus-que-parfait': [
-                { pronoun: 'j\'', form: 'avais peint' },
-                { pronoun: 'tu', form: 'avais peint' },
-                { pronoun: 'il/elle', form: 'avait peint' },
-                { pronoun: 'nous', form: 'avions peint' },
-                { pronoun: 'vous', form: 'aviez peint' },
-                { pronoun: 'ils/elles', form: 'avaient peint' }
-            ]
-        },
-        Participe: {
-            ...peindreBase.conjugations.Participe,
-            'Présent': [{ pronoun: '', form: 'peignant' }],
-            'Passé': [
-                { pronoun: 'Masc. Sing.', form: 'peint' },
-                { pronoun: 'Fem. Sing.', form: 'peinte' },
-                { pronoun: 'Masc. Plur.', form: 'peints' },
-                { pronoun: 'Fem. Plur.', form: 'peintes' }
-            ]
-        }
-    }
-};
+
 export const chanter = crv('chanter', 'ER', 'avoir', 'to sing', false, [], [], 'Hobbies');
 export const danser = crv('danser', 'ER', 'avoir', 'to dance', false, [], [], 'Hobbies');
 export const regarder_film = crv('regarder un film', 'ER', 'avoir', 'to watch a movie', false, [], [], 'Hobbies');
@@ -526,7 +467,52 @@ export const arroser = crv('arroser les plantes', 'ER', 'avoir', 'to water plant
 const makeFaire = (inf: string, trans: string, cat: string) => applyExamplesToVerb({ ...faireBase, infinitive: inf, translation: trans, category: cat });
 export const faire_du_sport = makeFaire('faire du sport', 'to do sports', 'Sport');
 export const sentrainer = crv("s'entraîner", 'ER', 'avoir', 'to train', true, [], [], 'Sport');
-export const courir = crv('courir', 'IR_DORMIR', 'avoir', 'to run', false, [], [], 'Sport'); // Short stem? courir is irregular-ish. IR_DORMIR might work (cours, cours, court...).
+const courirBase = crv('courir', 'IR_DORMIR', 'avoir', 'to run', false, [], [], 'Sport');
+export const courir = {
+    ...courirBase,
+    conjugations: {
+        ...courirBase.conjugations,
+        Indicatif: {
+            ...courirBase.conjugations.Indicatif,
+            'Futur Simple': [
+                { pronoun: 'je', form: 'courrai' },
+                { pronoun: 'tu', form: 'courras' },
+                { pronoun: 'il/elle', form: 'courra' },
+                { pronoun: 'nous', form: 'courrons' },
+                { pronoun: 'vous', form: 'courrez' },
+                { pronoun: 'ils/elles', form: 'courront' }
+            ],
+            'Passé Composé': [ // Uses avoir usually
+                { pronoun: 'j\'', form: 'ai couru' },
+                { pronoun: 'tu', form: 'as couru' },
+                { pronoun: 'il/elle', form: 'a couru' },
+                { pronoun: 'nous', form: 'avons couru' },
+                { pronoun: 'vous', form: 'avez couru' },
+                { pronoun: 'ils/elles', form: 'ont couru' }
+            ]
+        },
+        Conditionnel: {
+            ...courirBase.conjugations.Conditionnel,
+            'Présent': [
+                { pronoun: 'je', form: 'courrais' },
+                { pronoun: 'tu', form: 'courrais' },
+                { pronoun: 'il/elle', form: 'courrait' },
+                { pronoun: 'nous', form: 'courrions' },
+                { pronoun: 'vous', form: 'courriez' },
+                { pronoun: 'ils/elles', form: 'courraient' }
+            ]
+        },
+        Participe: {
+            ...courirBase.conjugations.Participe,
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'couru' },
+                { pronoun: 'Fem. Sing.', form: 'courue' },
+                { pronoun: 'Masc. Plur.', form: 'courus' },
+                { pronoun: 'Fem. Plur.', form: 'courues' }
+            ]
+        }
+    }
+};
 export const marcher = crv('marcher', 'ER', 'avoir', 'to walk', false, [], [], 'Sport');
 export const musculation = makeFaire('faire de la musculation', 'to lift weights', 'Sport');
 export const yoga = makeFaire('faire du yoga', 'to do yoga', 'Sport');
@@ -625,6 +611,107 @@ export const ecouter = crv('écouter', 'ER', 'avoir', 'to listen', false, [], []
 export const entendre = crv('entendre', 'RE', 'avoir', 'to hear', false, [], [], 'General');
 export const finir = crv('finir', 'IR_ISS', 'avoir', 'to finish', false, [], [], 'General');
 export const grandir = crv('grandir', 'IR_ISS', 'avoir', 'to grow', false, [], [], 'General');
+export const choisir = crv('choisir', 'IR_ISS', 'avoir', 'to choose', false, [], [], 'General');
+export const grossir = crv('grossir', 'IR_ISS', 'avoir', 'to gain weight', false, [], [], 'General');
+export const maigrir = crv('maigrir', 'IR_ISS', 'avoir', 'to lose weight', false, [], [], 'General');
+export const remplir = crv('remplir', 'IR_ISS', 'avoir', 'to fill', false, [], [], 'General');
+export const batir = crv('bâtir', 'IR_ISS', 'avoir', 'to build', false, [], [], 'General');
+export const punir = crv('punir', 'IR_ISS', 'avoir', 'to punish', false, [], [], 'General');
+export const ralentir = crv('ralentir', 'IR_ISS', 'avoir', 'to slow down', false, [], [], 'General');
+export const guerir = crv('guérir', 'IR_ISS', 'avoir', 'to heal/cure', false, [], [], 'General');
+export const vieillir = crv('vieillir', 'IR_ISS', 'avoir', 'to age', false, [], [], 'General');
+export const rougir = crv('rougir', 'IR_ISS', 'avoir', 'to blush', false, [], [], 'General');
+export const blanchir = crv('blanchir', 'IR_ISS', 'avoir', 'to whiten', false, [], [], 'General');
+export const salir = crv('salir', 'IR_ISS', 'avoir', 'to dirty', false, [], [], 'General');
+export const reflechir = crv('réfléchir', 'IR_ISS', 'avoir', 'to reflect/think', false, [], [], 'General');
+export const convertir = crv('convertir', 'IR_ISS', 'avoir', 'to convert', false, [], [], 'General');
+export const agir = crv('agir', 'IR_ISS', 'avoir', 'to act', false, [], [], 'General');
+export const reagir = crv('réagir', 'IR_ISS', 'avoir', 'to react', false, [], [], 'General');
+export const benir = crv('bénir', 'IR_ISS', 'avoir', 'to bless', false, [], [], 'General');
+export const verdir = crv('verdir', 'IR_ISS', 'avoir', 'to turn green', false, [], [], 'General');
+const hairBase = crv('haïr', 'IR_ISS', 'avoir', 'to hate', false, [], [], 'General');
+export const hair = {
+    ...hairBase,
+    conjugations: {
+        ...hairBase.conjugations,
+        Indicatif: {
+            ...hairBase.conjugations.Indicatif,
+            'Présent': [
+                { pronoun: 'je', form: 'hais' },
+                { pronoun: 'tu', form: 'hais' },
+                { pronoun: 'il/elle', form: 'hait' },
+                { pronoun: 'nous', form: 'haïssons' },
+                { pronoun: 'vous', form: 'haïssez' },
+                { pronoun: 'ils/elles', form: 'haïssent' }
+            ],
+            // Regular IR_ISS pattern for others preserves tréma because stem is 'ha' + 'ïss...' ? No.
+            // crv('haïr', 'IR_ISS') -> stem 'ha'.
+            // Imparfait: 'ha' + 'issais' -> 'haissais' (missing tréma).
+            // Need to fix all tenses to have tréma.
+            'Imparfait': [
+                { pronoun: 'je', form: 'haïssais' },
+                { pronoun: 'tu', form: 'haïssais' },
+                { pronoun: 'il/elle', form: 'haïssait' },
+                { pronoun: 'nous', form: 'haïssions' },
+                { pronoun: 'vous', form: 'haïssiez' },
+                { pronoun: 'ils/elles', form: 'haïssaient' }
+            ],
+            'Futur Simple': [
+                { pronoun: 'je', form: 'haïrai' },
+                { pronoun: 'tu', form: 'haïras' },
+                { pronoun: 'il/elle', form: 'haïra' },
+                { pronoun: 'nous', form: 'haïrons' },
+                { pronoun: 'vous', form: 'haïrez' },
+                { pronoun: 'ils/elles', form: 'haïront' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai haï' },
+                { pronoun: 'tu', form: 'as haï' },
+                { pronoun: 'il/elle', form: 'a haï' },
+                { pronoun: 'nous', form: 'avons haï' },
+                { pronoun: 'vous', form: 'avez haï' },
+                { pronoun: 'ils/elles', form: 'ont haï' }
+            ],
+            'Plus-que-parfait': [
+                { pronoun: 'j\'', form: 'avais haï' },
+                { pronoun: 'tu', form: 'avais haï' },
+                { pronoun: 'il/elle', form: 'avait haï' },
+                { pronoun: 'nous', form: 'avions haï' },
+                { pronoun: 'vous', form: 'aviez haï' },
+                { pronoun: 'ils/elles', form: 'avaient haï' }
+            ]
+        },
+        Subjonctif: {
+            ...hairBase.conjugations.Subjonctif,
+            'Présent': [
+                { pronoun: 'que je', form: 'haïsse' },
+                { pronoun: 'que tu', form: 'haïsses' },
+                { pronoun: 'qu\'il/elle', form: 'haïsse' },
+                { pronoun: 'que nous', form: 'haïssions' },
+                { pronoun: 'que vous', form: 'haïssiez' },
+                { pronoun: 'qu\'ils/elles', form: 'haïssent' }
+            ]
+        },
+        Participe: {
+            ...hairBase.conjugations.Participe,
+            'Présent': [{ pronoun: '', form: 'haïssant' }],
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'haï' },
+                { pronoun: 'Fem. Sing.', form: 'haïe' },
+                { pronoun: 'Masc. Plur.', form: 'haïs' },
+                { pronoun: 'Fem. Plur.', form: 'haïes' }
+            ]
+        },
+        Impératif: {
+            ...hairBase.conjugations.Impératif,
+            'Présent': [
+                { pronoun: '(Tu)', form: 'hais' },
+                { pronoun: '(Nous)', form: 'haïssons' },
+                { pronoun: '(Vous)', form: 'haïssez' }
+            ]
+        }
+    }
+};
 const mettreBase = crv('mettre', 'RE', 'avoir', 'to put', false, [], [], 'General');
 export const mettre = {
     ...mettreBase,
@@ -693,6 +780,128 @@ export const mettre = {
         }
     }
 };
+const mourirBase = crv('mourir', 'IR_DORMIR', 'etre', 'to die', false, [], [], 'General');
+export const mourir = {
+    ...mourirBase,
+    conjugations: {
+        ...mourirBase.conjugations,
+        Indicatif: {
+            ...mourirBase.conjugations.Indicatif,
+            'Présent': [
+                { pronoun: 'je', form: 'meurs' },
+                { pronoun: 'tu', form: 'meurs' },
+                { pronoun: 'il/elle', form: 'meurt' },
+                { pronoun: 'nous', form: 'mourons' },
+                { pronoun: 'vous', form: 'mourez' },
+                { pronoun: 'ils/elles', form: 'meurent' }
+            ],
+            'Futur Simple': [
+                { pronoun: 'je', form: 'mourrai' },
+                { pronoun: 'tu', form: 'mourras' },
+                { pronoun: 'il/elle', form: 'mourra' },
+                { pronoun: 'nous', form: 'mourrons' },
+                { pronoun: 'vous', form: 'mourrez' },
+                { pronoun: 'ils/elles', form: 'mourront' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'je', form: 'suis mort(e)' },
+                { pronoun: 'tu', form: 'es mort(e)' },
+                { pronoun: 'il/elle', form: 'est mort(e)' },
+                { pronoun: 'nous', form: 'sommes mort(e)s' },
+                { pronoun: 'vous', form: 'êtes mort(e)(s)' },
+                { pronoun: 'ils/elles', form: 'sont mort(e)s' }
+            ]
+        },
+        Subjonctif: {
+            ...mourirBase.conjugations.Subjonctif,
+            'Présent': [
+                { pronoun: 'que je', form: 'meure' },
+                { pronoun: 'que tu', form: 'meures' },
+                { pronoun: 'qu\'il/elle', form: 'meure' },
+                { pronoun: 'que nous', form: 'mourions' },
+                { pronoun: 'que vous', form: 'mouriez' },
+                { pronoun: 'qu\'ils/elles', form: 'meurent' }
+            ]
+        },
+        Participe: {
+            ...mourirBase.conjugations.Participe,
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'mort' },
+                { pronoun: 'Fem. Sing.', form: 'morte' },
+                { pronoun: 'Masc. Plur.', form: 'morts' },
+                { pronoun: 'Fem. Plur.', form: 'mortes' }
+            ]
+        }
+    }
+};
+
+const fuirBase = crv('fuir', 'IR_ISS', 'avoir', 'to flee', false, [], [], 'General'); // Base irrelevant, overriding
+export const fuir = {
+    ...fuirBase,
+    conjugations: {
+        ...fuirBase.conjugations,
+        Indicatif: {
+            ...fuirBase.conjugations.Indicatif,
+            'Présent': [
+                { pronoun: 'je', form: 'fuis' },
+                { pronoun: 'tu', form: 'fuis' },
+                { pronoun: 'il/elle', form: 'fuit' },
+                { pronoun: 'nous', form: 'fuyons' },
+                { pronoun: 'vous', form: 'fuyez' },
+                { pronoun: 'ils/elles', form: 'fuient' }
+            ],
+            'Imparfait': [
+                { pronoun: 'je', form: 'fuyais' },
+                { pronoun: 'tu', form: 'fuyais' },
+                { pronoun: 'il/elle', form: 'fuyait' },
+                { pronoun: 'nous', form: 'fuyions' },
+                { pronoun: 'vous', form: 'fuyiez' },
+                { pronoun: 'ils/elles', form: 'fuyaient' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai fui' },
+                { pronoun: 'tu', form: 'as fui' },
+                { pronoun: 'il/elle', form: 'a fui' },
+                { pronoun: 'nous', form: 'avons fui' },
+                { pronoun: 'vous', form: 'avez fui' },
+                { pronoun: 'ils/elles', form: 'ont fui' }
+            ]
+        },
+        Subjonctif: {
+            ...fuirBase.conjugations.Subjonctif,
+            'Présent': [
+                { pronoun: 'que je', form: 'fuie' },
+                { pronoun: 'que tu', form: 'fuies' },
+                { pronoun: 'qu\'il/elle', form: 'fuie' },
+                { pronoun: 'que nous', form: 'fuyions' },
+                { pronoun: 'que vous', form: 'fuyiez' },
+                { pronoun: 'qu\'ils/elles', form: 'fuient' }
+            ]
+        },
+        Participe: {
+            ...fuirBase.conjugations.Participe,
+            'Présent': [{ pronoun: '', form: 'fuyant' }],
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'fui' },
+                { pronoun: 'Fem. Sing.', form: 'fuie' },
+                { pronoun: 'Masc. Plur.', form: 'fuis' },
+                { pronoun: 'Fem. Plur.', form: 'fuies' }
+            ]
+        },
+        Impératif: {
+            ...fuirBase.conjugations.Impératif,
+            'Présent': [
+                { pronoun: '(Tu)', form: 'fuis' },
+                { pronoun: '(Nous)', form: 'fuyons' },
+                { pronoun: '(Vous)', form: 'fuyez' }
+            ]
+        }
+    }
+};
+export const partir = crv('partir', 'IR_DORMIR', 'etre', 'to leave', false, [], [], 'General');
+export const ouvrir = crv('ouvrir', 'IR_COCOS', 'avoir', 'to open', false, [], [], 'General');
+export const cueillir = crv('cueillir', 'IR_COCOS', 'avoir', 'to gather', false, [], [], 'General');
+export const accueillir = crv('accueillir', 'IR_COCOS', 'avoir', 'to welcome', false, [], [], 'General');
 export const offrir = crv('offrir', 'IR_COCOS', 'avoir', 'to offer', false, [], [], 'General');
 export const oublier = crv('oublier', 'ER', 'avoir', 'to forget', false, [], [], 'General');
 export const parler = crv('parler', 'ER', 'avoir', 'to speak', false, [], [], 'General');
@@ -789,8 +998,299 @@ export const terminer = crv('terminer', 'ER', 'avoir', 'to finish', false, [], [
 export const toucher = crv('toucher', 'ER', 'avoir', 'to touch', false, [], [], 'General');
 export const trouver = crv('trouver', 'ER', 'avoir', 'to find', false, [], [], 'General');
 export const utiliser = crv('utiliser', 'ER', 'avoir', 'to use', false, [], [], 'General');
-export const venir = crv('venir', 'IR_VENIR', 'etre', 'to come', false, [], [], 'General'); // Need IR_VENIR support in cleanRegularVerb or stick to IR_DORMIR approximation? Venir is irregular.
-export const voir = crv('voir', 'IR_DORMIR', 'avoir', 'to see', false, [], [], 'General'); // Irregular (puis, vois...)
+const venirBase = crv('venir', 'IR_VENIR', 'etre', 'to come', false, [], [], 'General');
+export const venir = {
+    ...venirBase,
+    conjugations: {
+        ...venirBase.conjugations,
+        Indicatif: {
+            ...venirBase.conjugations.Indicatif,
+            'Présent': [
+                { pronoun: 'je', form: 'viens' },
+                { pronoun: 'tu', form: 'viens' },
+                { pronoun: 'il/elle', form: 'vient' },
+                { pronoun: 'nous', form: 'venons' },
+                { pronoun: 'vous', form: 'venez' },
+                { pronoun: 'ils/elles', form: 'viennent' }
+            ],
+            'Futur Simple': [
+                { pronoun: 'je', form: 'viendrai' },
+                { pronoun: 'tu', form: 'viendras' },
+                { pronoun: 'il/elle', form: 'viendra' },
+                { pronoun: 'nous', form: 'viendrons' },
+                { pronoun: 'vous', form: 'viendrez' },
+                { pronoun: 'ils/elles', form: 'viendront' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'je', form: 'suis venu(e)' },
+                { pronoun: 'tu', form: 'es venu(e)' },
+                { pronoun: 'il/elle', form: 'est venu(e)' },
+                { pronoun: 'nous', form: 'sommes venu(e)s' },
+                { pronoun: 'vous', form: 'êtes venu(e)(s)' },
+                { pronoun: 'ils/elles', form: 'sont venu(e)s' }
+            ]
+        },
+        Conditionnel: {
+            ...venirBase.conjugations.Conditionnel,
+            'Présent': [
+                { pronoun: 'je', form: 'viendrais' },
+                { pronoun: 'tu', form: 'viendrais' },
+                { pronoun: 'il/elle', form: 'viendrait' },
+                { pronoun: 'nous', form: 'viendrions' },
+                { pronoun: 'vous', form: 'viendriez' },
+                { pronoun: 'ils/elles', form: 'viendraient' }
+            ]
+        },
+        Subjonctif: {
+            ...venirBase.conjugations.Subjonctif,
+            'Présent': [
+                { pronoun: 'que je', form: 'vienne' },
+                { pronoun: 'que tu', form: 'viennes' },
+                { pronoun: 'qu\'il/elle', form: 'vienne' },
+                { pronoun: 'que nous', form: 'venions' },
+                { pronoun: 'que vous', form: 'veniez' },
+                { pronoun: 'qu\'ils/elles', form: 'viennent' }
+            ]
+        },
+        Participe: {
+            ...venirBase.conjugations.Participe,
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'venu' },
+                { pronoun: 'Fem. Sing.', form: 'venue' },
+                { pronoun: 'Masc. Plur.', form: 'venus' },
+                { pronoun: 'Fem. Plur.', form: 'venues' }
+            ]
+        }
+    }
+};
+
+const tenirBase = crv('tenir', 'IR_VENIR', 'avoir', 'to hold', false, [], [], 'General');
+export const tenir = {
+    ...tenirBase,
+    conjugations: {
+        ...tenirBase.conjugations,
+        Indicatif: {
+            ...tenirBase.conjugations.Indicatif,
+            'Présent': [
+                { pronoun: 'je', form: 'tiens' },
+                { pronoun: 'tu', form: 'tiens' },
+                { pronoun: 'il/elle', form: 'tient' },
+                { pronoun: 'nous', form: 'tenons' },
+                { pronoun: 'vous', form: 'tenez' },
+                { pronoun: 'ils/elles', form: 'tiennent' }
+            ],
+            'Futur Simple': [
+                { pronoun: 'je', form: 'tiendrai' },
+                { pronoun: 'tu', form: 'tiendras' },
+                { pronoun: 'il/elle', form: 'tiendra' },
+                { pronoun: 'nous', form: 'tiendrons' },
+                { pronoun: 'vous', form: 'tiendrez' },
+                { pronoun: 'ils/elles', form: 'tiendront' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai tenu' },
+                { pronoun: 'tu', form: 'as tenu' },
+                { pronoun: 'il/elle', form: 'a tenu' },
+                { pronoun: 'nous', form: 'avons tenu' },
+                { pronoun: 'vous', form: 'avez tenu' },
+                { pronoun: 'ils/elles', form: 'ont tenu' }
+            ]
+        },
+        Conditionnel: {
+            ...tenirBase.conjugations.Conditionnel,
+            'Présent': [
+                { pronoun: 'je', form: 'tiendrais' },
+                { pronoun: 'tu', form: 'tiendrais' },
+                { pronoun: 'il/elle', form: 'tiendrait' },
+                { pronoun: 'nous', form: 'tiendrions' },
+                { pronoun: 'vous', form: 'tiendriez' },
+                { pronoun: 'ils/elles', form: 'tiendraient' }
+            ]
+        },
+        Subjonctif: {
+            ...tenirBase.conjugations.Subjonctif,
+            'Présent': [
+                { pronoun: 'que je', form: 'tienne' },
+                { pronoun: 'que tu', form: 'tiennes' },
+                { pronoun: 'qu\'il/elle', form: 'tienne' },
+                { pronoun: 'que nous', form: 'tenions' },
+                { pronoun: 'que vous', form: 'teniez' },
+                { pronoun: 'qu\'ils/elles', form: 'tiennent' }
+            ]
+        },
+        Participe: {
+            ...tenirBase.conjugations.Participe,
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'tenu' },
+                { pronoun: 'Fem. Sing.', form: 'tenue' },
+                { pronoun: 'Masc. Plur.', form: 'tenus' },
+                { pronoun: 'Fem. Plur.', form: 'tenues' }
+            ]
+        }
+    }
+};
+
+const voirBase = crv('voir', 'IR_DORMIR', 'avoir', 'to see', false, [], [], 'General');
+export const voir = {
+    ...voirBase,
+    conjugations: {
+        ...voirBase.conjugations,
+        Indicatif: {
+            ...voirBase.conjugations.Indicatif,
+            'Présent': [
+                { pronoun: 'je', form: 'vois' },
+                { pronoun: 'tu', form: 'vois' },
+                { pronoun: 'il/elle', form: 'voit' },
+                { pronoun: 'nous', form: 'voyons' },
+                { pronoun: 'vous', form: 'voyez' },
+                { pronoun: 'ils/elles', form: 'voient' }
+            ],
+            'Futur Simple': [
+                { pronoun: 'je', form: 'verrai' },
+                { pronoun: 'tu', form: 'verras' },
+                { pronoun: 'il/elle', form: 'verra' },
+                { pronoun: 'nous', form: 'verrons' },
+                { pronoun: 'vous', form: 'verrez' },
+                { pronoun: 'ils/elles', form: 'verront' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai vu' },
+                { pronoun: 'tu', form: 'as vu' },
+                { pronoun: 'il/elle', form: 'a vu' },
+                { pronoun: 'nous', form: 'avons vu' },
+                { pronoun: 'vous', form: 'avez vu' },
+                { pronoun: 'ils/elles', form: 'ont vu' }
+            ]
+        },
+        Conditionnel: {
+            ...voirBase.conjugations.Conditionnel,
+            'Présent': [
+                { pronoun: 'je', form: 'verrais' },
+                { pronoun: 'tu', form: 'verrais' },
+                { pronoun: 'il/elle', form: 'verrait' },
+                { pronoun: 'nous', form: 'verrions' },
+                { pronoun: 'vous', form: 'verriez' },
+                { pronoun: 'ils/elles', form: 'verraient' }
+            ]
+        },
+        Participe: {
+            ...voirBase.conjugations.Participe,
+            'Présent': [{ pronoun: '', form: 'voyant' }],
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'vu' },
+                { pronoun: 'Fem. Sing.', form: 'vue' },
+                { pronoun: 'Masc. Plur.', form: 'vus' },
+                { pronoun: 'Fem. Plur.', form: 'vues' }
+            ]
+        }
+    }
+};
+
+const croireBase = crv('croire', 'RE', 'avoir', 'to believe', false, [], [], 'General');
+export const croire = {
+    ...croireBase,
+    conjugations: {
+        ...croireBase.conjugations,
+        Indicatif: {
+            ...croireBase.conjugations.Indicatif,
+            'Présent': [
+                { pronoun: 'je', form: 'crois' },
+                { pronoun: 'tu', form: 'crois' },
+                { pronoun: 'il/elle', form: 'croit' },
+                { pronoun: 'nous', form: 'croyons' },
+                { pronoun: 'vous', form: 'croyez' },
+                { pronoun: 'ils/elles', form: 'croient' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai cru' },
+                { pronoun: 'tu', form: 'as cru' },
+                { pronoun: 'il/elle', form: 'a cru' },
+                { pronoun: 'nous', form: 'avons cru' },
+                { pronoun: 'vous', form: 'avez cru' },
+                { pronoun: 'ils/elles', form: 'ont cru' }
+            ]
+        },
+        Participe: {
+            ...croireBase.conjugations.Participe,
+            'Présent': [{ pronoun: '', form: 'croyant' }],
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'cru' },
+                { pronoun: 'Fem. Sing.', form: 'crue' },
+                { pronoun: 'Masc. Plur.', form: 'crus' },
+                { pronoun: 'Fem. Plur.', form: 'crues' }
+            ]
+        }
+    }
+};
+
+const recevoirBase = crv('recevoir', 'RE', 'avoir', 'to receive', false, [], [], 'General');
+export const recevoir = {
+    ...recevoirBase,
+    conjugations: {
+        ...recevoirBase.conjugations,
+        Indicatif: {
+            ...recevoirBase.conjugations.Indicatif,
+            'Présent': [
+                { pronoun: 'je', form: 'reçois' },
+                { pronoun: 'tu', form: 'reçois' },
+                { pronoun: 'il/elle', form: 'reçoit' },
+                { pronoun: 'nous', form: 'recevons' },
+                { pronoun: 'vous', form: 'recevez' },
+                { pronoun: 'ils/elles', form: 'reçoivent' }
+            ],
+            'Futur Simple': [
+                { pronoun: 'je', form: 'recevrai' },
+                { pronoun: 'tu', form: 'recevras' },
+                { pronoun: 'il/elle', form: 'recevra' },
+                { pronoun: 'nous', form: 'recevrons' },
+                { pronoun: 'vous', form: 'recevrez' },
+                { pronoun: 'ils/elles', form: 'recevront' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai reçu' },
+                { pronoun: 'tu', form: 'as reçu' },
+                { pronoun: 'il/elle', form: 'a reçu' },
+                { pronoun: 'nous', form: 'avons reçu' },
+                { pronoun: 'vous', form: 'avez reçu' },
+                { pronoun: 'ils/elles', form: 'ont reçu' }
+            ]
+        },
+        Conditionnel: {
+            ...recevoirBase.conjugations.Conditionnel,
+            'Présent': [
+                { pronoun: 'je', form: 'recevrais' },
+                { pronoun: 'tu', form: 'recevrais' },
+                { pronoun: 'il/elle', form: 'recevrait' },
+                { pronoun: 'nous', form: 'recevrions' },
+                { pronoun: 'vous', form: 'recevriez' },
+                { pronoun: 'ils/elles', form: 'recevraient' }
+            ]
+        },
+        Subjonctif: {
+            ...recevoirBase.conjugations.Subjonctif,
+            'Présent': [
+                { pronoun: 'que je', form: 'reçoive' },
+                { pronoun: 'que tu', form: 'reçoives' },
+                { pronoun: 'qu\'il/elle', form: 'reçoive' },
+                { pronoun: 'que nous', form: 'recevions' },
+                { pronoun: 'que vous', form: 'receviez' },
+                { pronoun: 'qu\'ils/elles', form: 'reçoivent' }
+            ]
+        },
+        Participe: {
+            ...recevoirBase.conjugations.Participe,
+            'Présent': [{ pronoun: '', form: 'recevant' }],
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'reçu' },
+                { pronoun: 'Fem. Sing.', form: 'reçue' },
+                { pronoun: 'Masc. Plur.', form: 'reçus' },
+                { pronoun: 'Fem. Plur.', form: 'reçues' }
+            ]
+        }
+    }
+};
+
+export const mentir = crv('mentir', 'IR_DORMIR', 'avoir', 'to lie', false, [], [], 'General');
 
 // --- Missing / Extra Verbs ---
 export const amuser = crv('amuser', 'ER', 'avoir', 'to amuse', false, [], [], 'General');
@@ -874,27 +1374,217 @@ export const coucher = crv('coucher', 'ER', 'avoir', 'to put to bed', false, [],
 
 
 
+// --- -uire Verbs (conduire, construire, etc.) ---
+const conduireBase = crv('conduire', 'RE', 'avoir', 'to drive', false, [], [], 'General');
+const makeConduire = (inf: string, trans: string) => ({
+    ...conduireBase,
+    infinitive: inf,
+    translation: trans,
+    conjugations: {
+        ...conduireBase.conjugations,
+        Indicatif: {
+            ...conduireBase.conjugations.Indicatif,
+            'Présent': [
+                { pronoun: 'je', form: inf.slice(0, -2) + 's' },
+                { pronoun: 'tu', form: inf.slice(0, -2) + 's' },
+                { pronoun: 'il/elle', form: inf.slice(0, -2) + 't' },
+                { pronoun: 'nous', form: inf.slice(0, -2) + 'sons' },
+                { pronoun: 'vous', form: inf.slice(0, -2) + 'sez' },
+                { pronoun: 'ils/elles', form: inf.slice(0, -2) + 'sent' }
+            ],
+            'Imparfait': [
+                { pronoun: 'je', form: inf.slice(0, -2) + 'sais' },
+                { pronoun: 'tu', form: inf.slice(0, -2) + 'sais' },
+                { pronoun: 'il/elle', form: inf.slice(0, -2) + 'sait' },
+                { pronoun: 'nous', form: inf.slice(0, -2) + 'sions' },
+                { pronoun: 'vous', form: inf.slice(0, -2) + 'siez' },
+                { pronoun: 'ils/elles', form: inf.slice(0, -2) + 'saient' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai ' + inf.slice(0, -2) + 't' },
+                { pronoun: 'tu', form: 'as ' + inf.slice(0, -2) + 't' },
+                { pronoun: 'il/elle', form: 'a ' + inf.slice(0, -2) + 't' },
+                { pronoun: 'nous', form: 'avons ' + inf.slice(0, -2) + 't' },
+                { pronoun: 'vous', form: 'avez ' + inf.slice(0, -2) + 't' },
+                { pronoun: 'ils/elles', form: 'ont ' + inf.slice(0, -2) + 't' }
+            ]
+        },
+        Subjonctif: {
+            ...conduireBase.conjugations.Subjonctif,
+            'Présent': [
+                { pronoun: 'que je', form: inf.slice(0, -2) + 'se' },
+                { pronoun: 'que tu', form: inf.slice(0, -2) + 'ses' },
+                { pronoun: 'qu\'il/elle', form: inf.slice(0, -2) + 'se' },
+                { pronoun: 'que nous', form: inf.slice(0, -2) + 'sions' },
+                { pronoun: 'que vous', form: inf.slice(0, -2) + 'siez' },
+                { pronoun: 'qu\'ils/elles', form: inf.slice(0, -2) + 'sent' }
+            ]
+        },
+        Participe: {
+            ...conduireBase.conjugations.Participe,
+            'Présent': [{ pronoun: '', form: inf.slice(0, -2) + 'sant' }],
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: inf.slice(0, -2) + 't' },
+                { pronoun: 'Fem. Sing.', form: inf.slice(0, -2) + 'te' },
+                { pronoun: 'Masc. Plur.', form: inf.slice(0, -2) + 'ts' },
+                { pronoun: 'Fem. Plur.', form: inf.slice(0, -2) + 'tes' }
+            ]
+        }
+    }
+});
+
+export const conduire = makeConduire('conduire', 'to drive');
+export const construire = makeConduire('construire', 'to build');
+export const instruire = makeConduire('instruire', 'to instruct');
+export const produire = makeConduire('produire', 'to produce');
+export const reduire = makeConduire('réduire', 'to reduce');
+
+// --- -ndre Verbs (rejoindre, peindre, etc.) ---
+const rejoindreBase = crv('rejoindre', 'RE', 'avoir', 'to join', false, [], [], 'General');
+const makeRejoindre = (inf: string, trans: string) => {
+    const base = inf.slice(0, -4); // rejoi, pei, crai
+    return {
+        ...rejoindreBase,
+        infinitive: inf,
+        translation: trans,
+        conjugations: {
+            ...rejoindreBase.conjugations,
+            Indicatif: {
+                ...rejoindreBase.conjugations.Indicatif,
+                'Présent': [
+                    { pronoun: 'je', form: base + 'ns' },
+                    { pronoun: 'tu', form: base + 'ns' },
+                    { pronoun: 'il/elle', form: base + 'nt' },
+                    { pronoun: 'nous', form: base + 'gnons' },
+                    { pronoun: 'vous', form: base + 'gnez' },
+                    { pronoun: 'ils/elles', form: base + 'gnent' }
+                ],
+                'Imparfait': [
+                    { pronoun: 'je', form: base + 'gnais' },
+                    { pronoun: 'tu', form: base + 'gnais' },
+                    { pronoun: 'il/elle', form: base + 'gnait' },
+                    { pronoun: 'nous', form: base + 'gnions' },
+                    { pronoun: 'vous', form: base + 'gniez' },
+                    { pronoun: 'ils/elles', form: base + 'gnaient' }
+                ],
+                'Passé Composé': [
+                    { pronoun: 'j\'', form: 'ai ' + base + 'nt' },
+                    { pronoun: 'tu', form: 'as ' + base + 'nt' },
+                    { pronoun: 'il/elle', form: 'a ' + base + 'nt' },
+                    { pronoun: 'nous', form: 'avons ' + base + 'nt' },
+                    { pronoun: 'vous', form: 'avez ' + base + 'nt' },
+                    { pronoun: 'ils/elles', form: 'ont ' + base + 'nt' }
+                ]
+            },
+            'Subjonctif': {
+                ...rejoindreBase.conjugations.Subjonctif,
+                'Présent': [
+                    { pronoun: 'que je', form: base + 'gne' },
+                    { pronoun: 'que tu', form: base + 'gnes' },
+                    { pronoun: 'qu\'il/elle', form: base + 'gne' },
+                    { pronoun: 'que nous', form: base + 'gnions' },
+                    { pronoun: 'que vous', form: base + 'gniez' },
+                    { pronoun: 'qu\'ils/elles', form: base + 'gnent' }
+                ]
+            },
+            Participe: {
+                ...rejoindreBase.conjugations.Participe,
+                'Présent': [{ pronoun: '', form: base + 'gnant' }],
+                'Passé': [
+                    { pronoun: 'Masc. Sing.', form: base + 'nt' },
+                    { pronoun: 'Fem. Sing.', form: base + 'nte' },
+                    { pronoun: 'Masc. Plur.', form: base + 'nts' },
+                    { pronoun: 'Fem. Plur.', form: base + 'ntes' }
+                ]
+            }
+        }
+    };
+};
+
+export const rejoindre = makeRejoindre('rejoindre', 'to join/rejoin');
+export const peindre = makeRejoindre('peindre', 'to paint');
+
+// --- Dependent Verbs ---
+export const comprendre = {
+    ...apprendre,
+    infinitive: 'comprendre',
+    translation: 'to understand',
+    conjugations: {
+        ...apprendre.conjugations,
+        Indicatif: {
+            ...apprendre.conjugations.Indicatif,
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai compris' },
+                { pronoun: 'tu', form: 'as compris' },
+                { pronoun: 'il/elle', form: 'a compris' },
+                { pronoun: 'nous', form: 'avons compris' },
+                { pronoun: 'vous', form: 'avez compris' },
+                { pronoun: 'ils/elles', form: 'ont compris' }
+            ]
+        },
+        Participe: {
+            ...apprendre.conjugations.Participe,
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'compris' },
+                { pronoun: 'Fem. Sing.', form: 'comprise' },
+                { pronoun: 'Masc. Plur.', form: 'compris' },
+                { pronoun: 'Fem. Plur.', form: 'comprises' }
+            ]
+        }
+    }
+};
+
+export const survivre = {
+    ...vivre,
+    infinitive: 'survivre',
+    translation: 'to survive',
+    conjugations: {
+        ...vivre.conjugations,
+        Indicatif: {
+            ...vivre.conjugations.Indicatif,
+            'Passé Composé': [
+                { pronoun: 'j\'', form: 'ai survécu' },
+                { pronoun: 'tu', form: 'as survécu' },
+                { pronoun: 'il/elle', form: 'a survécu' },
+                { pronoun: 'nous', form: 'avons survécu' },
+                { pronoun: 'vous', form: 'avez survécu' },
+                { pronoun: 'ils/elles', form: 'ont survécu' }
+            ] // Rest fits vivre pattern (survis, survis, survit...)
+        },
+        Participe: {
+            ...vivre.conjugations.Participe,
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'survécu' },
+                { pronoun: 'Fem. Sing.', form: 'survécue' },
+                { pronoun: 'Masc. Plur.', form: 'survécus' },
+                { pronoun: 'Fem. Plur.', form: 'survécues' }
+            ]
+        }
+    }
+};
+
+
 // Export Dictionary
 export const verbs = [
-    accepter, acheter, aider, aller, amuser, appeler, apprendre, arriver, arroser, asseoir, attendre, avoir,
-    baigner, balayer, boire, boxer, bricoler, se_brosser_dents,
-    chanter, chercher_emploi, coiffer, se_coiffer, commander, commencer, comprendre, se_concentrer, connecter, se_connecter, se_coucher, coucher, courir, couvrir, cuisiner,
+    accepter, accueillir, acheter, agir, aider, aller, amuser, appeler, apprendre, arriver, arroser, asseoir, attendre, avoir,
+    baigner, balayer, batir, benir, blanchir, boire, boxer, bricoler, se_brosser_dents,
+    chanter, chercher_emploi, choisir, coiffer, se_coiffer, commander, commencer, comprendre, se_concentrer, conduire, construire, instruire, produire, reduire, rejoindre, peindre, connecter, convertir, se_coucher, coucher, courir, couvrir, cueillir, cuisiner,
     danser, se_debrouiller, decouvrir, defendre, dejeuner, demander, demenager, se_depecher, dependre, descendre, se_deshabiller, deshabiller, dessiner, se_detendre, devoir, diner, dire, diriger, discuter, se_disputer, dormir, se_doucher, doucher,
     echouer, ecouter, ecouter_musique, ecrire, embaucher, endormir, sendormir, sennuyer, entendre, envoyer_email, etudier, etre, expliquer,
-    se_facher, faire, faire_du_sport, finir,
-    gagner_argent, gouter, grandir, grignoter,
-    habiter, habiller, shabiller,
+    se_facher, faire, faire_du_sport, finir, fuir,
+    gagner_argent, gouter, grandir, grignoter, grossir, guerir,
+    habiter, habiller, shabiller, hair,
     informer, sinquieter, sinteresser, inviter,
     jardiner, jouer, jouer_jeux,
     laver, se_laver, se_laver_les_mains, se_laver_le_visage, se_lever, lever, licencier, lire, louer,
-    manger, marcher, maquiller, se_maquiller, se_marier, memoriser, mettre, musculation,
+    maigrir, manger, marcher, maquiller, se_maquiller, se_marier, memoriser, mentir, mettre, mourir, musculation,
     nager, negocier, nettoyer,
-    offrir, organiser, oublier,
-    parler, participer, passer_aspirateur, payer, peigner, se_peigner, peindre, perdre, planifier, porter, poser_question, postuler, pouvoir, preciser, prendre, preparer_repas, se_preparer, promener, se_promener, proposer,
-    ranger, raser, se_raser, se_reconcilier, regarder_film, remercier, rencontrer, rendre, se_rendre, rentrer, reparer, repeter, repondre, se_reposer, respirer, rester, reussir, reveiller, se_reveiller, reviser, rouvrir,
-    samuser, sappeler, sauter, secher, se_secher, se_secher_les_cheveux, se_sentir, sentrainer, servir, setirer, signer, sortir, souffrir, souligner, se_souvenir, surligner,
-    terminer, toucher, travailler, se_tromper, trouver,
+    offrir, organiser, oublier, ouvrir,
+    parler, participer, partir, passer_aspirateur, payer, peigner, se_peigner, peindre, perdre, planifier, porter, poser_question, postuler, pouvoir, preciser, prendre, preparer_repas, se_preparer, promener, se_promener, proposer, punir,
+    ralentir, ranger, raser, se_raser, reagir, recevoir, se_reconcilier, reflechir, regarder_film, rejoindre, remercier, remplir, rencontrer, rendre, se_rendre, rentrer, reparer, repeter, repondre, se_reposer, respirer, rester, reussir, reveiller, se_reveiller, reviser, rougir, rouvrir,
+    salir, samuser, sappeler, sauter, secher, se_secher, se_secher_les_cheveux, se_sentir, sentrainer, servir, setirer, signer, sortir, souffrir, souligner, se_souvenir, surligner,
+    tenir, terminer, toucher, travailler, se_tromper, trouver,
     utiliser,
-    vendre, venir, vivre, voir, vouloir, voyager,
+    vendre, venir, verdir, vieillir, vivre, voir, vouloir, voyager,
     yoga
 ].filter(Boolean);
