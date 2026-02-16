@@ -19,85 +19,54 @@ if (window.speechSynthesis) {
 // Keep references to prevent garbage collection bug
 const activeUtterances: SpeechSynthesisUtterance[] = [];
 
-export const speakFrench = (text: string) => {
+// Shared speak helper with a small delay after cancel to prevent truncation
+const speakWithLang = (text: string, lang: string, langPrefix: string) => {
     if (!window.speechSynthesis) {
         console.error("Speech synthesis not supported");
         return;
     }
 
-    // Cancel any ongoing speech to prevent queue stacking/stuck state on mobile
+    // Cancel any ongoing speech
     window.speechSynthesis.cancel();
 
-    const utterance = new SpeechSynthesisUtterance(text);
+    // Small delay after cancel — fixes Chrome bug where cancel() + speak()
+    // immediately causes only the tail end of the sentence to be spoken
+    setTimeout(() => {
+        const utterance = new SpeechSynthesisUtterance(text);
 
-    // Attempt to find a specific French voice
-    // iOS/Mac often has "Amelie" or "Thomas". Android "Google français".
-    // We prioritize 'fr-FR' voices.
-    if (voices.length === 0) {
-        voices = window.speechSynthesis.getVoices();
-    }
-
-    const frenchVoice = voices.find(v => v.lang === 'fr-FR' || v.lang === 'fr_FR') ||
-        voices.find(v => v.lang.startsWith('fr'));
-
-    if (frenchVoice) {
-        utterance.voice = frenchVoice;
-    } else {
-        // Fallback: some mobile browsers need this explicitly unused/null to use default
-        // utterance.voice = null; 
-    }
-
-    utterance.lang = 'fr-FR';
-    utterance.rate = 0.9; // Slightly slower is usually better for learning
-
-    // Mobile debug
-    utterance.onerror = (e) => console.error("TTS Error:", e);
-
-    // GC protection
-    activeUtterances.push(utterance);
-    utterance.onend = () => {
-        const index = activeUtterances.indexOf(utterance);
-        if (index > -1) {
-            activeUtterances.splice(index, 1);
+        if (voices.length === 0) {
+            voices = window.speechSynthesis.getVoices();
         }
-    };
 
-    window.speechSynthesis.speak(utterance);
+        const voice = voices.find(v => v.lang === lang || v.lang === lang.replace('-', '_')) ||
+            voices.find(v => v.lang.startsWith(langPrefix));
+
+        if (voice) {
+            utterance.voice = voice;
+        }
+
+        utterance.lang = lang;
+        utterance.rate = 0.9; // Slightly slower for learning
+
+        utterance.onerror = (e) => console.error("TTS Error:", e);
+
+        // GC protection
+        activeUtterances.push(utterance);
+        utterance.onend = () => {
+            const index = activeUtterances.indexOf(utterance);
+            if (index > -1) {
+                activeUtterances.splice(index, 1);
+            }
+        };
+
+        window.speechSynthesis.speak(utterance);
+    }, 100);
+};
+
+export const speakFrench = (text: string) => {
+    speakWithLang(text, 'fr-FR', 'fr');
 };
 
 export const speakEnglish = (text: string) => {
-    if (!window.speechSynthesis) {
-        console.error("Speech synthesis not supported");
-        return;
-    }
-
-    window.speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(text);
-
-    if (voices.length === 0) {
-        voices = window.speechSynthesis.getVoices();
-    }
-
-    const englishVoice = voices.find(v => v.lang === 'en-US' || v.lang === 'en_US') ||
-        voices.find(v => v.lang.startsWith('en'));
-
-    if (englishVoice) {
-        utterance.voice = englishVoice;
-    }
-
-    utterance.lang = 'en-US';
-    utterance.rate = 0.9;
-
-    utterance.onerror = (e) => console.error("TTS Error:", e);
-
-    activeUtterances.push(utterance);
-    utterance.onend = () => {
-        const index = activeUtterances.indexOf(utterance);
-        if (index > -1) {
-            activeUtterances.splice(index, 1);
-        }
-    };
-
-    window.speechSynthesis.speak(utterance);
+    speakWithLang(text, 'en-US', 'en');
 };
