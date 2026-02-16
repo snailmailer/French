@@ -1,8 +1,9 @@
 
 import { useState, useMemo, useEffect } from 'react';
-import { ArrowRight, Check, X, RefreshCw } from 'lucide-react';
+import { ArrowRight, Check, X, RefreshCw, Volume2 } from 'lucide-react';
 import { writingData } from '../data/writingPrompts';
 import type { WritingPrompt } from '../data/writingPrompts';
+import { speakFrench, speakEnglish } from '../utils/tts';
 
 const WritingPage = () => {
     const [selectedTense, setSelectedTense] = useState<string>(writingData[0].name);
@@ -133,9 +134,28 @@ const WritingPage = () => {
                         }}>
                             {direction === 'en-to-fr' ? 'Translate to French' : 'Translate to English'}
                         </span>
-                        <h2 style={{ fontSize: '1.5rem', lineHeight: '1.4' }}>
-                            {direction === 'en-to-fr' ? currentPrompt.english : currentPrompt.french}
-                        </h2>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                            <h2 style={{ fontSize: '1.5rem', lineHeight: '1.4', flex: 1 }}>
+                                {direction === 'en-to-fr' ? currentPrompt.english : currentPrompt.french}
+                            </h2>
+                            <button
+                                onClick={() => direction === 'en-to-fr' ? speakEnglish(currentPrompt.english) : speakFrench(currentPrompt.french)}
+                                title="Listen to sentence"
+                                style={{
+                                    background: 'none',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    color: '#4CAF50',
+                                    padding: '0.5rem',
+                                    borderRadius: '50%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    flexShrink: 0
+                                }}
+                            >
+                                <Volume2 size={24} />
+                            </button>
+                        </div>
                     </div>
 
                     <div style={{ marginBottom: '1.5rem' }}>
@@ -166,27 +186,86 @@ const WritingPage = () => {
 
                     {/* Feedback Section */}
                     {showAnswer && (
-                        <div style={{
-                            marginBottom: '1.5rem',
-                            padding: '1rem',
-                            borderRadius: '8px',
-                            background: feedback === 'correct' ? 'rgba(76, 175, 80, 0.1)' : 'rgba(255, 82, 82, 0.1)',
-                            borderLeft: `4px solid ${feedback === 'correct' ? '#4CAF50' : '#FF5252'}`
-                        }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', fontWeight: 'bold', color: feedback === 'correct' ? '#4CAF50' : '#FF5252' }}>
-                                {feedback === 'correct' ? <Check size={20} /> : <X size={20} />}
-                                {feedback === 'correct' ? 'Correct!' : 'Incorrect'}
-                            </div>
-
-                            {feedback === 'incorrect' && (
-                                <div>
-                                    <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Correct Answer:</div>
-                                    <div style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: '500' }}>
-                                        {direction === 'en-to-fr' ? currentPrompt.french : currentPrompt.english}
-                                    </div>
+                        <>
+                            <div style={{
+                                marginBottom: '1.5rem',
+                                padding: '1rem',
+                                borderRadius: '8px',
+                                background: feedback === 'correct' ? 'rgba(76, 175, 80, 0.1)' : 'rgba(255, 82, 82, 0.1)',
+                                borderLeft: `4px solid ${feedback === 'correct' ? '#4CAF50' : '#FF5252'}`
+                            }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', fontWeight: 'bold', color: feedback === 'correct' ? '#4CAF50' : '#FF5252' }}>
+                                    {feedback === 'correct' ? <Check size={20} /> : <X size={20} />}
+                                    {feedback === 'correct' ? 'Correct!' : 'Incorrect'}
                                 </div>
-                            )}
-                        </div>
+
+                                {feedback === 'incorrect' && (
+                                    <div>
+                                        <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Correct Answer:</div>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                            <div style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: '500', flex: 1 }}>
+                                                {direction === 'en-to-fr' ? currentPrompt.french : currentPrompt.english}
+                                            </div>
+                                            <button
+                                                onClick={() => direction === 'en-to-fr' ? speakFrench(currentPrompt.french) : speakEnglish(currentPrompt.english)}
+                                                title="Listen to correct answer"
+                                                style={{
+                                                    background: 'none',
+                                                    border: 'none',
+                                                    cursor: 'pointer',
+                                                    color: '#4CAF50',
+                                                    padding: '0.25rem',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    flexShrink: 0
+                                                }}
+                                            >
+                                                <Volume2 size={20} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                            {/* Full sentence TTS after answer revealed */}
+                            <div style={{ marginBottom: '1.5rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                                <button
+                                    onClick={() => speakFrench(currentPrompt.french)}
+                                    style={{
+                                        padding: '0.5rem 1rem',
+                                        borderRadius: '8px',
+                                        border: '1px solid #4CAF50',
+                                        background: 'rgba(76, 175, 80, 0.1)',
+                                        color: '#4CAF50',
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '0.4rem',
+                                        fontSize: '0.9rem'
+                                    }}
+                                >
+                                    <Volume2 size={16} />
+                                    Listen in French
+                                </button>
+                                <button
+                                    onClick={() => speakEnglish(currentPrompt.english)}
+                                    style={{
+                                        padding: '0.5rem 1rem',
+                                        borderRadius: '8px',
+                                        border: '1px solid #3686C9',
+                                        background: 'rgba(54, 134, 201, 0.1)',
+                                        color: '#3686C9',
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '0.4rem',
+                                        fontSize: '0.9rem'
+                                    }}
+                                >
+                                    <Volume2 size={16} />
+                                    Listen in English
+                                </button>
+                            </div>
+                        </>
                     )}
 
                     {/* Actions */}

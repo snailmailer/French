@@ -64,3 +64,40 @@ export const speakFrench = (text: string) => {
 
     window.speechSynthesis.speak(utterance);
 };
+
+export const speakEnglish = (text: string) => {
+    if (!window.speechSynthesis) {
+        console.error("Speech synthesis not supported");
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    if (voices.length === 0) {
+        voices = window.speechSynthesis.getVoices();
+    }
+
+    const englishVoice = voices.find(v => v.lang === 'en-US' || v.lang === 'en_US') ||
+        voices.find(v => v.lang.startsWith('en'));
+
+    if (englishVoice) {
+        utterance.voice = englishVoice;
+    }
+
+    utterance.lang = 'en-US';
+    utterance.rate = 0.9;
+
+    utterance.onerror = (e) => console.error("TTS Error:", e);
+
+    activeUtterances.push(utterance);
+    utterance.onend = () => {
+        const index = activeUtterances.indexOf(utterance);
+        if (index > -1) {
+            activeUtterances.splice(index, 1);
+        }
+    };
+
+    window.speechSynthesis.speak(utterance);
+};
