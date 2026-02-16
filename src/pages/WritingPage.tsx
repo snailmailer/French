@@ -54,13 +54,13 @@ const WritingPage = () => {
     };
 
     return (
-        <div style={{ maxWidth: '800px', margin: '0 auto', padding: '2rem' }}>
+        <div className="writing-page" style={{ maxWidth: '800px', margin: '0 auto', padding: '2rem' }}>
             <h1 style={{ textAlign: 'center', marginBottom: '2rem', color: 'var(--accent-color)' }}>
                 Writing Practice
             </h1>
 
             {/* Controls Container */}
-            <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
+            <div className="writing-controls" style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
                 {/* Tense Selection */}
                 <div style={{ flex: 2, minWidth: '200px' }}>
                     <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
@@ -115,7 +115,7 @@ const WritingPage = () => {
 
             {/* Practice Area */}
             {currentPrompt && (
-                <div style={{
+                <div className="writing-card" style={{
                     background: 'var(--bg-secondary)',
                     padding: '2rem',
                     borderRadius: '16px',
@@ -135,7 +135,7 @@ const WritingPage = () => {
                             {direction === 'en-to-fr' ? 'Translate to French' : 'Translate to English'}
                         </span>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                            <h2 style={{ fontSize: '1.5rem', lineHeight: '1.4', flex: 1 }}>
+                            <h2 className="writing-prompt-text" style={{ fontSize: '1.5rem', lineHeight: '1.4', flex: 1 }}>
                                 {direction === 'en-to-fr' ? currentPrompt.english : currentPrompt.french}
                             </h2>
                             <button
@@ -160,6 +160,7 @@ const WritingPage = () => {
 
                     <div style={{ marginBottom: '1.5rem' }}>
                         <textarea
+                            className="writing-textarea"
                             value={userInput}
                             onChange={(e) => setUserInput(e.target.value)}
                             placeholder={direction === 'en-to-fr' ? "Type the French translation here..." : "Type the English translation here..."}
@@ -172,7 +173,8 @@ const WritingPage = () => {
                                 background: 'var(--bg-primary)',
                                 color: 'var(--text-primary)',
                                 fontSize: '1.1rem',
-                                resize: 'vertical'
+                                resize: 'vertical',
+                                boxSizing: 'border-box'
                             }}
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter' && !e.shiftKey) {
@@ -227,7 +229,7 @@ const WritingPage = () => {
                                 )}
                             </div>
                             {/* Full sentence TTS after answer revealed */}
-                            <div style={{ marginBottom: '1.5rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                            <div className="writing-tts-buttons" style={{ marginBottom: '1.5rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                                 <button
                                     onClick={() => speakFrench(currentPrompt.french)}
                                     style={{
@@ -269,7 +271,7 @@ const WritingPage = () => {
                     )}
 
                     {/* Actions */}
-                    <div style={{ display: 'flex', gap: '1rem' }}>
+                    <div className="writing-actions" style={{ display: 'flex', gap: '1rem' }}>
                         {!showAnswer ? (
                             <button
                                 onClick={handleCheck}
