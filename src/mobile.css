@@ -124,4 +124,38 @@
     .writing-action-main {
         order: -1 !important;
     }
+
+    /* Conjugation Practice Modal */
+    .conjugation-practice-modal {
+        padding: 1.25rem !important;
+    }
+
+    .conjugation-practice-modal h2 {
+        font-size: 1.3rem !important;
+    }
+
+    .conjugation-practice-modal select {
+        padding: 0.75rem !important;
+        font-size: 0.9rem !important;
+    }
+
+    .conjugation-practice-modal table th,
+    .conjugation-practice-modal table td {
+        padding: 0.5rem !important;
+        font-size: 0.9rem !important;
+    }
+
+    .conjugation-practice-modal table input {
+        padding: 0.5rem !important;
+        font-size: 0.9rem !important;
+    }
+
+    .practice-footer {
+        flex-direction: column !important;
+    }
+
+    .practice-footer button {
+        width: 100% !important;
+        justify-content: center !important;
+    }
 }

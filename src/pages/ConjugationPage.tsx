@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Search, Info, X } from 'lucide-react';
+import { Search, Info, X, PenLine } from 'lucide-react';
 import { verbs } from '../data/verbs';
 import type { VerbDefinition } from '../data/types';
 import ConjugationTable from '../components/ConjugationTable';
+import ConjugationPractice from '../components/ConjugationPractice';
 import { tenseUsageData } from '../data/tenseUsage';
 
 const ConjugationPage = () => {
@@ -11,6 +12,7 @@ const ConjugationPage = () => {
     const [categoryFilter, setCategoryFilter] = useState<string>('All');
     const [groupFilter, setGroupFilter] = useState<string>('All');
     const [tenseFilter, setTenseFilter] = useState<string>('All');
+    const [showPractice, setShowPractice] = useState(false);
 
     // Extract unique categories
     const categories = ['All', ...Array.from(new Set(verbs.map(v => v.category).filter(Boolean)))].sort();
@@ -214,7 +216,7 @@ const ConjugationPage = () => {
                                         ({selectedVerb.translation})
                                     </span>
                                 </h2>
-                                <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+                                <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
                                     <span className="badge" style={{ background: '#2c3e50', padding: '0.2rem 0.8rem', borderRadius: '4px', fontSize: '0.9rem' }}>
                                         Group {selectedVerb.group}
                                     </span>
@@ -224,6 +226,25 @@ const ConjugationPage = () => {
                                     <span className="badge" style={{ background: '#2c3e50', padding: '0.2rem 0.8rem', borderRadius: '4px', fontSize: '0.9rem' }}>
                                         Gérondif: {selectedVerb.gerund || (selectedVerb.conjugations.Participe?.Présent?.[0]?.form ? `en ${selectedVerb.conjugations.Participe.Présent[0].form}` : 'N/A')}
                                     </span>
+                                    <button
+                                        onClick={() => setShowPractice(true)}
+                                        style={{
+                                            padding: '0.4rem 1rem',
+                                            borderRadius: '8px',
+                                            border: '1px solid #4CAF50',
+                                            background: 'rgba(76, 175, 80, 0.15)',
+                                            color: '#4CAF50',
+                                            cursor: 'pointer',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '0.4rem',
+                                            fontSize: '0.9rem',
+                                            fontWeight: 600
+                                        }}
+                                    >
+                                        <PenLine size={16} />
+                                        Practice
+                                    </button>
                                 </div>
                             </div>
 
@@ -319,6 +340,14 @@ const ConjugationPage = () => {
                     </div>
                 )
             }
+
+            {/* Practice Modal */}
+            {showPractice && selectedVerb && (
+                <ConjugationPractice
+                    verb={selectedVerb}
+                    onClose={() => setShowPractice(false)}
+                />
+            )}
         </div >
     );
 };
