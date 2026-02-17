@@ -157,7 +157,7 @@ const ConjugationPractice = ({ verb, onClose }: ConjugationPracticeProps) => {
 
                 {/* Practice Table */}
                 <div style={{ overflowX: 'auto' }}>
-                    <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '2rem' }}>
+                    <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0.5rem 0', marginBottom: '2rem' }}>
                         <thead>
                             <tr>
                                 <th style={{ textAlign: 'left', padding: '1rem', borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)', width: '20%' }}>Pronoun</th>
@@ -175,7 +175,7 @@ const ConjugationPractice = ({ verb, onClose }: ConjugationPracticeProps) => {
                                         <td style={{ padding: '1rem', fontWeight: 500, color: 'var(--text-secondary)' }}>
                                             {c.pronoun}
                                         </td>
-                                        <td style={{ padding: '0.5rem' }}>
+                                        <td style={{ padding: '0.5rem', paddingRight: '1.5rem' }}>
                                             <input
                                                 type="text"
                                                 value={userAnswers[c.pronoun] || ''}
@@ -188,6 +188,7 @@ const ConjugationPractice = ({ verb, onClose }: ConjugationPracticeProps) => {
                                                     width: '100%',
                                                     padding: '0.75rem',
                                                     borderRadius: '6px',
+                                                    boxSizing: 'border-box',
                                                     border: showResults
                                                         ? `1px solid ${isCorrect ? '#4CAF50' : '#FF5252'}`
                                                         : '1px solid var(--border-color)',
