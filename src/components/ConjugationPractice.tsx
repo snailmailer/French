@@ -160,10 +160,10 @@ const ConjugationPractice = ({ verb, onClose }: ConjugationPracticeProps) => {
                     <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '2rem' }}>
                         <thead>
                             <tr>
-                                <th style={{ textAlign: 'left', padding: '1rem', borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)' }}>Pronoun</th>
-                                <th style={{ textAlign: 'left', padding: '1rem', borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)' }}>Your Answer</th>
+                                <th style={{ textAlign: 'left', padding: '1rem', borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)', width: '20%' }}>Pronoun</th>
+                                <th style={{ textAlign: 'left', padding: '1rem', borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)', width: showResults ? '35%' : '80%' }}>Your Answer</th>
                                 {showResults && (
-                                    <th style={{ textAlign: 'left', padding: '1rem', borderBottom: '1px solid var(--border-color)', color: '#4CAF50' }}>Correct Answer</th>
+                                    <th style={{ textAlign: 'left', padding: '1rem', borderBottom: '1px solid var(--border-color)', color: '#4CAF50', width: '45%' }}>Correct Answer</th>
                                 )}
                             </tr>
                         </thead>
