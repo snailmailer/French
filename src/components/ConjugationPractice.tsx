@@ -34,6 +34,9 @@ const ConjugationPractice = ({ verb, onClose }: ConjugationPracticeProps) => {
     const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
     const [showResults, setShowResults] = useState(false);
     const [score, setScore] = useState({ correct: 0, total: 0 });
+    const [focusedPronoun, setFocusedPronoun] = useState<string | null>(null);
+
+    const frenchChars = ['é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'ù', 'û', 'ô', 'î', 'ï', 'œ'];
 
     // Reset when tense changes
     useEffect(() => {
@@ -49,10 +52,18 @@ const ConjugationPractice = ({ verb, onClose }: ConjugationPracticeProps) => {
     }, [verb, selectedOption]);
 
     const handleInputChange = (pronoun: string, value: string) => {
-        if (showResults) return; // Prevent editing after check
+        if (showResults) return;
         setUserAnswers(prev => ({
             ...prev,
             [pronoun]: value
+        }));
+    };
+
+    const insertChar = (char: string) => {
+        if (showResults || !focusedPronoun) return;
+        setUserAnswers(prev => ({
+            ...prev,
+            [focusedPronoun]: (prev[focusedPronoun] || '') + char
         }));
     };
 
@@ -155,6 +166,41 @@ const ConjugationPractice = ({ verb, onClose }: ConjugationPracticeProps) => {
                     </select>
                 </div>
 
+                {/* French Characters */}
+                {!showResults && (
+                    <div style={{
+                        display: 'flex',
+                        gap: '0.4rem',
+                        flexWrap: 'wrap',
+                        marginBottom: '1rem',
+                        padding: '0.75rem',
+                        background: 'var(--bg-primary)',
+                        borderRadius: '8px'
+                    }}>
+                        {frenchChars.map(char => (
+                            <button
+                                key={char}
+                                onClick={() => insertChar(char)}
+                                type="button"
+                                style={{
+                                    padding: '0.4rem 0.7rem',
+                                    borderRadius: '6px',
+                                    border: '1px solid var(--border-color)',
+                                    background: 'var(--bg-secondary)',
+                                    color: 'var(--text-primary)',
+                                    cursor: 'pointer',
+                                    fontSize: '1rem',
+                                    fontWeight: 600,
+                                    minWidth: '2.2rem',
+                                    textAlign: 'center'
+                                }}
+                            >
+                                {char}
+                            </button>
+                        ))}
+                    </div>
+                )}
+
                 {/* Practice Table */}
                 <div style={{ overflowX: 'auto' }}>
                     <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0.5rem 0', marginBottom: '2rem' }}>
@@ -180,6 +226,7 @@ const ConjugationPractice = ({ verb, onClose }: ConjugationPracticeProps) => {
                                                 type="text"
                                                 value={userAnswers[c.pronoun] || ''}
                                                 onChange={(e) => handleInputChange(c.pronoun, e.target.value)}
+                                                onFocus={() => setFocusedPronoun(c.pronoun)}
                                                 disabled={showResults}
                                                 placeholder="..."
                                                 autoComplete="off"
