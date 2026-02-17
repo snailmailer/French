@@ -163,7 +163,7 @@ const ConjugationPractice = ({ verb, onClose }: ConjugationPracticeProps) => {
                                 <th style={{ textAlign: 'left', padding: '1rem', borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)', width: '20%' }}>Pronoun</th>
                                 <th style={{ textAlign: 'left', padding: '1rem', borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)', width: showResults ? '35%' : '80%' }}>Your Answer</th>
                                 {showResults && (
-                                    <th style={{ textAlign: 'left', padding: '1rem', borderBottom: '1px solid var(--border-color)', color: '#4CAF50', width: '45%' }}>Correct Answer</th>
+                                    <th style={{ textAlign: 'left', padding: '1rem', paddingLeft: '2rem', borderBottom: '1px solid var(--border-color)', color: '#4CAF50', width: '45%' }}>Correct Answer</th>
                                 )}
                             </tr>
                         </thead>
@@ -200,7 +200,7 @@ const ConjugationPractice = ({ verb, onClose }: ConjugationPracticeProps) => {
                                             />
                                         </td>
                                         {showResults && (
-                                            <td style={{ padding: '1rem', color: isCorrect ? '#4CAF50' : '#FF5252' }}>
+                                            <td style={{ padding: '1rem', paddingLeft: '2rem', color: isCorrect ? '#4CAF50' : '#FF5252' }}>
                                                 {!isCorrect && (
                                                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                                         <span style={{ fontWeight: 'bold' }}>{c.form}</span>
