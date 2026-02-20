@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { grammarData } from '../data/grammar';
 import { vocabularyData, type VocabularySection } from '../data/vocabulary';
 import type { PronounSection } from '../data/pronouns';
@@ -222,7 +223,11 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
 // --- Main Page ---
 
 const GrammarPage = () => {
-    const [activeTab, setActiveTab] = useState<'grammar' | 'vocabulary'>('grammar');
+    const [searchParams, setSearchParams] = useSearchParams();
+    const activeTab = (searchParams.get('tab') as 'grammar' | 'vocabulary') || 'grammar';
+    const setActiveTab = (tab: 'grammar' | 'vocabulary') => {
+        setSearchParams({ tab });
+    };
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedTopic, setSelectedTopic] = useState<string>('All');
 
