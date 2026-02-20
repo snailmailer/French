@@ -3,12 +3,108 @@ import { pronounsData, type PronounSection } from './pronouns';
 export const grammarData: PronounSection[] = [
     {
         title: "Noms (Nouns)",
-        useFr: "mot qui désigne une personne, un animal, un objet, une idée ou un lieu.",
-        useEn: "word naming people, places, things, or ideas.",
+        useFr: "designent des personnes, objets, lieux, idées ou concepts.",
+        useEn: "designate people, objects, places, ideas, or concepts.",
         structure: "Variable en genre (masculin/féminin) et en nombre (singulier/pluriel).",
-        examples: [
-            { fr: "Le chat", en: "The cat" },
-            { fr: "La ville", en: "The city" }
+        examples: [],
+        subSections: [
+            {
+                title: "Genre des noms",
+                useFr: "Masculin ou Féminin.",
+                useEn: "Masculine or Feminine.",
+                structure: "Variable",
+                examples: [],
+                subSections: [
+                    {
+                        title: "Masculin",
+                        useFr: "Généralement terminaisons -age, -ment, -eau, -isme, jours, langues.",
+                        useEn: "Usually endings -age, -ment, -eau, -ism, days, languages.",
+                        structure: "Le / Un",
+                        examples: [{ fr: "Le lit, le lundi, le français.", en: "The bed, Monday, French." }]
+                    },
+                    {
+                        title: "Féminin",
+                        useFr: "Généralement terminaisons -tion, -sion, -té, -ance, -ence, pays en -e.",
+                        useEn: "Usually endings -tion, -sion, -té, -ance, -ence, countries in -e.",
+                        structure: "La / Une",
+                        examples: [{ fr: "La chambre, la nation, la France.", en: "The room, the nation, France." }]
+                    }
+                ]
+            },
+            {
+                title: "Pluriel des noms",
+                useFr: "Règle générale : +s.",
+                useEn: "General rule: +s.",
+                structure: "Sing. + -s",
+                examples: [],
+                subSections: [
+                    {
+                        title: "Règle générale",
+                        useFr: "Ajouter s (silencieux).",
+                        useEn: "Add s (silent).",
+                        structure: "Sing. + -s",
+                        examples: [{ fr: "lit → lits", en: "bed → beds" }]
+                    },
+                    {
+                        title: "Exceptions",
+                        useFr: "-s/-x/-z inchangés; -au/-eau/-eu → -x; -al → -aux.",
+                        useEn: "-s/-x/-z unchanged; -au/-eau/-eu → -x; -al → -aux.",
+                        structure: "Irrégulier",
+                        examples: [
+                            { fr: "bateau → bateaux", en: "boat" },
+                            { fr: "journal → journaux", en: "newspaper" },
+                            { fr: "prix → prix", en: "price" }
+                        ]
+                    }
+                ]
+            },
+            {
+                title: "Types de noms",
+                useFr: "Différentes catégories de noms.",
+                useEn: "Different categories of nouns.",
+                structure: "Variable",
+                examples: [],
+                subSections: [
+                    {
+                        title: "Commun",
+                        useFr: "Général, avec article.",
+                        useEn: "Common, with article.",
+                        structure: "art. + nom",
+                        examples: [{ fr: "maison, chaise", en: "house, chair" }]
+                    },
+                    {
+                        title: "Propre",
+                        useFr: "Spécifique, majuscule.",
+                        useEn: "Proper, capitalized.",
+                        structure: "Majuscule",
+                        examples: [{ fr: "Paris, Marie", en: "Paris, Marie" }]
+                    },
+                    {
+                        title: "Concret",
+                        useFr: "Tangible, perceptible.",
+                        useEn: "Concrete, tangible.",
+                        structure: "Variable",
+                        examples: [{ fr: "armoire, miroir", en: "wardrobe, mirror" }]
+                    },
+                    {
+                        title: "Abstrait",
+                        useFr: "Idée, qualité intangible.",
+                        useEn: "Abstract, intangible.",
+                        structure: "Variable",
+                        examples: [{ fr: "beauté, propreté", en: "beauty, cleanliness" }]
+                    }
+                ]
+            },
+            {
+                title: "Exemples maison",
+                useFr: "Phrases complètes.",
+                useEn: "Full sentences.",
+                structure: "Phrase",
+                examples: [
+                    { fr: "Le grand lit → Les grands lits.", en: "The big bed → The big beds." },
+                    { fr: "Une belle armoire → Des belles armoires.", en: "A beautiful wardrobe → Beautiful wardrobes." }
+                ]
+            }
         ]
     },
     {
