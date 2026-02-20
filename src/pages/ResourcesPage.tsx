@@ -49,15 +49,17 @@ const ResourcesPage = () => {
                         rel="noopener noreferrer"
                         style={{
                             display: 'flex',
+                            flexDirection: 'column',
                             alignItems: 'center',
-                            background: '#ffffff',
+                            justifyContent: 'center',
+                            background: 'var(--bg-secondary)',
                             padding: '2rem',
                             borderRadius: '16px',
                             textDecoration: 'none',
                             color: 'var(--text-primary)',
-                            boxShadow: '0 4px 6px rgba(0,0,0,0.05)',
+                            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
                             transition: 'transform 0.2s, box-shadow 0.2s',
-                            borderLeft: `6px solid ${res.color}`
+                            borderLeft: '6px solid #E0E2D2'
                         }}
                         onMouseEnter={(e) => {
                             e.currentTarget.style.transform = 'translateY(-3px)';
@@ -80,12 +82,14 @@ const ResourcesPage = () => {
                         }}>
                             <Globe size={28} />
                         </div>
-                        <div style={{ flex: 1 }}>
-                            <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.3rem', color: res.color }}>{res.title}</h3>
+                        <div style={{ flex: 1, textAlign: 'center' }}>
+                            <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.3rem', color: res.color, justifyContent: 'center', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                {res.title}
+                            </h3>
                             <p style={{ margin: 0, color: 'var(--text-secondary)', lineHeight: 1.5 }}>
                                 {res.desc}
                             </p>
-                            <div style={{ marginTop: '0.5rem', fontSize: '0.9rem', color: '#95a5a6', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                            <div style={{ marginTop: '0.8rem', fontSize: '0.9rem', color: '#95a5a6', display: 'flex', alignItems: 'center', gap: '0.3rem', justifyContent: 'center' }}>
                                 <ExternalLink size={14} /> {new URL(res.url).hostname}
                             </div>
                         </div>

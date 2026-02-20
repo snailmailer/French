@@ -90,7 +90,7 @@ button:focus-visible {
 
 .level-card {
   background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  border-left: 6px solid #E0E2D2;
   border-radius: 12px;
   padding: 2rem;
   display: flex;

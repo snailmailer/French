@@ -246,11 +246,11 @@ const SpeakingPage = () => {
     };
 
     // Common styles
-    const cardStyle = {
+    const cardStyle: React.CSSProperties = {
         background: 'var(--bg-secondary)',
         padding: '1.5rem',
         borderRadius: '12px',
-        borderLeft: '4px solid var(--accent-color)',
+        borderLeft: '4px solid #E0E2D2',
         boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
         marginBottom: '1rem'
     };

@@ -17,7 +17,7 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
             background: level === 0 ? 'var(--bg-secondary)' : 'rgba(0,0,0,0.02)',
             padding: '1.5rem',
             borderRadius: '12px',
-            borderLeft: level === 0 ? '4px solid var(--accent-color)' : 'none',
+            borderLeft: '4px solid #E0E2D2',
             marginLeft: level === 0 ? '0' : '1rem', // Reduced margin for mobile
             boxShadow: level === 0 ? '0 4px 12px rgba(0,0,0,0.05)' : 'none'
         }}>
@@ -110,7 +110,7 @@ const VocabularyItemCard: React.FC<{ item: { fr: string; en: string } }> = ({ it
         padding: '0.8rem',
         background: 'var(--bg-primary)',
         borderRadius: '8px',
-        border: '1px solid var(--border-color)'
+        borderLeft: '4px solid #E0E2D2'
     }}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{item.fr}</span>
@@ -144,7 +144,7 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
             background: 'var(--bg-secondary)',
             padding: '1.5rem',
             borderRadius: '12px',
-            borderLeft: '4px solid var(--accent-color)',
+            borderLeft: '4px solid #E0E2D2',
             boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
         }}>
             <h2 style={{ color: 'var(--accent-color)', marginTop: 0, borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem', marginBottom: '1rem' }}>

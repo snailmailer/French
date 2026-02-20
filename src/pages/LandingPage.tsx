@@ -100,7 +100,7 @@ const LandingPage = () => {
                                 flexDirection: 'column',
                                 alignItems: 'center',
                                 textAlign: 'center',
-                                borderLeft: `6px solid ${feature.borderColor}`,
+                                borderLeft: '6px solid #E0E2D2',
                                 boxShadow: '0 4px 12px rgba(54, 134, 201, 0.3)'
                             }}
                             onMouseEnter={(e) => {

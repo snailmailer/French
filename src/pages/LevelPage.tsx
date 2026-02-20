@@ -47,7 +47,7 @@ const LevelPage = () => {
 
             <div className="topics-list">
                 {levelData.topics.map((topic) => (
-                    <section key={topic.id} style={{ marginBottom: '4rem', background: 'var(--bg-secondary)', padding: '2rem', borderRadius: '16px' }}>
+                    <section key={topic.id} style={{ marginBottom: '4rem', background: 'var(--bg-secondary)', padding: '2rem', borderRadius: '16px', borderLeft: '6px solid #E0E2D2' }}>
                         <h2 style={{ borderLeft: '4px solid var(--accent-color)', paddingLeft: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <span style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                 {topic.title}
@@ -64,7 +64,7 @@ const LevelPage = () => {
 
                         {/* Topic-level Formula */}
                         {topic.formula && (
-                            <div style={{ background: '#1e1e1e', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid #4CAF50', marginBottom: '1.5rem' }}>
+                            <div style={{ background: '#1e1e1e', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid #E0E2D2', marginBottom: '1.5rem' }}>
                                 <h4 style={{ margin: '0 0 0.5rem 0', color: '#B4C540', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Formula</h4>
                                 <div style={{ fontFamily: 'monospace', fontSize: '1.1rem', color: '#e0e0e0' }}>{topic.formula}</div>
                             </div>
@@ -84,7 +84,7 @@ const LevelPage = () => {
                                 );
                             } else if (block.type === 'formula') {
                                 return (
-                                    <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1.5rem', background: '#1e1e1e', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid #4CAF50' }}>
+                                    <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1.5rem', background: '#1e1e1e', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid #E0E2D2' }}>
                                         <h4 style={{ margin: 0, color: '#B4C540' }}>Structure</h4>
                                         {block.items.map((item, i) => (
                                             <div key={i} style={{ fontFamily: 'monospace', fontSize: '1.1rem' }}>{item}</div>
@@ -118,7 +118,7 @@ const LevelPage = () => {
                                 );
                             } else if (block.type === 'examples') {
                                 return (
-                                    <div key={idx} style={{ background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem' }}>
+                                    <div key={idx} style={{ background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem', borderLeft: '4px solid #E0E2D2' }}>
                                         <h4 style={{ color: '#B4C540' }}>Examples</h4>
                                         <ul style={{ listStyle: 'none', padding: 0 }}>
                                             {block.list.map((ex, eIdx) => (

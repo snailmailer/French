@@ -135,7 +135,7 @@ const WritingPage = () => {
                     padding: '2rem',
                     borderRadius: '16px',
                     boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
-                    border: '1px solid var(--border-color)'
+                    borderLeft: '6px solid #E0E2D2'
                 }}>
                     <div style={{ marginBottom: '1.5rem' }}>
                         <span style={{
@@ -209,7 +209,7 @@ const WritingPage = () => {
                                 padding: '1rem',
                                 borderRadius: '8px',
                                 background: feedback === 'correct' ? 'rgba(76, 175, 80, 0.1)' : 'rgba(255, 82, 82, 0.1)',
-                                borderLeft: `4px solid ${feedback === 'correct' ? '#4CAF50' : '#FF5252'}`
+                                borderLeft: '6px solid #E0E2D2'
                             }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', fontWeight: 'bold', color: feedback === 'correct' ? '#4CAF50' : '#FF5252' }}>
                                     {feedback === 'correct' ? <Check size={20} /> : <X size={20} />}

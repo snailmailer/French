@@ -199,11 +199,11 @@ const ConjugationPage = () => {
                     }}
                     style={{
                         width: '100%',
-                        padding: '1rem',
-                        fontSize: '1.2rem',
-                        borderRadius: '12px',
-                        border: '2px solid var(--border-color)',
-                        background: 'var(--bg-secondary)',
+                        backgroundColor: 'var(--bg-secondary)',
+                        padding: '1rem', // Keep original padding for select
+                        fontSize: '1.2rem', // Keep original font size for select
+                        borderRadius: '12px', // Keep original border radius for select
+                        border: '2px solid var(--border-color)', // Keep original border for select
                         color: 'var(--text-primary)',
                         outline: 'none',
                         cursor: 'pointer'
