@@ -7,16 +7,7 @@ Access the live application here: **[Le Français](https://snailmailer.github.io
 
 ## 📖 User Guide
 
-### 1. Choose Your Level
-The home page presents four learning paths based on the CEFR standard:
-- **A1 (Absolute Beginner)**: Basics like greetings, numbers, and simple verbs.
-- **A2 (Elementary)**: Daily routines, past tense (Passé Composé), and reflexive verbs.
-- **B1 (Intermediate)**: Complex grammar, future tense, and expressing opinions.
-- **B2 (Upper Intermediate)**: Nuanced speech, subjunctive, and advanced vocabulary.
-
-Click on a card to enter that level's specific curriculum.
-
-### 2. The Conjugation Tool
+### 1. The Conjugation Tool
 Accessible via the **Green Button** in the top navigation bar.
 - **Search**: Type any verb (e.g., *manger*, *être*, *se lever*) to see its full conjugation.
 - **Filters**: Quickly find verbs by **Category** (Work, Hobbies), **Group** (-ER, -IR, -RE), or **Tense** (Présent, Passé Composé, etc.).
@@ -26,10 +17,15 @@ Accessible via the **Green Button** in the top navigation bar.
 - **Rules & Notes**: Automatically updates to show specific rules for the selected verb (e.g., stem changes).
 - **Examples**: See sample sentences with translations for key verbs.
 
+### 2. Speaking Practice
+A dedicated tool to practice pronunciation and speaking, tailored for TEF/TCF exams.
+- **Question Categories**: Practice speaking on various topics like Home, Work, and Travel.
+- **Exam Practice**: Simulate real exam scenarios with timers and structured tasks.
+- **CEFR Level Guide**: Access a detailed guide to help you understand the requirements for each level.
+
 ### 3. Features & Resources
 - **Waffle Menu**: Toggle the waffle menu (grid icon) in the top-left to quickly access different sections like **Resources**, **Conjugation Tool**, and **Speaking Practice**.
 - **Resources Page**: A curated list of external tools (dictionaries, news, culture) to supplement your learning.
-- **Speaking Practice**: (Coming Soon) A dedicated tool to practice pronunciation and speaking.
 
 ### 4. Integrated Audio (Text-to-Speech)
 - **Pronunciation**: Click the speaker icon 🔊 next to vocabulary lists, conjugation tables, or examples to hear the correct French pronunciation.

@@ -53,7 +53,7 @@ export const vocabularyData: VocabularySection[] = [
         subsections: [
             {
                 subtitle: "Couleurs de base (Basic Colors)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Blanc / Blanche", en: "White" },
                     { fr: "Bleu / Bleue", en: "Blue" },
@@ -70,7 +70,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Règle générale (General Rule)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Les adjectifs de couleur en français doivent s'accorder en genre et en nombre avec le nom qu'ils décrivent.", en: "French color adjectives must agree in gender and number with the noun they describe." },
                     { fr: "Masculin singulier : vert", en: "Masculine singular: green (vert)" },
@@ -82,7 +82,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Exceptions : couleurs invariables (Invariable Colors)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Certaines couleurs ne changent jamais : marron, orange, turquoise (noms de fruits, fleurs ou pierres).", en: "Some colors are invariable and never change: marron, orange, turquoise (names of fruits, flowers, or gems)." },
                     { fr: "des chaussures marron", en: "brown shoes" },
@@ -91,7 +91,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Couleurs composées (Compound Colors)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Les couleurs composées (ex. : bleu-vert) sont invariables et reliées par un trait d'union.", en: "Compound colors (e.g., bleu-vert) are invariable and hyphenated." },
                     { fr: "des yeux bleu-vert", en: "blue-green eyes" },
@@ -100,7 +100,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Autres exceptions (Other Exceptions)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Rose, mauve, pourpre, fauve, écarlate s'accordent en genre et nombre malgré leur apparence.", en: "Rose (pink), mauve, pourpre (purple), fauve (tawny), écarlate (scarlet) agree in gender and number despite appearances." },
                     { fr: "Rose → pink", en: "Pink" },
@@ -527,7 +527,7 @@ export const vocabularyData: VocabularySection[] = [
         subsections: [
             {
                 subtitle: "Règles principales (Main Rules)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Dire l'heure en français suit des règles précises différentes de l'anglais.", en: "Telling the time in French follows precise rules different from English." },
                     { fr: "Structure de base : Il est + heure(s) + minutes + période", en: "Basic Structure: It is + hour(s) + minutes + period of day" },
@@ -540,7 +540,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Minutes 1-30",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Règle : dites les minutes après l'heure", en: "Rule: say minutes after the hour" },
                     { fr: "Il est trois heures cinq.", en: "It's three oh-five. (3:05)" },
@@ -553,7 +553,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Minutes 31-59 avec \"moins\" (Minutes 31-59 with \"to\")",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Règle : Il est [heure suivante] moins [minutes manquantes]", en: "Rule: It is [next hour] minus [missing minutes to next hour]" },
                     { fr: "Il est quatre heures moins vingt-cinq.", en: "It's twenty-five to four. (3:35)" },
@@ -565,7 +565,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Périodes de la journée (Periods of the Day)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "du matin → 00h00-11h59", en: "in the morning / AM → 00:00-11:59" },
                     { fr: "de l'après-midi → 12h00-17h59", en: "in the afternoon / PM → 12:00-17:59" },
@@ -577,7 +577,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Plages horaires (Time Ranges)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Structure : de + heure1 + à + heure2", en: "Structure: from + time1 + to + time2" },
                     { fr: "De neuf heures à dix-sept heures.", en: "From nine to five. (9AM to 5PM)" },
@@ -587,7 +587,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Rendez-vous (Appointments)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Règle : À + heure précise (sans \"Il est\")", en: "Rule: At + exact time (without \"It is\")" },
                     { fr: "À deux heures.", en: "At two o'clock. (2:00)" },
@@ -597,7 +597,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Futur et Passé (Future & Past)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Dans + durée → futur", en: "In + duration → future" },
                     { fr: "Dans dix minutes.", en: "In ten minutes." },
@@ -609,7 +609,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Exceptions et cas spéciaux (Exceptions & Special Cases)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Midi / Minuit : jamais avec chiffres", en: "Noon / Midnight: never with numbers" },
                     { fr: "Il est midi.", en: "It's noon. (12:00)" },
@@ -623,7 +623,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Questions et Réponses (Questions & Answers)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Q : Quelle heure est-il ?", en: "Q: What time is it?" },
                     { fr: "R : Il est dix heures seize du soir.", en: "A: It is ten sixteen in the evening. (10:16 PM)" },
@@ -703,7 +703,7 @@ export const vocabularyData: VocabularySection[] = [
         subsections: [
             {
                 subtitle: "Règles principales (Main Rules)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Utilisez « Il + verbe » pour la pluie ou la neige : Il pleut, Il neige.", en: "Use « Il + verb » for rain or snow: It's raining, It's snowing." },
                     { fr: "Pour le vent ou le soleil : « Il y a du + nom » : Il y a du vent, Il y a du soleil.", en: "For wind or sun: « Il y a du + noun »: It's windy, It's sunny." },
@@ -712,7 +712,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Conditions générales — Il fait + adjectif (General Conditions)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Il fait beau.", en: "It's nice." },
                     { fr: "Il fait mauvais.", en: "It's bad / stormy." },
@@ -726,7 +726,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Précipitations — Il + verbe / Il y a de la + nom (Precipitation)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Il pleut.", en: "It's raining." },
                     { fr: "Il pleut des cordes.", en: "It's pouring." },
@@ -739,7 +739,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Ciel et nuages — Le ciel est / Il y a du + nom (Sky & Clouds)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Ensoleillé / Il y a du soleil.", en: "Sunny." },
                     { fr: "Nuageux / couvert.", en: "Cloudy / overcast." },
@@ -749,7 +749,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Vent et tempêtes — Il y a du + nom (Wind & Storms)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Il y a du vent / Il vente.", en: "It's windy." },
                     { fr: "Une brise.", en: "A breeze." },
@@ -762,7 +762,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Autres phénomènes (Other Phenomena)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Il y a du brouillard / de la brume.", en: "It's foggy / misty." },
                     { fr: "Il gèle / Il y a de la gelée.", en: "It's freezing / frosty." },
@@ -778,7 +778,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Usage en phrases complètes (Full Sentence Usage)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "Q : Quel temps fait-il ?", en: "Q: What's the weather?" },
                     { fr: "R : Il fait frais et nuageux avec des averses.", en: "A: Cool and cloudy with showers." },
@@ -788,7 +788,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Exceptions et nuances (Exceptions & Nuances)",
-                format: 'table',
+                format: 'table' as const,
                 items: [
                     { fr: "« C'est » remplace parfois « Il fait » pour des états : C'est nuageux.", en: "« C'est » sometimes replaces « Il fait » for states: It's cloudy." },
                     { fr: "« Il pleut des cordes » est une expression idiomatique.", en: "« Il pleut des cordes » (It's raining ropes) is an idiomatic expression for 'It's pouring.'" },
