@@ -259,7 +259,7 @@ const SpeakingPage = () => {
     // ========================
     if (view === 'categories') {
         return (
-            <div className="container" style={{ padding: '3rem 1rem', maxWidth: '1200px', margin: '0 auto' }}>
+            <div className="container" style={{ padding: '3rem 1rem', maxWidth: '1400px', margin: '0 auto' }}>
                 <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '0.25rem', color: 'var(--text-primary)' }}>
                     Expression Orale
                 </h1>
@@ -270,279 +270,292 @@ const SpeakingPage = () => {
                     Pratiquez votre expression orale avec des questions par catégorie, des examens TEF/TCF, et un guide de niveaux CECR.
                 </p>
 
-                {/* === Question Categories === */}
-                {sectionHeading('📋 Catégories de questions (Question Categories)')}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '4rem' }}>
-                    {categories.map(cat => (
-                        <div
-                            key={cat}
-                            onClick={() => handleCategorySelect(cat)}
-                            style={{
-                                ...cardStyle,
-                                cursor: 'pointer',
-                                transition: 'transform 0.2s, box-shadow 0.2s',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                textAlign: 'center',
-                                padding: '2rem'
-                            }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.transform = 'translateY(-5px)';
-                                e.currentTarget.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.transform = 'translateY(0)';
-                                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.05)';
-                            }}
-                        >
-                            <div style={{
-                                color: 'var(--accent-color)',
-                                background: 'rgba(76, 175, 80, 0.08)',
-                                padding: '1rem',
-                                borderRadius: '50%',
-                                marginBottom: '1rem',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            }}>
-                                <Mic size={32} />
-                            </div>
-                            <h3 style={{ margin: '0.5rem 0 0.5rem', fontSize: '1.3rem', color: 'var(--accent-color)' }}>{cat}</h3>
-                            <span style={{ color: 'var(--text-secondary)' }}>
-                                {speakingQuestions.filter(q => q.category === cat).length} Questions
-                            </span>
-                        </div>
-                    ))}
-                </div>
+                {/* Two-column layout: main content + toolbox sidebar */}
+                <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                    {/* === Left: Main Content === */}
+                    <div style={{ flex: '1 1 650px', minWidth: 0 }}>
 
-                {/* === TEF/TCF Exam Practice === */}
-                {sectionHeading('🎓 Pratique d\'examen TEF / TCF (Exam Practice)')}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '4rem' }}>
-                    {examTopics.map(topic => (
-                        <div key={topic.id} style={cardStyle}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-                                <GraduationCap size={22} style={{ color: 'var(--accent-color)' }} />
-                                <h3 style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.2rem' }}>{topic.title}</h3>
-                            </div>
-                            <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', lineHeight: 1.6 }}>{topic.description}</p>
-                            <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
-                                {topic.prepTime > 0 && (
-                                    <span style={{ fontSize: '0.85rem', background: 'rgba(54, 134, 201, 0.1)', color: '#3686C9', padding: '0.3rem 0.8rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                                        <Clock size={14} /> Préparation: {formatTime(topic.prepTime)}
+                        {/* === Question Categories === */}
+                        {sectionHeading('📋 Catégories de questions (Question Categories)')}
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '4rem' }}>
+                            {categories.map(cat => (
+                                <div
+                                    key={cat}
+                                    onClick={() => handleCategorySelect(cat)}
+                                    style={{
+                                        ...cardStyle,
+                                        cursor: 'pointer',
+                                        transition: 'transform 0.2s, box-shadow 0.2s',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        textAlign: 'center',
+                                        padding: '2rem'
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.transform = 'translateY(-5px)';
+                                        e.currentTarget.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.transform = 'translateY(0)';
+                                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.05)';
+                                    }}
+                                >
+                                    <div style={{
+                                        color: 'var(--accent-color)',
+                                        background: 'rgba(76, 175, 80, 0.08)',
+                                        padding: '1rem',
+                                        borderRadius: '50%',
+                                        marginBottom: '1rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}>
+                                        <Mic size={32} />
+                                    </div>
+                                    <h3 style={{ margin: '0.5rem 0 0.5rem', fontSize: '1.3rem', color: 'var(--accent-color)' }}>{cat}</h3>
+                                    <span style={{ color: 'var(--text-secondary)' }}>
+                                        {speakingQuestions.filter(q => q.category === cat).length} Questions
                                     </span>
-                                )}
-                                <span style={{ fontSize: '0.85rem', background: 'rgba(76, 175, 80, 0.1)', color: '#4CAF50', padding: '0.3rem 0.8rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                                    <Mic size={14} /> Parole: {formatTime(topic.speakTime)}
-                                </span>
-                            </div>
+                                </div>
+                            ))}
+                        </div>
 
-                            {/* Scenarios */}
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                                {topic.scenarios.map((scenario, idx) => {
-                                    const isActive = selectedExamTopic === topic.id && selectedScenario === scenario;
-                                    return (
-                                        <div key={idx} style={{
-                                            background: isActive ? 'rgba(76, 175, 80, 0.08)' : 'var(--bg-primary)',
-                                            border: isActive ? '2px solid var(--accent-color)' : '1px solid var(--border-color)',
-                                            borderRadius: '8px',
-                                            padding: '1rem',
-                                        }}>
-                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}>
-                                                <div style={{ flex: 1 }}>
-                                                    <p style={{ margin: 0, color: 'var(--text-primary)', lineHeight: 1.5, fontStyle: 'italic' }}>
-                                                        « {scenario} »
-                                                    </p>
-                                                </div>
-                                                <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
-                                                    <button
-                                                        onClick={() => speakFrench(scenario)}
-                                                        style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50', padding: '0.3rem' }}
-                                                        title="Écouter"
-                                                    >
-                                                        <Volume2 size={18} />
-                                                    </button>
-                                                    {!isActive ? (
-                                                        <button
-                                                            onClick={() => startExamTimer(topic, scenario)}
-                                                            style={{
-                                                                background: 'var(--accent-color)',
-                                                                color: 'white',
-                                                                border: 'none',
-                                                                borderRadius: '6px',
-                                                                padding: '0.4rem 0.8rem',
-                                                                cursor: 'pointer',
-                                                                fontSize: '0.85rem',
-                                                                display: 'flex',
-                                                                alignItems: 'center',
-                                                                gap: '0.3rem'
-                                                            }}
-                                                        >
-                                                            <Play size={14} /> Commencer
-                                                        </button>
-                                                    ) : (
-                                                        <button
-                                                            onClick={resetExam}
-                                                            style={{
-                                                                background: '#e74c3c',
-                                                                color: 'white',
-                                                                border: 'none',
-                                                                borderRadius: '6px',
-                                                                padding: '0.4rem 0.8rem',
-                                                                cursor: 'pointer',
-                                                                fontSize: '0.85rem',
-                                                                display: 'flex',
-                                                                alignItems: 'center',
-                                                                gap: '0.3rem'
-                                                            }}
-                                                        >
-                                                            <RotateCcw size={14} /> Réinitialiser
-                                                        </button>
-                                                    )}
-                                                </div>
-                                            </div>
-                                            {isActive && examPhase !== 'idle' && (
-                                                <div style={{
-                                                    marginTop: '1rem',
-                                                    padding: '1rem',
-                                                    background: examPhase === 'prep' ? 'rgba(54, 134, 201, 0.1)' : examPhase === 'speak' ? 'rgba(76, 175, 80, 0.1)' : 'rgba(155, 89, 182, 0.1)',
+                        {/* === TEF/TCF Exam Practice === */}
+                        {sectionHeading('🎓 Pratique d\'examen TEF / TCF (Exam Practice)')}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '4rem' }}>
+                            {examTopics.map(topic => (
+                                <div key={topic.id} style={cardStyle}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                                        <GraduationCap size={22} style={{ color: 'var(--accent-color)' }} />
+                                        <h3 style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.2rem' }}>{topic.title}</h3>
+                                    </div>
+                                    <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', lineHeight: 1.6 }}>{topic.description}</p>
+                                    <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+                                        {topic.prepTime > 0 && (
+                                            <span style={{ fontSize: '0.85rem', background: 'rgba(54, 134, 201, 0.1)', color: '#3686C9', padding: '0.3rem 0.8rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                                                <Clock size={14} /> Préparation: {formatTime(topic.prepTime)}
+                                            </span>
+                                        )}
+                                        <span style={{ fontSize: '0.85rem', background: 'rgba(76, 175, 80, 0.1)', color: '#4CAF50', padding: '0.3rem 0.8rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                                            <Mic size={14} /> Parole: {formatTime(topic.speakTime)}
+                                        </span>
+                                    </div>
+
+                                    {/* Scenarios */}
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                        {topic.scenarios.map((scenario, idx) => {
+                                            const isActive = selectedExamTopic === topic.id && selectedScenario === scenario;
+                                            return (
+                                                <div key={idx} style={{
+                                                    background: isActive ? 'rgba(76, 175, 80, 0.08)' : 'var(--bg-primary)',
+                                                    border: isActive ? '2px solid var(--accent-color)' : '1px solid var(--border-color)',
                                                     borderRadius: '8px',
-                                                    textAlign: 'center'
+                                                    padding: '1rem',
                                                 }}>
-                                                    <div style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', color: examPhase === 'prep' ? '#3686C9' : examPhase === 'speak' ? '#4CAF50' : '#9B59B6', fontWeight: 'bold', marginBottom: '0.5rem' }}>
-                                                        {examPhase === 'prep' ? '⏳ Préparation' : examPhase === 'speak' ? '🎤 Parlez maintenant !' : '✅ Terminé !'}
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}>
+                                                        <div style={{ flex: 1 }}>
+                                                            <p style={{ margin: 0, color: 'var(--text-primary)', lineHeight: 1.5, fontStyle: 'italic' }}>
+                                                                « {scenario} »
+                                                            </p>
+                                                        </div>
+                                                        <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
+                                                            <button
+                                                                onClick={() => speakFrench(scenario)}
+                                                                style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50', padding: '0.3rem' }}
+                                                                title="Écouter"
+                                                            >
+                                                                <Volume2 size={18} />
+                                                            </button>
+                                                            {!isActive ? (
+                                                                <button
+                                                                    onClick={() => startExamTimer(topic, scenario)}
+                                                                    style={{
+                                                                        background: 'var(--accent-color)',
+                                                                        color: 'white',
+                                                                        border: 'none',
+                                                                        borderRadius: '6px',
+                                                                        padding: '0.4rem 0.8rem',
+                                                                        cursor: 'pointer',
+                                                                        fontSize: '0.85rem',
+                                                                        display: 'flex',
+                                                                        alignItems: 'center',
+                                                                        gap: '0.3rem'
+                                                                    }}
+                                                                >
+                                                                    <Play size={14} /> Commencer
+                                                                </button>
+                                                            ) : (
+                                                                <button
+                                                                    onClick={resetExam}
+                                                                    style={{
+                                                                        background: '#e74c3c',
+                                                                        color: 'white',
+                                                                        border: 'none',
+                                                                        borderRadius: '6px',
+                                                                        padding: '0.4rem 0.8rem',
+                                                                        cursor: 'pointer',
+                                                                        fontSize: '0.85rem',
+                                                                        display: 'flex',
+                                                                        alignItems: 'center',
+                                                                        gap: '0.3rem'
+                                                                    }}
+                                                                >
+                                                                    <RotateCcw size={14} /> Réinitialiser
+                                                                </button>
+                                                            )}
+                                                        </div>
                                                     </div>
-                                                    {examPhase !== 'done' && (
-                                                        <div style={{ fontSize: '2.5rem', fontFamily: 'monospace', fontWeight: 'bold', color: examPhase === 'prep' ? '#3686C9' : '#4CAF50' }}>
-                                                            {formatTime(examTimer)}
+                                                    {isActive && examPhase !== 'idle' && (
+                                                        <div style={{
+                                                            marginTop: '1rem',
+                                                            padding: '1rem',
+                                                            background: examPhase === 'prep' ? 'rgba(54, 134, 201, 0.1)' : examPhase === 'speak' ? 'rgba(76, 175, 80, 0.1)' : 'rgba(155, 89, 182, 0.1)',
+                                                            borderRadius: '8px',
+                                                            textAlign: 'center'
+                                                        }}>
+                                                            <div style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', color: examPhase === 'prep' ? '#3686C9' : examPhase === 'speak' ? '#4CAF50' : '#9B59B6', fontWeight: 'bold', marginBottom: '0.5rem' }}>
+                                                                {examPhase === 'prep' ? '⏳ Préparation' : examPhase === 'speak' ? '🎤 Parlez maintenant !' : '✅ Terminé !'}
+                                                            </div>
+                                                            {examPhase !== 'done' && (
+                                                                <div style={{ fontSize: '2.5rem', fontFamily: 'monospace', fontWeight: 'bold', color: examPhase === 'prep' ? '#3686C9' : '#4CAF50' }}>
+                                                                    {formatTime(examTimer)}
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     )}
                                                 </div>
-                                            )}
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                {/* === CEFR Level Structures === */}
-                {sectionHeading('📊 Niveaux CECR : Comment structurer vos réponses (CEFR Level Guide)')}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '4rem' }}>
-                    {levelStructures.map(level => {
-                        const levelColors: Record<string, string> = {
-                            'A1': '#4CAF50', 'A2': '#8BC34A',
-                            'B1': '#FF9800', 'B2': '#F57C00',
-                            'C1': '#E91E63', 'C2': '#9C27B0'
-                        };
-                        const color = levelColors[level.level] || 'var(--accent-color)';
-                        return (
-                            <div key={level.level} style={{
-                                ...cardStyle,
-                                borderLeft: `4px solid ${color}`
-                            }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-                                    <span style={{
-                                        background: color,
-                                        color: 'white',
-                                        fontWeight: 'bold',
-                                        fontSize: '0.9rem',
-                                        padding: '0.3rem 0.8rem',
-                                        borderRadius: '6px'
-                                    }}>
-                                        {level.level}
-                                    </span>
-                                    <h3 style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.15rem' }}>
-                                        {level.titleFr} ({level.titleEn})
-                                    </h3>
-                                </div>
-
-                                <div style={{ marginBottom: '1rem' }}>
-                                    <p style={{ color: 'var(--text-primary)', lineHeight: 1.7, margin: '0 0 0.5rem' }}>
-                                        <strong style={{ color }}>En français :</strong> {level.descriptionFr}
-                                    </p>
-                                    <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, margin: 0, fontStyle: 'italic' }}>
-                                        <strong>English:</strong> {level.descriptionEn}
-                                    </p>
-                                </div>
-
-                                <div style={{
-                                    background: 'var(--bg-primary)',
-                                    borderRadius: '8px',
-                                    padding: '1rem',
-                                    border: '1px solid var(--border-color)',
-                                    display: 'flex',
-                                    alignItems: 'flex-start',
-                                    gap: '0.75rem'
-                                }}>
-                                    <button
-                                        onClick={() => speakFrench(level.exemple.replace(/[«»]/g, ''))}
-                                        style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50', padding: '0.2rem', flexShrink: 0, marginTop: '0.1rem' }}
-                                        title="Écouter l'exemple"
-                                    >
-                                        <Volume2 size={18} />
-                                    </button>
-                                    <div>
-                                        <p style={{ margin: '0 0 0.3rem', color: 'var(--text-primary)', fontWeight: 600 }}>
-                                            {level.exemple}
-                                        </p>
-                                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem', fontStyle: 'italic' }}>
-                                            ({level.exempleEn})
-                                        </p>
+                                            );
+                                        })}
                                     </div>
                                 </div>
-                            </div>
-                        );
-                    })}
-                </div>
-
-                {/* === Boîte à Outils === */}
-                {sectionHeading('🧰 Boîte à Outils (Speaking Toolbox)')}
-                <div style={{ marginBottom: '3rem' }}>
-                    <h3 style={{ color: 'var(--text-primary)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <Wrench size={18} /> Connecteurs logiques (Logical Connectors)
-                    </h3>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
-                        {speakingTips.connectors.map((group, idx) => (
-                            <div key={idx} style={cardStyle}>
-                                <h4 style={{ margin: '0 0 0.75rem', color: 'var(--accent-color)', fontSize: '1rem' }}>{group.category}</h4>
-                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                                    {group.phrases.map((phrase, pIdx) => (
-                                        <span
-                                            key={pIdx}
-                                            onClick={() => speakFrench(phrase.replace('...', ''))}
-                                            style={{
-                                                background: 'var(--bg-primary)',
-                                                border: '1px solid var(--border-color)',
-                                                borderRadius: '20px',
-                                                padding: '0.4rem 0.8rem',
-                                                fontSize: '0.9rem',
-                                                color: 'var(--text-primary)',
-                                                cursor: 'pointer',
-                                                transition: 'background 0.2s'
-                                            }}
-                                            title="Cliquez pour écouter"
-                                        >
-                                            {phrase}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <h3 style={{ color: 'var(--text-primary)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <BookOpen size={18} /> Conseils (Tips)
-                    </h3>
-                    <div style={cardStyle}>
-                        <ul style={{ margin: 0, paddingLeft: '1.5rem', lineHeight: 2 }}>
-                            {speakingTips.advice.map((tip, idx) => (
-                                <li key={idx} style={{ color: 'var(--text-primary)' }}>{tip}</li>
                             ))}
-                        </ul>
-                    </div>
-                </div>
+                        </div>
+
+                        {/* === CEFR Level Structures === */}
+                        {sectionHeading('📊 Niveaux CECR : Comment structurer vos réponses (CEFR Level Guide)')}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '4rem' }}>
+                            {levelStructures.map(level => {
+                                const levelColors: Record<string, string> = {
+                                    'A1': '#4CAF50', 'A2': '#8BC34A',
+                                    'B1': '#FF9800', 'B2': '#F57C00',
+                                    'C1': '#E91E63', 'C2': '#9C27B0'
+                                };
+                                const color = levelColors[level.level] || 'var(--accent-color)';
+                                return (
+                                    <div key={level.level} style={{
+                                        ...cardStyle,
+                                        borderLeft: `4px solid ${color}`
+                                    }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                                            <span style={{
+                                                background: color,
+                                                color: 'white',
+                                                fontWeight: 'bold',
+                                                fontSize: '0.9rem',
+                                                padding: '0.3rem 0.8rem',
+                                                borderRadius: '6px'
+                                            }}>
+                                                {level.level}
+                                            </span>
+                                            <h3 style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.15rem' }}>
+                                                {level.titleFr} ({level.titleEn})
+                                            </h3>
+                                        </div>
+
+                                        <div style={{ marginBottom: '1rem' }}>
+                                            <p style={{ color: 'var(--text-primary)', lineHeight: 1.7, margin: '0 0 0.5rem' }}>
+                                                <strong style={{ color }}>En français :</strong> {level.descriptionFr}
+                                            </p>
+                                            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, margin: 0, fontStyle: 'italic' }}>
+                                                <strong>English:</strong> {level.descriptionEn}
+                                            </p>
+                                        </div>
+
+                                        <div style={{
+                                            background: 'var(--bg-primary)',
+                                            borderRadius: '8px',
+                                            padding: '1rem',
+                                            border: '1px solid var(--border-color)',
+                                            display: 'flex',
+                                            alignItems: 'flex-start',
+                                            gap: '0.75rem'
+                                        }}>
+                                            <button
+                                                onClick={() => speakFrench(level.exemple.replace(/[«»]/g, ''))}
+                                                style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50', padding: '0.2rem', flexShrink: 0, marginTop: '0.1rem' }}
+                                                title="Écouter l'exemple"
+                                            >
+                                                <Volume2 size={18} />
+                                            </button>
+                                            <div>
+                                                <p style={{ margin: '0 0 0.3rem', color: 'var(--text-primary)', fontWeight: 600 }}>
+                                                    {level.exemple}
+                                                </p>
+                                                <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem', fontStyle: 'italic' }}>
+                                                    ({level.exempleEn})
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                    </div>{/* end main content */}
+
+                    {/* === Right Sidebar: Boîte à Outils === */}
+                    <div style={{ flex: '0 0 320px', position: 'sticky', top: '5rem', alignSelf: 'flex-start' }}>
+                        <h2 style={{ color: 'var(--accent-color)', fontSize: '1.4rem', marginBottom: '1.5rem', paddingBottom: '0.5rem', borderBottom: '2px solid var(--border-color)' }}>
+                            🧰 Boîte à Outils
+                        </h2>
+                        <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '1.5rem' }}>(Speaking Toolbox)</p>
+
+                        <h4 style={{ color: 'var(--text-primary)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.95rem' }}>
+                            <Wrench size={16} /> Connecteurs logiques
+                        </h4>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem' }}>
+                            {speakingTips.connectors.map((group, idx) => (
+                                <div key={idx} style={{ ...cardStyle, padding: '1rem' }}>
+                                    <h5 style={{ margin: '0 0 0.5rem', color: 'var(--accent-color)', fontSize: '0.9rem' }}>{group.category}</h5>
+                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                                        {group.phrases.map((phrase, pIdx) => (
+                                            <span
+                                                key={pIdx}
+                                                onClick={() => speakFrench(phrase.replace('...', ''))}
+                                                style={{
+                                                    background: 'var(--bg-primary)',
+                                                    border: '1px solid var(--border-color)',
+                                                    borderRadius: '16px',
+                                                    padding: '0.25rem 0.6rem',
+                                                    fontSize: '0.8rem',
+                                                    color: 'var(--text-primary)',
+                                                    cursor: 'pointer',
+                                                    transition: 'background 0.2s'
+                                                }}
+                                                title="Cliquez pour écouter"
+                                            >
+                                                {phrase}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <h4 style={{ color: 'var(--text-primary)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.95rem' }}>
+                            <BookOpen size={16} /> Conseils (Tips)
+                        </h4>
+                        <div style={{ ...cardStyle, padding: '1rem' }}>
+                            <ul style={{ margin: 0, paddingLeft: '1.2rem', lineHeight: 1.8, fontSize: '0.85rem' }}>
+                                {speakingTips.advice.map((tip, idx) => (
+                                    <li key={idx} style={{ color: 'var(--text-primary)' }}>{tip}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>{/* end sidebar */}
+
+                </div>{/* end two-column layout */}
             </div>
         );
     }
