@@ -4,8 +4,8 @@ import { Book, PenTool, Mic, BookOpen } from 'lucide-react';
 const features = [
     {
         id: 'grammar',
-        title: 'Grammar',
-        desc: 'Master French rules, pronouns, and sentence structures.',
+        title: 'Grammar & Vocabulary',
+        desc: 'Master French rules, vocabulary, pronouns, and sentence structures.',
         icon: <Book size={32} />,
         path: '/grammar',
         color: '#ffffff',

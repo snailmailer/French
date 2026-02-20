@@ -70,10 +70,10 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
             background: 'var(--bg-secondary)',
             padding: '1.5rem',
             borderRadius: '12px',
-            borderLeft: '4px solid #48C9B0', // Relaxing Teal
+            borderLeft: '4px solid #9B59B6', // Lavender (Amethyst)
             boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
         }}>
-            <h2 style={{ color: '#16A085', marginTop: 0, borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem', marginBottom: '1rem' }}>
+            <h2 style={{ color: '#8E44AD', marginTop: 0, borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem', marginBottom: '1rem' }}>
                 {section.title}
             </h2>
 
@@ -84,9 +84,9 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         padding: '0.8rem',
-                        background: 'rgba(72, 201, 176, 0.1)', // Very light teal background
+                        background: 'rgba(155, 89, 182, 0.1)', // Light Lavender background
                         borderRadius: '8px',
-                        border: '1px solid rgba(72, 201, 176, 0.3)'
+                        border: '1px solid rgba(155, 89, 182, 0.3)'
                     }}>
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <span style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{item.fr}</span>
@@ -99,7 +99,7 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
                                 background: 'transparent',
                                 border: 'none',
                                 cursor: 'pointer',
-                                color: '#16A085', // Teal icon
+                                color: '#8E44AD', // Lavender icon
                                 padding: '0.4rem',
                                 borderRadius: '50%',
                                 display: 'flex',
@@ -181,12 +181,12 @@ const GrammarPage = () => {
                         fontSize: '1.1rem',
                         borderRadius: '25px',
                         border: 'none',
-                        background: activeTab === 'vocabulary' ? '#16A085' : 'var(--bg-secondary)', // Teal button
+                        background: activeTab === 'vocabulary' ? '#9B59B6' : 'var(--bg-secondary)', // Lavender button
                         color: activeTab === 'vocabulary' ? 'white' : 'var(--text-secondary)',
                         cursor: 'pointer',
                         fontWeight: 600,
                         transition: 'all 0.2s ease',
-                        boxShadow: activeTab === 'vocabulary' ? '0 4px 10px rgba(22, 160, 133, 0.3)' : 'none'
+                        boxShadow: activeTab === 'vocabulary' ? '0 4px 10px rgba(155, 89, 182, 0.3)' : 'none'
                     }}
                 >
                     Vocabulary
