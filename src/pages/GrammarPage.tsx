@@ -238,7 +238,8 @@ const GrammarPage = () => {
             section.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
             (section.items && section.items.length > 0) ||
             (section.subsections && section.subsections.length > 0)
-        );
+        )
+        .sort((a, b) => a.title.localeCompare(b.title, 'fr'));
 
 
     const handleSearch = (term: string) => {
