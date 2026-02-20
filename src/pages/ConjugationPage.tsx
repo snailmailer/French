@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Search, Info, X, PenLine } from 'lucide-react';
 import { verbs } from '../data/verbs';
 import type { VerbDefinition } from '../data/types';
@@ -7,11 +8,27 @@ import ConjugationPractice from '../components/ConjugationPractice';
 import { tenseUsageData } from '../data/tenseUsage';
 
 const ConjugationPage = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedVerb, setSelectedVerb] = useState<VerbDefinition | null>(null);
-    const [categoryFilter, setCategoryFilter] = useState<string>('All');
-    const [groupFilter, setGroupFilter] = useState<string>('All');
-    const [tenseFilter, setTenseFilter] = useState<string>('All');
+    const categoryFilter = searchParams.get('category') || 'All';
+    const groupFilter = searchParams.get('group') || 'All';
+    const tenseFilter = searchParams.get('tense') || 'All';
+    const setCategoryFilter = (val: string) => {
+        const params = new URLSearchParams(searchParams);
+        if (val === 'All') params.delete('category'); else params.set('category', val);
+        setSearchParams(params);
+    };
+    const setGroupFilter = (val: string) => {
+        const params = new URLSearchParams(searchParams);
+        if (val === 'All') params.delete('group'); else params.set('group', val);
+        setSearchParams(params);
+    };
+    const setTenseFilter = (val: string) => {
+        const params = new URLSearchParams(searchParams);
+        if (val === 'All') params.delete('tense'); else params.set('tense', val);
+        setSearchParams(params);
+    };
     const [showPractice, setShowPractice] = useState(false);
 
     // Extract unique categories

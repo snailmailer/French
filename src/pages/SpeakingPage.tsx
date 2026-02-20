@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { speakingQuestions } from '../data/speakingQuestions';
 import { Mic, Square, RotateCcw, ChevronLeft, Volume2 } from 'lucide-react';
 import { speakFrench } from '../utils/tts';
@@ -10,9 +11,20 @@ interface IWindow extends Window {
 }
 
 const SpeakingPage = () => {
-    // Navigation State
-    const [view, setView] = useState<'categories' | 'questions' | 'practice'>('categories');
-    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+    // URL-persisted Navigation State
+    const [searchParams, setSearchParams] = useSearchParams();
+    const view = (searchParams.get('view') as 'categories' | 'questions' | 'practice') || 'categories';
+    const selectedCategory = searchParams.get('category') || null;
+    const setView = (v: 'categories' | 'questions' | 'practice', cat?: string | null) => {
+        const params: Record<string, string> = { view: v };
+        if (cat) params.category = cat;
+        else if (selectedCategory && v !== 'categories') params.category = selectedCategory;
+        setSearchParams(params);
+    };
+    const setSelectedCategory = (cat: string | null) => {
+        if (cat) setSearchParams({ view: 'questions', category: cat });
+        else setSearchParams({ view: 'categories' });
+    };
     const [currentQuestionId, setCurrentQuestionId] = useState<string | null>(null);
 
     // Practice State

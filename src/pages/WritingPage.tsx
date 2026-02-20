@@ -1,17 +1,29 @@
 
 import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { ArrowRight, Check, X, RefreshCw, Volume2 } from 'lucide-react';
 import { writingData } from '../data/writingPrompts';
 import type { WritingPrompt } from '../data/writingPrompts';
 import { speakFrench, speakEnglish } from '../utils/tts';
 
 const WritingPage = () => {
-    const [selectedTense, setSelectedTense] = useState<string>(writingData[0].name);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const selectedTense = searchParams.get('tense') || writingData[0].name;
+    const direction = (searchParams.get('dir') as 'en-to-fr' | 'fr-to-en') || 'en-to-fr';
+    const setSelectedTense = (val: string) => {
+        const params = new URLSearchParams(searchParams);
+        params.set('tense', val);
+        setSearchParams(params);
+    };
+    const setDirection = (val: 'en-to-fr' | 'fr-to-en') => {
+        const params = new URLSearchParams(searchParams);
+        params.set('dir', val);
+        setSearchParams(params);
+    };
     const [currentPrompt, setCurrentPrompt] = useState<WritingPrompt | null>(null);
     const [userInput, setUserInput] = useState('');
     const [showAnswer, setShowAnswer] = useState(false);
     const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
-    const [direction, setDirection] = useState<'en-to-fr' | 'fr-to-en'>('en-to-fr');
 
     // Get prompts for the selected tense
     const availablePrompts = useMemo(() => {
@@ -91,7 +103,7 @@ const WritingPage = () => {
                         Direction:
                     </label>
                     <button
-                        onClick={() => setDirection(prev => prev === 'en-to-fr' ? 'fr-to-en' : 'en-to-fr')}
+                        onClick={() => setDirection(direction === 'en-to-fr' ? 'fr-to-en' : 'en-to-fr')}
                         style={{
                             width: '100%',
                             padding: '1rem',
