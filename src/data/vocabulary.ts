@@ -681,5 +681,104 @@ export const vocabularyData: VocabularySection[] = [
                 ]
             }
         ]
+    },
+    {
+        title: "La météo (Weather)",
+        subsections: [
+            {
+                subtitle: "Règles principales (Main Rules)",
+                format: 'table',
+                items: [
+                    { fr: "Utilisez « Il + verbe » pour la pluie ou la neige : Il pleut, Il neige.", en: "Use « Il + verb » for rain or snow: It's raining, It's snowing." },
+                    { fr: "Pour le vent ou le soleil : « Il y a du + nom » : Il y a du vent, Il y a du soleil.", en: "For wind or sun: « Il y a du + noun »: It's windy, It's sunny." },
+                    { fr: "Les adjectifs s'accordent avec le nom si spécifié (ex. : temps nuageux).", en: "Adjectives agree with the noun if specified (e.g., temps nuageux – cloudy weather)." },
+                ]
+            },
+            {
+                subtitle: "Conditions générales — Il fait + adjectif (General Conditions)",
+                format: 'table',
+                items: [
+                    { fr: "Il fait beau.", en: "It's nice." },
+                    { fr: "Il fait mauvais.", en: "It's bad / stormy." },
+                    { fr: "Il fait chaud.", en: "It's hot." },
+                    { fr: "Il fait froid.", en: "It's cold." },
+                    { fr: "Il fait doux.", en: "It's mild." },
+                    { fr: "Il fait frais.", en: "It's cool." },
+                    { fr: "Il fait glacial.", en: "It's freezing." },
+                    { fr: "Il fait caniculaire.", en: "It's scorchingly hot." },
+                ]
+            },
+            {
+                subtitle: "Précipitations — Il + verbe / Il y a de la + nom (Precipitation)",
+                format: 'table',
+                items: [
+                    { fr: "Il pleut.", en: "It's raining." },
+                    { fr: "Il pleut des cordes.", en: "It's pouring." },
+                    { fr: "Il neige.", en: "It's snowing." },
+                    { fr: "Il grêle.", en: "It's hailing." },
+                    { fr: "Il y a de la pluie.", en: "It's rainy." },
+                    { fr: "Il y a une averse.", en: "There's a shower." },
+                    { fr: "Il y a une bruine.", en: "There's a drizzle." },
+                ]
+            },
+            {
+                subtitle: "Ciel et nuages — Le ciel est / Il y a du + nom (Sky & Clouds)",
+                format: 'table',
+                items: [
+                    { fr: "Ensoleillé / Il y a du soleil.", en: "Sunny." },
+                    { fr: "Nuageux / couvert.", en: "Cloudy / overcast." },
+                    { fr: "Dégagé / clair.", en: "Clear." },
+                    { fr: "Il y a des nuages.", en: "It's cloudy." },
+                ]
+            },
+            {
+                subtitle: "Vent et tempêtes — Il y a du + nom (Wind & Storms)",
+                format: 'table',
+                items: [
+                    { fr: "Il y a du vent / Il vente.", en: "It's windy." },
+                    { fr: "Une brise.", en: "A breeze." },
+                    { fr: "Une bourrasque / une rafale.", en: "A gust." },
+                    { fr: "Orageux / Il y a de l'orage.", en: "Stormy / thundery." },
+                    { fr: "Une tempête.", en: "A storm." },
+                    { fr: "Un ouragan.", en: "A hurricane." },
+                    { fr: "Une tornade.", en: "A tornado." },
+                ]
+            },
+            {
+                subtitle: "Autres phénomènes (Other Phenomena)",
+                format: 'table',
+                items: [
+                    { fr: "Il y a du brouillard / de la brume.", en: "It's foggy / misty." },
+                    { fr: "Il gèle / Il y a de la gelée.", en: "It's freezing / frosty." },
+                    { fr: "Humide.", en: "Humid." },
+                    { fr: "Sec.", en: "Dry." },
+                    { fr: "Grésil.", en: "Sleet." },
+                    { fr: "Verglas.", en: "Black ice." },
+                    { fr: "Rosée.", en: "Dew." },
+                    { fr: "Arc-en-ciel.", en: "Rainbow." },
+                    { fr: "Éclair / Foudre.", en: "Lightning." },
+                    { fr: "Tonnerre.", en: "Thunder." },
+                ]
+            },
+            {
+                subtitle: "Usage en phrases complètes (Full Sentence Usage)",
+                format: 'table',
+                items: [
+                    { fr: "Q : Quel temps fait-il ?", en: "Q: What's the weather?" },
+                    { fr: "R : Il fait frais et nuageux avec des averses.", en: "A: Cool and cloudy with showers." },
+                    { fr: "Demain, il va neiger.", en: "Tomorrow, it will snow." },
+                    { fr: "Il va pleuvoir cet après-midi.", en: "It's going to rain this afternoon." },
+                ]
+            },
+            {
+                subtitle: "Exceptions et nuances (Exceptions & Nuances)",
+                format: 'table',
+                items: [
+                    { fr: "« C'est » remplace parfois « Il fait » pour des états : C'est nuageux.", en: "« C'est » sometimes replaces « Il fait » for states: It's cloudy." },
+                    { fr: "« Il pleut des cordes » est une expression idiomatique.", en: "« Il pleut des cordes » (It's raining ropes) is an idiomatic expression for 'It's pouring.'" },
+                    { fr: "Utilisez le futur pour les prévisions : Il va pleuvoir.", en: "Use the future tense for forecasts: It's going to rain." },
+                ]
+            }
+        ]
     }
 ];
