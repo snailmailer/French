@@ -402,5 +402,33 @@ export const vocabularyData: VocabularySection[] = [
             { en: "Towel rack", fr: "le porte-serviettes" },
             { en: "Bath mat", fr: "le tapis de bain" }
         ]
+    },
+    {
+        title: "Literie (Bedding Essentials)",
+        items: [
+            { en: "Pillow", fr: "l'oreiller" },
+            { en: "Pillowcase", fr: "la taie d'oreiller" },
+            { en: "Sheet", fr: "le drap" },
+            { en: "Duvet", fr: "la couette" },
+            { en: "Blanket", fr: "la couverture" }
+        ]
+    },
+    {
+        title: "Éclairage et réveil (Lighting & Alarm)",
+        items: [
+            { en: "Bedside lamp", fr: "la lampe de chevet" },
+            { en: "Alarm clock", fr: "le réveil" },
+            { en: "Lampshade", fr: "l'abat-jour" }
+        ]
+    },
+    {
+        title: "Autres accessoires (Other Accessories)",
+        items: [
+            { en: "Mirror", fr: "le miroir" },
+            { en: "Rug", fr: "le tapis" },
+            { en: "Curtains", fr: "les rideaux" },
+            { en: "Hanger", fr: "le cintre" },
+            { en: "Wastebasket", fr: "la corbeille à papier" }
+        ]
     }
 ];
