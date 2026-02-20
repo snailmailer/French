@@ -6,8 +6,8 @@ const PlaceholderPage = () => {
     return (
         <div style={{ textAlign: 'center', padding: '4rem 2rem' }}>
             <Construction size={64} color="var(--text-secondary)" style={{ opacity: 0.5, marginBottom: '2rem' }} />
-            <h1 style={{ color: 'var(--accent-color)', marginBottom: '0.25rem' }}>Lecture</h1>
-            <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>(Reading)</p>
+            <h1 style={{ color: '#575A6C', marginBottom: '0.25rem' }}>Lecture</h1>
+            <p style={{ fontSize: '1.25rem', color: '#B4C540', fontWeight: 'bold', marginBottom: '1rem' }}>(Reading)</p>
             <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', marginBottom: '3rem' }}>
                 Cette section est en cours de développement. Restez à l'écoute !
             </p>

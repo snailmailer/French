@@ -267,10 +267,10 @@ const SpeakingPage = () => {
     if (view === 'categories') {
         return (
             <div className="container" style={{ padding: '3rem 1rem', maxWidth: '1400px', margin: '0 auto' }}>
-                <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '0.25rem', color: 'var(--text-primary)' }}>
+                <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '0.25rem', color: '#8BC34A' }}>
                     Expression Orale
                 </h1>
-                <p style={{ textAlign: 'center', fontSize: '1.25rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+                <p style={{ textAlign: 'center', fontSize: '1.25rem', color: '#B4C540', fontWeight: 'bold', marginBottom: '1rem' }}>
                     (Speaking Practice)
                 </p>
                 <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '3rem', maxWidth: '700px', margin: '0 auto 3rem' }}>

@@ -30,10 +30,10 @@ const resources = [
 const ResourcesPage = () => {
     return (
         <div className="container" style={{ maxWidth: '900px', padding: '3rem 1rem' }}>
-            <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '0.25rem', color: 'var(--text-primary)' }}>
+            <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '0.25rem', color: '#E67E22' }}>
                 Ressources Externes
             </h1>
-            <p style={{ textAlign: 'center', fontSize: '1.25rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+            <p style={{ textAlign: 'center', fontSize: '1.25rem', color: '#B4C540', fontWeight: 'bold', marginBottom: '1rem' }}>
                 (External Resources)
             </p>
             <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginBottom: '4rem' }}>

@@ -48,12 +48,12 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
                     <strong style={{ color: '#3686C9' }}>Use (EN):</strong> {section.useEn}
                 </div>
                 <div>
-                    <strong>Structure:</strong> <span style={{ fontStyle: 'italic', fontFamily: 'monospace', background: 'rgba(0,0,0,0.05)', padding: '0.2rem 0.4rem', borderRadius: '4px' }}>{section.structure}</span>
+                    <strong style={{ color: '#B4C540' }}>Structure:</strong> <span style={{ fontStyle: 'italic', fontFamily: 'monospace', background: 'rgba(0,0,0,0.05)', padding: '0.2rem 0.4rem', borderRadius: '4px' }}>{section.structure}</span>
                 </div>
                 {section.forms && (
                     <div>
                         <strong>Forms:</strong> {section.forms}
-                        <button onClick={() => speakFrench(section.forms!)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', marginLeft: '0.5rem', verticalAlign: 'middle' }}>
+                        <button onClick={() => speakFrench(section.forms!)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#B4C540', marginLeft: '0.5rem', verticalAlign: 'middle' }}>
                             <Volume2 size={16} />
                         </button>
                     </div>
@@ -62,7 +62,7 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
 
             {section.examples && section.examples.length > 0 && (
                 <div style={{ background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
-                    <strong style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', opacity: 0.8 }}>EXAMPLES</strong>
+                    <strong style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', opacity: 0.8, color: '#B4C540' }}>EXAMPLES</strong>
                     <ul style={{ margin: 0, paddingLeft: '0', listStyle: 'none' }}>
                         {section.examples.map((ex, idx) => (
                             <li key={idx} style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
@@ -269,10 +269,10 @@ const GrammarPage = () => {
 
     return (
         <div className="container" style={{ maxWidth: '1000px' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '0.25rem', color: 'var(--accent-color)' }}>
+            <h1 style={{ textAlign: 'center', marginBottom: '0.25rem', color: '#3686C9' }}>
                 Grammaire et Vocabulaire
             </h1>
-            <p style={{ textAlign: 'center', fontSize: '1.25rem', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+            <p style={{ textAlign: 'center', fontSize: '1.25rem', color: '#B4C540', fontWeight: 'bold', marginBottom: '2rem' }}>
                 (Grammar &amp; Vocabulary)
             </p>
 

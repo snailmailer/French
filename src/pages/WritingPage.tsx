@@ -67,10 +67,10 @@ const WritingPage = () => {
 
     return (
         <div className="writing-page" style={{ maxWidth: '800px', margin: '0 auto', padding: '2rem' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '0.25rem', color: 'var(--accent-color)' }}>
+            <h1 style={{ textAlign: 'center', marginBottom: '0.25rem', color: '#2980B9' }}>
                 Pratique d'Écriture
             </h1>
-            <p style={{ textAlign: 'center', fontSize: '1.25rem', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+            <p style={{ textAlign: 'center', fontSize: '1.25rem', color: '#B4C540', fontWeight: 'bold', marginBottom: '2rem' }}>
                 (Writing Practice)
             </p>
 

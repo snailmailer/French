@@ -69,10 +69,10 @@ const ConjugationPage = () => {
 
     return (
         <div className="container" style={{ maxWidth: '900px' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '0.25rem', color: 'var(--accent-color)' }}>
+            <h1 style={{ textAlign: 'center', marginBottom: '0.25rem', color: '#1ABC9C' }}>
                 Outil de Conjugaison
             </h1>
-            <p style={{ textAlign: 'center', fontSize: '1.25rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+            <p style={{ textAlign: 'center', fontSize: '1.25rem', color: '#B4C540', fontWeight: 'bold', marginBottom: '1rem' }}>
                 (Conjugation Tool)
             </p>
             <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginBottom: '3rem' }}>
