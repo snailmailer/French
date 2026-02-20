@@ -8,9 +8,9 @@ const features = [
         desc: 'Master French rules, vocabulary, pronouns, and sentence structures.',
         icon: <Book size={32} />,
         path: '/grammar',
-        color: '#3686C9', // Saturated Blue
-        textColor: '#ffffff',
-        borderColor: '#3686C9'
+        color: '#4a4d5e', // Dark Grey/Blue background
+        textColor: '#E0E2D2', // Cream
+        borderColor: '#575A6C'
     },
     {
         id: 'conjugation',
@@ -18,9 +18,9 @@ const features = [
         desc: 'Explore 100+ verbs with tenses, usage guides, and audio.',
         icon: <BookOpen size={32} />,
         path: '/conjugation',
-        color: '#1ABC9C', // Saturated Mint
-        textColor: '#ffffff',
-        borderColor: '#1ABC9C'
+        color: '#4a4d5e',
+        textColor: '#E0E2D2',
+        borderColor: '#575A6C'
     },
     {
         id: 'reading',
@@ -28,8 +28,8 @@ const features = [
         desc: 'Practice reading comprehension with engaging stories.',
         icon: <Book size={32} />,
         path: '/reading',
-        color: '#575A6C', // Saturated Slate
-        textColor: '#ffffff',
+        color: '#4a4d5e',
+        textColor: '#E0E2D2',
         borderColor: '#575A6C'
     },
     {
@@ -38,9 +38,9 @@ const features = [
         desc: 'Improve your written French with exercises and prompts.',
         icon: <PenTool size={32} />,
         path: '/writing',
-        color: '#2980B9', // Saturated Sky Blue
-        textColor: '#ffffff',
-        borderColor: '#2980B9'
+        color: '#4a4d5e',
+        textColor: '#E0E2D2',
+        borderColor: '#575A6C'
     },
     {
         id: 'speaking',
@@ -48,9 +48,9 @@ const features = [
         desc: 'Enhance pronunciation and speaking confidence.',
         icon: <Mic size={32} />,
         path: '/speaking',
-        color: '#8BC34A', // Saturated Lime Green
-        textColor: '#ffffff',
-        borderColor: '#8BC34A'
+        color: '#4a4d5e',
+        textColor: '#E0E2D2',
+        borderColor: '#575A6C'
     },
     {
         id: 'resources',
@@ -58,9 +58,9 @@ const features = [
         desc: 'External tools, news, and practice materials.',
         icon: <BookOpen size={32} />,
         path: '/resources',
-        color: '#E67E22', // Saturated Orange
-        textColor: '#ffffff',
-        borderColor: '#E67E22'
+        color: '#4a4d5e',
+        textColor: '#E0E2D2',
+        borderColor: '#575A6C'
     },
 ];
 
@@ -94,27 +94,27 @@ const LandingPage = () => {
                                 padding: '2rem',
                                 borderRadius: '16px',
                                 textDecoration: 'none',
-                                color: '#ffffff',
+                                color: feature.textColor,
                                 transition: 'transform 0.2s, box-shadow 0.2s',
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
                                 textAlign: 'center',
-                                borderLeft: `6px solid rgba(0,0,0,0.1)`,
-                                boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                                borderLeft: `6px solid ${feature.borderColor}`,
+                                boxShadow: '0 4px 12px #575A6C'
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.transform = 'translateY(-5px)';
-                                e.currentTarget.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)';
+                                e.currentTarget.style.boxShadow = '0 10px 20px #575A6C';
                             }}
                             onMouseLeave={(e) => {
                                 e.currentTarget.style.transform = 'translateY(0)';
-                                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+                                e.currentTarget.style.boxShadow = '0 4px 12px #575A6C';
                             }}
                         >
                             <div style={{
-                                color: '#ffffff',
-                                background: 'rgba(255,255,255,0.2)',
+                                color: '#B4C540',
+                                background: 'rgba(255,255,255,0.05)',
                                 padding: '1rem',
                                 borderRadius: '50%',
                                 marginBottom: '1rem',
@@ -126,7 +126,7 @@ const LandingPage = () => {
                             </div>
                             <h3 style={{
                                 margin: '0.25rem 0 0',
-                                color: '#ffffff',
+                                color: '#E0E2D2',
                                 fontSize: '1.4rem',
                                 fontWeight: 700,
                                 textTransform: 'uppercase',
@@ -139,7 +139,7 @@ const LandingPage = () => {
                                     ({cleanedEnTitle})
                                 </p>
                             )}
-                            <p style={{ color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, marginTop: 'auto' }}>{feature.desc}</p>
+                            <p style={{ color: '#E0E2D2', opacity: 0.9, lineHeight: 1.6, marginTop: 'auto' }}>{feature.desc}</p>
                         </Link>
                     );
                 })}

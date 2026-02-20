@@ -45,7 +45,7 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
                     </button>
                 </div>
                 <div>
-                    <strong style={{ color: '#3686C9' }}>Use (EN):</strong> {section.useEn}
+                    <strong style={{ color: '#575A6C' }}>Use (EN):</strong> {section.useEn}
                 </div>
                 <div>
                     <strong style={{ color: '#B4C540' }}>Structure:</strong> <span style={{ fontStyle: 'italic', fontFamily: 'monospace', background: 'rgba(0,0,0,0.05)', padding: '0.2rem 0.4rem', borderRadius: '4px' }}>{section.structure}</span>
@@ -269,7 +269,7 @@ const GrammarPage = () => {
 
     return (
         <div className="container" style={{ maxWidth: '1000px' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '0.25rem', color: '#3686C9' }}>
+            <h1 style={{ textAlign: 'center', marginBottom: '0.25rem', color: '#E0E2D2', textTransform: 'uppercase' }}>
                 Grammaire et Vocabulaire
             </h1>
             <p style={{ textAlign: 'center', fontSize: '1.25rem', color: '#B4C540', fontWeight: 'bold', marginBottom: '2rem' }}>

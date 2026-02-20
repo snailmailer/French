@@ -267,7 +267,7 @@ const SpeakingPage = () => {
     if (view === 'categories') {
         return (
             <div className="container" style={{ padding: '3rem 1rem', maxWidth: '1400px', margin: '0 auto' }}>
-                <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '0.25rem', color: '#8BC34A' }}>
+                <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '0.25rem', color: '#E0E2D2', textTransform: 'uppercase' }}>
                     Expression Orale
                 </h1>
                 <p style={{ textAlign: 'center', fontSize: '1.25rem', color: '#B4C540', fontWeight: 'bold', marginBottom: '1rem' }}>
@@ -668,7 +668,7 @@ const SpeakingPage = () => {
                                 }}>
                                     {/* Basic Structure */}
                                     <div>
-                                        <h4 style={{ color: color, fontSize: '1.1rem', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold' }}>
+                                        <h4 style={{ color: '#B4C540', fontSize: '1.1rem', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold' }}>
                                             Structure de base (Basic Structure)
                                         </h4>
                                         <p style={{ color: 'var(--text-primary)', fontSize: '1.05rem', lineHeight: 1.8, margin: 0 }}>
@@ -678,7 +678,7 @@ const SpeakingPage = () => {
 
                                     {/* Practical Example */}
                                     <div>
-                                        <h4 style={{ color: color, fontSize: '1.1rem', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold' }}>
+                                        <h4 style={{ color: '#B4C540', fontSize: '1.1rem', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold' }}>
                                             Exemple Pratique (Practical Example)
                                         </h4>
                                         <div style={{

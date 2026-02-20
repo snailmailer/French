@@ -69,7 +69,7 @@ const ConjugationPage = () => {
 
     return (
         <div className="container" style={{ maxWidth: '900px' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '0.25rem', color: '#1ABC9C' }}>
+            <h1 style={{ textAlign: 'center', marginBottom: '0.25rem', color: '#E0E2D2', textTransform: 'uppercase' }}>
                 Outil de Conjugaison
             </h1>
             <p style={{ textAlign: 'center', fontSize: '1.25rem', color: '#B4C540', fontWeight: 'bold', marginBottom: '1rem' }}>
@@ -284,7 +284,7 @@ const ConjugationPage = () => {
                         {/* Examples Section */}
                         {selectedVerb.examples && selectedVerb.examples.length > 0 && (
                             <div style={{ marginBottom: '2rem', background: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: '12px' }}>
-                                <h3 style={{ color: 'var(--accent-color)', marginBottom: '1rem' }}>Examples</h3>
+                                <h3 style={{ color: '#B4C540', marginBottom: '1rem' }}>Examples</h3>
                                 <ul style={{ listStyle: 'none', padding: 0 }}>
                                     {selectedVerb.examples.map((ex, idx) => (
                                         <li key={idx} style={{ marginBottom: '0.8rem', display: 'flex', flexDirection: 'column' }}>
