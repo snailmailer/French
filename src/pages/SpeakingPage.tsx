@@ -15,6 +15,7 @@ const SpeakingPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const view = (searchParams.get('view') as string) || 'categories';
     const selectedCategory = searchParams.get('category') || null;
+    const selectedTopicId = searchParams.get('topicId') || null;
     const [currentQuestionId, setCurrentQuestionId] = useState<string | null>(null);
 
     // Practice State
@@ -157,13 +158,19 @@ const SpeakingPage = () => {
         setSearchParams({ view: 'questions', category });
     };
 
+    const handleExamSelect = (topicId: string) => {
+        setSearchParams({ view: 'exam-topic', topicId });
+    };
+
+    const handleLevelGuideLink = () => {
+        setSearchParams({ view: 'cefr-guide' });
+    };
+
     const handleQuestionSelect = (id: string) => {
         setCurrentQuestionId(id);
-        if (selectedCategory) {
-            setSearchParams({ view: 'practice', category: selectedCategory });
-        } else {
-            setSearchParams({ view: 'practice' });
-        }
+        const params: any = { view: 'practice' };
+        if (selectedCategory) params.category = selectedCategory;
+        setSearchParams(params);
         setTranscript('');
         setTimer(0);
         setAudioUrl(null);
@@ -179,7 +186,7 @@ const SpeakingPage = () => {
                 setSearchParams({ view: 'questions' });
             }
             if (audioUrl) URL.revokeObjectURL(audioUrl);
-        } else if (view === 'questions') {
+        } else if (view === 'exam-topic' || view === 'cefr-guide' || view === 'questions') {
             setSearchParams({ view: 'categories' });
         } else {
             setSearchParams({ view: 'categories' });
@@ -321,239 +328,94 @@ const SpeakingPage = () => {
                             ))}
                         </div>
 
-                        {/* === TEF/TCF Exam Practice === */}
-                        {sectionHeading('🎓 Pratique d\'examen TEF / TCF (Exam Practice)')}
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '4rem' }}>
+                        {/* === Exam Practice Grid === */}
+                        {sectionHeading('🎓 Pratique d\'examen (Exam Practice)')}
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '4rem' }}>
                             {examTopics.map(topic => (
-                                <div key={topic.id} style={cardStyle}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-                                        <GraduationCap size={22} style={{ color: 'var(--accent-color)' }} />
-                                        <h3 style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.2rem' }}>{topic.title}</h3>
+                                <div
+                                    key={topic.id}
+                                    onClick={() => handleExamSelect(topic.id)}
+                                    style={{
+                                        ...cardStyle,
+                                        cursor: 'pointer',
+                                        transition: 'transform 0.2s, box-shadow 0.2s',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        textAlign: 'center',
+                                        padding: '2rem'
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.transform = 'translateY(-5px)';
+                                        e.currentTarget.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.transform = 'translateY(0)';
+                                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.05)';
+                                    }}
+                                >
+                                    <div style={{
+                                        color: '#3686C9',
+                                        background: 'rgba(54, 134, 201, 0.08)',
+                                        padding: '1rem',
+                                        borderRadius: '50%',
+                                        marginBottom: '1rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}>
+                                        <GraduationCap size={32} />
                                     </div>
-                                    <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', lineHeight: 1.6 }}>{topic.description}</p>
-                                    <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
-                                        {topic.prepTime > 0 && (
-                                            <span style={{ fontSize: '0.85rem', background: 'rgba(54, 134, 201, 0.1)', color: '#3686C9', padding: '0.3rem 0.8rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                                                <Clock size={14} /> Préparation: {formatTime(topic.prepTime)}
-                                            </span>
-                                        )}
-                                        <span style={{ fontSize: '0.85rem', background: 'rgba(76, 175, 80, 0.1)', color: '#4CAF50', padding: '0.3rem 0.8rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                                            <Mic size={14} /> Parole: {formatTime(topic.speakTime)}
-                                        </span>
-                                    </div>
-
-                                    {/* Scenarios */}
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                                        {topic.scenarios.map((scenario, idx) => {
-                                            const isActive = selectedExamTopic === topic.id && selectedScenario === scenario;
-                                            return (
-                                                <div key={idx} style={{
-                                                    background: isActive ? 'rgba(76, 175, 80, 0.08)' : 'var(--bg-primary)',
-                                                    border: isActive ? '2px solid var(--accent-color)' : '1px solid var(--border-color)',
-                                                    borderRadius: '8px',
-                                                    padding: '1rem',
-                                                }}>
-                                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}>
-                                                        <div style={{ flex: 1 }}>
-                                                            <p style={{ margin: 0, color: 'var(--text-primary)', lineHeight: 1.5, fontStyle: 'italic' }}>
-                                                                « {scenario} »
-                                                            </p>
-                                                        </div>
-                                                        <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
-                                                            <button
-                                                                onClick={() => speakFrench(scenario)}
-                                                                style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50', padding: '0.3rem' }}
-                                                                title="Écouter"
-                                                            >
-                                                                <Volume2 size={18} />
-                                                            </button>
-                                                            {!isActive ? (
-                                                                <button
-                                                                    onClick={() => startExamTimer(topic, scenario)}
-                                                                    style={{
-                                                                        background: 'var(--accent-color)',
-                                                                        color: 'white',
-                                                                        border: 'none',
-                                                                        borderRadius: '6px',
-                                                                        padding: '0.4rem 0.8rem',
-                                                                        cursor: 'pointer',
-                                                                        fontSize: '0.85rem',
-                                                                        display: 'flex',
-                                                                        alignItems: 'center',
-                                                                        gap: '0.3rem'
-                                                                    }}
-                                                                >
-                                                                    <Play size={14} /> Commencer
-                                                                </button>
-                                                            ) : (
-                                                                <button
-                                                                    onClick={resetExam}
-                                                                    style={{
-                                                                        background: '#e74c3c',
-                                                                        color: 'white',
-                                                                        border: 'none',
-                                                                        borderRadius: '6px',
-                                                                        padding: '0.4rem 0.8rem',
-                                                                        cursor: 'pointer',
-                                                                        fontSize: '0.85rem',
-                                                                        display: 'flex',
-                                                                        alignItems: 'center',
-                                                                        gap: '0.3rem'
-                                                                    }}
-                                                                >
-                                                                    <RotateCcw size={14} /> Réinitialiser
-                                                                </button>
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                    {isActive && examPhase !== 'idle' && (
-                                                        <div style={{
-                                                            marginTop: '1rem',
-                                                            padding: '1rem',
-                                                            background: examPhase === 'prep' ? 'rgba(54, 134, 201, 0.1)' : examPhase === 'speak' ? 'rgba(76, 175, 80, 0.1)' : 'rgba(155, 89, 182, 0.1)',
-                                                            borderRadius: '8px',
-                                                            textAlign: 'center'
-                                                        }}>
-                                                            <div style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', color: examPhase === 'prep' ? '#3686C9' : examPhase === 'speak' ? '#4CAF50' : '#9B59B6', fontWeight: 'bold', marginBottom: '0.5rem' }}>
-                                                                {examPhase === 'prep' ? '⏳ Préparation' : examPhase === 'speak' ? '🎤 Parlez maintenant !' : '✅ Terminé !'}
-                                                            </div>
-                                                            {examPhase !== 'done' && (
-                                                                <div style={{ fontSize: '2.5rem', fontFamily: 'monospace', fontWeight: 'bold', color: examPhase === 'prep' ? '#3686C9' : '#4CAF50' }}>
-                                                                    {formatTime(examTimer)}
-                                                                </div>
-                                                            )}
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
+                                    <h3 style={{ margin: '0.5rem 0 0.5rem', fontSize: '1.2rem', color: '#3686C9' }}>{topic.title}</h3>
+                                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                                        {topic.scenarios.length} Scénarios
+                                    </span>
                                 </div>
                             ))}
                         </div>
 
-                        {/* === CEFR Level Structures === */}
-                        {sectionHeading('📊 Niveaux CECR : Guide de structure (CEFR Level Guide)')}
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', marginBottom: '4rem' }}>
-                            {levelStructures.map(level => {
-                                const levelColors: Record<string, string> = {
-                                    'A1': '#4CAF50', 'A2': '#8BC34A',
-                                    'B1': '#FF9800', 'B2': '#F57C00',
-                                    'C1': '#E91E63', 'C2': '#9C27B0'
-                                };
-                                const color = levelColors[level.level] || 'var(--accent-color)';
-                                return (
-                                    <div key={level.level} style={{
-                                        ...cardStyle,
-                                        borderTop: `6px solid ${color}`,
-                                        padding: '1.5rem 2rem'
-                                    }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                                            <span style={{
-                                                background: color,
-                                                color: 'white',
-                                                fontWeight: 'bold',
-                                                fontSize: '1.2rem',
-                                                padding: '0.5rem 1rem',
-                                                borderRadius: '8px',
-                                                minWidth: '60px',
-                                                textAlign: 'center'
-                                            }}>
-                                                {level.level}
-                                            </span>
-                                            <p style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: 500, lineHeight: 1.5 }}>
-                                                {level.intro}
-                                            </p>
-                                        </div>
-
-                                        <div style={{
-                                            display: 'grid',
-                                            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                                            gap: '1.5rem',
-                                            borderTop: '1px solid var(--border-color)',
-                                            paddingTop: '1.5rem'
-                                        }}>
-                                            {/* Basic Structure */}
-                                            <div>
-                                                <h4 style={{ color: color, fontSize: '1rem', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                                                    Basic Structure
-                                                </h4>
-                                                <p style={{ color: 'var(--text-primary)', fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>
-                                                    {level.structure}
-                                                </p>
-                                            </div>
-
-                                            {/* Practical Example */}
-                                            <div>
-                                                <h4 style={{ color: color, fontSize: '1rem', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                                                    Practical Example
-                                                </h4>
-                                                <div style={{
-                                                    background: 'var(--bg-primary)',
-                                                    padding: '1rem',
-                                                    borderRadius: '8px',
-                                                    border: '1px solid var(--border-color)',
-                                                    position: 'relative'
-                                                }}>
-                                                    <p style={{ margin: '0 0 0.5rem', fontWeight: 500, color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-                                                        Question: "{level.exampleQuestion}"
-                                                    </p>
-                                                    {level.exampleParts.map((part, pIdx) => (
-                                                        <div key={pIdx} style={{ marginBottom: pIdx === level.exampleParts.length - 1 ? 0 : '0.5rem' }}>
-                                                            {part.label && (
-                                                                <span style={{ color: color, fontWeight: 700, fontSize: '0.8rem', textTransform: 'uppercase', display: 'block' }}>
-                                                                    {part.label}:
-                                                                </span>
-                                                            )}
-                                                            <p style={{ margin: 0, color: 'var(--text-primary)', fontSize: '0.95rem', fontStyle: 'italic', lineHeight: 1.4 }}>
-                                                                "{part.text}"
-                                                            </p>
-                                                        </div>
-                                                    ))}
-                                                    <button
-                                                        onClick={() => speakFrench(level.exampleParts.map(p => p.text).join(' '))}
-                                                        style={{
-                                                            position: 'absolute',
-                                                            top: '10px',
-                                                            right: '10px',
-                                                            background: 'transparent',
-                                                            border: 'none',
-                                                            cursor: 'pointer',
-                                                            color: color,
-                                                            opacity: 0.7,
-                                                            transition: 'opacity 0.2s'
-                                                        }}
-                                                        onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
-                                                        onMouseLeave={(e) => e.currentTarget.style.opacity = '0.7'}
-                                                        title="Écouter l'exemple complet"
-                                                    >
-                                                        <Volume2 size={20} />
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                            {/* Progression Tips */}
-                                            <div style={{ gridColumn: '1 / -1' }}>
-                                                <h4 style={{ color: color, fontSize: '1rem', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                                                    Progression Tips
-                                                </h4>
-                                                <p style={{
-                                                    color: 'var(--text-secondary)',
-                                                    fontSize: '0.9rem',
-                                                    lineHeight: 1.6,
-                                                    margin: 0,
-                                                    background: 'rgba(0,0,0,0.02)',
-                                                    padding: '0.75rem 1rem',
-                                                    borderRadius: '6px',
-                                                    borderLeft: `3px solid ${color}`
-                                                }}>
-                                                    {level.tips}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                );
-                            })}
+                        {/* === CEFR Level Guide Link === */}
+                        {sectionHeading('📊 Guide des Niveaux (Level Guide)')}
+                        <div
+                            onClick={handleLevelGuideLink}
+                            style={{
+                                ...cardStyle,
+                                cursor: 'pointer',
+                                transition: 'transform 0.2s, box-shadow 0.2s',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '2rem',
+                                padding: '2rem',
+                                borderLeft: '8px solid var(--accent-color)'
+                            }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = 'translateY(-5px)';
+                                e.currentTarget.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = 'translateY(0)';
+                                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.05)';
+                            }}
+                        >
+                            <div style={{
+                                color: 'var(--accent-color)',
+                                background: 'rgba(76, 175, 80, 0.08)',
+                                padding: '1.5rem',
+                                borderRadius: '12px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}>
+                                <BookOpen size={40} />
+                            </div>
+                            <div>
+                                <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.5rem', color: 'var(--text-primary)' }}>
+                                    Niveaux CECR : Guide de structure
+                                </h3>
+                                <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '1rem' }}>
+                                    (CEFR Level Guide: How to structure your answers)
+                                </p>
+                            </div>
                         </div>
 
                     </div>{/* end main content */}
@@ -615,7 +477,290 @@ const SpeakingPage = () => {
     }
 
     // ========================
-    // 2. QUESTION LIST VIEW
+    // 3. EXAM TOPIC VIEW (Dedicated)
+    // ========================
+    if (view === 'exam-topic') {
+        const topic = examTopics.find(t => t.id === selectedTopicId);
+        if (!topic) return null;
+
+        return (
+            <div className="container" style={{ maxWidth: '900px', padding: '3rem 1rem' }}>
+                <button
+                    onClick={handleGoBack}
+                    style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', marginBottom: '2rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem' }}
+                >
+                    <ChevronLeft size={20} /> Retour aux catégories
+                </button>
+
+                <div style={cardStyle}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                        <GraduationCap size={28} style={{ color: '#3686C9' }} />
+                        <h2 style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.8rem' }}>{topic.title}</h2>
+                    </div>
+                    <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', lineHeight: 1.6, fontSize: '1.1rem' }}>{topic.description}</p>
+
+                    <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
+                        {topic.prepTime > 0 && (
+                            <span style={{ fontSize: '1rem', background: 'rgba(54, 134, 201, 0.1)', color: '#3686C9', padding: '0.5rem 1rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                <Clock size={18} /> Préparation: {formatTime(topic.prepTime)}
+                            </span>
+                        )}
+                        <span style={{ fontSize: '1rem', background: 'rgba(76, 175, 80, 0.1)', color: '#4CAF50', padding: '0.5rem 1rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <Mic size={18} /> Parole: {formatTime(topic.speakTime)}
+                        </span>
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        <h4 style={{ color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.9rem', marginBottom: '0.5rem' }}>
+                            Choisissez un scénario (Select a Scenario):
+                        </h4>
+                        {topic.scenarios.map((scenario, idx) => {
+                            const isActive = selectedExamTopic === topic.id && selectedScenario === scenario;
+                            return (
+                                <div key={idx} style={{
+                                    background: isActive ? 'rgba(76, 175, 80, 0.08)' : 'var(--bg-primary)',
+                                    border: isActive ? '2px solid var(--accent-color)' : '1px solid var(--border-color)',
+                                    borderRadius: '12px',
+                                    padding: '1.5rem',
+                                }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1.5rem' }}>
+                                        <div style={{ flex: 1 }}>
+                                            <p style={{ margin: 0, color: 'var(--text-primary)', lineHeight: 1.6, fontSize: '1.1rem', fontStyle: 'italic' }}>
+                                                « {scenario} »
+                                            </p>
+                                        </div>
+                                        <div style={{ display: 'flex', gap: '0.75rem', flexShrink: 0 }}>
+                                            <button
+                                                onClick={() => speakFrench(scenario)}
+                                                style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50', padding: '0.5rem' }}
+                                                title="Écouter"
+                                            >
+                                                <Volume2 size={24} />
+                                            </button>
+                                            {!isActive ? (
+                                                <button
+                                                    onClick={() => startExamTimer(topic, scenario)}
+                                                    style={{
+                                                        background: 'var(--accent-color)',
+                                                        color: 'white',
+                                                        border: 'none',
+                                                        borderRadius: '8px',
+                                                        padding: '0.6rem 1.2rem',
+                                                        cursor: 'pointer',
+                                                        fontSize: '1rem',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '0.5rem',
+                                                        fontWeight: 'bold'
+                                                    }}
+                                                >
+                                                    <Play size={18} /> Commencer
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    onClick={resetExam}
+                                                    style={{
+                                                        background: '#e74c3c',
+                                                        color: 'white',
+                                                        border: 'none',
+                                                        borderRadius: '8px',
+                                                        padding: '0.6rem 1.2rem',
+                                                        cursor: 'pointer',
+                                                        fontSize: '1rem',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '0.5rem',
+                                                        fontWeight: 'bold'
+                                                    }}
+                                                >
+                                                    <RotateCcw size={18} /> Réinitialiser
+                                                </button>
+                                            )}
+                                        </div>
+                                    </div>
+                                    {isActive && examPhase !== 'idle' && (
+                                        <div style={{
+                                            marginTop: '1.5rem',
+                                            padding: '2rem',
+                                            background: examPhase === 'prep' ? 'rgba(54, 134, 201, 0.1)' : examPhase === 'speak' ? 'rgba(76, 175, 80, 0.1)' : 'rgba(155, 89, 182, 0.1)',
+                                            borderRadius: '12px',
+                                            textAlign: 'center',
+                                            border: `1px dashed ${examPhase === 'prep' ? '#3686C9' : '#4CAF50'}`
+                                        }}>
+                                            <div style={{ fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '2px', color: examPhase === 'prep' ? '#3686C9' : examPhase === 'speak' ? '#4CAF50' : '#9B59B6', fontWeight: 'bold', marginBottom: '1rem' }}>
+                                                {examPhase === 'prep' ? '⏳ Temps de Préparation' : examPhase === 'speak' ? '🎤 Parlez maintenant !' : '✅ Exercice Terminé'}
+                                            </div>
+                                            {examPhase !== 'done' && (
+                                                <div style={{ fontSize: '4rem', fontFamily: 'monospace', fontWeight: 'bold', color: examPhase === 'prep' ? '#3686C9' : '#4CAF50' }}>
+                                                    {formatTime(examTimer)}
+                                                </div>
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    // ========================
+    // 4. CEFR GUIDE VIEW (Dedicated)
+    // ========================
+    if (view === 'cefr-guide') {
+        return (
+            <div className="container" style={{ maxWidth: '1200px', padding: '3rem 1rem' }}>
+                <button
+                    onClick={handleGoBack}
+                    style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', marginBottom: '2rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem' }}
+                >
+                    <ChevronLeft size={20} /> Retour aux catégories
+                </button>
+
+                <h1 style={{ color: 'var(--text-primary)', fontSize: '2.5rem', marginBottom: '0.5rem' }}>
+                    📊 Niveaux CECR : Guide de structure
+                </h1>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginBottom: '3rem' }}>
+                    Apprenez à structurer vos réponses selon votre niveau cible (CEFR Level Guide).
+                </p>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', marginBottom: '4rem' }}>
+                    {levelStructures.map(level => {
+                        const levelColors: Record<string, string> = {
+                            'A1': '#4CAF50', 'A2': '#8BC34A',
+                            'B1': '#FF9800', 'B2': '#F57C00',
+                            'C1': '#E91E63', 'C2': '#9C27B0'
+                        };
+                        const color = levelColors[level.level] || 'var(--accent-color)';
+                        return (
+                            <div key={level.level} style={{
+                                ...cardStyle,
+                                borderTop: `6px solid ${color}`,
+                                padding: '2rem'
+                            }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '2rem' }}>
+                                    <span style={{
+                                        background: color,
+                                        color: 'white',
+                                        fontWeight: 'bold',
+                                        fontSize: '1.5rem',
+                                        padding: '0.75rem 1.5rem',
+                                        borderRadius: '12px',
+                                        minWidth: '80px',
+                                        textAlign: 'center',
+                                        boxShadow: `0 4px 10px ${color}44`
+                                    }}>
+                                        {level.level}
+                                    </span>
+                                    <p style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.2rem', fontWeight: 500, lineHeight: 1.6 }}>
+                                        {level.intro}
+                                    </p>
+                                </div>
+
+                                <div style={{
+                                    display: 'grid',
+                                    gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+                                    gap: '2.5rem',
+                                    borderTop: '1px solid var(--border-color)',
+                                    paddingTop: '2rem'
+                                }}>
+                                    {/* Basic Structure */}
+                                    <div>
+                                        <h4 style={{ color: color, fontSize: '1.1rem', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold' }}>
+                                            Structure de base (Basic Structure)
+                                        </h4>
+                                        <p style={{ color: 'var(--text-primary)', fontSize: '1.05rem', lineHeight: 1.8, margin: 0 }}>
+                                            {level.structure}
+                                        </p>
+                                    </div>
+
+                                    {/* Practical Example */}
+                                    <div>
+                                        <h4 style={{ color: color, fontSize: '1.1rem', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold' }}>
+                                            Exemple Pratique (Practical Example)
+                                        </h4>
+                                        <div style={{
+                                            background: 'var(--bg-primary)',
+                                            padding: '1.5rem',
+                                            borderRadius: '12px',
+                                            border: '1px solid var(--border-color)',
+                                            position: 'relative',
+                                            boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02)'
+                                        }}>
+                                            <p style={{ margin: '0 0 1rem', fontWeight: 600, color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
+                                                Question: "{level.exampleQuestion}"
+                                            </p>
+                                            {level.exampleParts.map((part, pIdx) => (
+                                                <div key={pIdx} style={{ marginBottom: pIdx === level.exampleParts.length - 1 ? 0 : '1rem' }}>
+                                                    {part.label && (
+                                                        <span style={{ color: color, fontWeight: 700, fontSize: '0.85rem', textTransform: 'uppercase', display: 'block', marginBottom: '0.2rem' }}>
+                                                            {part.label}:
+                                                        </span>
+                                                    )}
+                                                    <p style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.05rem', fontStyle: 'italic', lineHeight: 1.5 }}>
+                                                        "{part.text}"
+                                                    </p>
+                                                </div>
+                                            ))}
+                                            <button
+                                                onClick={() => speakFrench(level.exampleParts.map(p => p.text).join(' '))}
+                                                style={{
+                                                    position: 'absolute',
+                                                    top: '15px',
+                                                    right: '15px',
+                                                    background: 'transparent',
+                                                    border: 'none',
+                                                    cursor: 'pointer',
+                                                    color: color,
+                                                    opacity: 0.7,
+                                                    transition: 'all 0.2s'
+                                                }}
+                                                onMouseEnter={(e) => {
+                                                    e.currentTarget.style.opacity = '1';
+                                                    e.currentTarget.style.transform = 'scale(1.1)';
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.opacity = '0.7';
+                                                    e.currentTarget.style.transform = 'scale(1)';
+                                                }}
+                                                title="Écouter l'exemple complet"
+                                            >
+                                                <Volume2 size={24} />
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    {/* Progression Tips */}
+                                    <div style={{ gridColumn: '1 / -1' }}>
+                                        <h4 style={{ color: color, fontSize: '1.1rem', marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold' }}>
+                                            Conseils de progression (Progression Tips)
+                                        </h4>
+                                        <p style={{
+                                            color: 'var(--text-secondary)',
+                                            fontSize: '1rem',
+                                            lineHeight: 1.8,
+                                            margin: 0,
+                                            background: 'rgba(0,0,0,0.02)',
+                                            padding: '1rem 1.5rem',
+                                            borderRadius: '8px',
+                                            borderLeft: `5px solid ${color}`
+                                        }}>
+                                            {level.tips}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        );
+    }
+
+    // ========================
+    // 5. QUESTION LIST VIEW
     // ========================
     if (view === 'questions') {
         return (
