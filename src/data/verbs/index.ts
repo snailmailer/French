@@ -7,6 +7,7 @@ import { devoir as devoirBase } from './devoir';
 import { etre as etreBase } from './etre';
 import { faire as faireBase } from './faire';
 import { pouvoir as pouvoirBase } from './pouvoir';
+import { savoir as savoirBase } from './savoir';
 import { souvenir as souvenirBase } from './souvenir';
 import { vouloir as vouloirBase } from './vouloir';
 
@@ -24,6 +25,7 @@ export const devoir = applyExamplesToVerb({ ...devoirBase, category: 'General' }
 export const etre = applyExamplesToVerb({ ...etreBase, category: 'General' });
 export const faire = applyExamplesToVerb({ ...faireBase, category: 'General' });
 export const pouvoir = applyExamplesToVerb({ ...pouvoirBase, category: 'General' });
+export const savoir = applyExamplesToVerb({ ...savoirBase, category: 'General' });
 export const se_souvenir = applyExamplesToVerb({ ...souvenirBase, category: 'Routine' });
 export const vouloir = applyExamplesToVerb({ ...vouloirBase, category: 'General' });
 
@@ -1689,7 +1691,7 @@ export const verbs = [
     offrir, organiser, oublier, ouvrir,
     parler, participer, partir, passer, passer_aspirateur, payer, se_peigner, peindre, perdre, planifier, porter, poser_question, postuler, pouvoir, preciser, prendre, preparer_repas, se_preparer, se_promener, proposer, punir,
     ralentir, ranger, rapetisser, se_raser, reagir, recevoir, se_reconcilier, reflechir, regarder_film, rejoindre, remercier, remplir, rencontrer, rendre, se_rendre, rentrer, reparer, repeter, repondre, se_reposer, respirer, rester, retrecir, reussir, se_reveiller, reviser, rougir, rouvrir,
-    salir, samuser, sappeler, sauter, se_secher, se_secher_les_cheveux, se_sentir, sentrainer, sera, servir, setirer, signer, sortir, souffrir, souligner, se_souvenir, surligner, survivre,
+    salir, samuser, sappeler, sauter, savoir, se_secher, se_secher_les_cheveux, se_sentir, sentrainer, sera, servir, setirer, signer, sortir, souffrir, souligner, se_souvenir, surligner, survivre,
     tenir, terminer, toucher, travailler, se_tromper, trouver,
     utiliser,
     vendre, venir, verdir, vieillir, vivre, voir, vouloir, voyager,
