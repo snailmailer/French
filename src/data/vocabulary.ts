@@ -615,5 +615,66 @@ export const vocabularyData: VocabularySection[] = [
                 ]
             }
         ]
+    },
+    {
+        title: "Les couleurs (Colors)",
+        subsections: [
+            {
+                subtitle: "Couleurs de base (Basic Colors)",
+                format: 'table',
+                items: [
+                    { fr: "Rouge", en: "Red" },
+                    { fr: "Bleu / Bleue", en: "Blue" },
+                    { fr: "Jaune", en: "Yellow" },
+                    { fr: "Vert / Verte", en: "Green" },
+                    { fr: "Orange", en: "Orange" },
+                    { fr: "Blanc / Blanche", en: "White" },
+                    { fr: "Noir / Noire", en: "Black" },
+                    { fr: "Gris / Grise", en: "Gray" },
+                    { fr: "Marron", en: "Brown" },
+                    { fr: "Rose", en: "Pink" },
+                    { fr: "Violet / Violette", en: "Purple" },
+                ]
+            },
+            {
+                subtitle: "Règle générale (General Rule)",
+                format: 'table',
+                items: [
+                    { fr: "Les adjectifs de couleur en français doivent s'accorder en genre et en nombre avec le nom qu'ils décrivent.", en: "French color adjectives must agree in gender and number with the noun they describe." },
+                    { fr: "Masculin singulier : vert", en: "Masculine singular: green (vert)" },
+                    { fr: "Féminin singulier : verte (ajouter -e)", en: "Feminine singular: green (verte, add -e)" },
+                    { fr: "Masculin pluriel : verts (ajouter -s)", en: "Masculine plural: green (verts, add -s)" },
+                    { fr: "Féminin pluriel : vertes (ajouter -e et -s)", en: "Feminine plural: green (vertes, add -e and -s)" },
+                    { fr: "Les couleurs se placent après le nom : une voiture rouge", en: "Colors come after the noun: a red car (une voiture rouge)" },
+                ]
+            },
+            {
+                subtitle: "Exceptions : couleurs invariables (Invariable Colors)",
+                format: 'table',
+                items: [
+                    { fr: "Certaines couleurs ne changent jamais : marron, orange, turquoise (noms de fruits, fleurs ou pierres).", en: "Some colors are invariable and never change: marron, orange, turquoise (names of fruits, flowers, or gems)." },
+                    { fr: "des chaussures marron", en: "brown shoes" },
+                    { fr: "une robe orange", en: "an orange dress" },
+                ]
+            },
+            {
+                subtitle: "Couleurs composées (Compound Colors)",
+                format: 'table',
+                items: [
+                    { fr: "Les couleurs composées (ex. : bleu-vert) sont invariables et reliées par un trait d'union.", en: "Compound colors (e.g., bleu-vert) are invariable and hyphenated." },
+                    { fr: "des yeux bleu-vert", en: "blue-green eyes" },
+                    { fr: "Pour les nuances, ajoutez clair / foncé, qui s'accordent : « bleu clair » → « bleue claire » au féminin.", en: "For shades, add clair / foncé, which agree: « bleu clair » → « bleue claire » in feminine." },
+                ]
+            },
+            {
+                subtitle: "Autres exceptions (Other Exceptions)",
+                format: 'table',
+                items: [
+                    { fr: "Rose, mauve, pourpre, fauve, écarlate s'accordent en genre et nombre malgré leur apparence.", en: "Rose, mauve, pourpre, fauve, écarlate agree in gender and number despite appearances." },
+                    { fr: "des fleurs roses", en: "pink flowers" },
+                    { fr: "une écharpe mauve", en: "a mauve scarf" },
+                ]
+            }
+        ]
     }
 ];
