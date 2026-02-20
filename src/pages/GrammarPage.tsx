@@ -144,10 +144,10 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
             background: 'var(--bg-secondary)',
             padding: '1.5rem',
             borderRadius: '12px',
-            borderLeft: '4px solid #9B59B6',
+            borderLeft: '4px solid var(--accent-color)',
             boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
         }}>
-            <h2 style={{ color: '#8E44AD', marginTop: 0, borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem', marginBottom: '1rem' }}>
+            <h2 style={{ color: 'var(--accent-color)', marginTop: 0, borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem', marginBottom: '1rem' }}>
                 {section.title}
             </h2>
 
@@ -183,8 +183,8 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
                                 fontSize: '1rem'
                             }}>
                                 <thead>
-                                    <tr style={{ background: 'rgba(155, 89, 182, 0.15)' }}>
-                                        <th style={{ padding: '0.75rem 1rem', textAlign: 'left', color: '#8E44AD', fontWeight: 700, borderBottom: '2px solid var(--border-color)' }}>Français</th>
+                                    <tr style={{ background: 'rgba(76, 175, 80, 0.08)' }}>
+                                        <th style={{ padding: '0.75rem 1rem', textAlign: 'left', color: 'var(--accent-color)', fontWeight: 700, borderBottom: '2px solid var(--border-color)' }}>Français</th>
                                         <th style={{ padding: '0.75rem 1rem', textAlign: 'left', color: '#3686C9', fontWeight: 700, borderBottom: '2px solid var(--border-color)' }}>English</th>
                                         <th style={{ padding: '0.75rem 0.5rem', textAlign: 'center', borderBottom: '2px solid var(--border-color)', width: '80px' }}>🔊</th>
                                     </tr>
