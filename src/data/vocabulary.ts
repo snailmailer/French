@@ -430,5 +430,106 @@ export const vocabularyData: VocabularySection[] = [
             { en: "Hanger", fr: "le cintre" },
             { en: "Wastebasket", fr: "la corbeille à papier" }
         ]
+    },
+
+    // ===== DIRE L'HEURE EN FRANÇAIS (Telling Time in French) =====
+    {
+        title: "Dire l'heure — Règles principales (Telling Time — Main Rules)",
+        items: [
+            { fr: "Dire l'heure en français suit des règles précises différentes de l'anglais.", en: "Telling the time in French follows precise rules different from English." },
+            { fr: "Structure de base : Il est + heure(s) + minutes + période", en: "Basic Structure: It is + hour(s) + minutes + period of day" },
+            { fr: "\"Une heure\" (singulier) → seulement pour 1h00", en: "\"One hour\" (singular) → only for 1:00" },
+            { fr: "\"Deux heures\" (pluriel) → dès 2h00 et plus", en: "\"Two hours\" (plural) → from 2:00 onwards" },
+            { fr: "Il est une heure.", en: "It's one o'clock. (1:00)" },
+            { fr: "Il est deux heures.", en: "It's two o'clock. (2:00)" },
+            { fr: "Il est trois heures.", en: "It's three o'clock. (3:00)" },
+        ]
+    },
+    {
+        title: "Dire l'heure — Minutes 1-30 (Telling Time — Minutes 1-30)",
+        items: [
+            { fr: "Règle : dites les minutes après l'heure", en: "Rule: say minutes after the hour" },
+            { fr: "Il est trois heures cinq.", en: "It's three oh-five. (3:05)" },
+            { fr: "Il est trois heures dix.", en: "It's ten past three. (3:10)" },
+            { fr: "Il est trois heures et quart.", en: "It's quarter past three. (3:15)" },
+            { fr: "Il est trois heures vingt.", en: "It's twenty past three. (3:20)" },
+            { fr: "Il est trois heures vingt-cinq.", en: "It's twenty-five past three. (3:25)" },
+            { fr: "Il est trois heures et demie.", en: "It's half past three. (3:30)" },
+        ]
+    },
+    {
+        title: "Dire l'heure — Minutes 31-59 avec \"moins\" (Telling Time — Minutes 31-59 with \"to\")",
+        items: [
+            { fr: "Règle : Il est [heure suivante] moins [minutes manquantes]", en: "Rule: It is [next hour] minus [missing minutes to next hour]" },
+            { fr: "Il est quatre heures moins vingt-cinq.", en: "It's twenty-five to four. (3:35)" },
+            { fr: "Il est quatre heures moins vingt.", en: "It's twenty to four. (3:40)" },
+            { fr: "Il est quatre heures moins le quart.", en: "It's quarter to four. (3:45)" },
+            { fr: "Il est quatre heures moins dix.", en: "It's ten to four. (3:50)" },
+            { fr: "Il est quatre heures moins cinq.", en: "It's five to four. (3:55)" },
+        ]
+    },
+    {
+        title: "Dire l'heure — Périodes de la journée (Telling Time — Periods of the Day)",
+        items: [
+            { fr: "du matin → 00h00-11h59", en: "in the morning / AM → 00:00-11:59" },
+            { fr: "de l'après-midi → 12h00-17h59", en: "in the afternoon / PM → 12:00-17:59" },
+            { fr: "du soir → 18h00-23h59", en: "in the evening → 18:00-23:59" },
+            { fr: "Il est neuf heures du matin.", en: "It's nine in the morning. (9:00 AM)" },
+            { fr: "Il est cinq heures de l'après-midi.", en: "It's five in the afternoon. (5:00 PM)" },
+            { fr: "Il est dix heures du soir.", en: "It's ten in the evening. (10:00 PM)" },
+        ]
+    },
+    {
+        title: "Dire l'heure — Plages horaires (Telling Time — Time Ranges)",
+        items: [
+            { fr: "Structure : de + heure1 + à + heure2", en: "Structure: from + time1 + to + time2" },
+            { fr: "De neuf heures à dix-sept heures.", en: "From nine to five. (9AM to 5PM)" },
+            { fr: "Je travaille de neuf heures du matin à cinq heures de l'après-midi.", en: "I work from nine in the morning to five in the afternoon. (9AM-5PM)" },
+            { fr: "Le magasin ouvre de huit heures à midi et de quatorze heures à dix-neuf heures.", en: "The store opens from eight to noon and from two to seven. (8AM-noon, 2PM-7PM)" },
+        ]
+    },
+    {
+        title: "Dire l'heure — Rendez-vous (Telling Time — Appointments)",
+        items: [
+            { fr: "Règle : À + heure précise (sans \"Il est\")", en: "Rule: At + exact time (without \"It is\")" },
+            { fr: "À deux heures.", en: "At two o'clock. (2:00)" },
+            { fr: "À midi et quart.", en: "At quarter past noon. (12:15)" },
+            { fr: "À seize heures trente.", en: "At four thirty. (4:30 PM)" },
+        ]
+    },
+    {
+        title: "Dire l'heure — Futur et Passé (Telling Time — Future & Past)",
+        items: [
+            { fr: "Dans + durée → futur", en: "In + duration → future" },
+            { fr: "Dans dix minutes.", en: "In ten minutes." },
+            { fr: "Dans une heure.", en: "In one hour." },
+            { fr: "Il y a + durée → passé", en: "Duration + ago → past" },
+            { fr: "Il y a une heure.", en: "One hour ago." },
+            { fr: "Il y a dix minutes.", en: "Ten minutes ago." },
+        ]
+    },
+    {
+        title: "Dire l'heure — Exceptions et cas spéciaux (Telling Time — Exceptions & Special Cases)",
+        items: [
+            { fr: "Midi / Minuit : jamais avec chiffres", en: "Noon / Midnight: never with numbers" },
+            { fr: "Il est midi.", en: "It's noon. (12:00)" },
+            { fr: "Il est minuit.", en: "It's midnight. (00:00)" },
+            { fr: "Heures précises : \"pile\"", en: "Exact time: \"exactly\"" },
+            { fr: "Il est trois heures pile.", en: "It's exactly three o'clock." },
+            { fr: "Approximations :", en: "Approximations:" },
+            { fr: "Il est environ trois heures.", en: "It's about three o'clock." },
+            { fr: "Il est moins le quart.", en: "It's quarter to." },
+        ]
+    },
+    {
+        title: "Dire l'heure — Questions (Telling Time — Questions)",
+        items: [
+            { fr: "Quelle heure est-il ?", en: "What time is it?" },
+            { fr: "Il est dix heures seize du soir.", en: "It is ten sixteen in the evening. (10:16 PM)" },
+            { fr: "À quelle heure ?", en: "At what time?" },
+            { fr: "À vingt-deux heures seize.", en: "At ten sixteen PM." },
+            { fr: "Tu arrives à quelle heure ?", en: "What time are you arriving?" },
+            { fr: "J'arrive maintenant, il est dix heures seize du soir !", en: "I'm arriving now, it's ten sixteen in the evening!" },
+        ]
     }
 ];

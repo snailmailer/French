@@ -3,7 +3,7 @@ import { grammarData } from '../data/grammar';
 import { vocabularyData, type VocabularySection } from '../data/vocabulary';
 import type { PronounSection } from '../data/pronouns';
 import { Search, X, BookOpen, Volume2 } from 'lucide-react';
-import { speakFrench } from '../utils/tts';
+import { speakFrench, speakEnglish } from '../utils/tts';
 
 // --- Components ---
 
@@ -130,23 +130,44 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
                             <span style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{item.fr}</span>
                             <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{item.en}</span>
                         </div>
-                        <button
-                            onClick={() => speakFrench(item.fr)}
-                            aria-label={`Pronounce ${item.fr}`}
-                            style={{
-                                background: 'transparent',
-                                border: 'none',
-                                cursor: 'pointer',
-                                color: '#4CAF50', // Green for TTS
-                                padding: '0.4rem',
-                                borderRadius: '50%',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            }}
-                        >
-                            <Volume2 size={20} />
-                        </button>
+                        <div style={{ display: 'flex', gap: '0.25rem' }}>
+                            <button
+                                onClick={() => speakFrench(item.fr)}
+                                aria-label={`Pronounce ${item.fr}`}
+                                title="Écouter en français"
+                                style={{
+                                    background: 'transparent',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    color: '#4CAF50',
+                                    padding: '0.4rem',
+                                    borderRadius: '50%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                <Volume2 size={20} />
+                            </button>
+                            <button
+                                onClick={() => speakEnglish(item.en)}
+                                aria-label={`Pronounce ${item.en}`}
+                                title="Listen in English"
+                                style={{
+                                    background: 'transparent',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    color: '#3686C9',
+                                    padding: '0.4rem',
+                                    borderRadius: '50%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                <Volume2 size={18} />
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>
