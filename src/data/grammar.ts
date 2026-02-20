@@ -47,12 +47,185 @@ export const grammarData: PronounSection[] = [
     },
     {
         title: "Adverbes (Adverbs)",
-        useFr: "modifient un verbe, un adjectif ou un autre adverbe.",
-        useEn: "modify verbs, adjectives, or other adverbs.",
-        structure: "Invariable (ne change pas de forme).",
-        examples: [
-            { fr: "Il court rapidement.", en: "He runs quickly." },
-            { fr: "Très bien.", en: "Very good." }
+        useFr: "mot invariable qui modifie un verbe, un adjectif ou un autre adverbe.",
+        useEn: "invariant word that modifies a verb, an adjective, or another adverb.",
+        structure: "Invariable",
+        examples: [],
+        subSections: [
+            {
+                title: "Formation des adverbes (Formation)",
+                useFr: "Règle générale : Adjectif au féminin + -ment",
+                useEn: "General rule: Feminine adjective + -ment",
+                structure: "Adjectif fém. + -ment",
+                examples: [
+                    { fr: "lent → lente → lentement", en: "slow → slowly" },
+                    { fr: "rapide → rapide → rapidement", en: "quick → quickly" },
+                    { fr: "sérieux → sérieuse → sérieusement", en: "serious → seriously" },
+                    { fr: "naturel → naturelle → naturellement", en: "natural → naturally" }
+                ],
+                subSections: [
+                    {
+                        title: "Exceptions importantes",
+                        useFr: "Adjectifs en -ant ou -ent",
+                        useEn: "Adjectives ending in -ant or -ent",
+                        structure: "-ant → -amment / -ent → -emment",
+                        examples: [
+                            { fr: "constant → constamment", en: "constant → constantly" },
+                            { fr: "élégant → élégamment", en: "elegant → elegantly" },
+                            { fr: "différent → différemment", en: "different → differently" },
+                            { fr: "fréquent → fréquemment", en: "frequent → frequently" }
+                        ]
+                    }
+                ]
+            },
+            {
+                title: "Adverbes de manière (Adverbs of Manner)",
+                useFr: "décrivent comment une action est faite.",
+                useEn: "describe how an action is done.",
+                structure: "Invariable",
+                examples: [],
+                subSections: [
+                    {
+                        title: "Rapidement",
+                        useFr: "Décrit une action faite à grande vitesse.",
+                        useEn: "Quickly, rapidly.",
+                        structure: "Invariable",
+                        examples: [{ fr: "Elle range la chambre rapidement.", en: "She tidies the bedroom quickly." }]
+                    },
+                    {
+                        title: "Lentement",
+                        useFr: "Décrit une action faite à petite vitesse.",
+                        useEn: "Slowly.",
+                        structure: "Invariable",
+                        examples: [{ fr: "Il nettoie la salle de bain lentement.", en: "He cleans the bathroom slowly." }]
+                    },
+                    {
+                        title: "Bien",
+                        useFr: "Indique une bonne qualité ou manière.",
+                        useEn: "Well, good.",
+                        structure: "Invariable",
+                        examples: [{ fr: "Le lit est bien fait.", en: "The bed is well made." }]
+                    },
+                    {
+                        title: "Mal",
+                        useFr: "Indique une mauvaise qualité ou manière.",
+                        useEn: "Badly, poorly.",
+                        structure: "Invariable",
+                        examples: [{ fr: "Les rideaux sont mal accrochés.", en: "The curtains are poorly hung." }]
+                    }
+                ]
+            },
+            {
+                title: "Adverbes de temps (Adverbs of Time)",
+                useFr: "indiquent quand une action se passe.",
+                useEn: "indicate when an action happens.",
+                structure: "Invariable",
+                examples: [],
+                subSections: [
+                    {
+                        title: "Maintenant",
+                        useFr: "À ce moment précis.",
+                        useEn: "Now.",
+                        structure: "Invariable",
+                        examples: [{ fr: "Je vais acheter un nouveau miroir maintenant.", en: "I'm going to buy a new mirror now." }]
+                    },
+                    {
+                        title: "Hier",
+                        useFr: "Le jour avant aujourd'hui.",
+                        useEn: "Yesterday.",
+                        structure: "Invariable",
+                        examples: [{ fr: "Hier, j'ai lavé les serviettes.", en: "Yesterday, I washed the towels." }]
+                    },
+                    {
+                        title: "Aujourd'hui",
+                        useFr: "Le jour en cours.",
+                        useEn: "Today.",
+                        structure: "Invariable",
+                        examples: [{ fr: "Aujourd'hui, on change les draps.", en: "Today, we change the sheets." }]
+                    },
+                    {
+                        title: "Demain",
+                        useFr: "Le jour après aujourd'hui.",
+                        useEn: "Tomorrow.",
+                        structure: "Invariable",
+                        examples: [{ fr: "Demain, le meuble arrive.", en: "Tomorrow, the furniture arrives." }]
+                    }
+                ]
+            },
+            {
+                title: "Adverbes de lieu (Adverbs of Place)",
+                useFr: "indiquent où une action se passe.",
+                useEn: "indicate where an action happens.",
+                structure: "Invariable",
+                examples: [],
+                subSections: [
+                    {
+                        title: "Ici",
+                        useFr: "À cet endroit précis.",
+                        useEn: "Here.",
+                        structure: "Invariable",
+                        examples: [{ fr: "Mets la lampe ici.", en: "Put the lamp here." }]
+                    },
+                    {
+                        title: "Là",
+                        useFr: "À cet endroit (un peu éloigné).",
+                        useEn: "There.",
+                        structure: "Invariable",
+                        examples: [{ fr: "Le savon est là.", en: "The soap is there." }]
+                    },
+                    {
+                        title: "Partout",
+                        useFr: "Dans tous les endroits.",
+                        useEn: "Everywhere.",
+                        structure: "Invariable",
+                        examples: [{ fr: "Il y a des tiroirs partout.", en: "There are drawers everywhere." }]
+                    },
+                    {
+                        title: "Près",
+                        useFr: "À proximité.",
+                        useEn: "Near, close.",
+                        structure: "Invariable",
+                        examples: [{ fr: "La brosse est près du lavabo.", en: "The brush is near the sink." }]
+                    }
+                ]
+            },
+            {
+                title: "Adverbes de quantité/intensité (Adverbs of Quantity/Intensity)",
+                useFr: "indiquent le degré ou la quantité.",
+                useEn: "indicate degree or quantity.",
+                structure: "Invariable",
+                examples: [],
+                subSections: [
+                    {
+                        title: "Très",
+                        useFr: "Augmente beaucoup l'intensité.",
+                        useEn: "Very, much.",
+                        structure: "Invariable",
+                        examples: [{ fr: "La chambre est très propre.", en: "The room is very clean." }]
+                    },
+                    {
+                        title: "Trop",
+                        useFr: "Excès, plus que nécessaire.",
+                        useEn: "Too (much).",
+                        structure: "Invariable",
+                        examples: [{ fr: "Il y a trop de meubles.", en: "There is too much furniture." }]
+                    },
+                    {
+                        title: "Peu",
+                        useFr: "Petite quantité.",
+                        useEn: "Little, few.",
+                        structure: "Invariable",
+                        examples: [{ fr: "Peu de serviettes propres.", en: "Few clean towels." }]
+                    },
+                    {
+                        title: "Beaucoup",
+                        useFr: "Grande quantité.",
+                        useEn: "A lot, much.",
+                        structure: "Invariable",
+                        examples: [{ fr: "J'aime beaucoup cette armoire.", en: "I like this wardrobe a lot." }]
+                    }
+                ]
+            }
         ]
     },
     {
