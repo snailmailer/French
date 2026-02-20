@@ -531,5 +531,63 @@ export const vocabularyData: VocabularySection[] = [
             { fr: "Tu arrives à quelle heure ?", en: "What time are you arriving?" },
             { fr: "J'arrive maintenant, il est dix heures seize du soir !", en: "I'm arriving now, it's ten sixteen in the evening!" },
         ]
+    },
+
+    // ===== DONNER UN NUMÉRO DE TÉLÉPHONE EN FRANÇAIS (Giving Phone Numbers in French) =====
+    {
+        title: "Numéros de téléphone — Règles principales (Phone Numbers — Main Rules)",
+        items: [
+            { fr: "Les numéros français (10 chiffres) se disent toujours deux par deux.", en: "French phone numbers (10 digits) are always said two digits at a time." },
+            { fr: "Structure : deux chiffres par deux, avec des pauses naturelles.", en: "Structure: group by 2 digits, with natural pauses." },
+            { fr: "Les nombres 10+ utilisent les dizaines : \"quarante-cinq\" (45), pas \"quatre cinq\".", en: "Numbers 10+ use the tens: \"quarante-cinq\" (45), not \"quatre cinq\"." },
+            { fr: "Exemple : 06 12 34 56 78", en: "Example: 06 12 34 56 78" },
+            { fr: "Zéro six, douze, trente-quatre, cinquante-six, soixante-dix-huit.", en: "Zero six, twelve, thirty-four, fifty-six, seventy-eight." },
+        ]
+    },
+    {
+        title: "Numéros de téléphone — Phrases pour donner son numéro (Phone Numbers — Giving Your Number)",
+        items: [
+            { fr: "Mon numéro c'est le...", en: "My number is..." },
+            { fr: "Mon numéro de téléphone est...", en: "My phone number is..." },
+            { fr: "Mon portable, c'est...", en: "My cell is..." },
+            { fr: "Vous pouvez noter ?", en: "Can you write it down?" },
+            { fr: "Mon numéro, c'est le zéro six, quarante-cinq, soixante-six, soixante-douze, quatre-vingt-un.", en: "My number is zero six, forty-five, sixty-six, seventy-two, eighty-one. (06 45 66 72 81)" },
+        ]
+    },
+    {
+        title: "Numéros de téléphone — Nombres spéciaux (Phone Numbers — Special Numbers)",
+        items: [
+            { fr: "00 → double zéro", en: "00 → double zero" },
+            { fr: "11 → onze", en: "11 → eleven" },
+            { fr: "22 → vingt-deux", en: "22 → twenty-two" },
+            { fr: "33 → trente-trois", en: "33 → thirty-three" },
+            { fr: "Jamais \"double un\" ou \"double deux\" → toujours la dizaine complète !", en: "Never \"double one\" or \"double two\" → always use the full tens!" },
+        ]
+    },
+    {
+        title: "Numéros de téléphone — Demander un numéro (Phone Numbers — Asking for a Number)",
+        items: [
+            { fr: "Quel est votre numéro ?", en: "What's your number? (formal)" },
+            { fr: "C'est quoi ton numéro ?", en: "What's your number? (informal)" },
+            { fr: "Tu peux me donner ton numéro ?", en: "Can you give me your number?" },
+            { fr: "Répétez lentement, s'il vous plaît.", en: "Repeat slowly, please." },
+        ]
+    },
+    {
+        title: "Numéros de téléphone — Exemple de dialogue (Phone Numbers — Dialogue Example)",
+        items: [
+            { fr: "A : Quel est votre numéro de téléphone ?", en: "A: What's your phone number?" },
+            { fr: "B : C'est le zéro un, vingt-trois, quarante-cinq, soixante-sept, quatre-vingt-neuf.", en: "B: It's zero one, twenty-three, forty-five, sixty-seven, eighty-nine. (01 23 45 67 89)" },
+            { fr: "A : Parfait, c'est noté !", en: "A: Perfect, got it!" },
+        ]
+    },
+    {
+        title: "Numéros de téléphone — Types de numéros français (Phone Numbers — French Number Types)",
+        items: [
+            { fr: "Portable (mobile) : 06 XX XX XX XX ou 07 XX XX XX XX", en: "Mobile: 06 XX XX XX XX or 07 XX XX XX XX" },
+            { fr: "Fixe (landline) : 01/02/03/04/05 XX XX XX XX", en: "Landline: 01/02/03/04/05 XX XX XX XX" },
+            { fr: "International : +33 6 XX XX XX XX (sans le 0)", en: "International: +33 6 XX XX XX XX (drop the 0)" },
+            { fr: "Mon numéro professionnel est le zéro quatre, vingt et un, trente-trois, quarante-quatre, cinquante-cinq.", en: "My work number is zero four, twenty-one, thirty-three, forty-four, fifty-five. (04 21 33 44 55)" },
+        ]
     }
 ];
