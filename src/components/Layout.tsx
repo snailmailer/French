@@ -62,7 +62,7 @@ const Layout = () => {
                             background: 'transparent',
                             border: 'none',
                             cursor: 'pointer',
-                            padding: '0.5rem',
+                            padding: '0.8rem',
                             borderRadius: '50%',
                             display: 'flex',
                             alignItems: 'center',
@@ -74,7 +74,7 @@ const Layout = () => {
                         onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                         aria-label="App Launcher"
                     >
-                        <Grid size={32} />
+                        <Grid size={48} />
                     </button>
 
                     {isMenuOpen && (

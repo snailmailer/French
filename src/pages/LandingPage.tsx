@@ -135,7 +135,7 @@ const LandingPage = () => {
                                 {frTitle}
                             </h3>
                             {cleanedEnTitle && (
-                                <p style={{ margin: '0 0 1rem', color: '#B4C540', fontSize: '1.1rem', fontWeight: 'bold' }}>
+                                <p style={{ margin: '0 0 1rem', color: '#3686C9', fontSize: '1.1rem', fontWeight: 'bold' }}>
                                     ({cleanedEnTitle})
                                 </p>
                             )}

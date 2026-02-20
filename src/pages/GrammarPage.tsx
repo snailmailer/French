@@ -272,8 +272,8 @@ const GrammarPage = () => {
             <h1 style={{ textAlign: 'center', marginBottom: '0.25rem', color: '#E0E2D2', textTransform: 'uppercase' }}>
                 Grammaire et Vocabulaire
             </h1>
-            <p style={{ textAlign: 'center', fontSize: '1.25rem', color: '#B4C540', fontWeight: 'bold', marginBottom: '2rem' }}>
-                (Grammar &amp; Vocabulary)
+            <p style={{ textAlign: 'center', fontSize: '1.25rem', color: '#3686C9', fontWeight: 'bold', marginBottom: '2rem' }}>
+                (Grammar & Vocabulary)
             </p>
 
             {/* Toggle Tabs */}
@@ -302,12 +302,12 @@ const GrammarPage = () => {
                         fontSize: '1.1rem',
                         borderRadius: '25px',
                         border: 'none',
-                        background: activeTab === 'vocabulary' ? '#9B59B6' : 'var(--bg-secondary)', // Lavender button
+                        background: activeTab === 'vocabulary' ? '#88BEEC' : 'var(--bg-secondary)', // Lighter blue button
                         color: activeTab === 'vocabulary' ? 'white' : 'var(--text-secondary)',
                         cursor: 'pointer',
                         fontWeight: 600,
                         transition: 'all 0.2s ease',
-                        boxShadow: activeTab === 'vocabulary' ? '0 4px 10px rgba(155, 89, 182, 0.3)' : 'none'
+                        boxShadow: activeTab === 'vocabulary' ? '0 4px 10px rgba(136, 190, 236, 0.3)' : 'none'
                     }}
                 >
                     Vocabulaire (Vocabulary)
