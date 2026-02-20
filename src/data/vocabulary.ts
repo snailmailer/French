@@ -330,5 +330,35 @@ export const vocabularyData: VocabularySection[] = [
             { en: "Webcam", fr: "la webcam" },
             { en: "Power button", fr: "le bouton d'alimentation" }
         ]
+    },
+    {
+        title: "Meubles essentiels (Essential Furniture)",
+        items: [
+            { en: "Sofa", fr: "le canapé" },
+            { en: "Armchair", fr: "le fauteuil" },
+            { en: "Chair", fr: "la chaise" },
+            { en: "Stool", fr: "le tabouret" },
+            { en: "Table", fr: "la table" },
+            { en: "Desk", fr: "le bureau" },
+            { en: "Bed", fr: "le lit" },
+            { en: "Wardrobe", fr: "l'armoire" },
+            { en: "Dresser", fr: "la commode" },
+            { en: "Shelf", fr: "l'étagère" }
+        ]
+    },
+    {
+        title: "Autres meubles (Other Furniture)",
+        items: [
+            { en: "Nightstand", fr: "la table de nuit" },
+            { en: "Bookcase", fr: "la bibliothèque" },
+            { en: "Chest", fr: "le coffre" },
+            { en: "Mirror", fr: "le miroir" },
+            { en: "Lamp", fr: "la lampe" },
+            { en: "Rug", fr: "le tapis" },
+            { en: "Curtains", fr: "les rideaux" },
+            { en: "Drawer", fr: "le tiroir" },
+            { en: "Cupboard", fr: "le placard" },
+            { en: "Bench", fr: "la banquette" }
+        ]
     }
 ];
