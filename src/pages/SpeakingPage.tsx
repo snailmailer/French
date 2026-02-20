@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { speakingQuestions } from '../data/speakingQuestions';
-import { Mic, Square, RotateCcw, ChevronLeft, Volume2 } from 'lucide-react';
+import { speakingQuestions, examTopics, speakingTips, levelStructures } from '../data/speakingQuestions';
+import { Mic, Square, RotateCcw, ChevronLeft, Volume2, BookOpen, GraduationCap, Wrench, Clock, Play } from 'lucide-react';
 import { speakFrench } from '../utils/tts';
 
 // Type definition for SpeechRecognition
@@ -13,7 +13,7 @@ interface IWindow extends Window {
 const SpeakingPage = () => {
     // URL-persisted Navigation State
     const [searchParams, setSearchParams] = useSearchParams();
-    const view = (searchParams.get('view') as 'categories' | 'questions' | 'practice') || 'categories';
+    const view = (searchParams.get('view') as string) || 'categories';
     const selectedCategory = searchParams.get('category') || null;
     const [currentQuestionId, setCurrentQuestionId] = useState<string | null>(null);
 
@@ -27,6 +27,13 @@ const SpeakingPage = () => {
     // Countdown State
     const [isCountingDown, setIsCountingDown] = useState(false);
     const [countdown, setCountdown] = useState(10);
+
+    // Exam practice state
+    const [selectedExamTopic, setSelectedExamTopic] = useState<string | null>(null);
+    const [selectedScenario, setSelectedScenario] = useState<string | null>(null);
+    const [examTimer, setExamTimer] = useState(0);
+    const [examPhase, setExamPhase] = useState<'idle' | 'prep' | 'speak' | 'done'>('idle');
+    const examTimerRef = useRef<any>(null);
 
     // Refs
     const recognitionRef = useRef<any>(null);
@@ -43,110 +50,100 @@ const SpeakingPage = () => {
         // Initialize Speech Recognition
         const { webkitSpeechRecognition, SpeechRecognition } = window as unknown as IWindow;
         const SpeechRecognitionClass = SpeechRecognition || webkitSpeechRecognition;
-
         if (SpeechRecognitionClass) {
-            recognitionRef.current = new SpeechRecognitionClass();
-            recognitionRef.current.continuous = true;
-            recognitionRef.current.interimResults = true;
-            recognitionRef.current.lang = 'fr-FR'; // French
+            const recognition = new SpeechRecognitionClass();
+            recognition.lang = 'fr-FR';
+            recognition.interimResults = false;
+            recognition.continuous = true;
 
-            recognitionRef.current.onresult = (event: any) => {
-                let currentTranscript = '';
-                for (let i = event.resultIndex; i < event.results.length; ++i) {
-                    currentTranscript += event.results[i][0].transcript;
+            recognition.onresult = (event: any) => {
+                let fullTranscript = '';
+                for (let i = 0; i < event.results.length; i++) {
+                    fullTranscript += event.results[i][0].transcript + ' ';
                 }
-                setTranscript(currentTranscript);
+                setTranscript(fullTranscript.trim());
             };
+
+            recognition.onerror = () => { /* Silently handle */ };
+            recognitionRef.current = recognition;
         }
+
+        return () => {
+            if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
+            if (examTimerRef.current) clearInterval(examTimerRef.current);
+        };
     }, []);
 
-    // Countdown Logic
+    // --- Recording functions ---
+    const handleStartClick = () => {
+        setIsCountingDown(true);
+        setCountdown(10);
+        setShowResult(false);
+        setTranscript('');
+        setTimer(0);
+        setAudioUrl(null);
+    };
+
+    const startActualRecording = () => {
+        setIsRecording(true);
+        timerIntervalRef.current = setInterval(() => {
+            setTimer(prev => prev + 1);
+        }, 1000);
+
+        if (recognitionRef.current) {
+            try { recognitionRef.current.start(); } catch { /* already started */ }
+        }
+
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(stream => {
+                const recorder = new MediaRecorder(stream);
+                audioChunksRef.current = [];
+                mediaRecorderRef.current = recorder;
+
+                recorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) {
+                        audioChunksRef.current.push(event.data);
+                    }
+                };
+
+                recorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+                    const url = URL.createObjectURL(audioBlob);
+                    setAudioUrl(url);
+                    stream.getTracks().forEach(track => track.stop());
+                };
+
+                recorder.start();
+            })
+            .catch(() => { /* Permission denied */ });
+    };
+
     useEffect(() => {
-        let interval: any;
         if (isCountingDown && countdown > 0) {
-            interval = setInterval(() => {
-                setCountdown((prev) => prev - 1);
-            }, 1000);
+            const t = setTimeout(() => setCountdown(prev => prev - 1), 1000);
+            return () => clearTimeout(t);
         } else if (isCountingDown && countdown === 0) {
             setIsCountingDown(false);
             startActualRecording();
         }
-        return () => clearInterval(interval);
     }, [isCountingDown, countdown]);
-
-    const handleStartClick = () => {
-        setTranscript('');
-        setTimer(0);
-        setAudioUrl(null);
-        setShowResult(false);
-        setIsCountingDown(true);
-        setCountdown(10);
-    };
-
-    const startActualRecording = async () => {
-        setIsRecording(true);
-        audioChunksRef.current = [];
-
-        // Start Speech Recognition
-        if (recognitionRef.current) {
-            try {
-                recognitionRef.current.start();
-            } catch (e) {
-                console.error("Speech recognition error:", e);
-            }
-        }
-
-        // Start Audio Recording
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            const mediaRecorder = new MediaRecorder(stream);
-            mediaRecorderRef.current = mediaRecorder;
-
-            mediaRecorder.ondataavailable = (event) => {
-                if (event.data.size > 0) {
-                    audioChunksRef.current.push(event.data);
-                }
-            };
-
-            mediaRecorder.onstop = () => {
-                const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
-                const url = URL.createObjectURL(audioBlob);
-                setAudioUrl(url);
-
-                // Stop all tracks to release microphone
-                stream.getTracks().forEach(track => track.stop());
-            };
-
-            mediaRecorder.start();
-        } catch (err) {
-            console.error("Error accessing microphone:", err);
-        }
-
-        // Timer
-        timerIntervalRef.current = setInterval(() => {
-            setTimer(prev => prev + 1);
-        }, 1000);
-    };
 
     const stopRecording = () => {
         setIsRecording(false);
+        setShowResult(true);
 
-        // Stop Recognition
-        if (recognitionRef.current) {
-            try {
-                recognitionRef.current.stop();
-            } catch (e) {
-                console.error("Speech recognition stop error", e);
-            }
+        if (timerIntervalRef.current) {
+            clearInterval(timerIntervalRef.current);
+            timerIntervalRef.current = null;
         }
 
-        // Stop Audio Recorder
+        if (recognitionRef.current) {
+            try { recognitionRef.current.stop(); } catch { /* not started */ }
+        }
+
         if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
             mediaRecorderRef.current.stop();
         }
-
-        clearInterval(timerIntervalRef.current);
-        setShowResult(true);
     };
 
     const formatTime = (seconds: number) => {
@@ -155,6 +152,7 @@ const SpeakingPage = () => {
         return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     };
 
+    // --- Navigation ---
     const handleCategorySelect = (category: string) => {
         setSearchParams({ view: 'questions', category });
     };
@@ -166,7 +164,6 @@ const SpeakingPage = () => {
         } else {
             setSearchParams({ view: 'practice' });
         }
-        // Reset state
         setTranscript('');
         setTimer(0);
         setAudioUrl(null);
@@ -181,50 +178,111 @@ const SpeakingPage = () => {
             } else {
                 setSearchParams({ view: 'questions' });
             }
-            // Clean up audio url
             if (audioUrl) URL.revokeObjectURL(audioUrl);
         } else if (view === 'questions') {
+            setSearchParams({ view: 'categories' });
+        } else {
             setSearchParams({ view: 'categories' });
         }
     };
 
-    // --- RENDERERS ---
+    // --- Exam timer ---
+    const startExamTimer = (topic: typeof examTopics[0], scenario: string) => {
+        setSelectedExamTopic(topic.id);
+        setSelectedScenario(scenario);
+        if (topic.prepTime > 0) {
+            setExamPhase('prep');
+            setExamTimer(topic.prepTime);
+            examTimerRef.current = setInterval(() => {
+                setExamTimer(prev => {
+                    if (prev <= 1) {
+                        clearInterval(examTimerRef.current);
+                        // Auto-start speak phase
+                        setExamPhase('speak');
+                        setExamTimer(topic.speakTime);
+                        examTimerRef.current = setInterval(() => {
+                            setExamTimer(p => {
+                                if (p <= 1) {
+                                    clearInterval(examTimerRef.current);
+                                    setExamPhase('done');
+                                    return 0;
+                                }
+                                return p - 1;
+                            });
+                        }, 1000);
+                        return 0;
+                    }
+                    return prev - 1;
+                });
+            }, 1000);
+        } else {
+            setExamPhase('speak');
+            setExamTimer(topic.speakTime);
+            examTimerRef.current = setInterval(() => {
+                setExamTimer(prev => {
+                    if (prev <= 1) {
+                        clearInterval(examTimerRef.current);
+                        setExamPhase('done');
+                        return 0;
+                    }
+                    return prev - 1;
+                });
+            }, 1000);
+        }
+    };
 
-    // 1. Category Selection View
+    const resetExam = () => {
+        if (examTimerRef.current) clearInterval(examTimerRef.current);
+        setExamPhase('idle');
+        setExamTimer(0);
+        setSelectedScenario(null);
+    };
+
+    // Common styles
+    const cardStyle = {
+        background: 'var(--bg-secondary)',
+        padding: '1.5rem',
+        borderRadius: '12px',
+        borderLeft: '4px solid var(--accent-color)',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+        marginBottom: '1rem'
+    };
+
+    const sectionHeading = (text: string) => (
+        <h2 style={{ color: 'var(--accent-color)', fontSize: '1.8rem', marginBottom: '1.5rem', paddingBottom: '0.5rem', borderBottom: '2px solid var(--border-color)' }}>
+            {text}
+        </h2>
+    );
+
+    // ========================
+    // 1. CATEGORIES HOME VIEW
+    // ========================
     if (view === 'categories') {
-        const homeGridStyle = {
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '2rem',
-            maxWidth: '1200px',
-            margin: '0 auto'
-        };
-
         return (
-            <div className="container" style={{ padding: '3rem 1rem' }}>
-                <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>Expression orale (Speaking Practice)</h1>
-                <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '4rem', maxWidth: '600px', margin: '0 auto 4rem' }}>
-                    Choisissez un sujet pour commencer votre test oral.
+            <div className="container" style={{ padding: '3rem 1rem', maxWidth: '1200px', margin: '0 auto' }}>
+                <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>
+                    Expression orale (Speaking Practice)
+                </h1>
+                <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '3rem', maxWidth: '700px', margin: '0 auto 3rem' }}>
+                    Pratiquez votre expression orale avec des questions par catégorie, des examens TEF/TCF, et un guide de niveaux CECR.
                 </p>
 
-                <div style={homeGridStyle}>
+                {/* === Question Categories === */}
+                {sectionHeading('📋 Catégories de questions (Question Categories)')}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '4rem' }}>
                     {categories.map(cat => (
                         <div
                             key={cat}
                             onClick={() => handleCategorySelect(cat)}
                             style={{
-                                background: '#ffffff',
-                                padding: '2rem',
-                                borderRadius: '16px',
-                                boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+                                ...cardStyle,
                                 cursor: 'pointer',
                                 transition: 'transform 0.2s, box-shadow 0.2s',
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
                                 textAlign: 'center',
-                                borderLeft: '6px solid #B4C540', // Matching Home Page style
-                                color: '#2C3E50'
+                                padding: '2rem'
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.transform = 'translateY(-5px)';
@@ -236,8 +294,8 @@ const SpeakingPage = () => {
                             }}
                         >
                             <div style={{
-                                color: '#B4C540',
-                                background: 'rgba(180, 197, 64, 0.1)', // Light green bg for icon
+                                color: 'var(--accent-color)',
+                                background: 'rgba(76, 175, 80, 0.08)',
                                 padding: '1rem',
                                 borderRadius: '50%',
                                 marginBottom: '1rem',
@@ -247,18 +305,248 @@ const SpeakingPage = () => {
                             }}>
                                 <Mic size={32} />
                             </div>
-                            <h3 style={{ margin: '0.5rem 0 1rem', fontSize: '1.5rem', color: '#B4C540' }}>{cat}</h3>
-                            <span style={{ color: '#7f8c8d' }}>
+                            <h3 style={{ margin: '0.5rem 0 0.5rem', fontSize: '1.3rem', color: 'var(--accent-color)' }}>{cat}</h3>
+                            <span style={{ color: 'var(--text-secondary)' }}>
                                 {speakingQuestions.filter(q => q.category === cat).length} Questions
                             </span>
                         </div>
                     ))}
                 </div>
+
+                {/* === TEF/TCF Exam Practice === */}
+                {sectionHeading('🎓 Pratique d\'examen TEF / TCF (Exam Practice)')}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '4rem' }}>
+                    {examTopics.map(topic => (
+                        <div key={topic.id} style={cardStyle}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                                <GraduationCap size={22} style={{ color: 'var(--accent-color)' }} />
+                                <h3 style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.2rem' }}>{topic.title}</h3>
+                            </div>
+                            <p style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', lineHeight: 1.6 }}>{topic.description}</p>
+                            <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+                                {topic.prepTime > 0 && (
+                                    <span style={{ fontSize: '0.85rem', background: 'rgba(54, 134, 201, 0.1)', color: '#3686C9', padding: '0.3rem 0.8rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                                        <Clock size={14} /> Préparation: {formatTime(topic.prepTime)}
+                                    </span>
+                                )}
+                                <span style={{ fontSize: '0.85rem', background: 'rgba(76, 175, 80, 0.1)', color: '#4CAF50', padding: '0.3rem 0.8rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                                    <Mic size={14} /> Parole: {formatTime(topic.speakTime)}
+                                </span>
+                            </div>
+
+                            {/* Scenarios */}
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                {topic.scenarios.map((scenario, idx) => {
+                                    const isActive = selectedExamTopic === topic.id && selectedScenario === scenario;
+                                    return (
+                                        <div key={idx} style={{
+                                            background: isActive ? 'rgba(76, 175, 80, 0.08)' : 'var(--bg-primary)',
+                                            border: isActive ? '2px solid var(--accent-color)' : '1px solid var(--border-color)',
+                                            borderRadius: '8px',
+                                            padding: '1rem',
+                                        }}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}>
+                                                <div style={{ flex: 1 }}>
+                                                    <p style={{ margin: 0, color: 'var(--text-primary)', lineHeight: 1.5, fontStyle: 'italic' }}>
+                                                        « {scenario} »
+                                                    </p>
+                                                </div>
+                                                <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
+                                                    <button
+                                                        onClick={() => speakFrench(scenario)}
+                                                        style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50', padding: '0.3rem' }}
+                                                        title="Écouter"
+                                                    >
+                                                        <Volume2 size={18} />
+                                                    </button>
+                                                    {!isActive ? (
+                                                        <button
+                                                            onClick={() => startExamTimer(topic, scenario)}
+                                                            style={{
+                                                                background: 'var(--accent-color)',
+                                                                color: 'white',
+                                                                border: 'none',
+                                                                borderRadius: '6px',
+                                                                padding: '0.4rem 0.8rem',
+                                                                cursor: 'pointer',
+                                                                fontSize: '0.85rem',
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                gap: '0.3rem'
+                                                            }}
+                                                        >
+                                                            <Play size={14} /> Commencer
+                                                        </button>
+                                                    ) : (
+                                                        <button
+                                                            onClick={resetExam}
+                                                            style={{
+                                                                background: '#e74c3c',
+                                                                color: 'white',
+                                                                border: 'none',
+                                                                borderRadius: '6px',
+                                                                padding: '0.4rem 0.8rem',
+                                                                cursor: 'pointer',
+                                                                fontSize: '0.85rem',
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                gap: '0.3rem'
+                                                            }}
+                                                        >
+                                                            <RotateCcw size={14} /> Réinitialiser
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            </div>
+                                            {isActive && examPhase !== 'idle' && (
+                                                <div style={{
+                                                    marginTop: '1rem',
+                                                    padding: '1rem',
+                                                    background: examPhase === 'prep' ? 'rgba(54, 134, 201, 0.1)' : examPhase === 'speak' ? 'rgba(76, 175, 80, 0.1)' : 'rgba(155, 89, 182, 0.1)',
+                                                    borderRadius: '8px',
+                                                    textAlign: 'center'
+                                                }}>
+                                                    <div style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', color: examPhase === 'prep' ? '#3686C9' : examPhase === 'speak' ? '#4CAF50' : '#9B59B6', fontWeight: 'bold', marginBottom: '0.5rem' }}>
+                                                        {examPhase === 'prep' ? '⏳ Préparation' : examPhase === 'speak' ? '🎤 Parlez maintenant !' : '✅ Terminé !'}
+                                                    </div>
+                                                    {examPhase !== 'done' && (
+                                                        <div style={{ fontSize: '2.5rem', fontFamily: 'monospace', fontWeight: 'bold', color: examPhase === 'prep' ? '#3686C9' : '#4CAF50' }}>
+                                                            {formatTime(examTimer)}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* === CEFR Level Structures === */}
+                {sectionHeading('📊 Niveaux CECR : Comment structurer vos réponses (CEFR Level Guide)')}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '4rem' }}>
+                    {levelStructures.map(level => {
+                        const levelColors: Record<string, string> = {
+                            'A1': '#4CAF50', 'A2': '#8BC34A',
+                            'B1': '#FF9800', 'B2': '#F57C00',
+                            'C1': '#E91E63', 'C2': '#9C27B0'
+                        };
+                        const color = levelColors[level.level] || 'var(--accent-color)';
+                        return (
+                            <div key={level.level} style={{
+                                ...cardStyle,
+                                borderLeft: `4px solid ${color}`
+                            }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                                    <span style={{
+                                        background: color,
+                                        color: 'white',
+                                        fontWeight: 'bold',
+                                        fontSize: '0.9rem',
+                                        padding: '0.3rem 0.8rem',
+                                        borderRadius: '6px'
+                                    }}>
+                                        {level.level}
+                                    </span>
+                                    <h3 style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.15rem' }}>
+                                        {level.titleFr} ({level.titleEn})
+                                    </h3>
+                                </div>
+
+                                <div style={{ marginBottom: '1rem' }}>
+                                    <p style={{ color: 'var(--text-primary)', lineHeight: 1.7, margin: '0 0 0.5rem' }}>
+                                        <strong style={{ color }}>En français :</strong> {level.descriptionFr}
+                                    </p>
+                                    <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, margin: 0, fontStyle: 'italic' }}>
+                                        <strong>English:</strong> {level.descriptionEn}
+                                    </p>
+                                </div>
+
+                                <div style={{
+                                    background: 'var(--bg-primary)',
+                                    borderRadius: '8px',
+                                    padding: '1rem',
+                                    border: '1px solid var(--border-color)',
+                                    display: 'flex',
+                                    alignItems: 'flex-start',
+                                    gap: '0.75rem'
+                                }}>
+                                    <button
+                                        onClick={() => speakFrench(level.exemple.replace(/[«»]/g, ''))}
+                                        style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50', padding: '0.2rem', flexShrink: 0, marginTop: '0.1rem' }}
+                                        title="Écouter l'exemple"
+                                    >
+                                        <Volume2 size={18} />
+                                    </button>
+                                    <div>
+                                        <p style={{ margin: '0 0 0.3rem', color: 'var(--text-primary)', fontWeight: 600 }}>
+                                            {level.exemple}
+                                        </p>
+                                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem', fontStyle: 'italic' }}>
+                                            ({level.exempleEn})
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+
+                {/* === Boîte à Outils === */}
+                {sectionHeading('🧰 Boîte à Outils (Speaking Toolbox)')}
+                <div style={{ marginBottom: '3rem' }}>
+                    <h3 style={{ color: 'var(--text-primary)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <Wrench size={18} /> Connecteurs logiques (Logical Connectors)
+                    </h3>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+                        {speakingTips.connectors.map((group, idx) => (
+                            <div key={idx} style={cardStyle}>
+                                <h4 style={{ margin: '0 0 0.75rem', color: 'var(--accent-color)', fontSize: '1rem' }}>{group.category}</h4>
+                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                                    {group.phrases.map((phrase, pIdx) => (
+                                        <span
+                                            key={pIdx}
+                                            onClick={() => speakFrench(phrase.replace('...', ''))}
+                                            style={{
+                                                background: 'var(--bg-primary)',
+                                                border: '1px solid var(--border-color)',
+                                                borderRadius: '20px',
+                                                padding: '0.4rem 0.8rem',
+                                                fontSize: '0.9rem',
+                                                color: 'var(--text-primary)',
+                                                cursor: 'pointer',
+                                                transition: 'background 0.2s'
+                                            }}
+                                            title="Cliquez pour écouter"
+                                        >
+                                            {phrase}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <h3 style={{ color: 'var(--text-primary)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <BookOpen size={18} /> Conseils (Tips)
+                    </h3>
+                    <div style={cardStyle}>
+                        <ul style={{ margin: 0, paddingLeft: '1.5rem', lineHeight: 2 }}>
+                            {speakingTips.advice.map((tip, idx) => (
+                                <li key={idx} style={{ color: 'var(--text-primary)' }}>{tip}</li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
             </div>
         );
     }
 
-    // 2. Question Selection View
+    // ========================
+    // 2. QUESTION LIST VIEW
+    // ========================
     if (view === 'questions') {
         return (
             <div className="container" style={{ maxWidth: '900px', padding: '3rem 1rem' }}>
@@ -266,10 +554,10 @@ const SpeakingPage = () => {
                     onClick={handleGoBack}
                     style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', marginBottom: '2rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem' }}
                 >
-                    <ChevronLeft size={20} /> Back to Categories
+                    <ChevronLeft size={20} /> Retour aux catégories
                 </button>
 
-                <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: '#B4C540', fontSize: '2rem' }}>
+                <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: 'var(--accent-color)', fontSize: '2rem' }}>
                     {selectedCategory}
                 </h2>
 
@@ -279,16 +567,12 @@ const SpeakingPage = () => {
                             key={q.id}
                             onClick={() => handleQuestionSelect(q.id)}
                             style={{
-                                background: '#ffffff',
-                                padding: '1.5rem',
-                                borderRadius: '12px',
-                                boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+                                ...cardStyle,
                                 cursor: 'pointer',
                                 transition: 'transform 0.2s, box-shadow 0.2s',
                                 display: 'flex',
                                 alignItems: 'center',
-                                justifyContent: 'space-between',
-                                borderLeft: '4px solid #B4C540' // Consistent style
+                                justifyContent: 'space-between'
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.transform = 'translateX(5px)';
@@ -296,11 +580,11 @@ const SpeakingPage = () => {
                             }}
                             onMouseLeave={(e) => {
                                 e.currentTarget.style.transform = 'translateX(0)';
-                                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)';
+                                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.05)';
                             }}
                         >
-                            <span style={{ fontSize: '1.1rem', color: '#2C3E50', fontWeight: 500 }}>{q.question}</span>
-                            <ChevronLeft size={20} style={{ transform: 'rotate(180deg)', color: '#B4C540' }} />
+                            <span style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: 500 }}>{q.question}</span>
+                            <ChevronLeft size={20} style={{ transform: 'rotate(180deg)', color: 'var(--accent-color)' }} />
                         </div>
                     ))}
                 </div>
@@ -308,7 +592,9 @@ const SpeakingPage = () => {
         );
     }
 
-    // 3. Practice View
+    // ========================
+    // 3. PRACTICE VIEW
+    // ========================
     if (!currentQuestion) return null;
 
     return (
@@ -317,36 +603,27 @@ const SpeakingPage = () => {
                 onClick={handleGoBack}
                 style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', marginBottom: '1rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem' }}
             >
-                <ChevronLeft size={20} /> Back to Questions
+                <ChevronLeft size={20} /> Retour aux questions
             </button>
 
             <div style={{
-                background: '#ffffff',
+                ...cardStyle,
                 padding: '3rem 2rem',
-                borderRadius: '16px',
                 textAlign: 'center',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-                borderLeft: '6px solid #B4C540', // Consistent style
-                marginBottom: '2rem',
-                position: 'relative',
-                color: '#2C3E50'
+                borderLeft: '6px solid var(--accent-color)',
+                position: 'relative'
             }}>
-                <div style={{ marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '1px', color: '#B4C540', fontWeight: 'bold', fontSize: '0.9rem' }}>
+                <div style={{ marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--accent-color)', fontWeight: 'bold', fontSize: '0.9rem' }}>
                     {selectedCategory}
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginBottom: '2.5rem' }}>
-                    <h2 style={{ fontSize: '2.2rem', color: '#2C3E50', margin: 0 }}>
+                    <h2 style={{ fontSize: '2.2rem', color: 'var(--text-primary)', margin: 0 }}>
                         {currentQuestion.question}
                     </h2>
                     <button
                         onClick={() => speakFrench(currentQuestion.question)}
-                        style={{
-                            background: 'transparent',
-                            border: 'none',
-                            cursor: 'pointer',
-                            color: '#4CAF50'
-                        }}
+                        style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50' }}
                         aria-label="Speak question"
                     >
                         <Volume2 size={24} />
@@ -355,23 +632,22 @@ const SpeakingPage = () => {
 
                 {isCountingDown ? (
                     <div style={{ marginBottom: '2.5rem' }}>
-                        <div style={{ fontSize: '1.5rem', color: '#7f8c8d', marginBottom: '1rem' }}>Recording in...</div>
+                        <div style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>Enregistrement dans...</div>
                         <div style={{ fontSize: '5rem', fontWeight: 'bold', color: '#e74c3c' }}>{countdown}</div>
                     </div>
                 ) : (
-                    <div style={{ fontSize: '3.5rem', fontFamily: 'monospace', color: isRecording ? '#e74c3c' : '#2C3E50', marginBottom: '2.5rem', fontWeight: 'bold' }}>
+                    <div style={{ fontSize: '3.5rem', fontFamily: 'monospace', color: isRecording ? '#e74c3c' : 'var(--text-primary)', marginBottom: '2.5rem', fontWeight: 'bold' }}>
                         {formatTime(timer)}
                     </div>
                 )}
-
 
                 {!isRecording && !showResult && !isCountingDown && (
                     <button
                         onClick={handleStartClick}
                         style={{
-                            background: '#ffffff',
-                            color: '#2C3E50',
-                            border: '2px solid #B4C540',
+                            background: 'var(--bg-secondary)',
+                            color: 'var(--text-primary)',
+                            border: '2px solid var(--accent-color)',
                             padding: '1rem 3rem',
                             borderRadius: '50px',
                             fontSize: '1.2rem',
@@ -382,16 +658,8 @@ const SpeakingPage = () => {
                             transition: 'all 0.2s',
                             boxShadow: '0 4px 6px rgba(0,0,0,0.05)'
                         }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.background = '#B4C540';
-                            e.currentTarget.style.color = '#ffffff';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.background = '#ffffff';
-                            e.currentTarget.style.color = '#2C3E50';
-                        }}
                     >
-                        <Mic size={24} /> Start Answer
+                        <Mic size={24} /> Commencer
                     </button>
                 )}
 
@@ -413,29 +681,28 @@ const SpeakingPage = () => {
                             boxShadow: '0 4px 10px rgba(231, 76, 60, 0.4)'
                         }}
                     >
-                        <Square size={24} fill="white" /> Stop
+                        <Square size={24} fill="white" /> Arrêter
                     </button>
                 )}
 
                 {showResult && (
                     <div className="result-area" style={{ marginTop: '3rem', animation: 'fadeIn 0.5s' }}>
                         <div style={{
-                            background: '#f8f9fa',
+                            background: 'var(--bg-primary)',
                             padding: '2rem',
                             borderRadius: '12px',
                             textAlign: 'left',
                             marginBottom: '2rem',
-                            border: '1px solid #edf2f7'
+                            border: '1px solid var(--border-color)'
                         }}>
-                            <h4 style={{ margin: '0 0 1rem 0', color: '#7f8c8d', fontSize: '0.9rem', textTransform: 'uppercase' }}>Transcript</h4>
-                            <p style={{ fontSize: '1.2rem', fontStyle: transcript ? 'normal' : 'italic', color: '#2C3E50', lineHeight: 1.6 }}>
-                                {transcript || "(No speech detected)"}
+                            <h4 style={{ margin: '0 0 1rem 0', color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase' }}>Transcription</h4>
+                            <p style={{ fontSize: '1.2rem', fontStyle: transcript ? 'normal' : 'italic', color: 'var(--text-primary)', lineHeight: 1.6 }}>
+                                {transcript || "(Aucune parole détectée)"}
                             </p>
 
-                            {/* Audio Replay */}
                             {audioUrl && (
-                                <div style={{ marginTop: '1.5rem', borderTop: '1px solid #edf2f7', paddingTop: '1.5rem' }}>
-                                    <h4 style={{ margin: '0 0 0.8rem 0', color: '#7f8c8d', fontSize: '0.9rem', textTransform: 'uppercase' }}>Recording playback</h4>
+                                <div style={{ marginTop: '1.5rem', borderTop: '1px solid var(--border-color)', paddingTop: '1.5rem' }}>
+                                    <h4 style={{ margin: '0 0 0.8rem 0', color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase' }}>Réécouter l'enregistrement</h4>
                                     <audio controls src={audioUrl} style={{ width: '100%', height: '40px' }} />
                                 </div>
                             )}
@@ -443,7 +710,7 @@ const SpeakingPage = () => {
 
                         <div style={{ display: 'flex', justifyContent: 'center', gap: '3rem', marginBottom: '2rem' }}>
                             <div style={{ textAlign: 'center' }}>
-                                <div style={{ fontSize: '0.8rem', color: '#7f8c8d', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Duration</div>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Durée</div>
                                 <div style={{ fontSize: '3rem', fontWeight: 'bold', color: '#3686C9' }}>{formatTime(timer)}</div>
                             </div>
                         </div>
@@ -453,8 +720,8 @@ const SpeakingPage = () => {
                                 onClick={handleStartClick}
                                 style={{
                                     background: 'transparent',
-                                    border: '2px solid #B4C540',
-                                    color: '#2C3E50',
+                                    border: '2px solid var(--accent-color)',
+                                    color: 'var(--text-primary)',
                                     padding: '0.8rem 2rem',
                                     borderRadius: '8px',
                                     cursor: 'pointer',
@@ -465,7 +732,7 @@ const SpeakingPage = () => {
                                     fontSize: '1rem'
                                 }}
                             >
-                                <RotateCcw size={18} /> Retake
+                                <RotateCcw size={18} /> Recommencer
                             </button>
                         </div>
                     </div>
@@ -477,6 +744,7 @@ const SpeakingPage = () => {
                     0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
                     70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
                     100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+                }
                 @keyframes fadeIn {
                     from { opacity: 0; transform: translateY(10px); }
                     to { opacity: 1; transform: translateY(0); }
