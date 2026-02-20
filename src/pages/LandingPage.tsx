@@ -34,7 +34,7 @@ const features = [
     },
     {
         id: 'writing',
-        title: 'Écriture (Writing)',
+        title: 'Pratique d\'Écriture (Writing Practice)',
         desc: 'Improve your written French with exercises and prompts.',
         icon: <PenTool size={32} />,
         path: '/writing',
@@ -44,7 +44,7 @@ const features = [
     },
     {
         id: 'speaking',
-        title: 'Expression orale (Speaking)',
+        title: 'Expression Orale (Speaking Practice)',
         desc: 'Enhance pronunciation and speaking confidence.',
         icon: <Mic size={32} />,
         path: '/speaking',
@@ -54,12 +54,12 @@ const features = [
     },
     {
         id: 'resources',
-        title: 'Ressources (Resources)',
+        title: 'Ressources Externes (External Resources)',
         desc: 'External tools, news, and practice materials.',
         icon: <BookOpen size={32} />,
         path: '/resources',
         color: '#ffffff',
-        textColor: '#E67E22', // Orange for distinction
+        textColor: '#E67E22',
         borderColor: '#E67E22'
     },
 ];
@@ -68,10 +68,7 @@ const LandingPage = () => {
     return (
         <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
             <h1 style={{ fontSize: '2.5rem', marginBottom: '0.25rem', color: 'var(--text-primary)', textAlign: 'center' }}>Bienvenue !</h1>
-            <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', textAlign: 'center', marginBottom: '1rem' }}>(Welcome!)</p>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '4rem', maxWidth: '600px', margin: '0 auto 4rem' }}>
-                Commencez votre voyage d'apprentissage du français avec nos outils complets.
-            </p>
+            <p style={{ fontSize: '1.25rem', color: '#B4C540', fontWeight: 'bold', textAlign: 'center', marginBottom: '4rem' }}>(Welcome!)</p>
 
             <div className="feature-grid" style={{
                 display: 'grid',
@@ -80,49 +77,61 @@ const LandingPage = () => {
                 maxWidth: '1200px',
                 margin: '0 auto'
             }}>
-                {features.map((feature) => (
-                    <Link
-                        to={feature.path}
-                        key={feature.id}
-                        style={{
-                            background: feature.color,
-                            padding: '2rem',
-                            borderRadius: '16px',
-                            textDecoration: 'none',
-                            color: 'var(--text-primary)',
-                            transition: 'transform 0.2s, box-shadow 0.2s',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            textAlign: 'center',
-                            borderLeft: `6px solid ${feature.borderColor}`,
-                            boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.transform = 'translateY(-5px)';
-                            e.currentTarget.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.transform = 'translateY(0)';
-                            e.currentTarget.style.boxShadow = 'none';
-                        }}
-                    >
-                        <div style={{
-                            color: feature.textColor,
-                            background: 'rgba(255,255,255,0.6)',
-                            padding: '1rem',
-                            borderRadius: '50%',
-                            marginBottom: '1rem',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}>
-                            {feature.icon}
-                        </div>
-                        <h3 style={{ margin: '0.5rem 0 1rem', color: feature.textColor, fontSize: '1.5rem' }}>{feature.title}</h3>
-                        <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>{feature.desc}</p>
-                    </Link>
-                ))}
+                {features.map((feature) => {
+                    const [frTitle, enTitle] = feature.title.split(' (');
+                    const cleanedEnTitle = enTitle ? enTitle.replace(')', '') : '';
+
+                    return (
+                        <Link
+                            to={feature.path}
+                            key={feature.id}
+                            style={{
+                                background: feature.color,
+                                padding: '2rem',
+                                borderRadius: '16px',
+                                textDecoration: 'none',
+                                color: 'var(--text-primary)',
+                                transition: 'transform 0.2s, box-shadow 0.2s',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                textAlign: 'center',
+                                borderLeft: `6px solid ${feature.borderColor}`,
+                                boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
+                            }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = 'translateY(-5px)';
+                                e.currentTarget.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = 'translateY(0)';
+                                e.currentTarget.style.boxShadow = 'none';
+                            }}
+                        >
+                            <div style={{
+                                color: feature.textColor,
+                                background: 'rgba(255,255,255,0.6)',
+                                padding: '1rem',
+                                borderRadius: '50%',
+                                marginBottom: '1rem',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}>
+                                {feature.icon}
+                            </div>
+                            <h3 style={{ margin: '0.5rem 0 0', color: 'var(--text-primary)', fontSize: '1.4rem', fontWeight: 600 }}>
+                                {frTitle}
+                            </h3>
+                            {cleanedEnTitle && (
+                                <p style={{ margin: '0 0 1rem', color: '#B4C540', fontSize: '1.1rem', fontWeight: 'bold' }}>
+                                    ({cleanedEnTitle})
+                                </p>
+                            )}
+                            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, marginTop: 'auto' }}>{feature.desc}</p>
+                        </Link>
+                    );
+                })}
             </div>
         </div>
     );

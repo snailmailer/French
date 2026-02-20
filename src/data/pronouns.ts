@@ -12,7 +12,7 @@ export interface PronounSection {
 
 export const pronounsData: PronounSection[] = [
     {
-        title: "1. Pronoms personnels sujets",
+        title: "Pronoms personnels sujets",
         useFr: "remplacent le sujet du verbe (la personne / la chose qui fait l’action).",
         useEn: "replace the subject of the verb (the person/thing doing the action).",
         structure: "pronom sujet + verbe + complément.",
@@ -23,14 +23,14 @@ export const pronounsData: PronounSection[] = [
         ]
     },
     {
-        title: "2. Pronoms personnels compléments",
+        title: "Pronoms personnels compléments",
         useFr: "remplacent un complément d’objet.",
         useEn: "replace an object (direct or indirect).",
         structure: "sujet + pronom + verbe.",
         examples: [],
         subSections: [
             {
-                title: "2a. COD – compléments d’objet direct",
+                title: "COD – compléments d’objet direct",
                 useFr: "remplacent un complément d’objet direct (répond à « qui ? / quoi ? » sans préposition).",
                 useEn: "replace a direct object (answers “who? / what?” with no preposition).",
                 structure: "sujet + pronom COD + verbe (+ reste de la phrase).",
@@ -41,7 +41,7 @@ export const pronounsData: PronounSection[] = [
                 ]
             },
             {
-                title: "2b. COI – compléments d’objet indirect",
+                title: "COI – compléments d’objet indirect",
                 useFr: "remplacent un complément d’objet indirect avec la préposition à (parler à, téléphoner à…).",
                 useEn: "replace an indirect object introduced by to (talk to, write to…).",
                 structure: "sujet + pronom COI + verbe (+ reste de la phrase).",
@@ -54,7 +54,7 @@ export const pronounsData: PronounSection[] = [
         ]
     },
     {
-        title: "3. Pronoms réfléchis (verbes pronominaux)",
+        title: "Pronoms réfléchis (verbes pronominaux)",
         useFr: "s’emploient avec les verbes pronominaux pour montrer que l’action revient sur le sujet (se laver, se lever, se souvenir…).",
         useEn: "used with reflexive verbs to show the subject acts on itself (to wash oneself, to get up, etc.).",
         structure: "sujet + pronom réfléchi + verbe pronominal.",
@@ -65,7 +65,7 @@ export const pronounsData: PronounSection[] = [
         ]
     },
     {
-        title: "4. Pronoms toniques (disjoints)",
+        title: "Pronoms toniques (disjoints)",
         useFr: "utilisés après une préposition, pour l’insistance, ou seuls comme réponse courte.",
         useEn: "used after a preposition, for emphasis, or alone as short answers.",
         structure: "préposition + pronom tonique / C’est + pronom tonique / pronom tonique en tête de phrase.",
@@ -76,7 +76,7 @@ export const pronounsData: PronounSection[] = [
         ]
     },
     {
-        title: "5. Pronoms possessifs",
+        title: "Pronoms possessifs",
         useFr: "remplacent « mon/ma/mes + nom », « ton/ta/tes + nom », etc., pour éviter de répéter le nom.",
         useEn: "replace “my + noun, your + noun, his/her + noun…” with “mine, yours, his, hers, ours, theirs”.",
         structure: "article défini (le, la, les) + forme possessive.",
@@ -87,7 +87,7 @@ export const pronounsData: PronounSection[] = [
         ]
     },
     {
-        title: "6. Pronoms démonstratifs",
+        title: "Pronoms démonstratifs",
         useFr: "remplacent « ce/cet/cette/ces + nom » déjà connu pour montrer de quel élément précis on parle.",
         useEn: "correspond to “this one / that one / these / those”.",
         structure: "pronom démonstratif + éventuel complément (de…, qui…, que…, ci / là).",
@@ -98,7 +98,7 @@ export const pronounsData: PronounSection[] = [
         ]
     },
     {
-        title: "7. Pronoms relatifs (qui, que, dont, où)",
+        title: "Pronoms relatifs (qui, que, dont, où)",
         useFr: "introduisent une proposition relative et relient deux phrases en remplaçant un nom (personne, chose, lieu, moment).",
         useEn: "introduce a relative clause (who, which, that, whose, where, when).",
         structure: "qui + verbe (sujet) | que + sujet + verbe | dont + ... (de) | où + ... (lieu/temps).",
@@ -111,7 +111,7 @@ export const pronounsData: PronounSection[] = [
         ]
     },
     {
-        title: "8. Pronoms interrogatifs",
+        title: "Pronoms interrogatifs",
         useFr: "servent à poser des questions sur une personne, une chose ou un choix entre plusieurs éléments.",
         useEn: "used to ask questions (who? what? which one?).",
         structure: "pronom + verbe... ou préposition + quoi/qui.",
@@ -124,7 +124,7 @@ export const pronounsData: PronounSection[] = [
         ]
     },
     {
-        title: "9. Pronoms indéfinis",
+        title: "Pronoms indéfinis",
         useFr: "désignent des personnes ou des choses de manière vague ou générale (pas identifiées précisément).",
         useEn: "refer to people/things in a non‑specific way (someone, nothing, several…).",
         structure: "pronom indéfini + verbe.",
@@ -136,14 +136,14 @@ export const pronounsData: PronounSection[] = [
         ]
     },
     {
-        title: "10. Pronoms adverbiaux y et en",
+        title: "Pronoms adverbiaux y et en",
         useFr: "remplace un lieu ou un objet introduit par une préposition.",
         useEn: "replaces a place or a prepositional phrase.",
         structure: "sujet + y/en + verbe.",
         examples: [],
         subSections: [
             {
-                title: "a) y",
+                title: "y",
                 useFr: "remplace un lieu (« là, à Paris… ») ou « à + chose / idée » ; peut se traduire par “là‑bas / à cela”.",
                 useEn: "means “there” or “about it / to it” (replaces “to + thing / place”).",
                 structure: "sujet + y + verbe.",
@@ -153,7 +153,7 @@ export const pronounsData: PronounSection[] = [
                 ]
             },
             {
-                title: "b) en",
+                title: "en",
                 useFr: "remplace « de + nom » (quantité, origine, objet) ; se traduit par “some / any / of it / of them”.",
                 useEn: "replaces “of + it/them, some of it, any of it/them”.",
                 structure: "sujet + en + verbe (+ quantité éventuelle).",
