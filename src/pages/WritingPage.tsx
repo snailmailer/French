@@ -67,9 +67,12 @@ const WritingPage = () => {
 
     return (
         <div className="writing-page" style={{ maxWidth: '800px', margin: '0 auto', padding: '2rem' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '2rem', color: 'var(--accent-color)' }}>
-                Pratique d'écriture (Writing Practice)
+            <h1 style={{ textAlign: 'center', marginBottom: '0.25rem', color: 'var(--accent-color)' }}>
+                Pratique d'Écriture
             </h1>
+            <p style={{ textAlign: 'center', fontSize: '1.25rem', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+                (Writing Practice)
+            </p>
 
             {/* Controls Container */}
             <div className="writing-controls" style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>

@@ -67,7 +67,8 @@ const features = [
 const LandingPage = () => {
     return (
         <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
-            <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>Bienvenue ! (Welcome!)</h1>
+            <h1 style={{ fontSize: '2.5rem', marginBottom: '0.25rem', color: 'var(--text-primary)', textAlign: 'center' }}>Bienvenue !</h1>
+            <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', textAlign: 'center', marginBottom: '1rem' }}>(Welcome!)</p>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '4rem', maxWidth: '600px', margin: '0 auto 4rem' }}>
                 Commencez votre voyage d'apprentissage du français avec nos outils complets.
             </p>

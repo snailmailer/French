@@ -69,9 +69,12 @@ const ConjugationPage = () => {
 
     return (
         <div className="container" style={{ maxWidth: '900px' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '1rem', color: 'var(--accent-color)' }}>
-                Outil de Conjugaison (Conjugation Tool)
+            <h1 style={{ textAlign: 'center', marginBottom: '0.25rem', color: 'var(--accent-color)' }}>
+                Outil de Conjugaison
             </h1>
+            <p style={{ textAlign: 'center', fontSize: '1.25rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+                (Conjugation Tool)
+            </p>
             <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginBottom: '3rem' }}>
                 Cherchez un verbe pour voir sa conjugaison complète et ses règles.
             </p>

@@ -269,9 +269,12 @@ const GrammarPage = () => {
 
     return (
         <div className="container" style={{ maxWidth: '1000px' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '2rem', color: 'var(--accent-color)' }}>
-                Grammaire et Vocabulaire (Grammar & Vocabulary)
+            <h1 style={{ textAlign: 'center', marginBottom: '0.25rem', color: 'var(--accent-color)' }}>
+                Grammaire et Vocabulaire
             </h1>
+            <p style={{ textAlign: 'center', fontSize: '1.25rem', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
+                (Grammar &amp; Vocabulary)
+            </p>
 
             {/* Toggle Tabs */}
             <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem', gap: '1rem' }}>
