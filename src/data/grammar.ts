@@ -244,6 +244,7 @@ export const grammarData: PronounSection[] = [
         useFr: "mot invariable qui unit des mots en marquant un rapport (lieu, temps, cause, etc.).",
         useEn: "invariant word linking words and indicating a relationship (place, time, cause, etc.).",
         structure: "Préposition + Nom / Pronom / Verbe à l'infinitif",
+        // image: '/prepositions_guide.jpg', // Add your image here
         examples: [],
         subSections: [
             {

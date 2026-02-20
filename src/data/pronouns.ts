@@ -7,6 +7,7 @@ export interface PronounSection {
     commonForms?: { [key: string]: string }[]; // For "Common forms" list in Indefinite pronouns
     examples: { fr: string; en: string }[];
     subSections?: PronounSection[]; // For 2a, 2b etc
+    image?: string; // Path to an illustrative image
 }
 
 export const pronounsData: PronounSection[] = [

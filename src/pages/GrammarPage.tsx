@@ -23,6 +23,11 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
             <HeaderTag style={{ color: 'var(--accent-color)', marginTop: 0 }}>{section.title}</HeaderTag>
 
             <div style={{ display: 'grid', gap: '1rem', marginBottom: '1rem' }}>
+                {section.image && (
+                    <div style={{ marginBottom: '1rem', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+                        <img src={section.image} alt={section.title} style={{ width: '100%', height: 'auto', display: 'block' }} />
+                    </div>
+                )}
                 <div>
                     <strong style={{ color: '#B4C540' }}>Use (FR):</strong> {section.useFr}
                 </div>
