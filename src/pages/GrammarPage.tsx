@@ -17,10 +17,19 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
             padding: '1.5rem',
             borderRadius: '12px',
             borderLeft: level === 0 ? '4px solid var(--accent-color)' : 'none',
-            marginLeft: level * 20 + 'px',
+            marginLeft: level === 0 ? '0' : '1rem', // Reduced margin for mobile
             boxShadow: level === 0 ? '0 4px 12px rgba(0,0,0,0.05)' : 'none'
         }}>
-            <HeaderTag style={{ color: 'var(--accent-color)', marginTop: 0 }}>{section.title}</HeaderTag>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                <HeaderTag style={{ color: 'var(--accent-color)', margin: 0 }}>{section.title}</HeaderTag>
+                <button
+                    onClick={() => speakFrench(section.title)}
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)' }}
+                    aria-label="Speak title"
+                >
+                    <Volume2 size={20} />
+                </button>
+            </div>
 
             <div style={{ display: 'grid', gap: '1rem', marginBottom: '1rem' }}>
                 {section.image && (
@@ -30,6 +39,9 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
                 )}
                 <div>
                     <strong style={{ color: '#B4C540' }}>Use (FR):</strong> {section.useFr}
+                    <button onClick={() => speakFrench(section.useFr)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#B4C540', marginLeft: '0.5rem', verticalAlign: 'middle' }}>
+                        <Volume2 size={16} />
+                    </button>
                 </div>
                 <div>
                     <strong style={{ color: '#3686C9' }}>Use (EN):</strong> {section.useEn}
@@ -40,6 +52,9 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
                 {section.forms && (
                     <div>
                         <strong>Forms:</strong> {section.forms}
+                        <button onClick={() => speakFrench(section.forms!)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', marginLeft: '0.5rem', verticalAlign: 'middle' }}>
+                            <Volume2 size={16} />
+                        </button>
                     </div>
                 )}
             </div>
@@ -47,10 +62,28 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
             {section.examples && section.examples.length > 0 && (
                 <div style={{ background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
                     <strong style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', opacity: 0.8 }}>EXAMPLES</strong>
-                    <ul style={{ margin: 0, paddingLeft: '1.2rem' }}>
+                    <ul style={{ margin: 0, paddingLeft: '0', listStyle: 'none' }}>
                         {section.examples.map((ex, idx) => (
-                            <li key={idx} style={{ marginBottom: '0.5rem' }}>
-                                <strong>{ex.fr}</strong> <span style={{ opacity: 0.7 }}>→ {ex.en}</span>
+                            <li key={idx} style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
+                                <div>
+                                    <strong style={{ color: 'var(--text-primary)' }}>{ex.fr}</strong> <br />
+                                    <span style={{ opacity: 0.7, fontSize: '0.9rem' }}>→ {ex.en}</span>
+                                </div>
+                                <button
+                                    onClick={() => speakFrench(ex.fr)}
+                                    style={{
+                                        background: 'rgba(76, 175, 80, 0.1)',
+                                        border: 'none',
+                                        cursor: 'pointer',
+                                        color: '#4CAF50',
+                                        padding: '0.4rem',
+                                        borderRadius: '50%',
+                                        flexShrink: 0
+                                    }}
+                                    aria-label="Speak example"
+                                >
+                                    <Volume2 size={18} />
+                                </button>
                             </li>
                         ))}
                     </ul>
