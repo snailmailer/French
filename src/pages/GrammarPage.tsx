@@ -45,7 +45,7 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
                     </button>
                 </div>
                 <div>
-                    <strong style={{ color: '#575A6C' }}>Use (EN):</strong> {section.useEn}
+                    <strong style={{ color: '#3686C9' }}>Use (EN):</strong> {section.useEn}
                 </div>
                 <div>
                     <strong style={{ color: '#B4C540' }}>Structure:</strong> <span style={{ fontStyle: 'italic', fontFamily: 'monospace', background: 'rgba(0,0,0,0.05)', padding: '0.2rem 0.4rem', borderRadius: '4px' }}>{section.structure}</span>

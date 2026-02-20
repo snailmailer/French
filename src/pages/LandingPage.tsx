@@ -101,15 +101,15 @@ const LandingPage = () => {
                                 alignItems: 'center',
                                 textAlign: 'center',
                                 borderLeft: `6px solid ${feature.borderColor}`,
-                                boxShadow: '0 4px 12px #575A6C'
+                                boxShadow: '0 4px 12px rgba(54, 134, 201, 0.3)'
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.transform = 'translateY(-5px)';
-                                e.currentTarget.style.boxShadow = '0 10px 20px #575A6C';
+                                e.currentTarget.style.boxShadow = '0 10px 20px rgba(54, 134, 201, 0.5)';
                             }}
                             onMouseLeave={(e) => {
                                 e.currentTarget.style.transform = 'translateY(0)';
-                                e.currentTarget.style.boxShadow = '0 4px 12px #575A6C';
+                                e.currentTarget.style.boxShadow = '0 4px 12px rgba(54, 134, 201, 0.3)';
                             }}
                         >
                             <div style={{

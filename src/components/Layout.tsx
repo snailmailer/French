@@ -50,9 +50,9 @@ const Layout = () => {
                 zIndex: 1000,
                 boxShadow: '0 2px 10px rgba(0,0,0,0.1)' // Added shadow for better visibility when scrolling
             }}>
-                <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '2rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>
-                    <BookOpen size={32} color="var(--accent-color)" />
-                    <span>Le Français</span>
+                <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '3.5rem', fontWeight: 800, color: 'var(--text-primary)', textDecoration: 'none' }}>
+                    <BookOpen size={48} color="var(--accent-color)" />
+                    <span style={{ letterSpacing: '-1px' }}>Le Français</span>
                 </Link>
 
                 <div ref={menuRef} style={{ position: 'relative' }}>
