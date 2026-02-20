@@ -670,7 +670,12 @@ export const vocabularyData: VocabularySection[] = [
                 subtitle: "Autres exceptions (Other Exceptions)",
                 format: 'table',
                 items: [
-                    { fr: "Rose, mauve, pourpre, fauve, écarlate s'accordent en genre et nombre malgré leur apparence.", en: "Rose, mauve, pourpre, fauve, écarlate agree in gender and number despite appearances." },
+                    { fr: "Rose, mauve, pourpre, fauve, écarlate s'accordent en genre et nombre malgré leur apparence.", en: "Rose (pink), mauve, pourpre (purple), fauve (tawny), écarlate (scarlet) agree in gender and number despite appearances." },
+                    { fr: "Rose → pink", en: "Pink" },
+                    { fr: "Mauve → mauve", en: "Mauve" },
+                    { fr: "Pourpre → purple", en: "Purple" },
+                    { fr: "Fauve → tawny", en: "Tawny" },
+                    { fr: "Écarlate → scarlet", en: "Scarlet" },
                     { fr: "des fleurs roses", en: "pink flowers" },
                     { fr: "une écharpe mauve", en: "a mauve scarf" },
                 ]
