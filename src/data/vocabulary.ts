@@ -203,7 +203,16 @@ export const vocabularyData: VocabularySection[] = [
             { en: "Chef", fr: "le chef" },
             { en: "Driver", fr: "le chauffeur" },
             { en: "Artist", fr: "l'artiste" },
-            { en: "IT specialist", fr: "le spécialiste en informatique" }
+            { en: "IT specialist", fr: "le spécialiste en informatique" },
+            { en: "Actor", fr: "l'acteur (m) / l'actrice (f)" },
+            { en: "Comedian", fr: "le comédien / la comédienne" },
+            { en: "Police", fr: "le policier / la policière" },
+            { en: "Detective", fr: "le détective / l'inspecteur(-trice)" },
+            { en: "Newscaster", fr: "le présentateur / la présentatrice de nouvelles" },
+            { en: "Journalist", fr: "le journaliste" },
+            { en: "Janitor", fr: "le concierge / l'agent(e) d'entretien" },
+            { en: "Clerk", fr: "l'employé(e) / le commis" },
+            { en: "Waiter", fr: "le serveur / la serveuse" }
         ]
     },
     {
@@ -218,7 +227,9 @@ export const vocabularyData: VocabularySection[] = [
             { en: "Office", fr: "le bureau" },
             { en: "Hotel", fr: "l'hôtel" },
             { en: "Library", fr: "la bibliothèque" },
-            { en: "Supermarket", fr: "le supermarché" }
+            { en: "Supermarket", fr: "le supermarché" },
+            { en: "Factory", fr: "l'usine" },
+            { en: "Apartment", fr: "l'appartement" }
         ]
     },
     {
@@ -232,8 +243,7 @@ export const vocabularyData: VocabularySection[] = [
             { en: "Listening to music", fr: "écouter de la musique" },
             { en: "Traveling", fr: "voyager" },
             { en: "Dancing", fr: "la danse" },
-            { en: "Photography", fr: "la photographie" },
-            { en: "Boxing", fr: "la boxe" }
+            { en: "Photography", fr: "la photographie" }
         ]
     },
     {
@@ -242,7 +252,6 @@ export const vocabularyData: VocabularySection[] = [
             { en: "Soccer", fr: "le football" },
             { en: "Tennis", fr: "le tennis" },
             { en: "Basketball", fr: "le basket-ball" },
-            { en: "Swimming", fr: "la natation" },
             { en: "Cycling", fr: "le cyclisme" },
             { en: "Running", fr: "la course à pied" },
             { en: "Boxing", fr: "la boxe" },
@@ -292,7 +301,8 @@ export const vocabularyData: VocabularySection[] = [
             { en: "Garage", fr: "le garage" },
             { en: "Attic", fr: "le grenier" },
             { en: "Basement", fr: "la cave" },
-            { en: "Balcony", fr: "le balcon" }
+            { en: "Balcony", fr: "le balcon" },
+            { en: "Backyard", fr: "la cour arrière / le jardin arrière" }
         ]
     },
     {
@@ -305,7 +315,13 @@ export const vocabularyData: VocabularySection[] = [
             { en: "City hall", fr: "la mairie" },
             { en: "Museum", fr: "le musée" },
             { en: "Cinema", fr: "le cinéma" },
-            { en: "Market", fr: "le marché" }
+            { en: "Market", fr: "le marché" },
+            { en: "Clinic", fr: "la clinique" },
+            { en: "Pharmacy", fr: "la pharmacie" },
+            { en: "Convenience store", fr: "le dépanneur / la supérette" },
+            { en: "Bus stop", fr: "l'arrêt de bus" },
+            { en: "Pedestrian lane", fr: "le passage piéton / la voie piétonne" },
+            { en: "Parking lot", fr: "le parking / le stationnement" }
         ]
     },
     {
@@ -339,7 +355,7 @@ export const vocabularyData: VocabularySection[] = [
         ]
     },
     {
-        title: "Meubles essentiels (Essential Furniture)",
+        title: "Les Meubles (Furniture)",
         items: [
             { en: "Sofa", fr: "le canapé" },
             { en: "Armchair", fr: "le fauteuil" },
@@ -350,12 +366,7 @@ export const vocabularyData: VocabularySection[] = [
             { en: "Bed", fr: "le lit" },
             { en: "Wardrobe", fr: "l'armoire" },
             { en: "Dresser", fr: "la commode" },
-            { en: "Shelf", fr: "l'étagère" }
-        ]
-    },
-    {
-        title: "Autres meubles (Other Furniture)",
-        items: [
+            { en: "Shelf", fr: "l'étagère" },
             { en: "Nightstand", fr: "la table de nuit" },
             { en: "Bookcase", fr: "la bibliothèque" },
             { en: "Chest", fr: "le coffre" },
@@ -365,39 +376,25 @@ export const vocabularyData: VocabularySection[] = [
             { en: "Curtains", fr: "les rideaux" },
             { en: "Drawer", fr: "le tiroir" },
             { en: "Cupboard", fr: "le placard" },
-            { en: "Bench", fr: "la banquette" }
-        ]
-    },
-    {
-        title: "Meubles principaux (Main Furniture)",
-        items: [
+            { en: "Bench", fr: "la banquette" },
             { en: "Medicine cabinet", fr: "l'armoire à pharmacie" },
             { en: "Sink / Washbasin", fr: "le lavabo" },
-            { en: "Bathroom vanity/cabinet", fr: "le meuble de salle de bains" },
-            { en: "Mirror", fr: "le miroir" },
-            { en: "Drawer", fr: "le tiroir" }
+            { en: "Bathroom vanity/cabinet", fr: "le meuble de salle de bains" }
         ]
     },
     {
-        title: "Accessoires essentiels (Essential Accessories)",
+        title: "Produits de toilette (Toiletries & Grooming)",
         items: [
             { en: "Toothbrush", fr: "la brosse à dents" },
             { en: "Toothpaste", fr: "le dentifrice" },
             { en: "Towel", fr: "la serviette" },
             { en: "Soap", fr: "le savon" },
             { en: "Shampoo", fr: "le shampooing" },
-            { en: "Shower gel", fr: "le gel douche" }
-        ]
-    },
-    {
-        title: "Produits de toilette (Toiletries & Grooming)",
-        items: [
+            { en: "Shower gel", fr: "le gel douche" },
             { en: "Hair dryer", fr: "le sèche-cheveux" },
             { en: "Hairbrush", fr: "la brosse à cheveux" },
             { en: "Comb", fr: "le peigne" },
-            { en: "Razor", fr: "le rasoir" },
-            { en: "Mirror", fr: "le miroir" },
-            { en: "Medicine cabinet", fr: "l'armoire à pharmacie" }
+            { en: "Razor", fr: "le rasoir" }
         ]
     },
     {
@@ -407,7 +404,12 @@ export const vocabularyData: VocabularySection[] = [
             { en: "Laundry basket", fr: "le panier à linge" },
             { en: "Shower curtain", fr: "le rideau de douche" },
             { en: "Towel rack", fr: "le porte-serviettes" },
-            { en: "Bath mat", fr: "le tapis de bain" }
+            { en: "Bath mat", fr: "le tapis de bain" },
+            { en: "Bedside lamp", fr: "la lampe de chevet" },
+            { en: "Alarm clock", fr: "le réveil" },
+            { en: "Lampshade", fr: "l'abat-jour" },
+            { en: "Hanger", fr: "le cintre" },
+            { en: "Wastebasket", fr: "la corbeille à papier" }
         ]
     },
     {
@@ -418,24 +420,6 @@ export const vocabularyData: VocabularySection[] = [
             { en: "Sheet", fr: "le drap" },
             { en: "Duvet", fr: "la couette" },
             { en: "Blanket", fr: "la couverture" }
-        ]
-    },
-    {
-        title: "Éclairage et réveil (Lighting & Alarm)",
-        items: [
-            { en: "Bedside lamp", fr: "la lampe de chevet" },
-            { en: "Alarm clock", fr: "le réveil" },
-            { en: "Lampshade", fr: "l'abat-jour" }
-        ]
-    },
-    {
-        title: "Autres accessoires (Other Accessories)",
-        items: [
-            { en: "Mirror", fr: "le miroir" },
-            { en: "Rug", fr: "le tapis" },
-            { en: "Curtains", fr: "les rideaux" },
-            { en: "Hanger", fr: "le cintre" },
-            { en: "Wastebasket", fr: "la corbeille à papier" }
         ]
     },
 
