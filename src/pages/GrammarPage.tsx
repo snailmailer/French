@@ -101,6 +101,61 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
     );
 };
 
+const VocabularyItemCard: React.FC<{ item: { fr: string; en: string } }> = ({ item }) => (
+    <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '0.8rem',
+        background: 'var(--bg-primary)',
+        borderRadius: '8px',
+        border: '1px solid var(--border-color)'
+    }}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <span style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{item.fr}</span>
+            <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{item.en}</span>
+        </div>
+        <div style={{ display: 'flex', gap: '0.25rem' }}>
+            <button
+                onClick={() => speakFrench(item.fr)}
+                aria-label={`Pronounce ${item.fr}`}
+                title="Écouter en français"
+                style={{
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: '#4CAF50',
+                    padding: '0.4rem',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}
+            >
+                <Volume2 size={20} />
+            </button>
+            <button
+                onClick={() => speakEnglish(item.en)}
+                aria-label={`Pronounce ${item.en}`}
+                title="Listen in English"
+                style={{
+                    background: 'transparent',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: '#3686C9',
+                    padding: '0.4rem',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}
+            >
+                <Volume2 size={18} />
+            </button>
+        </div>
+    </div>
+);
+
 const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ section }) => {
     return (
         <div style={{
@@ -108,69 +163,42 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
             background: 'var(--bg-secondary)',
             padding: '1.5rem',
             borderRadius: '12px',
-            borderLeft: '4px solid #9B59B6', // Lavender (Amethyst)
+            borderLeft: '4px solid #9B59B6',
             boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
         }}>
             <h2 style={{ color: '#8E44AD', marginTop: 0, borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem', marginBottom: '1rem' }}>
                 {section.title}
             </h2>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
-                {section.items.map((item, idx) => (
-                    <div key={idx} style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        padding: '0.8rem',
-                        background: 'var(--bg-primary)',
-                        borderRadius: '8px',
-                        border: '1px solid var(--border-color)'
+            {/* Flat items (simple vocabulary sections) */}
+            {section.items && section.items.length > 0 && (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
+                    {section.items.map((item, idx) => (
+                        <VocabularyItemCard key={idx} item={item} />
+                    ))}
+                </div>
+            )}
+
+            {/* Subsections (grouped content like Telling Time, Phone Numbers) */}
+            {section.subsections && section.subsections.map((sub, subIdx) => (
+                <div key={subIdx} style={{ marginBottom: subIdx < section.subsections!.length - 1 ? '1.5rem' : 0 }}>
+                    <h3 style={{
+                        color: '#B4C540',
+                        fontSize: '1.15rem',
+                        marginTop: subIdx === 0 ? 0 : '1.5rem',
+                        marginBottom: '0.75rem',
+                        paddingBottom: '0.4rem',
+                        borderBottom: '1px dashed var(--border-color)'
                     }}>
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <span style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{item.fr}</span>
-                            <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{item.en}</span>
-                        </div>
-                        <div style={{ display: 'flex', gap: '0.25rem' }}>
-                            <button
-                                onClick={() => speakFrench(item.fr)}
-                                aria-label={`Pronounce ${item.fr}`}
-                                title="Écouter en français"
-                                style={{
-                                    background: 'transparent',
-                                    border: 'none',
-                                    cursor: 'pointer',
-                                    color: '#4CAF50',
-                                    padding: '0.4rem',
-                                    borderRadius: '50%',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}
-                            >
-                                <Volume2 size={20} />
-                            </button>
-                            <button
-                                onClick={() => speakEnglish(item.en)}
-                                aria-label={`Pronounce ${item.en}`}
-                                title="Listen in English"
-                                style={{
-                                    background: 'transparent',
-                                    border: 'none',
-                                    cursor: 'pointer',
-                                    color: '#3686C9',
-                                    padding: '0.4rem',
-                                    borderRadius: '50%',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}
-                            >
-                                <Volume2 size={18} />
-                            </button>
-                        </div>
+                        {sub.subtitle}
+                    </h3>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
+                        {sub.items.map((item, idx) => (
+                            <VocabularyItemCard key={idx} item={item} />
+                        ))}
                     </div>
-                ))}
-            </div>
+                </div>
+            ))}
         </div>
     );
 };
@@ -191,16 +219,25 @@ const GrammarPage = () => {
 
     // -- Derived State for Vocabulary --
     const filteredVocabSections = vocabularyData
-        .map(section => ({
-            ...section,
-            items: section.items.filter(item =>
-                item.en.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                item.fr.toLowerCase().includes(searchTerm.toLowerCase())
-            )
-        }))
+        .map(section => {
+            const term = searchTerm.toLowerCase();
+            const filteredItems = (section.items || []).filter(item =>
+                item.en.toLowerCase().includes(term) ||
+                item.fr.toLowerCase().includes(term)
+            );
+            const filteredSubsections = (section.subsections || []).map(sub => ({
+                ...sub,
+                items: sub.items.filter(item =>
+                    item.en.toLowerCase().includes(term) ||
+                    item.fr.toLowerCase().includes(term)
+                )
+            })).filter(sub => sub.items.length > 0);
+            return { ...section, items: filteredItems.length > 0 ? filteredItems : undefined, subsections: filteredSubsections.length > 0 ? filteredSubsections : undefined };
+        })
         .filter(section =>
             section.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            section.items.length > 0
+            (section.items && section.items.length > 0) ||
+            (section.subsections && section.subsections.length > 0)
         );
 
 
