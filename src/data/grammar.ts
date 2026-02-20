@@ -21,9 +21,8 @@ export const grammarData: PronounSection[] = [
             { fr: "Elle part.", en: "She leaves." },
             { fr: "Ils jouent.", en: "They play." }
         ],
-        subSections: pronounsData // Nest existing pronouns data here if you want, or just append them.
-        // Actually the user list had "Pronoms" as a single entry. 
-        // But since we have a whole detailed section on pronouns, I will append the detailed ones AFTER these basic definitions.
+
+        subSections: pronounsData
     },
     {
         title: "Verbes (Verbs)",
@@ -372,6 +371,4 @@ export const grammarData: PronounSection[] = [
             { fr: "Zut !", en: "Darn!" }
         ]
     },
-    // Append the detailed pronouns data here
-    ...pronounsData
 ];
