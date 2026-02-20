@@ -99,7 +99,7 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
                                 background: 'transparent',
                                 border: 'none',
                                 cursor: 'pointer',
-                                color: 'var(--accent-color)', // Standard accent icon
+                                color: '#4CAF50', // Green for TTS
                                 padding: '0.4rem',
                                 borderRadius: '50%',
                                 display: 'flex',
