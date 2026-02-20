@@ -1563,26 +1563,103 @@ export const survivre = {
     }
 };
 
+export const devenir = applyExamplesToVerb({
+    infinitive: 'devenir',
+    translation: 'to become',
+    group: 3,
+    auxiliary: 'être',
+    rules: ['Irregular, like venir.', 'Takes "être".', 'Future stem: deviendr-'],
+    category: 'General',
+    conjugations: {
+        Indicatif: {
+            'Présent': [
+                { pronoun: 'je', form: 'deviens' }, { pronoun: 'tu', form: 'deviens' }, { pronoun: 'il/elle', form: 'devient' },
+                { pronoun: 'nous', form: 'devenons' }, { pronoun: 'vous', form: 'devenez' }, { pronoun: 'ils/elles', form: 'deviennent' }
+            ],
+            'Passé Composé': [
+                { pronoun: 'je', form: 'suis devenu(e)' }, { pronoun: 'tu', form: 'es devenu(e)' }, { pronoun: 'il/elle', form: 'est devenu(e)' },
+                { pronoun: 'nous', form: 'sommes devenus(es)' }, { pronoun: 'vous', form: 'êtes devenus(es)' }, { pronoun: 'ils/elles', form: 'sont devenus(es)' }
+            ],
+            'Imparfait': [
+                { pronoun: 'je', form: 'devenais' }, { pronoun: 'tu', form: 'devenais' }, { pronoun: 'il/elle', form: 'devenait' },
+                { pronoun: 'nous', form: 'devenions' }, { pronoun: 'vous', form: 'deveniez' }, { pronoun: 'ils/elles', form: 'devenaient' }
+            ],
+            'Futur Simple': [
+                { pronoun: 'je', form: 'deviendrai' }, { pronoun: 'tu', form: 'deviendras' }, { pronoun: 'il/elle', form: 'deviendra' },
+                { pronoun: 'nous', form: 'deviendrons' }, { pronoun: 'vous', form: 'deviendrez' }, { pronoun: 'ils/elles', form: 'deviendront' }
+            ]
+        },
+        Subjonctif: {
+            'Présent': [
+                { pronoun: 'que je', form: 'devienne' }, { pronoun: 'que tu', form: 'deviennes' }, { pronoun: 'qu\'il/elle', form: 'devienne' },
+                { pronoun: 'que nous', form: 'devenions' }, { pronoun: 'que vous', form: 'deveniez' }, { pronoun: 'qu\'ils/elles', form: 'deviennent' }
+            ]
+        },
+        Conditionnel: {
+            'Présent': [
+                { pronoun: 'je', form: 'deviendrais' }, { pronoun: 'tu', form: 'deviendrais' }, { pronoun: 'il/elle', form: 'deviendrait' },
+                { pronoun: 'nous', form: 'deviendrions' }, { pronoun: 'vous', form: 'deviendriez' }, { pronoun: 'ils/elles', form: 'deviendraient' }
+            ]
+        },
+        Impératif: {
+            'Présent': [
+                { pronoun: '(tu)', form: 'deviens' },
+                { pronoun: '(nous)', form: 'devenons' },
+                { pronoun: '(vous)', form: 'devenez' }
+            ]
+        },
+        Participe: {
+            'Présent': [{ pronoun: '', form: 'devenant' }],
+            'Passé': [
+                { pronoun: 'Masc. Sing.', form: 'devenu' },
+                { pronoun: 'Fem. Sing.', form: 'devenue' },
+                { pronoun: 'Masc. Plur.', form: 'devenus' },
+                { pronoun: 'Fem. Plur.', form: 'devenues' }
+            ]
+        }
+    }
+});
+
+export const devenir_plus_grand = {
+    ...devenir,
+    infinitive: 'devenir plus grand',
+    translation: 'to become bigger',
+    category: 'General'
+};
+
+export const rapetisser = crv('rapetisser', 'ER', 'avoir', 'to shrink, get smaller', false, [], [], 'General');
+export const retrecir = crv('rétrécir', 'IR_ISS', 'avoir', 'to shrink, get smaller', false, [], [], 'General');
+export const diminuer = crv('diminuer', 'ER', 'avoir', 'to decrease, reduce', false, [], [], 'General');
+
+// Special entry for "sera" as requested
+export const sera = {
+    ...etreBase,
+    infinitive: 'sera',
+    translation: 'will be (from être)',
+    category: 'General',
+    rules: ['This is the future third-person singular form of "être".'],
+};
+
 
 // Export Dictionary
 export const verbs = [
     accepter, accueillir, acheter, agir, aider, aller, amuser, appeler, apprendre, arriver, arroser, asseoir, attendre, avoir,
     baigner, balayer, batir, benir, blanchir, boire, boxer, bricoler, se_brosser_dents,
-    chanter, chercher_emploi, choisir, coiffer, se_coiffer, commander, commencer, comprendre, se_concentrer, conduire, construire, instruire, produire, reduire, rejoindre, peindre, connecter, convertir, se_coucher, coucher, courir, couvrir, cueillir, cuisiner,
-    danser, se_debrouiller, decouvrir, defendre, dejeuner, demander, demenager, se_depecher, dependre, descendre, se_deshabiller, deshabiller, dessiner, se_detendre, devoir, diner, dire, diriger, discuter, se_disputer, dormir, se_doucher, doucher,
-    echouer, ecouter, ecouter_musique, ecrire, embaucher, endormir, sendormir, sennuyer, entendre, envoyer_email, etudier, etre, expliquer,
+    chanter, chercher_emploi, choisir, se_coiffer, commander, commencer, comprendre, se_concentrer, conduire, construire, instruire, produire, reduire, rejoindre, peindre, connecter, convertir, se_coucher, courir, couvrir, cueillir, cuisiner,
+    danser, se_debrouiller, decouvrir, defendre, dejeuner, demander, demenager, se_depecher, dependre, descendre, se_deshabiller, dessiner, se_detendre, devenir, devenir_plus_grand, devoir, diminuer, diner, dire, diriger, discuter, se_disputer, dormir, se_doucher,
+    echouer, ecouter, ecouter_musique, ecrire, embaucher, sendormir, sennuyer, entendre, envoyer_email, etudier, etre, expliquer,
     se_facher, faire, faire_du_sport, finir, fuir,
     gagner_argent, gouter, grandir, grignoter, grossir, guerir,
-    habiter, habiller, shabiller, hair,
+    habiter, shabiller, hair,
     informer, sinquieter, sinteresser, inviter,
     jardiner, jouer, jouer_jeux,
-    laver, se_laver, se_laver_les_mains, se_laver_le_visage, se_lever, lever, licencier, lire, louer,
-    maigrir, manger, marcher, maquiller, se_maquiller, se_marier, memoriser, mentir, mettre, mourir, musculation,
+    laver, se_laver, se_laver_les_mains, se_laver_le_visage, se_lever, licencier, lire, louer,
+    maigrir, manger, marcher, se_maquiller, se_marier, memoriser, mentir, mettre, mourir, musculation,
     nager, negocier, nettoyer,
     offrir, organiser, oublier, ouvrir,
-    parler, participer, partir, passer_aspirateur, payer, peigner, se_peigner, peindre, perdre, planifier, porter, poser_question, postuler, pouvoir, preciser, prendre, preparer_repas, se_preparer, promener, se_promener, proposer, punir,
-    ralentir, ranger, raser, se_raser, reagir, recevoir, se_reconcilier, reflechir, regarder_film, rejoindre, remercier, remplir, rencontrer, rendre, se_rendre, rentrer, reparer, repeter, repondre, se_reposer, respirer, rester, reussir, reveiller, se_reveiller, reviser, rougir, rouvrir,
-    salir, samuser, sappeler, sauter, secher, se_secher, se_secher_les_cheveux, se_sentir, sentrainer, servir, setirer, signer, sortir, souffrir, souligner, se_souvenir, surligner,
+    parler, participer, partir, passer_aspirateur, payer, se_peigner, peindre, perdre, planifier, porter, poser_question, postuler, pouvoir, preciser, prendre, preparer_repas, se_preparer, se_promener, proposer, punir,
+    ralentir, ranger, rapetisser, se_raser, reagir, recevoir, se_reconcilier, reflechir, regarder_film, rejoindre, remercier, remplir, rencontrer, rendre, se_rendre, rentrer, reparer, repeter, repondre, se_reposer, respirer, rester, retrecir, reussir, se_reveiller, reviser, rougir, rouvrir,
+    salir, samuser, sappeler, sauter, se_secher, se_secher_les_cheveux, se_sentir, sentrainer, sera, servir, setirer, signer, sortir, souffrir, souligner, se_souvenir, surligner, survivre,
     tenir, terminer, toucher, travailler, se_tromper, trouver,
     utiliser,
     vendre, venir, verdir, vieillir, vivre, voir, vouloir, voyager,
