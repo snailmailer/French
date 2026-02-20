@@ -5,31 +5,31 @@ const resources = [
         title: 'TV5Monde: Apprendre le français',
         url: 'https://apprendre.tv5monde.com/fr',
         desc: 'Interactive exercises, videos, and news for all levels (A1-B2).',
-        color: '#00AEEF'
+        color: '#AEC5EB' // Pastel Blue
     },
     {
         title: 'Alliance Française: Review and Practice',
         url: 'https://www.alliance-francaise.ca/en/education/review-and-practice',
         desc: 'Official practice materials and grammar reviews.',
-        color: '#E30613'
+        color: '#F7B2B7' // Pastel Pink
     },
     {
         title: 'Vitrine linguistique (OQLF)',
         url: 'https://vitrinelinguistique.oqlf.gouv.qc.ca/ressources-linguistiques/outils-apprendre-francais',
         desc: 'Tools and resources for learning French from the Office québécois de la langue française.',
-        color: '#2C3E50'
+        color: '#B8D8BA' // Pastel Green
     },
     {
         title: 'FrenchLearner.com',
         url: 'https://www.frenchlearner.com/learning-french/french-for-beginners/',
         desc: 'Comprehensive guides and lessons for beginners.',
-        color: '#27ae60'
+        color: '#FDE2A4' // Pastel Yellow
     }
 ];
 
 const ResourcesPage = () => {
     return (
-        <div className="container" style={{ maxWidth: '900px', padding: '3rem 1rem' }}>
+        <div className="container" style={{ maxWidth: '900px', padding: '3rem 1rem', margin: '0 auto' }}>
             <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '0.25rem', color: '#E0E2D2', textTransform: 'uppercase' }}>
                 Ressources Externes
             </h1>
