@@ -17,54 +17,330 @@ export interface VocabularySection {
 
 export const vocabularyData: VocabularySection[] = [
     {
-        title: "Parties du corps (Body Parts)",
+        title: "Les Autres objets (Other Items)",
         items: [
-            { en: "Head", fr: "la tête" },
-            { en: "Hair", fr: "les cheveux" },
-            { en: "Eye", fr: "l'œil (les yeux)" },
-            { en: "Nose", fr: "le nez" },
-            { en: "Mouth", fr: "la bouche" },
-            { en: "Ear", fr: "l'oreille" },
-            { en: "Neck", fr: "le cou" },
-            { en: "Arm", fr: "le bras" },
-            { en: "Hand", fr: "la main" },
-            { en: "Finger", fr: "le doigt" },
-            { en: "Leg", fr: "la jambe" },
-            { en: "Foot", fr: "le pied" },
-            { en: "Stomach", fr: "le ventre" },
-            { en: "Back", fr: "le dos" },
-            { en: "Heart", fr: "le cœur" }
+            { en: "Alarm clock", fr: "le réveil" },
+            { en: "Bath mat", fr: "le tapis de bain" },
+            { en: "Bedside lamp", fr: "la lampe de chevet" },
+            { en: "Hanger", fr: "le cintre" },
+            { en: "Lampshade", fr: "l'abat-jour" },
+            { en: "Laundry basket", fr: "le panier à linge" },
+            { en: "Shower curtain", fr: "le rideau de douche" },
+            { en: "Toilet paper", fr: "le papier toilette" },
+            { en: "Towel rack", fr: "le porte-serviettes" },
+            { en: "Wastebasket", fr: "la corbeille à papier" }
+        ].sort((a, b) => a.en.localeCompare(b.en))
+    },
+    {
+        title: "Les Bâtiments et établissements (Buildings & Establishments)",
+        items: [
+            { en: "Apartment", fr: "l'appartement" },
+            { en: "Bank", fr: "la banque" },
+            { en: "Factory", fr: "l'usine" },
+            { en: "Hospital", fr: "l'hôpital" },
+            { en: "Hotel", fr: "l'hôtel" },
+            { en: "House", fr: "la maison" },
+            { en: "Library", fr: "la bibliothèque" },
+            { en: "Office", fr: "le bureau" },
+            { en: "Restaurant", fr: "le restaurant" },
+            { en: "School", fr: "l'école" },
+            { en: "Store", fr: "le magasin" },
+            { en: "Supermarket", fr: "le supermarché" }
+        ].sort((a, b) => a.en.localeCompare(b.en))
+    },
+    {
+        title: "Les Couleurs (Colors)",
+        subsections: [
+            {
+                subtitle: "Couleurs de base (Basic Colors)",
+                format: 'table',
+                items: [
+                    { fr: "Blanc / Blanche", en: "White" },
+                    { fr: "Bleu / Bleue", en: "Blue" },
+                    { fr: "Gris / Grise", en: "Gray" },
+                    { fr: "Jaune", en: "Yellow" },
+                    { fr: "Marron", en: "Brown" },
+                    { fr: "Noir / Noire", en: "Black" },
+                    { fr: "Orange", en: "Orange" },
+                    { fr: "Rose", en: "Pink" },
+                    { fr: "Rouge", en: "Red" },
+                    { fr: "Vert / Verte", en: "Green" },
+                    { fr: "Violet / Violette", en: "Purple" }
+                ].sort((a, b) => (a.en || '').localeCompare(b.en || ''))
+            },
+            {
+                subtitle: "Règle générale (General Rule)",
+                format: 'table',
+                items: [
+                    { fr: "Les adjectifs de couleur en français doivent s'accorder en genre et en nombre avec le nom qu'ils décrivent.", en: "French color adjectives must agree in gender and number with the noun they describe." },
+                    { fr: "Masculin singulier : vert", en: "Masculine singular: green (vert)" },
+                    { fr: "Féminin singulier : verte (ajouter -e)", en: "Feminine singular: green (verte, add -e)" },
+                    { fr: "Masculin pluriel : verts (ajouter -s)", en: "Masculine plural: green (verts, add -s)" },
+                    { fr: "Féminin pluriel : vertes (ajouter -e et -s)", en: "Feminine plural: green (vertes, add -e and -s)" },
+                    { fr: "Les couleurs se placent après le nom : une voiture rouge", en: "Colors come after the noun: a red car (une voiture rouge)" },
+                ]
+            },
+            {
+                subtitle: "Exceptions : couleurs invariables (Invariable Colors)",
+                format: 'table',
+                items: [
+                    { fr: "Certaines couleurs ne changent jamais : marron, orange, turquoise (noms de fruits, fleurs ou pierres).", en: "Some colors are invariable and never change: marron, orange, turquoise (names of fruits, flowers, or gems)." },
+                    { fr: "des chaussures marron", en: "brown shoes" },
+                    { fr: "une robe orange", en: "an orange dress" },
+                ]
+            },
+            {
+                subtitle: "Couleurs composées (Compound Colors)",
+                format: 'table',
+                items: [
+                    { fr: "Les couleurs composées (ex. : bleu-vert) sont invariables et reliées par un trait d'union.", en: "Compound colors (e.g., bleu-vert) are invariable and hyphenated." },
+                    { fr: "des yeux bleu-vert", en: "blue-green eyes" },
+                    { fr: "Pour les nuances, ajoutez clair / foncé, qui s'accordent : « bleu clair » → « bleue claire » au féminin.", en: "For shades, add clair / foncé, which agree: « bleu clair » → « bleue claire » in feminine." },
+                ]
+            },
+            {
+                subtitle: "Autres exceptions (Other Exceptions)",
+                format: 'table',
+                items: [
+                    { fr: "Rose, mauve, pourpre, fauve, écarlate s'accordent en genre et nombre malgré leur apparence.", en: "Rose (pink), mauve, pourpre (purple), fauve (tawny), écarlate (scarlet) agree in gender and number despite appearances." },
+                    { fr: "Rose → pink", en: "Pink" },
+                    { fr: "Mauve → mauve", en: "Mauve" },
+                    { fr: "Pourpre → purple", en: "Purple" },
+                    { fr: "Fauve → tawny", en: "Tawny" },
+                    { fr: "Écarlate → scarlet", en: "Scarlet" },
+                    { fr: "des fleurs roses", en: "pink flowers" },
+                    { fr: "une écharpe mauve", en: "a mauve scarf" },
+                ]
+            }
         ]
     },
     {
-        title: "Famille (Family)",
+        title: "Les Cuisines (Kitchen)",
         items: [
-            { en: "Mother", fr: "la mère" },
-            { en: "Father", fr: "le père" },
+            { en: "Baking dish or pan", fr: "le plat à four / le moule à rôtir" },
+            { en: "Bowl", fr: "le bol" },
+            { en: "Chair", fr: "la chaise" },
+            { en: "Chopping board", fr: "la planche à découper" },
+            { en: "Cup", fr: "la tasse" },
+            { en: "Dishwasher", fr: "le lave-vaisselle" },
+            { en: "Fork", fr: "la fourchette" },
+            { en: "Fridge", fr: "le réfrigérateur" },
+            { en: "Frying pan", fr: "la poêle" },
+            { en: "Glass", fr: "le verre" },
+            { en: "Kettle", fr: "la bouilloire" },
+            { en: "Knife", fr: "le couteau" },
+            { en: "Microwave", fr: "le micro-ondes" },
+            { en: "Oven", fr: "le four" },
+            { en: "Plate", fr: "l'assiette" },
+            { en: "Saucepan", fr: "la casserole" },
+            { en: "Sink", fr: "l'évier" },
+            { en: "Spoon", fr: "la cuillère" },
+            { en: "Steak knife", fr: "le couteau à steak" },
+            { en: "Stove", fr: "la cuisinière" },
+            { en: "Table", fr: "la table" },
+            { en: "Teaspoon", fr: "la cuillère à café" },
+            { en: "Trash bin", fr: "la poubelle" }
+        ].sort((a, b) => a.en.localeCompare(b.en))
+    },
+    {
+        title: "Les Familles (Families)",
+        items: [
             { en: "Brother", fr: "le frère" },
-            { en: "Sister", fr: "la sœur" },
-            { en: "Son", fr: "le fils" },
             { en: "Daughter", fr: "la fille" },
+            { en: "Father", fr: "le père" },
             { en: "Grandfather", fr: "le grand-père" },
             { en: "Grandmother", fr: "la grand-mère" },
             { en: "Husband", fr: "le mari" },
+            { en: "Mother", fr: "la mère" },
+            { en: "Sister", fr: "la sœur" },
+            { en: "Son", fr: "le fils" },
             { en: "Wife", fr: "la femme" }
-        ]
+        ].sort((a, b) => a.en.localeCompare(b.en))
     },
     {
-        title: "Nombres (Numbers)",
+        title: "Les Fournitures scolaires (School Supplies)",
+        items: [
+            { en: "Backpack", fr: "le sac à dos" },
+            { en: "Book", fr: "le livre" },
+            { en: "Calculator", fr: "la calculatrice" },
+            { en: "Eraser", fr: "la gomme" },
+            { en: "Glue", fr: "la colle" },
+            { en: "Notebook", fr: "le cahier" },
+            { en: "Pen", fr: "le stylo" },
+            { en: "Pencil", fr: "le crayon" },
+            { en: "Ruler", fr: "la règle" },
+            { en: "Scissors", fr: "les ciseaux" }
+        ].sort((a, b) => a.en.localeCompare(b.en))
+    },
+    {
+        title: "Les Jours de la semaine (Days of the Week)",
+        items: [
+            { en: "Friday", fr: "vendredi" },
+            { en: "Monday", fr: "lundi" },
+            { en: "Saturday", fr: "samedi" },
+            { en: "Sunday", fr: "dimanche" },
+            { en: "Thursday", fr: "jeudi" },
+            { en: "Tuesday", fr: "mardi" },
+            { en: "Wednesday", fr: "mercredi" }
+        ].sort((a, b) => a.en.localeCompare(b.en))
+    },
+    {
+        title: "Les Jouets (Toys)",
+        items: [
+            { en: "Ball", fr: "le ballon" },
+            { en: "Board game", fr: "le jeu de société" },
+            { en: "Car", fr: "la voiture (jouet)" },
+            { en: "Doll", fr: "la poupée" },
+            { en: "Kite", fr: "le cerf-volant" },
+            { en: "Lego", fr: "les Lego" },
+            { en: "Puzzle", fr: "le puzzle" },
+            { en: "Teddy bear", fr: "l'ours en peluche" },
+            { en: "Yo-yo", fr: "le yoyo" }
+        ].sort((a, b) => a.en.localeCompare(b.en))
+    },
+    {
+        title: "Les Lieux (Places)",
+        items: [
+            { en: "Airport", fr: "l'aéroport" },
+            { en: "Beach", fr: "la plage" },
+            { en: "Bus stop", fr: "l'arrêt de bus" },
+            { en: "Cinema", fr: "le cinéma" },
+            { en: "City hall", fr: "la mairie" },
+            { en: "Clinic", fr: "la clinique" },
+            { en: "Convenience store", fr: "le dépanneur / la supérette" },
+            { en: "Market", fr: "le marché" },
+            { en: "Museum", fr: "le musée" },
+            { en: "Park", fr: "le parc" },
+            { en: "Parking lot", fr: "le parking / le stationnement" },
+            { en: "Pedestrian lane", fr: "le passage piéton / la voie piétonne" },
+            { en: "Pharmacy", fr: "la pharmacie" },
+            { en: "Train station", fr: "la gare" }
+        ].sort((a, b) => a.en.localeCompare(b.en))
+    },
+    {
+        title: "Les Lieux (Places)",
+        items: [
+            { en: "Airport", fr: "l'aéroport" },
+            { en: "Beach", fr: "la plage" },
+            { en: "Bus stop", fr: "l'arrêt de bus" },
+            { en: "Cinema", fr: "le cinéma" },
+            { en: "City hall", fr: "la mairie" },
+            { en: "Clinic", fr: "la clinique" },
+            { en: "Convenience store", fr: "le dépanneur / la supérette" },
+            { en: "Market", fr: "le marché" },
+            { en: "Museum", fr: "le musée" },
+            { en: "Park", fr: "le parc" },
+            { en: "Parking lot", fr: "le parking / le stationnement" },
+            { en: "Pedestrian lane", fr: "le passage piéton / la voie piétonne" },
+            { en: "Pharmacy", fr: "la pharmacie" },
+            { en: "Train station", fr: "la gare" }
+        ].sort((a, b) => a.en.localeCompare(b.en))
+    },
+    {
+        title: "Les Literies (Bedding Essentials)",
+        items: [
+            { en: "Blanket", fr: "la couverture" },
+            { en: "Duvet", fr: "la couette" },
+            { en: "Pillow", fr: "l'oreiller" },
+            { en: "Pillowcase", fr: "la taie d'oreiller" },
+            { en: "Sheet", fr: "le drap" }
+        ].sort((a, b) => a.en.localeCompare(b.en))
+    },
+    {
+        title: "Les Loisirs et activités (Hobbies & Activities)",
+        items: [
+            { en: "Cooking", fr: "la cuisine" },
+            { en: "Dancing", fr: "la danse" },
+            { en: "Gardening", fr: "le jardinage" },
+            { en: "Listening to music", fr: "écouter de la musique" },
+            { en: "Painting", fr: "la peinture" },
+            { en: "Photography", fr: "la photographie" },
+            { en: "Reading", fr: "la lecture" },
+            { en: "Swimming", fr: "la natation" },
+            { en: "Traveling", fr: "voyager" }
+        ].sort((a, b) => a.en.localeCompare(b.en))
+    },
+    {
+        title: "Les Meubles (Furniture)",
+        items: [
+            { en: "Armchair", fr: "le fauteuil" },
+            { en: "Bathroom vanity/cabinet", fr: "le meuble de salle de bains" },
+            { en: "Bed", fr: "le lit" },
+            { en: "Bench", fr: "la banquette" },
+            { en: "Bookcase", fr: "la bibliothèque" },
+            { en: "Chair", fr: "la chaise" },
+            { en: "Chest", fr: "le coffre" },
+            { en: "Cupboard", fr: "le placard" },
+            { en: "Curtains", fr: "les rideaux" },
+            { en: "Desk", fr: "le bureau" },
+            { en: "Drawer", fr: "le tiroir" },
+            { en: "Dresser", fr: "la commode" },
+            { en: "Lamp", fr: "la lampe" },
+            { en: "Medicine cabinet", fr: "l'armoire à pharmacie" },
+            { en: "Mirror", fr: "le miroir" },
+            { en: "Nightstand", fr: "la table de nuit" },
+            { en: "Rug", fr: "le tapis" },
+            { en: "Shelf", fr: "l'étagère" },
+            { en: "Sink / Washbasin", fr: "le lavabo" },
+            { en: "Sofa", fr: "le canapé" },
+            { en: "Stool", fr: "le tabouret" },
+            { en: "Table", fr: "la table" },
+            { en: "Wardrobe", fr: "l'armoire" }
+        ].sort((a, b) => a.en.localeCompare(b.en))
+    },
+    {
+        title: "Les Métiers (Jobs)",
+        items: [
+            { en: "Actor", fr: "l'acteur (m) / l'actrice (f)" },
+            { en: "Artist", fr: "l'artiste" },
+            { en: "Chef", fr: "le chef" },
+            { en: "Clerk", fr: "l'employé(e) / le commis" },
+            { en: "Comedian", fr: "le comédien / la comédienne" },
+            { en: "Detective", fr: "le détective / l'inspecteur(-trice)" },
+            { en: "Doctor", fr: "le médecin" },
+            { en: "Driver", fr: "le chauffeur" },
+            { en: "Engineer", fr: "l'ingénieur" },
+            { en: "IT specialist", fr: "le spécialiste en informatique" },
+            { en: "Janitor", fr: "le concierge / l'agent(e) d'entretien" },
+            { en: "Journalist", fr: "le journaliste" },
+            { en: "Lawyer", fr: "l'avocat" },
+            { en: "Newscaster", fr: "le présentateur / la présentatrice de nouvelles" },
+            { en: "Nurse", fr: "l'infirmier(-ière)" },
+            { en: "Police", fr: "le policier / la policière" },
+            { en: "Programmer", fr: "le programmeur" },
+            { en: "Teacher", fr: "le professeur / l'enseignant(e)" },
+            { en: "Waiter", fr: "le serveur / la serveuse" }
+        ].sort((a, b) => a.en.localeCompare(b.en))
+    },
+    {
+        title: "Les Mois (Months)",
+        items: [
+            { en: "April", fr: "avril" },
+            { en: "August", fr: "août" },
+            { en: "February", fr: "février" },
+            { en: "January", fr: "janvier" },
+            { en: "July", fr: "juillet" },
+            { en: "June", fr: "juin" },
+            { en: "March", fr: "mars" },
+            { en: "May", fr: "mai" },
+            { en: "October", fr: "octobre" },
+            { en: "September", fr: "septembre" }
+        ].sort((a, b) => a.en.localeCompare(b.en))
+    },
+    {
+        title: "Les Nombres (Numbers)",
         items: [
             { en: "0", fr: "zéro" },
             { en: "1", fr: "un" },
-            { en: "2", fr: "deux" },
-            { en: "3", fr: "trois" },
-            { en: "4", fr: "quatre" },
-            { en: "5", fr: "cinq" },
-            { en: "6", fr: "six" },
-            { en: "7", fr: "sept" },
-            { en: "8", fr: "huit" },
-            { en: "9", fr: "neuf" },
+            { en: "1,000", fr: "mille" },
+            { en: "1,000,000", fr: "un million" },
+            { en: "1,000,000,000", fr: "un milliard" },
             { en: "10", fr: "dix" },
+            { en: "10,000", fr: "dix mille" },
+            { en: "10,000,000", fr: "dix millions" },
+            { en: "100", fr: "cent" },
+            { en: "100,000", fr: "cent mille" },
+            { en: "100,000,000", fr: "cent millions" },
             { en: "11", fr: "onze" },
             { en: "12", fr: "douze" },
             { en: "13", fr: "treize" },
@@ -74,6 +350,7 @@ export const vocabularyData: VocabularySection[] = [
             { en: "17", fr: "dix-sept" },
             { en: "18", fr: "dix-huit" },
             { en: "19", fr: "dix-neuf" },
+            { en: "2", fr: "deux" },
             { en: "20", fr: "vingt" },
             { en: "21", fr: "vingt et un" },
             { en: "22", fr: "vingt-deux" },
@@ -84,6 +361,7 @@ export const vocabularyData: VocabularySection[] = [
             { en: "27", fr: "vingt-sept" },
             { en: "28", fr: "vingt-huit" },
             { en: "29", fr: "vingt-neuf" },
+            { en: "3", fr: "trois" },
             { en: "30", fr: "trente" },
             { en: "31", fr: "trente et un" },
             { en: "32", fr: "trente-deux" },
@@ -94,6 +372,7 @@ export const vocabularyData: VocabularySection[] = [
             { en: "37", fr: "trente-sept" },
             { en: "38", fr: "trente-huit" },
             { en: "39", fr: "trente-neuf" },
+            { en: "4", fr: "quatre" },
             { en: "40", fr: "quarante" },
             { en: "41", fr: "quarante et un" },
             { en: "42", fr: "quarante-deux" },
@@ -104,6 +383,7 @@ export const vocabularyData: VocabularySection[] = [
             { en: "47", fr: "quarante-sept" },
             { en: "48", fr: "quarante-huit" },
             { en: "49", fr: "quarante-neuf" },
+            { en: "5", fr: "cinq" },
             { en: "50", fr: "cinquante" },
             { en: "51", fr: "cinquante et un" },
             { en: "52", fr: "cinquante-deux" },
@@ -114,6 +394,7 @@ export const vocabularyData: VocabularySection[] = [
             { en: "57", fr: "cinquante-sept" },
             { en: "58", fr: "cinquante-huit" },
             { en: "59", fr: "cinquante-neuf" },
+            { en: "6", fr: "six" },
             { en: "60", fr: "soixante" },
             { en: "61", fr: "soixante et un" },
             { en: "62", fr: "soixante-deux" },
@@ -124,6 +405,7 @@ export const vocabularyData: VocabularySection[] = [
             { en: "67", fr: "soixante-sept" },
             { en: "68", fr: "soixante-huit" },
             { en: "69", fr: "soixante-neuf" },
+            { en: "7", fr: "sept" },
             { en: "70", fr: "soixante-dix" },
             { en: "71", fr: "soixante et onze" },
             { en: "72", fr: "soixante-douze" },
@@ -134,6 +416,7 @@ export const vocabularyData: VocabularySection[] = [
             { en: "77", fr: "soixante-dix-sept" },
             { en: "78", fr: "soixante-dix-huit" },
             { en: "79", fr: "soixante-dix-neuf" },
+            { en: "8", fr: "huit" },
             { en: "80", fr: "quatre-vingts" },
             { en: "81", fr: "quatre-vingt-un" },
             { en: "82", fr: "quatre-vingt-deux" },
@@ -144,6 +427,7 @@ export const vocabularyData: VocabularySection[] = [
             { en: "87", fr: "quatre-vingt-sept" },
             { en: "88", fr: "quatre-vingt-huit" },
             { en: "89", fr: "quatre-vingt-neuf" },
+            { en: "9", fr: "neuf" },
             { en: "90", fr: "quatre-vingt-dix" },
             { en: "91", fr: "quatre-vingt-onze" },
             { en: "92", fr: "quatre-vingt-douze" },
@@ -153,274 +437,88 @@ export const vocabularyData: VocabularySection[] = [
             { en: "96", fr: "quatre-vingt-seize" },
             { en: "97", fr: "quatre-vingt-dix-sept" },
             { en: "98", fr: "quatre-vingt-dix-huit" },
-            { en: "99", fr: "quatre-vingt-dix-neuf" },
-            { en: "100", fr: "cent" },
-            { en: "1,000", fr: "mille" },
-            { en: "10,000", fr: "dix mille" },
-            { en: "100,000", fr: "cent mille" },
-            { en: "1,000,000", fr: "un million" },
-            { en: "10,000,000", fr: "dix millions" },
-            { en: "100,000,000", fr: "cent millions" },
-            { en: "1,000,000,000", fr: "un milliard" }
+            { en: "99", fr: "quatre-vingt-dix-neuf" }
         ]
     },
     {
-        title: "Jours de la semaine (Days of the Week)",
+        title: "Les Parties de la maison (Parts of the House)",
         items: [
-            { en: "Monday", fr: "lundi" },
-            { en: "Tuesday", fr: "mardi" },
-            { en: "Wednesday", fr: "mercredi" },
-            { en: "Thursday", fr: "jeudi" },
-            { en: "Friday", fr: "vendredi" },
-            { en: "Saturday", fr: "samedi" },
-            { en: "Sunday", fr: "dimanche" }
-        ]
-    },
-    {
-        title: "Mois (Months)",
-        items: [
-            { en: "January", fr: "janvier" },
-            { en: "February", fr: "février" },
-            { en: "March", fr: "mars" },
-            { en: "April", fr: "avril" },
-            { en: "May", fr: "mai" },
-            { en: "June", fr: "juin" },
-            { en: "July", fr: "juillet" },
-            { en: "August", fr: "août" },
-            { en: "September", fr: "septembre" },
-            { en: "October", fr: "octobre" }
-        ]
-    },
-    {
-        title: "Métiers (Jobs)",
-        items: [
-            { en: "Doctor", fr: "le médecin" },
-            { en: "Teacher", fr: "le professeur / l'enseignant(e)" },
-            { en: "Engineer", fr: "l'ingénieur" },
-            { en: "Nurse", fr: "l'infirmier(-ière)" },
-            { en: "Programmer", fr: "le programmeur" },
-            { en: "Lawyer", fr: "l'avocat" },
-            { en: "Chef", fr: "le chef" },
-            { en: "Driver", fr: "le chauffeur" },
-            { en: "Artist", fr: "l'artiste" },
-            { en: "IT specialist", fr: "le spécialiste en informatique" },
-            { en: "Actor", fr: "l'acteur (m) / l'actrice (f)" },
-            { en: "Comedian", fr: "le comédien / la comédienne" },
-            { en: "Police", fr: "le policier / la policière" },
-            { en: "Detective", fr: "le détective / l'inspecteur(-trice)" },
-            { en: "Newscaster", fr: "le présentateur / la présentatrice de nouvelles" },
-            { en: "Journalist", fr: "le journaliste" },
-            { en: "Janitor", fr: "le concierge / l'agent(e) d'entretien" },
-            { en: "Clerk", fr: "l'employé(e) / le commis" },
-            { en: "Waiter", fr: "le serveur / la serveuse" }
-        ]
-    },
-    {
-        title: "Bâtiments et établissements (Buildings & Establishments)",
-        items: [
-            { en: "House", fr: "la maison" },
-            { en: "School", fr: "l'école" },
-            { en: "Hospital", fr: "l'hôpital" },
-            { en: "Bank", fr: "la banque" },
-            { en: "Restaurant", fr: "le restaurant" },
-            { en: "Store", fr: "le magasin" },
-            { en: "Office", fr: "le bureau" },
-            { en: "Hotel", fr: "l'hôtel" },
-            { en: "Library", fr: "la bibliothèque" },
-            { en: "Supermarket", fr: "le supermarché" },
-            { en: "Factory", fr: "l'usine" },
-            { en: "Apartment", fr: "l'appartement" }
-        ]
-    },
-    {
-        title: "Loisirs et activités (Hobbies & Activities)",
-        items: [
-            { en: "Reading", fr: "la lecture" },
-            { en: "Swimming", fr: "la natation" },
-            { en: "Cooking", fr: "la cuisine" },
-            { en: "Painting", fr: "la peinture" },
-            { en: "Gardening", fr: "le jardinage" },
-            { en: "Listening to music", fr: "écouter de la musique" },
-            { en: "Traveling", fr: "voyager" },
-            { en: "Dancing", fr: "la danse" },
-            { en: "Photography", fr: "la photographie" }
-        ]
-    },
-    {
-        title: "Sports",
-        items: [
-            { en: "Soccer", fr: "le football" },
-            { en: "Tennis", fr: "le tennis" },
-            { en: "Basketball", fr: "le basket-ball" },
-            { en: "Cycling", fr: "le cyclisme" },
-            { en: "Running", fr: "la course à pied" },
-            { en: "Boxing", fr: "la boxe" },
-            { en: "Skiing", fr: "le ski" },
-            { en: "Golf", fr: "le golf" },
-            { en: "Volleyball", fr: "le volley-ball" }
-        ]
-    },
-    {
-        title: "Cuisine (Kitchen)",
-        items: [
-            { en: "Fridge", fr: "le réfrigérateur" },
-            { en: "Oven", fr: "le four" },
-            { en: "Stove", fr: "la cuisinière" },
-            { en: "Sink", fr: "l'évier" },
-            { en: "Table", fr: "la table" },
-            { en: "Chair", fr: "la chaise" },
-            { en: "Plate", fr: "l'assiette" },
-            { en: "Knife", fr: "le couteau" },
-            { en: "Fork", fr: "la fourchette" },
-            { en: "Spoon", fr: "la cuillère" }
-        ]
-    },
-    {
-        title: "Jouets (Toys)",
-        items: [
-            { en: "Doll", fr: "la poupée" },
-            { en: "Ball", fr: "le ballon" },
-            { en: "Car", fr: "la voiture (jouet)" },
-            { en: "Teddy bear", fr: "l'ours en peluche" },
-            { en: "Puzzle", fr: "le puzzle" },
-            { en: "Lego", fr: "les Lego" },
-            { en: "Kite", fr: "le cerf-volant" },
-            { en: "Yo-yo", fr: "le yoyo" },
-            { en: "Board game", fr: "le jeu de société" }
-        ]
-    },
-    {
-        title: "Parties de la maison (Parts of the House)",
-        items: [
-            { en: "Living room", fr: "le salon" },
-            { en: "Kitchen", fr: "la cuisine" },
-            { en: "Bedroom", fr: "la chambre" },
-            { en: "Bathroom", fr: "la salle de bain" },
-            { en: "Dining room", fr: "la salle à manger" },
-            { en: "Garden", fr: "le jardin" },
-            { en: "Garage", fr: "le garage" },
             { en: "Attic", fr: "le grenier" },
-            { en: "Basement", fr: "la cave" },
+            { en: "Backyard", fr: "la cour arrière / le jardin arrière" },
             { en: "Balcony", fr: "le balcon" },
-            { en: "Backyard", fr: "la cour arrière / le jardin arrière" }
-        ]
+            { en: "Basement", fr: "la cave" },
+            { en: "Bathroom", fr: "la salle de bain" },
+            { en: "Bedroom", fr: "la chambre" },
+            { en: "Dining room", fr: "la salle à manger" },
+            { en: "Garage", fr: "le garage" },
+            { en: "Garden", fr: "le jardin" },
+            { en: "Kitchen", fr: "la cuisine" },
+            { en: "Living room", fr: "le salon" }
+        ].sort((a, b) => a.en.localeCompare(b.en))
     },
     {
-        title: "Lieux (Places)",
+        title: "Les Parties du corps (Body Parts)",
         items: [
-            { en: "Park", fr: "le parc" },
-            { en: "Beach", fr: "la plage" },
-            { en: "Airport", fr: "l'aéroport" },
-            { en: "Train station", fr: "la gare" },
-            { en: "City hall", fr: "la mairie" },
-            { en: "Museum", fr: "le musée" },
-            { en: "Cinema", fr: "le cinéma" },
-            { en: "Market", fr: "le marché" },
-            { en: "Clinic", fr: "la clinique" },
-            { en: "Pharmacy", fr: "la pharmacie" },
-            { en: "Convenience store", fr: "le dépanneur / la supérette" },
-            { en: "Bus stop", fr: "l'arrêt de bus" },
-            { en: "Pedestrian lane", fr: "le passage piéton / la voie piétonne" },
-            { en: "Parking lot", fr: "le parking / le stationnement" }
-        ]
+            { en: "Arm", fr: "le bras" },
+            { en: "Back", fr: "le dos" },
+            { en: "Ear", fr: "l'oreille" },
+            { en: "Eye", fr: "l'œil (les yeux)" },
+            { en: "Finger", fr: "le doigt" },
+            { en: "Foot", fr: "le pied" },
+            { en: "Hair", fr: "les cheveux" },
+            { en: "Hand", fr: "la main" },
+            { en: "Head", fr: "la tête" },
+            { en: "Heart", fr: "le cœur" },
+            { en: "Leg", fr: "la jambe" },
+            { en: "Mouth", fr: "la bouche" },
+            { en: "Neck", fr: "le cou" },
+            { en: "Nose", fr: "le nez" },
+            { en: "Stomach", fr: "le ventre" }
+        ].sort((a, b) => a.en.localeCompare(b.en))
     },
     {
-        title: "Fournitures scolaires (School Supplies)",
+        title: "Les Parties d'un ordinateur (Computer Parts)",
         items: [
-            { en: "Pencil", fr: "le crayon" },
-            { en: "Pen", fr: "le stylo" },
-            { en: "Notebook", fr: "le cahier" },
-            { en: "Book", fr: "le livre" },
-            { en: "Eraser", fr: "la gomme" },
-            { en: "Ruler", fr: "la règle" },
-            { en: "Backpack", fr: "le sac à dos" },
-            { en: "Glue", fr: "la colle" },
-            { en: "Scissors", fr: "les ciseaux" },
-            { en: "Calculator", fr: "la calculatrice" }
-        ]
-    },
-    {
-        title: "Parties d'un ordinateur (Computer Parts)",
-        items: [
-            { en: "Screen", fr: "l'écran" },
+            { en: "Battery", fr: "la batterie" },
+            { en: "Hard drive", fr: "le disque dur" },
             { en: "Keyboard", fr: "le clavier" },
             { en: "Mouse", fr: "la souris" },
+            { en: "Power button", fr: "le bouton d'alimentation" },
             { en: "Processor", fr: "le processeur" },
-            { en: "Hard drive", fr: "le disque dur" },
             { en: "RAM", fr: "la RAM" },
-            { en: "Battery", fr: "la batterie" },
+            { en: "Screen", fr: "l'écran" },
             { en: "USB port", fr: "le port USB" },
-            { en: "Webcam", fr: "la webcam" },
-            { en: "Power button", fr: "le bouton d'alimentation" }
-        ]
+            { en: "Webcam", fr: "la webcam" }
+        ].sort((a, b) => a.en.localeCompare(b.en))
     },
     {
-        title: "Les Meubles (Furniture)",
+        title: "Les Produits de toilette (Toiletries & Grooming)",
         items: [
-            { en: "Sofa", fr: "le canapé" },
-            { en: "Armchair", fr: "le fauteuil" },
-            { en: "Chair", fr: "la chaise" },
-            { en: "Stool", fr: "le tabouret" },
-            { en: "Table", fr: "la table" },
-            { en: "Desk", fr: "le bureau" },
-            { en: "Bed", fr: "le lit" },
-            { en: "Wardrobe", fr: "l'armoire" },
-            { en: "Dresser", fr: "la commode" },
-            { en: "Shelf", fr: "l'étagère" },
-            { en: "Nightstand", fr: "la table de nuit" },
-            { en: "Bookcase", fr: "la bibliothèque" },
-            { en: "Chest", fr: "le coffre" },
-            { en: "Mirror", fr: "le miroir" },
-            { en: "Lamp", fr: "la lampe" },
-            { en: "Rug", fr: "le tapis" },
-            { en: "Curtains", fr: "les rideaux" },
-            { en: "Drawer", fr: "le tiroir" },
-            { en: "Cupboard", fr: "le placard" },
-            { en: "Bench", fr: "la banquette" },
-            { en: "Medicine cabinet", fr: "l'armoire à pharmacie" },
-            { en: "Sink / Washbasin", fr: "le lavabo" },
-            { en: "Bathroom vanity/cabinet", fr: "le meuble de salle de bains" }
-        ]
-    },
-    {
-        title: "Produits de toilette (Toiletries & Grooming)",
-        items: [
-            { en: "Toothbrush", fr: "la brosse à dents" },
-            { en: "Toothpaste", fr: "le dentifrice" },
-            { en: "Towel", fr: "la serviette" },
-            { en: "Soap", fr: "le savon" },
-            { en: "Shampoo", fr: "le shampooing" },
-            { en: "Shower gel", fr: "le gel douche" },
+            { en: "Comb", fr: "le peigne" },
             { en: "Hair dryer", fr: "le sèche-cheveux" },
             { en: "Hairbrush", fr: "la brosse à cheveux" },
-            { en: "Comb", fr: "le peigne" },
-            { en: "Razor", fr: "le rasoir" }
-        ]
+            { en: "Razor", fr: "le rasoir" },
+            { en: "Shampoo", fr: "le shampooing" },
+            { en: "Shower gel", fr: "le gel douche" },
+            { en: "Soap", fr: "le savon" },
+            { en: "Toothbrush", fr: "la brosse à dents" },
+            { en: "Toothpaste", fr: "le dentifrice" },
+            { en: "Towel", fr: "la serviette" }
+        ].sort((a, b) => a.en.localeCompare(b.en))
     },
     {
-        title: "Autres objets (Other Items)",
+        title: "Les Sports",
         items: [
-            { en: "Toilet paper", fr: "le papier toilette" },
-            { en: "Laundry basket", fr: "le panier à linge" },
-            { en: "Shower curtain", fr: "le rideau de douche" },
-            { en: "Towel rack", fr: "le porte-serviettes" },
-            { en: "Bath mat", fr: "le tapis de bain" },
-            { en: "Bedside lamp", fr: "la lampe de chevet" },
-            { en: "Alarm clock", fr: "le réveil" },
-            { en: "Lampshade", fr: "l'abat-jour" },
-            { en: "Hanger", fr: "le cintre" },
-            { en: "Wastebasket", fr: "la corbeille à papier" }
-        ]
-    },
-    {
-        title: "Literie (Bedding Essentials)",
-        items: [
-            { en: "Pillow", fr: "l'oreiller" },
-            { en: "Pillowcase", fr: "la taie d'oreiller" },
-            { en: "Sheet", fr: "le drap" },
-            { en: "Duvet", fr: "la couette" },
-            { en: "Blanket", fr: "la couverture" }
-        ]
+            { en: "Basketball", fr: "le basket-ball" },
+            { en: "Boxing", fr: "la boxe" },
+            { en: "Cycling", fr: "le cyclisme" },
+            { en: "Golf", fr: "le golf" },
+            { en: "Running", fr: "la course à pied" },
+            { en: "Skiing", fr: "le ski" },
+            { en: "Soccer", fr: "le football" },
+            { en: "Tennis", fr: "le tennis" },
+            { en: "Volleyball", fr: "le volley-ball" }
+        ].sort((a, b) => a.en.localeCompare(b.en))
     },
 
     // ===== DIRE L'HEURE EN FRANÇAIS (Telling Time in French) =====
@@ -547,7 +645,7 @@ export const vocabularyData: VocabularySection[] = [
                 items: [
                     { fr: "Les numéros français (10 chiffres) se disent toujours deux par deux.", en: "French phone numbers (10 digits) are always said two digits at a time." },
                     { fr: "Structure : deux chiffres par deux, avec des pauses naturelles.", en: "Structure: group by 2 digits, with natural pauses." },
-                    { fr: "Les nombres 10+ utilisent les dizaines : \"quarante-cinq\" (45), pas \"quatre cinq\".", en: "Numbers 10+ use the tens: \"quarante-cinq\" (45), not \"quatre cinq\"." },
+                    { fr: "Les numéros 10+ utilisent les dizaines : \"quarante-cinq\" (45), pas \"quatre cinq\".", en: "Numbers 10+ use the tens: \"quarante-cinq\" (45), not \"quatre cinq\"." },
                     { fr: "Exemple : 06 12 34 56 78", en: "Example: 06 12 34 56 78" },
                     { fr: "Zéro six, douze, trente-quatre, cinquante-six, soixante-dix-huit.", en: "Zero six, twelve, thirty-four, fifty-six, seventy-eight." },
                 ]
@@ -601,73 +699,7 @@ export const vocabularyData: VocabularySection[] = [
         ]
     },
     {
-        title: "Les couleurs (Colors)",
-        subsections: [
-            {
-                subtitle: "Couleurs de base (Basic Colors)",
-                format: 'table',
-                items: [
-                    { fr: "Rouge", en: "Red" },
-                    { fr: "Bleu / Bleue", en: "Blue" },
-                    { fr: "Jaune", en: "Yellow" },
-                    { fr: "Vert / Verte", en: "Green" },
-                    { fr: "Orange", en: "Orange" },
-                    { fr: "Blanc / Blanche", en: "White" },
-                    { fr: "Noir / Noire", en: "Black" },
-                    { fr: "Gris / Grise", en: "Gray" },
-                    { fr: "Marron", en: "Brown" },
-                    { fr: "Rose", en: "Pink" },
-                    { fr: "Violet / Violette", en: "Purple" },
-                ]
-            },
-            {
-                subtitle: "Règle générale (General Rule)",
-                format: 'table',
-                items: [
-                    { fr: "Les adjectifs de couleur en français doivent s'accorder en genre et en nombre avec le nom qu'ils décrivent.", en: "French color adjectives must agree in gender and number with the noun they describe." },
-                    { fr: "Masculin singulier : vert", en: "Masculine singular: green (vert)" },
-                    { fr: "Féminin singulier : verte (ajouter -e)", en: "Feminine singular: green (verte, add -e)" },
-                    { fr: "Masculin pluriel : verts (ajouter -s)", en: "Masculine plural: green (verts, add -s)" },
-                    { fr: "Féminin pluriel : vertes (ajouter -e et -s)", en: "Feminine plural: green (vertes, add -e and -s)" },
-                    { fr: "Les couleurs se placent après le nom : une voiture rouge", en: "Colors come after the noun: a red car (une voiture rouge)" },
-                ]
-            },
-            {
-                subtitle: "Exceptions : couleurs invariables (Invariable Colors)",
-                format: 'table',
-                items: [
-                    { fr: "Certaines couleurs ne changent jamais : marron, orange, turquoise (noms de fruits, fleurs ou pierres).", en: "Some colors are invariable and never change: marron, orange, turquoise (names of fruits, flowers, or gems)." },
-                    { fr: "des chaussures marron", en: "brown shoes" },
-                    { fr: "une robe orange", en: "an orange dress" },
-                ]
-            },
-            {
-                subtitle: "Couleurs composées (Compound Colors)",
-                format: 'table',
-                items: [
-                    { fr: "Les couleurs composées (ex. : bleu-vert) sont invariables et reliées par un trait d'union.", en: "Compound colors (e.g., bleu-vert) are invariable and hyphenated." },
-                    { fr: "des yeux bleu-vert", en: "blue-green eyes" },
-                    { fr: "Pour les nuances, ajoutez clair / foncé, qui s'accordent : « bleu clair » → « bleue claire » au féminin.", en: "For shades, add clair / foncé, which agree: « bleu clair » → « bleue claire » in feminine." },
-                ]
-            },
-            {
-                subtitle: "Autres exceptions (Other Exceptions)",
-                format: 'table',
-                items: [
-                    { fr: "Rose, mauve, pourpre, fauve, écarlate s'accordent en genre et nombre malgré leur apparence.", en: "Rose (pink), mauve, pourpre (purple), fauve (tawny), écarlate (scarlet) agree in gender and number despite appearances." },
-                    { fr: "Rose → pink", en: "Pink" },
-                    { fr: "Mauve → mauve", en: "Mauve" },
-                    { fr: "Pourpre → purple", en: "Purple" },
-                    { fr: "Fauve → tawny", en: "Tawny" },
-                    { fr: "Écarlate → scarlet", en: "Scarlet" },
-                    { fr: "des fleurs roses", en: "pink flowers" },
-                    { fr: "une écharpe mauve", en: "a mauve scarf" },
-                ]
-            }
-        ]
-    },
-    {
-        title: "La météo (Weather)",
+        title: "Les Météos (Weather)",
         subsections: [
             {
                 subtitle: "Règles principales (Main Rules)",
@@ -765,4 +797,4 @@ export const vocabularyData: VocabularySection[] = [
             }
         ]
     }
-];
+].sort((a, b) => a.title.localeCompare(b.title));
