@@ -68,13 +68,113 @@ export const grammarData: PronounSection[] = [
     },
     {
         title: "Prépositions (Prepositions)",
-        useFr: "introduisent un complément et indiquent un rapport (lieu, temps, etc.).",
-        useEn: "show relationships.",
-        structure: "Invariable.",
-        examples: [
-            { fr: "Dans la maison", en: "In the house" },
-            { fr: "Pour toi", en: "For you" },
-            { fr: "Avec mon ami", en: "With my friend" }
+        useFr: "mot invariable qui unit des mots en marquant un rapport (lieu, temps, cause, etc.).",
+        useEn: "invariant word linking words and indicating a relationship (place, time, cause, etc.).",
+        structure: "Préposition + Nom / Pronom / Verbe à l'infinitif",
+        examples: [],
+        subSections: [
+            {
+                title: "Prépositions de lieu (Prepositions of Place)",
+                useFr: "décrivent la position d'objets ou de personnes.",
+                useEn: "describe the position of objects or people.",
+                structure: "Invariable",
+                examples: [],
+                subSections: [
+                    {
+                        title: "Sur",
+                        useFr: "Indique une position au-dessus de quelque chose, en contact.",
+                        useEn: "On top of, touching the surface.",
+                        structure: "Invariable",
+                        examples: [{ fr: "Le livre est sur la table.", en: "The book is on the table." }]
+                    },
+                    {
+                        title: "Sous",
+                        useFr: "Indique une position en dessous de quelque chose.",
+                        useEn: "Under, below something.",
+                        structure: "Invariable",
+                        examples: [{ fr: "Le chat est sous le lit.", en: "The cat is under the bed." }]
+                    },
+                    {
+                        title: "Dans",
+                        useFr: "Indique l'intérieur d'un espace clos.",
+                        useEn: "In, inside an enclosed space.",
+                        structure: "Invariable",
+                        examples: [{ fr: "Les vêtements sont dans l'armoire.", en: "The clothes are in the wardrobe." }]
+                    },
+                    {
+                        title: "Devant",
+                        useFr: "Indique une position face à quelque chose, vers l'avant.",
+                        useEn: "In front of, facing.",
+                        structure: "Invariable",
+                        examples: [{ fr: "Le miroir est devant le lavabo.", en: "The mirror is in front of the sink." }]
+                    },
+                    {
+                        title: "Derrière",
+                        useFr: "Indique une position à l'arrière de quelque chose.",
+                        useEn: "Behind, at the back of.",
+                        structure: "Invariable",
+                        examples: [{ fr: "La chaise est derrière la porte.", en: "The chair is behind the door." }]
+                    },
+                    {
+                        title: "À côté de",
+                        useFr: "Indique une position latérale, proche mais séparée.",
+                        useEn: "Next to, beside.",
+                        structure: "Invariable",
+                        examples: [{ fr: "La lampe est à côté du lit.", en: "The lamp is next to the bed." }]
+                    },
+                    {
+                        title: "Entre",
+                        useFr: "Indique une position au milieu de deux choses.",
+                        useEn: "Between two things.",
+                        structure: "Invariable",
+                        examples: [{ fr: "Les oreillers sont entre les couvertures.", en: "The pillows are between the blankets." }]
+                    }
+                ]
+            },
+            {
+                title: "Autres prépositions courantes (Common Prepositions)",
+                useFr: "utilisées pour le temps, la possession, le moyen, etc.",
+                useEn: "used for time, possession, means, etc.",
+                structure: "Invariable",
+                examples: [],
+                subSections: [
+                    {
+                        title: "À",
+                        useFr: "Indique un lieu, une direction ou un but.",
+                        useEn: "At, to, in (location or direction).",
+                        structure: "Invariable",
+                        examples: [{ fr: "Je suis à la maison.", en: "I am at home." }]
+                    },
+                    {
+                        title: "De",
+                        useFr: "Indique la possession, l'origine ou la matière.",
+                        useEn: "Of, from (possession or origin).",
+                        structure: "Invariable",
+                        examples: [{ fr: "Le tiroir de la commode.", en: "The drawer of the dresser." }]
+                    },
+                    {
+                        title: "Pour",
+                        useFr: "Indique le destinataire ou l'usage.",
+                        useEn: "For (purpose or recipient).",
+                        structure: "Invariable",
+                        examples: [{ fr: "Une serviette pour la salle de bain.", en: "A towel for the bathroom." }]
+                    },
+                    {
+                        title: "Avec",
+                        useFr: "Indique l'accompagnement ou l'instrument.",
+                        useEn: "With (accompaniment or tool).",
+                        structure: "Invariable",
+                        examples: [{ fr: "Le savon avec le shampooing.", en: "The soap with the shampoo." }]
+                    },
+                    {
+                        title: "Par",
+                        useFr: "Indique le moyen, la voie ou l'agent.",
+                        useEn: "By, through (means or path).",
+                        structure: "Invariable",
+                        examples: [{ fr: "Passer par la chambre.", en: "Go through the bedroom." }]
+                    }
+                ]
+            }
         ]
     },
     {
