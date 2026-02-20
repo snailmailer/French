@@ -31,10 +31,10 @@ const ResourcesPage = () => {
     return (
         <div className="container" style={{ maxWidth: '900px', padding: '3rem 1rem' }}>
             <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>
-                External Resources
+                Ressources externes (External Resources)
             </h1>
             <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginBottom: '4rem' }}>
-                Curated links to help you further your French studies.
+                Liens sélectionnés pour approfondir vos études de français.
             </p>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem' }}>

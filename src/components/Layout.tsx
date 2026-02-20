@@ -27,13 +27,13 @@ const Layout = () => {
     }, [location]);
 
     const navItems = [
-        { path: '/', label: 'Home', icon: <BookOpen size={24} />, color: '#2C3E50' },
-        { path: '/conjugation', label: 'Conjugation', icon: <BookOpen size={24} />, color: '#B4C540' },
-        { path: '/grammar', label: 'Grammar', icon: <Book size={24} />, color: '#3686C9' },
-        { path: '/reading', label: 'Reading', icon: <Book size={24} />, color: '#575A6C' },
-        { path: '/writing', label: 'Writing', icon: <PenTool size={24} />, color: '#3686C9' },
-        { path: '/speaking', label: 'Speaking', icon: <Mic size={24} />, color: '#B4C540' },
-        { path: '/resources', label: 'Resources', icon: <BookOpen size={24} />, color: '#E67E22' },
+        { path: '/', label: 'Accueil (Home)', icon: <BookOpen size={24} />, color: '#2C3E50' },
+        { path: '/conjugation', label: 'Conjugaison (Conjugation)', icon: <BookOpen size={24} />, color: '#B4C540' },
+        { path: '/grammar', label: 'Grammaire (Grammar)', icon: <Book size={24} />, color: '#3686C9' },
+        { path: '/reading', label: 'Lecture (Reading)', icon: <Book size={24} />, color: '#575A6C' },
+        { path: '/writing', label: 'Écriture (Writing)', icon: <PenTool size={24} />, color: '#3686C9' },
+        { path: '/speaking', label: 'Expression orale (Speaking)', icon: <Mic size={24} />, color: '#B4C540' },
+        { path: '/resources', label: 'Ressources (Resources)', icon: <BookOpen size={24} />, color: '#E67E22' },
     ];
 
     return (

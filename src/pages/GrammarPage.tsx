@@ -190,7 +190,7 @@ const GrammarPage = () => {
     return (
         <div className="container" style={{ maxWidth: '1000px' }}>
             <h1 style={{ textAlign: 'center', marginBottom: '2rem', color: 'var(--accent-color)' }}>
-                Grammar & Vocabulary
+                Grammaire et Vocabulaire (Grammar & Vocabulary)
             </h1>
 
             {/* Toggle Tabs */}
@@ -210,7 +210,7 @@ const GrammarPage = () => {
                         boxShadow: activeTab === 'grammar' ? '0 4px 10px rgba(52, 152, 219, 0.3)' : 'none'
                     }}
                 >
-                    Grammar
+                    Grammaire (Grammar)
                 </button>
                 <button
                     onClick={() => { setActiveTab('vocabulary'); setSelectedTopic('All'); setSearchTerm(''); }}
@@ -227,7 +227,7 @@ const GrammarPage = () => {
                         boxShadow: activeTab === 'vocabulary' ? '0 4px 10px rgba(155, 89, 182, 0.3)' : 'none'
                     }}
                 >
-                    Vocabulary
+                    Vocabulaire (Vocabulary)
                 </button>
             </div>
 

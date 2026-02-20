@@ -10,7 +10,7 @@ const PlaceholderPage = () => {
             <Construction size={64} color="var(--text-secondary)" style={{ opacity: 0.5, marginBottom: '2rem' }} />
             <h1 style={{ color: 'var(--accent-color)', marginBottom: '1rem' }}>{title}</h1>
             <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', marginBottom: '3rem' }}>
-                This section is currently under development. Stay tuned!
+                Cette section est en cours de développement. Restez à l'écoute !
             </p>
             <Link to="/" style={{
                 background: 'var(--accent-color)',

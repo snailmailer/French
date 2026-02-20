@@ -56,7 +56,7 @@ const WritingPage = () => {
     return (
         <div className="writing-page" style={{ maxWidth: '800px', margin: '0 auto', padding: '2rem' }}>
             <h1 style={{ textAlign: 'center', marginBottom: '2rem', color: 'var(--accent-color)' }}>
-                Writing Practice
+                Pratique d'écriture (Writing Practice)
             </h1>
 
             {/* Controls Container */}

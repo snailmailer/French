@@ -4,7 +4,7 @@ import { Book, PenTool, Mic, BookOpen } from 'lucide-react';
 const features = [
     {
         id: 'grammar',
-        title: 'Grammar & Vocabulary',
+        title: 'Grammaire et Vocabulaire (Grammar & Vocabulary)',
         desc: 'Master French rules, vocabulary, pronouns, and sentence structures.',
         icon: <Book size={32} />,
         path: '/grammar',
@@ -14,7 +14,7 @@ const features = [
     },
     {
         id: 'conjugation',
-        title: 'Conjugation Tool',
+        title: 'Outil de Conjugaison (Conjugation Tool)',
         desc: 'Explore 100+ verbs with tenses, usage guides, and audio.',
         icon: <BookOpen size={32} />,
         path: '/conjugation',
@@ -24,7 +24,7 @@ const features = [
     },
     {
         id: 'reading',
-        title: 'Reading',
+        title: 'Lecture (Reading)',
         desc: 'Practice reading comprehension with engaging stories.',
         icon: <Book size={32} />,
         path: '/reading',
@@ -34,7 +34,7 @@ const features = [
     },
     {
         id: 'writing',
-        title: 'Writing',
+        title: 'Écriture (Writing)',
         desc: 'Improve your written French with exercises and prompts.',
         icon: <PenTool size={32} />,
         path: '/writing',
@@ -44,7 +44,7 @@ const features = [
     },
     {
         id: 'speaking',
-        title: 'Speaking',
+        title: 'Expression orale (Speaking)',
         desc: 'Enhance pronunciation and speaking confidence.',
         icon: <Mic size={32} />,
         path: '/speaking',
@@ -54,7 +54,7 @@ const features = [
     },
     {
         id: 'resources',
-        title: 'Resources',
+        title: 'Ressources (Resources)',
         desc: 'External tools, news, and practice materials.',
         icon: <BookOpen size={32} />,
         path: '/resources',
@@ -67,9 +67,9 @@ const features = [
 const LandingPage = () => {
     return (
         <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
-            <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>Bienvenue !</h1>
+            <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>Bienvenue ! (Welcome!)</h1>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '4rem', maxWidth: '600px', margin: '0 auto 4rem' }}>
-                Start your French learning journey with our comprehensive tools.
+                Commencez votre voyage d'apprentissage du français avec nos outils complets.
             </p>
 
             <div className="feature-grid" style={{

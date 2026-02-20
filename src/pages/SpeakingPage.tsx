@@ -194,9 +194,9 @@ const SpeakingPage = () => {
 
         return (
             <div className="container" style={{ padding: '3rem 1rem' }}>
-                <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>Speaking Practice</h1>
+                <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>Expression orale (Speaking Practice)</h1>
                 <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '4rem', maxWidth: '600px', margin: '0 auto 4rem' }}>
-                    Select a topic to begin your speaking test.
+                    Choisissez un sujet pour commencer votre test oral.
                 </p>
 
                 <div style={homeGridStyle}>
