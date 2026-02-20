@@ -30,4 +30,14 @@ export const speakingQuestions: SpeakingQuestion[] = [
     { id: 'fam1', category: 'La famille', question: "As-tu des frères et sœurs ?" },
     { id: 'fam2', category: 'La famille', question: "Combien de personnes y a-t-il dans ta famille ?" },
     { id: 'fam3', category: 'La famille', question: "Peux-tu décrire ton ami(e) ?" },
+
+    // Parler des événements passés
+    { id: 'pass1', category: 'Parler des événements passés', question: "Qu’est-ce que vous avez fait hier / le week-end dernier ?" },
+    { id: 'pass2', category: 'Parler des événements passés', question: "Est-ce que vous avez voyagé récemment ? Avec qui ? et qu’est-ce que vous avez fait pendant ce voyage ?" },
+    { id: 'pass3', category: 'Parler des événements passés', question: "Qu’est-ce que vous avez fait pendant vos vacances d’hiver ?" },
+
+    // Parler des projets de l’avenir
+    { id: 'fut1', category: 'Parler des projets de l’avenir', question: "Qu’est-ce que vous allez faire ce soir / demain ?" },
+    { id: 'fut2', category: 'Parler des projets de l’avenir', question: "Quels sont vos projets pour le week-end ?" },
+    { id: 'fut3', category: 'Parler des projets de l’avenir', question: "Qu’est-ce que vous allez faire l’année prochaine ?" },
 ];

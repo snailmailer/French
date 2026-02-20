@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { speakingQuestions } from '../data/speakingQuestions';
-import { Mic, Square, RotateCcw, ChevronLeft } from 'lucide-react';
+import { Mic, Square, RotateCcw, ChevronLeft, Volume2 } from 'lucide-react';
+import { speakFrench } from '../utils/tts';
 
 // Type definition for SpeechRecognition
 interface IWindow extends Window {
@@ -18,9 +19,12 @@ const SpeakingPage = () => {
     const [isRecording, setIsRecording] = useState(false);
     const [timer, setTimer] = useState(0);
     const [transcript, setTranscript] = useState('');
-    const [score, setScore] = useState<number | null>(null);
     const [showResult, setShowResult] = useState(false);
     const [audioUrl, setAudioUrl] = useState<string | null>(null);
+
+    // Countdown State
+    const [isCountingDown, setIsCountingDown] = useState(false);
+    const [countdown, setCountdown] = useState(10);
 
     // Refs
     const recognitionRef = useRef<any>(null);
@@ -54,18 +58,40 @@ const SpeakingPage = () => {
         }
     }, []);
 
-    const startRecording = async () => {
+    // Countdown Logic
+    useEffect(() => {
+        let interval: any;
+        if (isCountingDown && countdown > 0) {
+            interval = setInterval(() => {
+                setCountdown((prev) => prev - 1);
+            }, 1000);
+        } else if (isCountingDown && countdown === 0) {
+            setIsCountingDown(false);
+            startActualRecording();
+        }
+        return () => clearInterval(interval);
+    }, [isCountingDown, countdown]);
+
+    const handleStartClick = () => {
         setTranscript('');
-        setScore(null);
         setTimer(0);
         setAudioUrl(null);
-        setIsRecording(true);
         setShowResult(false);
+        setIsCountingDown(true);
+        setCountdown(10);
+    };
+
+    const startActualRecording = async () => {
+        setIsRecording(true);
         audioChunksRef.current = [];
 
         // Start Speech Recognition
         if (recognitionRef.current) {
-            recognitionRef.current.start();
+            try {
+                recognitionRef.current.start();
+            } catch (e) {
+                console.error("Speech recognition error:", e);
+            }
         }
 
         // Start Audio Recording
@@ -105,7 +131,11 @@ const SpeakingPage = () => {
 
         // Stop Recognition
         if (recognitionRef.current) {
-            recognitionRef.current.stop();
+            try {
+                recognitionRef.current.stop();
+            } catch (e) {
+                console.error("Speech recognition stop error", e);
+            }
         }
 
         // Stop Audio Recorder
@@ -114,21 +144,7 @@ const SpeakingPage = () => {
         }
 
         clearInterval(timerIntervalRef.current);
-        calculateScore();
         setShowResult(true);
-    };
-
-    const calculateScore = () => {
-        // Simple scoring based on word count
-        const wordCount = transcript.trim().split(/\s+/).length;
-        let calculatedScore = 0;
-        if (transcript.length === 0) calculatedScore = 0;
-        else if (wordCount < 3) calculatedScore = 2;
-        else if (wordCount < 6) calculatedScore = 5;
-        else if (wordCount < 10) calculatedScore = 8;
-        else calculatedScore = 10;
-
-        setScore(calculatedScore);
     };
 
     const formatTime = (seconds: number) => {
@@ -147,10 +163,10 @@ const SpeakingPage = () => {
         setView('practice');
         // Reset state
         setTranscript('');
-        setScore(null);
         setTimer(0);
         setAudioUrl(null);
         setShowResult(false);
+        setIsCountingDown(false);
     };
 
     const handleGoBack = () => {
@@ -311,17 +327,39 @@ const SpeakingPage = () => {
                     {selectedCategory}
                 </div>
 
-                <h2 style={{ fontSize: '2.2rem', marginBottom: '2.5rem', color: '#2C3E50' }}>
-                    {currentQuestion.question}
-                </h2>
-
-                <div style={{ fontSize: '3.5rem', fontFamily: 'monospace', color: isRecording ? '#e74c3c' : '#2C3E50', marginBottom: '2.5rem', fontWeight: 'bold' }}>
-                    {formatTime(timer)}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginBottom: '2.5rem' }}>
+                    <h2 style={{ fontSize: '2.2rem', color: '#2C3E50', margin: 0 }}>
+                        {currentQuestion.question}
+                    </h2>
+                    <button
+                        onClick={() => speakFrench(currentQuestion.question)}
+                        style={{
+                            background: 'transparent',
+                            border: 'none',
+                            cursor: 'pointer',
+                            color: '#4CAF50'
+                        }}
+                        aria-label="Speak question"
+                    >
+                        <Volume2 size={24} />
+                    </button>
                 </div>
 
-                {!isRecording && !showResult && (
+                {isCountingDown ? (
+                    <div style={{ marginBottom: '2.5rem' }}>
+                        <div style={{ fontSize: '1.5rem', color: '#7f8c8d', marginBottom: '1rem' }}>Recording in...</div>
+                        <div style={{ fontSize: '5rem', fontWeight: 'bold', color: '#e74c3c' }}>{countdown}</div>
+                    </div>
+                ) : (
+                    <div style={{ fontSize: '3.5rem', fontFamily: 'monospace', color: isRecording ? '#e74c3c' : '#2C3E50', marginBottom: '2.5rem', fontWeight: 'bold' }}>
+                        {formatTime(timer)}
+                    </div>
+                )}
+
+
+                {!isRecording && !showResult && !isCountingDown && (
                     <button
-                        onClick={startRecording}
+                        onClick={handleStartClick}
                         style={{
                             background: '#ffffff',
                             color: '#2C3E50',
@@ -397,10 +435,6 @@ const SpeakingPage = () => {
 
                         <div style={{ display: 'flex', justifyContent: 'center', gap: '3rem', marginBottom: '2rem' }}>
                             <div style={{ textAlign: 'center' }}>
-                                <div style={{ fontSize: '0.8rem', color: '#7f8c8d', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Fluency Score</div>
-                                <div style={{ fontSize: '3rem', fontWeight: 'bold', color: '#B4C540' }}>{score}/10</div>
-                            </div>
-                            <div style={{ textAlign: 'center' }}>
                                 <div style={{ fontSize: '0.8rem', color: '#7f8c8d', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Duration</div>
                                 <div style={{ fontSize: '3rem', fontWeight: 'bold', color: '#3686C9' }}>{formatTime(timer)}</div>
                             </div>
@@ -408,7 +442,7 @@ const SpeakingPage = () => {
 
                         <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
                             <button
-                                onClick={startRecording}
+                                onClick={handleStartClick}
                                 style={{
                                     background: 'transparent',
                                     border: '2px solid #B4C540',
@@ -423,7 +457,7 @@ const SpeakingPage = () => {
                                     fontSize: '1rem'
                                 }}
                             >
-                                <RotateCcw size={18} /> Retry
+                                <RotateCcw size={18} /> Retake
                             </button>
                         </div>
                     </div>
