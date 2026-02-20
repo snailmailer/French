@@ -360,5 +360,47 @@ export const vocabularyData: VocabularySection[] = [
             { en: "Cupboard", fr: "le placard" },
             { en: "Bench", fr: "la banquette" }
         ]
+    },
+    {
+        title: "Meubles principaux (Main Furniture)",
+        items: [
+            { en: "Medicine cabinet", fr: "l'armoire à pharmacie" },
+            { en: "Sink / Washbasin", fr: "le lavabo" },
+            { en: "Bathroom vanity/cabinet", fr: "le meuble de salle de bains" },
+            { en: "Mirror", fr: "le miroir" },
+            { en: "Drawer", fr: "le tiroir" }
+        ]
+    },
+    {
+        title: "Accessoires essentiels (Essential Accessories)",
+        items: [
+            { en: "Toothbrush", fr: "la brosse à dents" },
+            { en: "Toothpaste", fr: "le dentifrice" },
+            { en: "Towel", fr: "la serviette" },
+            { en: "Soap", fr: "le savon" },
+            { en: "Shampoo", fr: "le shampooing" },
+            { en: "Shower gel", fr: "le gel douche" }
+        ]
+    },
+    {
+        title: "Produits de toilette (Toiletries & Grooming)",
+        items: [
+            { en: "Hair dryer", fr: "le sèche-cheveux" },
+            { en: "Hairbrush", fr: "la brosse à cheveux" },
+            { en: "Comb", fr: "le peigne" },
+            { en: "Razor", fr: "le rasoir" },
+            { en: "Mirror", fr: "le miroir" },
+            { en: "Medicine cabinet", fr: "l'armoire à pharmacie" }
+        ]
+    },
+    {
+        title: "Autres objets (Other Items)",
+        items: [
+            { en: "Toilet paper", fr: "le papier toilette" },
+            { en: "Laundry basket", fr: "le panier à linge" },
+            { en: "Shower curtain", fr: "le rideau de douche" },
+            { en: "Towel rack", fr: "le porte-serviettes" },
+            { en: "Bath mat", fr: "le tapis de bain" }
+        ]
     }
 ];
