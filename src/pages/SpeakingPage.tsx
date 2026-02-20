@@ -433,8 +433,8 @@ const SpeakingPage = () => {
                         </div>
 
                         {/* === CEFR Level Structures === */}
-                        {sectionHeading('📊 Niveaux CECR : Comment structurer vos réponses (CEFR Level Guide)')}
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '4rem' }}>
+                        {sectionHeading('📊 Niveaux CECR : Guide de structure (CEFR Level Guide)')}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', marginBottom: '4rem' }}>
                             {levelStructures.map(level => {
                                 const levelColors: Record<string, string> = {
                                     'A1': '#4CAF50', 'A2': '#8BC34A',
@@ -445,55 +445,109 @@ const SpeakingPage = () => {
                                 return (
                                     <div key={level.level} style={{
                                         ...cardStyle,
-                                        borderLeft: `4px solid ${color}`
+                                        borderTop: `6px solid ${color}`,
+                                        padding: '1.5rem 2rem'
                                     }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
                                             <span style={{
                                                 background: color,
                                                 color: 'white',
                                                 fontWeight: 'bold',
-                                                fontSize: '0.9rem',
-                                                padding: '0.3rem 0.8rem',
-                                                borderRadius: '6px'
+                                                fontSize: '1.2rem',
+                                                padding: '0.5rem 1rem',
+                                                borderRadius: '8px',
+                                                minWidth: '60px',
+                                                textAlign: 'center'
                                             }}>
                                                 {level.level}
                                             </span>
-                                            <h3 style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.15rem' }}>
-                                                {level.titleFr} ({level.titleEn})
-                                            </h3>
-                                        </div>
-
-                                        <div style={{ marginBottom: '1rem' }}>
-                                            <p style={{ color: 'var(--text-primary)', lineHeight: 1.7, margin: '0 0 0.5rem' }}>
-                                                <strong style={{ color }}>En français :</strong> {level.descriptionFr}
-                                            </p>
-                                            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, margin: 0, fontStyle: 'italic' }}>
-                                                <strong>English:</strong> {level.descriptionEn}
+                                            <p style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.1rem', fontWeight: 500, lineHeight: 1.5 }}>
+                                                {level.intro}
                                             </p>
                                         </div>
 
                                         <div style={{
-                                            background: 'var(--bg-primary)',
-                                            borderRadius: '8px',
-                                            padding: '1rem',
-                                            border: '1px solid var(--border-color)',
-                                            display: 'flex',
-                                            alignItems: 'flex-start',
-                                            gap: '0.75rem'
+                                            display: 'grid',
+                                            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                                            gap: '1.5rem',
+                                            borderTop: '1px solid var(--border-color)',
+                                            paddingTop: '1.5rem'
                                         }}>
-                                            <button
-                                                onClick={() => speakFrench(level.exemple.replace(/[«»]/g, ''))}
-                                                style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50', padding: '0.2rem', flexShrink: 0, marginTop: '0.1rem' }}
-                                                title="Écouter l'exemple"
-                                            >
-                                                <Volume2 size={18} />
-                                            </button>
+                                            {/* Basic Structure */}
                                             <div>
-                                                <p style={{ margin: '0 0 0.3rem', color: 'var(--text-primary)', fontWeight: 600 }}>
-                                                    {level.exemple}
+                                                <h4 style={{ color: color, fontSize: '1rem', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                                    Basic Structure
+                                                </h4>
+                                                <p style={{ color: 'var(--text-primary)', fontSize: '0.95rem', lineHeight: 1.6, margin: 0 }}>
+                                                    {level.structure}
                                                 </p>
-                                                <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem', fontStyle: 'italic' }}>
-                                                    ({level.exempleEn})
+                                            </div>
+
+                                            {/* Practical Example */}
+                                            <div>
+                                                <h4 style={{ color: color, fontSize: '1rem', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                                    Practical Example
+                                                </h4>
+                                                <div style={{
+                                                    background: 'var(--bg-primary)',
+                                                    padding: '1rem',
+                                                    borderRadius: '8px',
+                                                    border: '1px solid var(--border-color)',
+                                                    position: 'relative'
+                                                }}>
+                                                    <p style={{ margin: '0 0 0.5rem', fontWeight: 500, color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+                                                        Question: "{level.exampleQuestion}"
+                                                    </p>
+                                                    {level.exampleParts.map((part, pIdx) => (
+                                                        <div key={pIdx} style={{ marginBottom: pIdx === level.exampleParts.length - 1 ? 0 : '0.5rem' }}>
+                                                            {part.label && (
+                                                                <span style={{ color: color, fontWeight: 700, fontSize: '0.8rem', textTransform: 'uppercase', display: 'block' }}>
+                                                                    {part.label}:
+                                                                </span>
+                                                            )}
+                                                            <p style={{ margin: 0, color: 'var(--text-primary)', fontSize: '0.95rem', fontStyle: 'italic', lineHeight: 1.4 }}>
+                                                                "{part.text}"
+                                                            </p>
+                                                        </div>
+                                                    ))}
+                                                    <button
+                                                        onClick={() => speakFrench(level.exampleParts.map(p => p.text).join(' '))}
+                                                        style={{
+                                                            position: 'absolute',
+                                                            top: '10px',
+                                                            right: '10px',
+                                                            background: 'transparent',
+                                                            border: 'none',
+                                                            cursor: 'pointer',
+                                                            color: color,
+                                                            opacity: 0.7,
+                                                            transition: 'opacity 0.2s'
+                                                        }}
+                                                        onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+                                                        onMouseLeave={(e) => e.currentTarget.style.opacity = '0.7'}
+                                                        title="Écouter l'exemple complet"
+                                                    >
+                                                        <Volume2 size={20} />
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            {/* Progression Tips */}
+                                            <div style={{ gridColumn: '1 / -1' }}>
+                                                <h4 style={{ color: color, fontSize: '1rem', marginBottom: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                                    Progression Tips
+                                                </h4>
+                                                <p style={{
+                                                    color: 'var(--text-secondary)',
+                                                    fontSize: '0.9rem',
+                                                    lineHeight: 1.6,
+                                                    margin: 0,
+                                                    background: 'rgba(0,0,0,0.02)',
+                                                    padding: '0.75rem 1rem',
+                                                    borderRadius: '6px',
+                                                    borderLeft: `3px solid ${color}`
+                                                }}>
+                                                    {level.tips}
                                                 </p>
                                             </div>
                                         </div>
