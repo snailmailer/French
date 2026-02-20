@@ -1630,6 +1630,36 @@ export const devenir_plus_grand = {
 export const rapetisser = crv('rapetisser', 'ER', 'avoir', 'to shrink, get smaller', false, [], [], 'General');
 export const retrecir = crv('rétrécir', 'IR_ISS', 'avoir', 'to shrink, get smaller', false, [], [], 'General');
 export const diminuer = crv('diminuer', 'ER', 'avoir', 'to decrease, reduce', false, [], [], 'General');
+export const donner = crv('donner', 'ER', 'avoir', 'to give', false, [], [], 'General');
+export const passer = crv('passer', 'ER', 'avoir', 'to pass, spend time', false, [], [], 'General');
+export const falloir = applyExamplesToVerb({
+    infinitive: 'falloir',
+    translation: 'to be necessary',
+    group: 3,
+    auxiliary: 'avoir',
+    rules: ['Impersonal verb (only used in the 3rd person singular "il").'],
+    category: 'General',
+    conjugations: {
+        Indicatif: {
+            'Présent': [{ pronoun: 'il', form: 'faut' }],
+            'Imparfait': [{ pronoun: 'il', form: 'fallait' }],
+            'Futur Simple': [{ pronoun: 'il', form: 'faudra' }],
+            'Passé Composé': [{ pronoun: 'il', form: 'a fallu' }],
+        },
+        Conditionnel: {
+            'Présent': [{ pronoun: 'il', form: 'faudrait' }],
+        },
+        Subjonctif: {
+            'Présent': [{ pronoun: 'qu\'il', form: 'faille' }]
+        },
+        Impératif: {
+            'Présent': []
+        },
+        Participe: {
+            'Passé': [{ pronoun: 'Masc. Sing.', form: 'fallu' }]
+        }
+    }
+});
 
 // Special entry for "sera" as requested
 export const sera = {
@@ -1646,9 +1676,9 @@ export const verbs = [
     accepter, accueillir, acheter, agir, aider, aller, amuser, appeler, apprendre, arriver, arroser, asseoir, attendre, avoir,
     baigner, balayer, batir, benir, blanchir, boire, boxer, bricoler, se_brosser_dents,
     chanter, chercher_emploi, choisir, se_coiffer, commander, commencer, comprendre, se_concentrer, conduire, construire, instruire, produire, reduire, rejoindre, peindre, connecter, convertir, se_coucher, courir, couvrir, cueillir, cuisiner,
-    danser, se_debrouiller, decouvrir, defendre, dejeuner, demander, demenager, se_depecher, dependre, descendre, se_deshabiller, dessiner, se_detendre, devenir, devenir_plus_grand, devoir, diminuer, diner, dire, diriger, discuter, se_disputer, dormir, se_doucher,
+    demander, demenager, se_depecher, dependre, descendre, se_deshabiller, dessiner, se_detendre, devenir, devenir_plus_grand, devoir, diminuer, diner, dire, diriger, discuter, se_disputer, donner, dormir, se_doucher,
     echouer, ecouter, ecouter_musique, ecrire, embaucher, sendormir, sennuyer, entendre, envoyer_email, etudier, etre, expliquer,
-    se_facher, faire, faire_du_sport, finir, fuir,
+    se_facher, faire, faire_du_sport, falloir, finir, fuir,
     gagner_argent, gouter, grandir, grignoter, grossir, guerir,
     habiter, shabiller, hair,
     informer, sinquieter, sinteresser, inviter,
@@ -1657,7 +1687,7 @@ export const verbs = [
     maigrir, manger, marcher, se_maquiller, se_marier, memoriser, mentir, mettre, mourir, musculation,
     nager, negocier, nettoyer,
     offrir, organiser, oublier, ouvrir,
-    parler, participer, partir, passer_aspirateur, payer, se_peigner, peindre, perdre, planifier, porter, poser_question, postuler, pouvoir, preciser, prendre, preparer_repas, se_preparer, se_promener, proposer, punir,
+    parler, participer, partir, passer, passer_aspirateur, payer, se_peigner, peindre, perdre, planifier, porter, poser_question, postuler, pouvoir, preciser, prendre, preparer_repas, se_preparer, se_promener, proposer, punir,
     ralentir, ranger, rapetisser, se_raser, reagir, recevoir, se_reconcilier, reflechir, regarder_film, rejoindre, remercier, remplir, rencontrer, rendre, se_rendre, rentrer, reparer, repeter, repondre, se_reposer, respirer, rester, retrecir, reussir, se_reveiller, reviser, rougir, rouvrir,
     salir, samuser, sappeler, sauter, se_secher, se_secher_les_cheveux, se_sentir, sentrainer, sera, servir, setirer, signer, sortir, souffrir, souligner, se_souvenir, surligner, survivre,
     tenir, terminer, toucher, travailler, se_tromper, trouver,

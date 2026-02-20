@@ -436,7 +436,7 @@ const ConjugationPage = () => {
                                 }}
                             >
                                 <span>{verbName}</span>
-                                {verbObj && <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>({verbObj.translation})</span>}
+                                {verbObj && <span style={{ fontSize: '0.8rem', color: '#3686C9', fontWeight: 600 }}>({verbObj.translation})</span>}
                             </button>
                         );
                     })}
