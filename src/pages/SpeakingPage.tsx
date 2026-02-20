@@ -15,16 +15,6 @@ const SpeakingPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const view = (searchParams.get('view') as 'categories' | 'questions' | 'practice') || 'categories';
     const selectedCategory = searchParams.get('category') || null;
-    const setView = (v: 'categories' | 'questions' | 'practice', cat?: string | null) => {
-        const params: Record<string, string> = { view: v };
-        if (cat) params.category = cat;
-        else if (selectedCategory && v !== 'categories') params.category = selectedCategory;
-        setSearchParams(params);
-    };
-    const setSelectedCategory = (cat: string | null) => {
-        if (cat) setSearchParams({ view: 'questions', category: cat });
-        else setSearchParams({ view: 'categories' });
-    };
     const [currentQuestionId, setCurrentQuestionId] = useState<string | null>(null);
 
     // Practice State
@@ -166,13 +156,16 @@ const SpeakingPage = () => {
     };
 
     const handleCategorySelect = (category: string) => {
-        setSelectedCategory(category);
-        setView('questions');
+        setSearchParams({ view: 'questions', category });
     };
 
     const handleQuestionSelect = (id: string) => {
         setCurrentQuestionId(id);
-        setView('practice');
+        if (selectedCategory) {
+            setSearchParams({ view: 'practice', category: selectedCategory });
+        } else {
+            setSearchParams({ view: 'practice' });
+        }
         // Reset state
         setTranscript('');
         setTimer(0);
@@ -183,12 +176,15 @@ const SpeakingPage = () => {
 
     const handleGoBack = () => {
         if (view === 'practice') {
-            setView('questions');
+            if (selectedCategory) {
+                setSearchParams({ view: 'questions', category: selectedCategory });
+            } else {
+                setSearchParams({ view: 'questions' });
+            }
             // Clean up audio url
             if (audioUrl) URL.revokeObjectURL(audioUrl);
         } else if (view === 'questions') {
-            setView('categories');
-            setSelectedCategory(null);
+            setSearchParams({ view: 'categories' });
         }
     };
 
