@@ -309,8 +309,8 @@ const SpeakingPage = () => {
                                     }}
                                 >
                                     <div style={{
-                                        color: 'var(--accent-color)',
-                                        background: 'rgba(76, 175, 80, 0.08)',
+                                        color: '#3686C9',
+                                        background: 'rgba(54, 134, 201, 0.08)',
                                         padding: '1rem',
                                         borderRadius: '50%',
                                         marginBottom: '1rem',
@@ -320,8 +320,8 @@ const SpeakingPage = () => {
                                     }}>
                                         <Mic size={32} />
                                     </div>
-                                    <h3 style={{ margin: '0.5rem 0 0.5rem', fontSize: '1.3rem', color: 'var(--accent-color)' }}>{cat}</h3>
-                                    <span style={{ color: 'var(--text-secondary)' }}>
+                                    <h3 style={{ margin: '0.5rem 0 0.5rem', fontSize: '1.2rem', color: '#3686C9' }}>{cat}</h3>
+                                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                                         {speakingQuestions.filter(q => q.category === cat).length} Questions
                                     </span>
                                 </div>
