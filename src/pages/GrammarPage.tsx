@@ -3,7 +3,7 @@ import { grammarData } from '../data/grammar';
 import { vocabularyData, type VocabularySection } from '../data/vocabulary';
 import type { PronounSection } from '../data/pronouns';
 import { Search, X, BookOpen, Volume2 } from 'lucide-react';
-import { speakFrench, speakEnglish } from '../utils/tts';
+import { speakFrench } from '../utils/tts';
 
 // --- Components ---
 
@@ -115,44 +115,24 @@ const VocabularyItemCard: React.FC<{ item: { fr: string; en: string } }> = ({ it
             <span style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{item.fr}</span>
             <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{item.en}</span>
         </div>
-        <div style={{ display: 'flex', gap: '0.25rem' }}>
-            <button
-                onClick={() => speakFrench(item.fr)}
-                aria-label={`Pronounce ${item.fr}`}
-                title="Écouter en français"
-                style={{
-                    background: 'transparent',
-                    border: 'none',
-                    cursor: 'pointer',
-                    color: '#4CAF50',
-                    padding: '0.4rem',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}
-            >
-                <Volume2 size={20} />
-            </button>
-            <button
-                onClick={() => speakEnglish(item.en)}
-                aria-label={`Pronounce ${item.en}`}
-                title="Listen in English"
-                style={{
-                    background: 'transparent',
-                    border: 'none',
-                    cursor: 'pointer',
-                    color: '#3686C9',
-                    padding: '0.4rem',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}
-            >
-                <Volume2 size={18} />
-            </button>
-        </div>
+        <button
+            onClick={() => speakFrench(item.fr)}
+            aria-label={`Pronounce ${item.fr}`}
+            title="Écouter en français"
+            style={{
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                color: '#4CAF50',
+                padding: '0.4rem',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+            }}
+        >
+            <Volume2 size={20} />
+        </button>
     </div>
 );
 
@@ -192,11 +172,47 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
                     }}>
                         {sub.subtitle}
                     </h3>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
-                        {sub.items.map((item, idx) => (
-                            <VocabularyItemCard key={idx} item={item} />
-                        ))}
-                    </div>
+                    {sub.format === 'table' ? (
+                        <div style={{ overflowX: 'auto' }}>
+                            <table style={{
+                                width: '100%',
+                                borderCollapse: 'collapse',
+                                borderRadius: '8px',
+                                overflow: 'hidden',
+                                fontSize: '1rem'
+                            }}>
+                                <thead>
+                                    <tr style={{ background: 'rgba(155, 89, 182, 0.15)' }}>
+                                        <th style={{ padding: '0.75rem 1rem', textAlign: 'left', color: '#8E44AD', fontWeight: 700, borderBottom: '2px solid var(--border-color)' }}>Français</th>
+                                        <th style={{ padding: '0.75rem 1rem', textAlign: 'left', color: '#3686C9', fontWeight: 700, borderBottom: '2px solid var(--border-color)' }}>English</th>
+                                        <th style={{ padding: '0.75rem 0.5rem', textAlign: 'center', borderBottom: '2px solid var(--border-color)', width: '80px' }}>🔊</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {sub.items.map((item, idx) => (
+                                        <tr key={idx} style={{
+                                            background: idx % 2 === 0 ? 'var(--bg-primary)' : 'var(--bg-secondary)',
+                                            borderBottom: '1px solid var(--border-color)'
+                                        }}>
+                                            <td style={{ padding: '0.65rem 1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{item.fr}</td>
+                                            <td style={{ padding: '0.65rem 1rem', color: 'var(--text-secondary)' }}>{item.en}</td>
+                                            <td style={{ padding: '0.4rem 0.5rem', textAlign: 'center' }}>
+                                                <button onClick={() => speakFrench(item.fr)} title="Écouter en français" style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50', padding: '0.3rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}>
+                                                    <Volume2 size={16} />
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    ) : (
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
+                            {sub.items.map((item, idx) => (
+                                <VocabularyItemCard key={idx} item={item} />
+                            ))}
+                        </div>
+                    )}
                 </div>
             ))}
         </div>

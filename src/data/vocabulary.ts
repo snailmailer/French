@@ -6,6 +6,7 @@ export interface VocabularyItem {
 export interface VocabularySubsection {
     subtitle: string;
     items: VocabularyItem[];
+    format?: 'cards' | 'table';
 }
 
 export interface VocabularySection {
@@ -444,6 +445,7 @@ export const vocabularyData: VocabularySection[] = [
         subsections: [
             {
                 subtitle: "Règles principales (Main Rules)",
+                format: 'table',
                 items: [
                     { fr: "Dire l'heure en français suit des règles précises différentes de l'anglais.", en: "Telling the time in French follows precise rules different from English." },
                     { fr: "Structure de base : Il est + heure(s) + minutes + période", en: "Basic Structure: It is + hour(s) + minutes + period of day" },
@@ -456,6 +458,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Minutes 1-30",
+                format: 'table',
                 items: [
                     { fr: "Règle : dites les minutes après l'heure", en: "Rule: say minutes after the hour" },
                     { fr: "Il est trois heures cinq.", en: "It's three oh-five. (3:05)" },
@@ -468,6 +471,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Minutes 31-59 avec \"moins\" (Minutes 31-59 with \"to\")",
+                format: 'table',
                 items: [
                     { fr: "Règle : Il est [heure suivante] moins [minutes manquantes]", en: "Rule: It is [next hour] minus [missing minutes to next hour]" },
                     { fr: "Il est quatre heures moins vingt-cinq.", en: "It's twenty-five to four. (3:35)" },
@@ -479,6 +483,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Périodes de la journée (Periods of the Day)",
+                format: 'table',
                 items: [
                     { fr: "du matin → 00h00-11h59", en: "in the morning / AM → 00:00-11:59" },
                     { fr: "de l'après-midi → 12h00-17h59", en: "in the afternoon / PM → 12:00-17:59" },
@@ -490,6 +495,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Plages horaires (Time Ranges)",
+                format: 'table',
                 items: [
                     { fr: "Structure : de + heure1 + à + heure2", en: "Structure: from + time1 + to + time2" },
                     { fr: "De neuf heures à dix-sept heures.", en: "From nine to five. (9AM to 5PM)" },
@@ -499,6 +505,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Rendez-vous (Appointments)",
+                format: 'table',
                 items: [
                     { fr: "Règle : À + heure précise (sans \"Il est\")", en: "Rule: At + exact time (without \"It is\")" },
                     { fr: "À deux heures.", en: "At two o'clock. (2:00)" },
@@ -508,6 +515,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Futur et Passé (Future & Past)",
+                format: 'table',
                 items: [
                     { fr: "Dans + durée → futur", en: "In + duration → future" },
                     { fr: "Dans dix minutes.", en: "In ten minutes." },
@@ -519,6 +527,7 @@ export const vocabularyData: VocabularySection[] = [
             },
             {
                 subtitle: "Exceptions et cas spéciaux (Exceptions & Special Cases)",
+                format: 'table',
                 items: [
                     { fr: "Midi / Minuit : jamais avec chiffres", en: "Noon / Midnight: never with numbers" },
                     { fr: "Il est midi.", en: "It's noon. (12:00)" },
@@ -531,14 +540,15 @@ export const vocabularyData: VocabularySection[] = [
                 ]
             },
             {
-                subtitle: "Questions",
+                subtitle: "Questions et Réponses (Questions & Answers)",
+                format: 'table',
                 items: [
-                    { fr: "Quelle heure est-il ?", en: "What time is it?" },
-                    { fr: "Il est dix heures seize du soir.", en: "It is ten sixteen in the evening. (10:16 PM)" },
-                    { fr: "À quelle heure ?", en: "At what time?" },
-                    { fr: "À vingt-deux heures seize.", en: "At ten sixteen PM." },
-                    { fr: "Tu arrives à quelle heure ?", en: "What time are you arriving?" },
-                    { fr: "J'arrive maintenant, il est dix heures seize du soir !", en: "I'm arriving now, it's ten sixteen in the evening!" },
+                    { fr: "Q : Quelle heure est-il ?", en: "Q: What time is it?" },
+                    { fr: "R : Il est dix heures seize du soir.", en: "A: It is ten sixteen in the evening. (10:16 PM)" },
+                    { fr: "Q : À quelle heure ?", en: "Q: At what time?" },
+                    { fr: "R : À vingt-deux heures seize.", en: "A: At ten sixteen PM." },
+                    { fr: "Q : Tu arrives à quelle heure ?", en: "Q: What time are you arriving?" },
+                    { fr: "R : J'arrive maintenant, il est dix heures seize du soir !", en: "A: I'm arriving now, it's ten sixteen in the evening!" },
                 ]
             }
         ]
