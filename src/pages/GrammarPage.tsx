@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
-import { pronounsData, type PronounSection } from '../data/pronouns';
-import { Search, X, BookOpen } from 'lucide-react';
+import { grammarData } from '../data/grammar';
+import { vocabularyData, type VocabularySection } from '../data/vocabulary';
+import type { PronounSection } from '../data/pronouns';
+import { Search, X, BookOpen, Volume2 } from 'lucide-react';
+import { speakFrench } from '../utils/tts';
 
-const PronounSectionView: React.FC<{ section: PronounSection, level?: number }> = ({ section, level = 0 }) => {
+// --- Components ---
+
+const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> = ({ section, level = 0 }) => {
     const HeaderTag = level === 0 ? 'h2' : 'h3';
 
     return (
@@ -50,7 +55,7 @@ const PronounSectionView: React.FC<{ section: PronounSection, level?: number }> 
             {section.subSections && (
                 <div style={{ marginTop: '2rem' }}>
                     {section.subSections.map((sub, idx) => (
-                        <PronounSectionView key={idx} section={sub} level={level + 1} />
+                        <GrammarSectionView key={idx} section={sub} level={level + 1} />
                     ))}
                 </div>
             )}
@@ -58,36 +63,141 @@ const PronounSectionView: React.FC<{ section: PronounSection, level?: number }> 
     );
 };
 
-const GrammarPage = () => {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [selectedTopic, setSelectedTopic] = useState<PronounSection | null>(null);
+const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ section }) => {
+    return (
+        <div style={{
+            marginBottom: '2rem',
+            background: 'var(--bg-secondary)',
+            padding: '1.5rem',
+            borderRadius: '12px',
+            borderLeft: '4px solid #e67e22', // Orange for vocab
+            boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
+        }}>
+            <h2 style={{ color: '#d35400', marginTop: 0, borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem', marginBottom: '1rem' }}>
+                {section.title}
+            </h2>
 
-    // Filter topics
-    const filteredTopics = pronounsData.filter(topic =>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
+                {section.items.map((item, idx) => (
+                    <div key={idx} style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '0.8rem',
+                        background: 'var(--bg-primary)',
+                        borderRadius: '8px',
+                        border: '1px solid var(--border-color)'
+                    }}>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <span style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{item.fr}</span>
+                            <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{item.en}</span>
+                        </div>
+                        <button
+                            onClick={() => speakFrench(item.fr)}
+                            aria-label={`Pronounce ${item.fr}`}
+                            style={{
+                                background: 'transparent',
+                                border: 'none',
+                                cursor: 'pointer',
+                                color: '#4CAF50',
+                                padding: '0.4rem',
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}
+                        >
+                            <Volume2 size={20} />
+                        </button>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+// --- Main Page ---
+
+const GrammarPage = () => {
+    const [activeTab, setActiveTab] = useState<'grammar' | 'vocabulary'>('grammar');
+    const [searchTerm, setSearchTerm] = useState('');
+    const [selectedTopic, setSelectedTopic] = useState<string>('All');
+
+    // -- Derived State for Grammar --
+    const filteredGrammarTopics = grammarData.filter(topic =>
         topic.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         topic.useEn.toLowerCase().includes(searchTerm.toLowerCase()) ||
         topic.useFr.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+    // -- Derived State for Vocabulary --
+    const filteredVocabSections = vocabularyData
+        .map(section => ({
+            ...section,
+            items: section.items.filter(item =>
+                item.en.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.fr.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+        }))
+        .filter(section =>
+            section.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            section.items.length > 0
+        );
+
+
     const handleSearch = (term: string) => {
         setSearchTerm(term);
-        // Auto-select if 1 match? Maybe not, keep generic.
     };
 
     return (
-        <div className="container" style={{ maxWidth: '900px' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '1rem', color: 'var(--accent-color)' }}>
-                Grammar Reference
+        <div className="container" style={{ maxWidth: '1000px' }}>
+            <h1 style={{ textAlign: 'center', marginBottom: '2rem', color: 'var(--accent-color)' }}>
+                Grammar & Vocabulary
             </h1>
-            <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginBottom: '3rem' }}>
-                Search for a grammar topic to view rules and examples.
-            </p>
+
+            {/* Toggle Tabs */}
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem', gap: '1rem' }}>
+                <button
+                    onClick={() => { setActiveTab('grammar'); setSelectedTopic('All'); setSearchTerm(''); }}
+                    style={{
+                        padding: '0.8rem 2rem',
+                        fontSize: '1.1rem',
+                        borderRadius: '25px',
+                        border: 'none',
+                        background: activeTab === 'grammar' ? 'var(--accent-color)' : 'var(--bg-secondary)',
+                        color: activeTab === 'grammar' ? 'white' : 'var(--text-secondary)',
+                        cursor: 'pointer',
+                        fontWeight: 600,
+                        transition: 'all 0.2s ease',
+                        boxShadow: activeTab === 'grammar' ? '0 4px 10px rgba(52, 152, 219, 0.3)' : 'none'
+                    }}
+                >
+                    Grammar
+                </button>
+                <button
+                    onClick={() => { setActiveTab('vocabulary'); setSelectedTopic('All'); setSearchTerm(''); }}
+                    style={{
+                        padding: '0.8rem 2rem',
+                        fontSize: '1.1rem',
+                        borderRadius: '25px',
+                        border: 'none',
+                        background: activeTab === 'vocabulary' ? '#e67e22' : 'var(--bg-secondary)',
+                        color: activeTab === 'vocabulary' ? 'white' : 'var(--text-secondary)',
+                        cursor: 'pointer',
+                        fontWeight: 600,
+                        transition: 'all 0.2s ease',
+                        boxShadow: activeTab === 'vocabulary' ? '0 4px 10px rgba(230, 126, 34, 0.3)' : 'none'
+                    }}
+                >
+                    Vocabulary
+                </button>
+            </div>
 
             {/* Search Bar */}
             <div style={{ position: 'relative', marginBottom: '2rem' }}>
                 <input
                     type="text"
-                    placeholder="Search grammar (e.g., pronouns, subject, relative)..."
+                    placeholder={activeTab === 'grammar' ? "Search grammar rules..." : "Search vocabulary words..."}
                     value={searchTerm}
                     onChange={(e) => handleSearch(e.target.value)}
                     style={{
@@ -120,22 +230,15 @@ const GrammarPage = () => {
                 )}
             </div>
 
-            {/* Topic Dropdown */}
+            {/* Filter Dropdown (Optional but helpful for large lists) */}
             <div style={{ marginBottom: '3rem' }}>
                 <select
-                    value={selectedTopic?.title || 'All'}
-                    onChange={(e) => {
-                        if (e.target.value === 'All') {
-                            setSelectedTopic(null); // Use null to represent 'All'
-                        } else {
-                            const topic = pronounsData.find(t => t.title === e.target.value);
-                            if (topic) setSelectedTopic(topic);
-                        }
-                    }}
+                    value={selectedTopic}
+                    onChange={(e) => setSelectedTopic(e.target.value)}
                     style={{
                         width: '100%',
                         padding: '1rem',
-                        fontSize: '1.2rem',
+                        fontSize: '1.1rem',
                         borderRadius: '12px',
                         border: '2px solid var(--border-color)',
                         background: 'var(--bg-secondary)',
@@ -144,39 +247,46 @@ const GrammarPage = () => {
                         cursor: 'pointer'
                     }}
                 >
-                    <option value="All">Show All Topics ({filteredTopics.length})</option>
-                    {filteredTopics.map((t) => (
-                        <option key={t.title} value={t.title}>
-                            {t.title}
-                        </option>
-                    ))}
+                    <option value="All">Show All {activeTab === 'grammar' ? 'Topics' : 'Categories'}</option>
+                    {activeTab === 'grammar'
+                        ? filteredGrammarTopics.map(t => <option key={t.title} value={t.title}>{t.title}</option>)
+                        : filteredVocabSections.map(s => <option key={s.title} value={s.title}>{s.title}</option>)
+                    }
                 </select>
             </div>
 
+
             {/* Content Display */}
-            <div className="grammar-content">
-                {selectedTopic ? (
-                    <PronounSectionView section={selectedTopic} />
-                ) : (
+            <div className="content-area">
+                {activeTab === 'grammar' ? (
+                    // --- GRAMMAR VIEW ---
                     <>
-                        {filteredTopics.length > 0 ? (
-                            filteredTopics.map((topic, idx) => (
-                                <PronounSectionView key={idx} section={topic} />
-                            ))
+                        {filteredGrammarTopics.length > 0 ? (
+                            filteredGrammarTopics
+                                .filter(t => selectedTopic === 'All' || t.title === selectedTopic)
+                                .map((topic, idx) => (
+                                    <GrammarSectionView key={idx} section={topic} />
+                                ))
                         ) : (
-                            <div style={{
-                                textAlign: 'center',
-                                padding: '4rem',
-                                color: 'var(--text-secondary)',
-                                border: '2px dashed var(--border-color)',
-                                borderRadius: '12px',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                gap: '1rem'
-                            }}>
-                                <BookOpen size={48} style={{ opacity: 0.5 }} />
-                                <p>No topics found match your search.</p>
+                            <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>
+                                <BookOpen size={48} style={{ opacity: 0.5, marginBottom: '1rem' }} />
+                                <p>No grammar topics found.</p>
+                            </div>
+                        )}
+                    </>
+                ) : (
+                    // --- VOCABULARY VIEW ---
+                    <>
+                        {filteredVocabSections.length > 0 ? (
+                            filteredVocabSections
+                                .filter(s => selectedTopic === 'All' || s.title === selectedTopic)
+                                .map((section, idx) => (
+                                    <VocabularySectionView key={idx} section={section} />
+                                ))
+                        ) : (
+                            <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>
+                                <BookOpen size={48} style={{ opacity: 0.5, marginBottom: '1rem' }} />
+                                <p>No vocabulary words found.</p>
                             </div>
                         )}
                     </>

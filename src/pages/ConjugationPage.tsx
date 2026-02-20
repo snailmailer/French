@@ -309,11 +309,27 @@ const ConjugationPage = () => {
                                                     const normName = u.name.toLowerCase();
                                                     const normTense = tense.toLowerCase();
                                                     const normMood = mood.toLowerCase();
-                                                    if (normMood === 'indicatif') {
-                                                        if (normTense === 'présent') return normName.includes('présent de l’indicatif');
-                                                        if (normTense === 'passé') return normName.includes('passé composé');
+
+                                                    // For non-Indicatif moods, the mood name generally appears in the tense name
+                                                    // e.g. "Subjonctif présent", "Conditionnel passé"
+                                                    if (normMood !== 'indicatif') {
+                                                        // Ensure the mood is part of the name (e.g. "subjonctif" is in "Subjonctif présent")
+                                                        // And the tense is part of the name (e.g. "présent" is in "Subjonctif présent")
+                                                        return normName.includes(normMood) && normName.includes(normTense);
                                                     }
-                                                    return normName.toLowerCase().includes(normTense.toLowerCase()) || normTense.toLowerCase().includes(normName.toLowerCase());
+
+                                                    // For Indicatif (default), we want to avoid matching names that belong to other moods
+                                                    // e.g. "Présent" should match "Présent de l'indicatif" but NOT "Subjonctif présent"
+                                                    const otherMoods = ['subjonctif', 'conditionnel', 'impératif', 'participe'];
+                                                    if (otherMoods.some(m => normName.includes(m))) {
+                                                        return false;
+                                                    }
+
+                                                    // Specific mapping for "Présent" in Indicatif which is often "Présent de l'indicatif"
+                                                    if (normTense === 'présent' && normName.includes('présent')) return true;
+
+                                                    // General fallback for Indicatif tenses (e.g. "Imparfait", "Futur Simple")
+                                                    return normName.includes(normTense);
                                                 });
 
                                                 return (

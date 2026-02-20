@@ -131,7 +131,57 @@ export const tenseUsageData: TenseUsage[] = [
         name: "Subjonctif présent",
         useFr: "après certaines expressions de volonté, nécessité, doute, sentiment, jugement ; action incertaine.",
         useEn: "often “that + subject + verb” after “it’s necessary that, I want you to…”, etc.",
-        structure: "que + sujet + verbe au subjonctif présent.",
+        structure: `Il faut que + sujet + verbe au subjonctif
+
+Exceptions au subjonctif présent:
+
+Être
+que je sois
+que tu sois
+qu’il/elle soit
+que nous soyons
+que vous soyez
+qu’ils/elles soient
+
+Avoir
+que j’aie
+que tu aies
+qu’il/elle ait
+que nous ayons
+que vous ayez
+qu’ils/elles aient
+
+Aller
+que j’aille
+que tu ailles
+qu’il/elle aille
+que nous allions
+que vous alliez
+qu’ils/elles aillent
+
+Faire
+que je fasse
+que tu fasses
+qu’il/elle fasse
+que nous fassions
+que vous fassiez
+qu’ils/elles fassent
+
+Pouvoir
+que je puisse
+que tu puisses
+qu’il/elle puisse
+que nous puissions
+que vous puissiez
+qu’ils/elles puissent
+
+Vouloir
+que je veuille
+que tu veuilles
+qu’il/elle veuille
+que nous voulions
+que vous vouliez
+qu’ils/elles veuillent`,
         examples: [
             { fr: "Il faut que je parle au médecin.", en: "It is necessary that I speak to the doctor / I have to speak to the doctor." },
             { fr: "Je veux que tu finisses ce dossier aujourd’hui.", en: "I want you to finish this file today." }

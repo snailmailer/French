@@ -37,7 +37,7 @@ const ConjugationTable: React.FC<ConjugationProps> = ({ verb, tense, conjugation
                         <strong style={{ color: '#2980b9' }}>Use (EN):</strong> {tenseUsage.useEn}
                     </div>
                     <div style={{ marginBottom: '0.5rem' }}>
-                        <strong>Structure:</strong> <span style={{ fontStyle: 'italic', color: 'var(--text-secondary)' }}>{tenseUsage.structure}</span>
+                        <strong>Structure:</strong> <span style={{ fontStyle: 'italic', color: 'var(--text-secondary)', whiteSpace: 'pre-line', display: 'block', marginTop: '0.5rem' }}>{tenseUsage.structure}</span>
                     </div>
                     {/* Examples could be collapsible or small text to save space, but user asked for them. */}
                 </div>
