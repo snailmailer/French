@@ -84,9 +84,9 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         padding: '0.8rem',
-                        background: 'rgba(155, 89, 182, 0.1)', // Light Lavender background
+                        background: 'var(--bg-primary)',
                         borderRadius: '8px',
-                        border: '1px solid rgba(155, 89, 182, 0.3)'
+                        border: '1px solid var(--border-color)'
                     }}>
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <span style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{item.fr}</span>
