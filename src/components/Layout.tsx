@@ -45,8 +45,10 @@ const Layout = () => {
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 background: 'var(--bg-secondary)',
-                position: 'relative',
-                zIndex: 100
+                position: 'sticky',
+                top: 0,
+                zIndex: 1000,
+                boxShadow: '0 2px 10px rgba(0,0,0,0.1)' // Added shadow for better visibility when scrolling
             }}>
                 <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '2rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>
                     <BookOpen size={32} color="var(--accent-color)" />
