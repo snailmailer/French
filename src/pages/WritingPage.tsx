@@ -1,5 +1,5 @@
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ArrowRight, Check, X, RefreshCw, Volume2 } from 'lucide-react';
 import { writingData } from '../data/writingPrompts';
@@ -24,6 +24,27 @@ const WritingPage = () => {
     const [userInput, setUserInput] = useState('');
     const [showAnswer, setShowAnswer] = useState(false);
     const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+    const frenchChars = ['é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'ù', 'û', 'ô', 'î', 'ï', 'œ'];
+
+    const insertChar = (char: string) => {
+        if (textareaRef.current) {
+            const start = textareaRef.current.selectionStart;
+            const end = textareaRef.current.selectionEnd;
+            const newValue = userInput.substring(0, start) + char + userInput.substring(end);
+            setUserInput(newValue);
+
+            setTimeout(() => {
+                if (textareaRef.current) {
+                    textareaRef.current.focus();
+                    textareaRef.current.setSelectionRange(start + char.length, start + char.length);
+                }
+            }, 0);
+        } else {
+            setUserInput(prev => prev + char);
+        }
+    };
 
     // Get prompts for the selected tense
     const availablePrompts = useMemo(() => {
@@ -176,6 +197,7 @@ const WritingPage = () => {
 
                     <div style={{ marginBottom: '1.5rem' }}>
                         <textarea
+                            ref={textareaRef}
                             className="writing-textarea"
                             value={userInput}
                             onChange={(e) => setUserInput(e.target.value)}
@@ -200,6 +222,34 @@ const WritingPage = () => {
                                 }
                             }}
                         />
+
+                        {!showAnswer && (
+                            <div style={{
+                                display: 'flex',
+                                gap: '0.4rem',
+                                flexWrap: 'wrap',
+                                marginTop: '1rem',
+                                padding: '0.75rem',
+                                background: 'var(--bg-primary)',
+                                borderRadius: '8px'
+                            }}>
+                                {frenchChars.map(char => (
+                                    <button
+                                        key={char}
+                                        onClick={() => insertChar(char)}
+                                        type="button"
+                                        style={{
+                                            padding: '0.4rem 0.7rem',
+                                            minWidth: '2.2rem',
+                                            textAlign: 'center',
+                                            borderRadius: '8px'
+                                        }}
+                                    >
+                                        {char}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     {/* Feedback Section */}
