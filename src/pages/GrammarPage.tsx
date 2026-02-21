@@ -260,135 +260,218 @@ const GrammarPage = () => {
         )
         .sort((a, b) => a.title.localeCompare(b.title, 'fr'));
 
+    // All grammar topic titles (unfiltered, for sidebar)
+    const allGrammarTopics = grammarData.map(t => t.title);
+    const allVocabTopics = vocabularyData.map(s => s.title).sort((a, b) => a.localeCompare(b, 'fr'));
+    // Deduplicate vocab topics
+    const uniqueVocabTopics = Array.from(new Set(allVocabTopics));
 
     const handleSearch = (term: string) => {
         setSearchTerm(term);
     };
 
+    const handleSidebarClick = (topic: string) => {
+        setSelectedTopic(topic);
+        setSearchTerm('');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Sidebar topics based on active tab
+    const sidebarTopics = activeTab === 'grammar' ? allGrammarTopics : uniqueVocabTopics;
+    const sidebarTitle = activeTab === 'grammar' ? 'Grammaire (Grammar)' : 'Vocabulaire (Vocabulary)';
+
     return (
-        <div className="container" style={{ maxWidth: '1000px' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '0.25rem', color: 'var(--text-primary)', textTransform: 'uppercase' }}>
-                Grammaire et Vocabulaire
-            </h1>
-            <p style={{ textAlign: 'center', fontSize: '1.25rem', color: 'var(--accent-cyan)', fontWeight: 'bold', marginBottom: '2rem' }}>
-                (Grammar & Vocabulary)
-            </p>
+        <div className="container" style={{ maxWidth: '1200px', display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
+            {/* Main Content */}
+            <div style={{ flex: 1, minWidth: 0 }}>
+                <h1 style={{ textAlign: 'center', marginBottom: '0.25rem', color: 'var(--text-primary)', textTransform: 'uppercase' }}>
+                    Grammaire et Vocabulaire
+                </h1>
+                <p style={{ textAlign: 'center', fontSize: '1.25rem', color: 'var(--accent-cyan)', fontWeight: 'bold', marginBottom: '2rem' }}>
+                    (Grammar & Vocabulary)
+                </p>
 
-            {/* Toggle Tabs */}
-            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem', gap: '1rem' }}>
-                <button
-                    className={`filter-btn ${activeTab === 'grammar' ? 'active' : ''}`}
-                    onClick={() => { setActiveTab('grammar'); setSelectedTopic('All'); setSearchTerm(''); }}
-                >
-                    Grammaire (Grammar)
-                </button>
-                <button
-                    className={`filter-btn ${activeTab === 'vocabulary' ? 'active' : ''}`}
-                    onClick={() => { setActiveTab('vocabulary'); setSelectedTopic('All'); setSearchTerm(''); }}
-                >
-                    Vocabulaire (Vocabulary)
-                </button>
-            </div>
+                {/* Toggle Tabs */}
+                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem', gap: '1rem' }}>
+                    <button
+                        className={`filter-btn ${activeTab === 'grammar' ? 'active' : ''}`}
+                        onClick={() => { setActiveTab('grammar'); setSelectedTopic('All'); setSearchTerm(''); }}
+                    >
+                        Grammaire (Grammar)
+                    </button>
+                    <button
+                        className={`filter-btn ${activeTab === 'vocabulary' ? 'active' : ''}`}
+                        onClick={() => { setActiveTab('vocabulary'); setSelectedTopic('All'); setSearchTerm(''); }}
+                    >
+                        Vocabulaire (Vocabulary)
+                    </button>
+                </div>
 
-            {/* Search Bar */}
-            <div style={{ position: 'relative', marginBottom: '2rem' }}>
-                <input
-                    type="text"
-                    placeholder={activeTab === 'grammar' ? "Search grammar rules..." : "Search vocabulary words..."}
-                    value={searchTerm}
-                    onChange={(e) => handleSearch(e.target.value)}
-                    style={{
-                        width: '100%',
-                        padding: '1rem 1rem 1rem 3rem',
-                        fontSize: '1.2rem',
-                        borderRadius: '12px',
-                        border: '2px solid var(--border-color)',
-                        background: 'var(--bg-secondary)',
-                        color: 'var(--text-primary)',
-                        outline: 'none'
-                    }}
-                />
-                <Search
-                    style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }}
-                />
-                {searchTerm && (
-                    <X
-                        size={20}
-                        onClick={() => setSearchTerm('')}
+                {/* Search Bar — sized to match dropdown */}
+                <div style={{ position: 'relative', marginBottom: '1rem' }}>
+                    <input
+                        type="text"
+                        placeholder={activeTab === 'grammar' ? "Search grammar rules..." : "Search vocabulary words..."}
+                        value={searchTerm}
+                        onChange={(e) => handleSearch(e.target.value)}
                         style={{
-                            position: 'absolute',
-                            right: '1rem',
-                            top: '50%',
-                            transform: 'translateY(-50%)',
-                            color: 'var(--text-secondary)',
-                            cursor: 'pointer'
+                            width: '100%',
+                            padding: '1rem 1rem 1rem 3rem',
+                            fontSize: '1.1rem',
+                            borderRadius: '12px',
+                            border: '2px solid var(--border-color)',
+                            background: 'var(--bg-secondary)',
+                            color: 'var(--text-primary)',
+                            outline: 'none',
+                            boxSizing: 'border-box'
                         }}
                     />
-                )}
+                    <Search
+                        style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }}
+                    />
+                    {searchTerm && (
+                        <X
+                            size={20}
+                            onClick={() => setSearchTerm('')}
+                            style={{
+                                position: 'absolute',
+                                right: '1rem',
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                color: 'var(--text-secondary)',
+                                cursor: 'pointer'
+                            }}
+                        />
+                    )}
+                </div>
+
+                {/* Filter Dropdown */}
+                <div style={{ marginBottom: '3rem' }}>
+                    <select
+                        value={selectedTopic}
+                        onChange={(e) => setSelectedTopic(e.target.value)}
+                        style={{
+                            width: '100%',
+                            padding: '1rem',
+                            fontSize: '1.1rem',
+                            borderRadius: '12px',
+                            border: '2px solid var(--border-color)',
+                            background: 'var(--bg-secondary)',
+                            color: 'var(--text-primary)',
+                            outline: 'none',
+                            cursor: 'pointer',
+                            boxSizing: 'border-box'
+                        }}
+                    >
+                        <option value="All">Show All {activeTab === 'grammar' ? 'Topics' : 'Categories'}</option>
+                        {activeTab === 'grammar'
+                            ? filteredGrammarTopics.map(t => <option key={t.title} value={t.title}>{t.title}</option>)
+                            : filteredVocabSections.map(s => <option key={s.title} value={s.title}>{s.title}</option>)
+                        }
+                    </select>
+                </div>
+
+                {/* Content Display */}
+                <div className="content-area">
+                    {activeTab === 'grammar' ? (
+                        <>
+                            {filteredGrammarTopics.length > 0 ? (
+                                filteredGrammarTopics
+                                    .filter(t => selectedTopic === 'All' || t.title === selectedTopic)
+                                    .map((topic, idx) => (
+                                        <GrammarSectionView key={idx} section={topic} />
+                                    ))
+                            ) : (
+                                <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>
+                                    <BookOpen size={48} style={{ opacity: 0.5, marginBottom: '1rem' }} />
+                                    <p>No grammar topics found.</p>
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <>
+                            {filteredVocabSections.length > 0 ? (
+                                filteredVocabSections
+                                    .filter(s => selectedTopic === 'All' || s.title === selectedTopic)
+                                    .map((section, idx) => (
+                                        <VocabularySectionView key={idx} section={section} />
+                                    ))
+                            ) : (
+                                <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>
+                                    <BookOpen size={48} style={{ opacity: 0.5, marginBottom: '1rem' }} />
+                                    <p>No vocabulary words found.</p>
+                                </div>
+                            )}
+                        </>
+                    )}
+                </div>
             </div>
 
-            {/* Filter Dropdown (Optional but helpful for large lists) */}
-            <div style={{ marginBottom: '3rem' }}>
-                <select
-                    value={selectedTopic}
-                    onChange={(e) => setSelectedTopic(e.target.value)}
-                    style={{
-                        width: '100%',
-                        padding: '1rem',
-                        fontSize: '1.1rem',
-                        borderRadius: '12px',
-                        border: '2px solid var(--border-color)',
-                        background: 'var(--bg-secondary)',
-                        color: 'var(--text-primary)',
-                        outline: 'none',
-                        cursor: 'pointer'
-                    }}
-                >
-                    <option value="All">Show All {activeTab === 'grammar' ? 'Topics' : 'Categories'}</option>
-                    {activeTab === 'grammar'
-                        ? filteredGrammarTopics.map(t => <option key={t.title} value={t.title}>{t.title}</option>)
-                        : filteredVocabSections.map(s => <option key={s.title} value={s.title}>{s.title}</option>)
+            {/* Right Sidebar — Topic Shortcuts */}
+            <div style={{
+                width: '300px',
+                background: 'var(--bg-secondary)',
+                borderRadius: '12px',
+                padding: '1.5rem',
+                border: '1px solid var(--border-color)',
+                position: 'sticky',
+                top: '5rem',
+                display: 'none'
+            }} className="grammar-sidebar">
+                <h3 style={{ textAlign: 'center', marginBottom: '1.5rem', color: 'var(--accent-color)', fontSize: '1.2rem', textTransform: 'uppercase' }}>
+                    {sidebarTitle}
+                </h3>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.5rem' }}>
+                    <button
+                        onClick={() => { setSelectedTopic('All'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                        style={{
+                            textAlign: 'left',
+                            padding: '0.6rem 1rem',
+                            borderRadius: '8px',
+                            border: '1px solid transparent',
+                            background: selectedTopic === 'All' ? 'rgba(0, 120, 212, 0.2)' : 'transparent',
+                            color: selectedTopic === 'All' ? 'var(--accent-color)' : 'var(--text-primary)',
+                            cursor: 'pointer',
+                            transition: 'all 0.2s',
+                            fontSize: '0.95rem',
+                            fontWeight: selectedTopic === 'All' ? 700 : 400
+                        }}
+                    >
+                        Tout afficher (Show All)
+                    </button>
+                    {sidebarTopics.map((topic) => {
+                        const isActive = selectedTopic === topic;
+                        return (
+                            <button
+                                key={topic}
+                                onClick={() => handleSidebarClick(topic)}
+                                style={{
+                                    textAlign: 'left',
+                                    padding: '0.6rem 1rem',
+                                    borderRadius: '8px',
+                                    border: '1px solid transparent',
+                                    background: isActive ? 'rgba(0, 120, 212, 0.2)' : 'transparent',
+                                    color: isActive ? 'var(--accent-color)' : 'var(--text-primary)',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.2s',
+                                    fontSize: '0.9rem',
+                                    fontWeight: isActive ? 700 : 400
+                                }}
+                            >
+                                {topic}
+                            </button>
+                        );
+                    })}
+                </div>
+            </div>
+
+            <style>{`
+                @media (min-width: 1024px) {
+                    .grammar-sidebar {
+                        display: block !important;
                     }
-                </select>
-            </div>
-
-
-            {/* Content Display */}
-            <div className="content-area">
-                {activeTab === 'grammar' ? (
-                    // --- GRAMMAR VIEW ---
-                    <>
-                        {filteredGrammarTopics.length > 0 ? (
-                            filteredGrammarTopics
-                                .filter(t => selectedTopic === 'All' || t.title === selectedTopic)
-                                .map((topic, idx) => (
-                                    <GrammarSectionView key={idx} section={topic} />
-                                ))
-                        ) : (
-                            <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>
-                                <BookOpen size={48} style={{ opacity: 0.5, marginBottom: '1rem' }} />
-                                <p>No grammar topics found.</p>
-                            </div>
-                        )}
-                    </>
-                ) : (
-                    // --- VOCABULARY VIEW ---
-                    <>
-                        {filteredVocabSections.length > 0 ? (
-                            filteredVocabSections
-                                .filter(s => selectedTopic === 'All' || s.title === selectedTopic)
-                                .map((section, idx) => (
-                                    <VocabularySectionView key={idx} section={section} />
-                                ))
-                        ) : (
-                            <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>
-                                <BookOpen size={48} style={{ opacity: 0.5, marginBottom: '1rem' }} />
-                                <p>No vocabulary words found.</p>
-                            </div>
-                        )}
-                    </>
-                )}
-            </div>
+                }
+            `}</style>
         </div>
     );
 };

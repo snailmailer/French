@@ -163,13 +163,14 @@ const ConjugationPage = () => {
                         onChange={(e) => handleSearch(e.target.value)}
                         style={{
                             width: '100%',
-                            padding: '1rem 1rem 1rem 3rem',
-                            fontSize: '1.2rem',
-                            borderRadius: '12px',
-                            border: '2px solid var(--border-color)',
+                            padding: '0.8rem 0.8rem 0.8rem 3rem',
+                            fontSize: '1rem',
+                            borderRadius: '8px',
+                            border: '1px solid var(--border-color)',
                             background: 'var(--bg-secondary)',
                             color: 'var(--text-primary)',
-                            outline: 'none'
+                            outline: 'none',
+                            boxSizing: 'border-box'
                         }}
                     />
                     <Search
