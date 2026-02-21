@@ -7,12 +7,18 @@ export interface VocabularySubsection {
     subtitle: string;
     items: VocabularyItem[];
     format?: 'cards' | 'table';
+    descriptionFr?: string;
+    descriptionEn?: string;
+    notesFr?: string;
+    notesEn?: string;
 }
 
 export interface VocabularySection {
     title: string;
     items?: VocabularyItem[];
     subsections?: VocabularySubsection[];
+    descriptionFr?: string;
+    descriptionEn?: string;
 }
 
 export const vocabularyData: VocabularySection[] = [
@@ -774,6 +780,106 @@ export const vocabularyData: VocabularySection[] = [
                     { fr: "« C'est » remplace parfois « Il fait » pour des états : C'est nuageux.", en: "« C'est » sometimes replaces « Il fait » for states: It's cloudy." },
                     { fr: "« Il pleut des cordes » est une expression idiomatique.", en: "« Il pleut des cordes » (It's raining ropes) is an idiomatic expression for 'It's pouring.'" },
                     { fr: "Utilisez le futur pour les prévisions : Il va pleuvoir.", en: "Use the future tense for forecasts: It's going to rain." },
+                ]
+            }
+        ]
+    },
+    {
+        title: "Les salutations (Greetings)",
+        descriptionFr: "En français, les salutations ne se conjuguent pas selon les pronoms personnels (je, tu, il/elle, nous, vous, ils/elles). Elles dépendent surtout de la situation (formelle ou informelle) et du moment de la journée.",
+        descriptionEn: "In French, greetings don't conjugate according to personal pronouns (je, tu, il/elle, nous, vous, ils/elles). They mainly depend on the situation (formal or informal) and time of day.",
+        subsections: [
+            {
+                subtitle: "Les salutations principales (Core greetings)",
+                descriptionFr: "Ces expressions sont invariables, c'est-à-dire qu'elles ne changent pas avec les pronoms.",
+                descriptionEn: "These expressions are invariable, meaning they don't change with pronouns.",
+                format: 'table' as const,
+                items: [
+                    { fr: "Bonjour", en: "Hello / Good day (until ~6 PM)" },
+                    { fr: "Bonsoir", en: "Good evening (after ~6 PM)" },
+                    { fr: "Salut", en: "Hi / Bye" },
+                    { fr: "Coucou", en: "Hey there" },
+                    { fr: "Au revoir", en: "Goodbye" }
+                ],
+                notesFr: "Bonjour et Bonsoir s'emploient dans un cadre formel ou neutre (travail, école, service). Salut et Coucou sont pour la famille, les amis, ou les messages textos.",
+                notesEn: "Bonjour and Bonsoir are used in formal or neutral settings (work, school, services). Salut and Coucou are for family, friends, or text messages."
+            },
+            {
+                subtitle: "Les phrases de suivi (Follow-up phrases)",
+                descriptionFr: "Ces phrases se conjuguent selon le pronom et révèlent le degré de politesse ou familiarité.",
+                descriptionEn: "These phrases conjugate according to the pronoun and reveal the degree of politeness or familiarity.",
+                format: 'table' as const,
+                items: [
+                    { fr: "Comment vas-tu ?", en: "How are you? (informal)" },
+                    { fr: "Comment allez-vous ?", en: "How are you? (formal or plural)" },
+                    { fr: "Ça va ?", en: "All good? / How's it going?" }
+                ],
+                notesFr: "Salut ! Comment vas-tu ? → Tu montre une relation amicale. Bonjour ! Comment allez-vous ? → Vous montre le respect ou la distance professionnelle.",
+                notesEn: "Salut! Comment vas-tu? → Tu shows a friendly relationship. Bonjour! Comment allez-vous? → Vous shows respect or professional distance."
+            },
+            {
+                subtitle: "Réponses possibles (Possible responses)",
+                format: 'table' as const,
+                items: [
+                    { fr: "Je vais bien.", en: "I'm good." },
+                    { fr: "Tu vas bien ?", en: "Are you good?" },
+                    { fr: "Nous allons bien.", en: "We're good." },
+                    { fr: "Ils/Elles vont bien.", en: "They're good." }
+                ]
+            },
+            {
+                subtitle: "Exemples de dialogues complets (Complete dialogue examples)",
+                format: 'table' as const,
+                items: [
+                    {
+                        fr: "– Salut ! Comment vas-tu ?\n– Je vais bien, et toi ? On va bien, merci. Elles vont super !",
+                        en: "(Hi! How are you?)\n(I'm good, and you? We're good, thanks. They're great!)"
+                    },
+                    {
+                        fr: "– Bonjour ! Comment allez-vous ?\n– Je vais bien, merci. Il va bien aussi. Et vous, allez-vous bien ?",
+                        en: "(Hello! How are you?)\n(I'm well, thank you. He's fine too. And you, are you well?)"
+                    }
+                ]
+            },
+            {
+                subtitle: "Les salutations complémentaires (Expanded greetings)",
+                descriptionFr: "Ces expressions expriment la bienveillance et s'emploient sans conjugaison, souvent au moment d'arriver ou de partir.",
+                descriptionEn: "These expressions show goodwill and are used without conjugation, often when arriving or leaving.",
+                format: 'table' as const,
+                items: [
+                    { fr: "Bienvenue", en: "Welcome" },
+                    { fr: "Bonne journée", en: "Have a good day" },
+                    { fr: "Bon après-midi", en: "Good afternoon" },
+                    { fr: "Bonne soirée", en: "Have a good evening" },
+                    { fr: "Bonne nuit", en: "Good night" }
+                ],
+                notesFr: "Ces expressions ne changent pas selon le sujet. On dit Bonne journée peu importe si c'est tu, vous, ou ils.",
+                notesEn: "These expressions don't change according to the subject. You say Bonne journée regardless of whether it's tu, vous, or ils."
+            },
+            {
+                subtitle: "« Enchanté(e) » – Nice to meet you",
+                descriptionFr: "L'expression enchanté(e) s'accorde selon le genre et le nombre du locuteur (celui qui parle, pas celui qu'on salue).",
+                descriptionEn: "The expression enchanté(e) agrees according to the gender and number of the speaker (not the person being greeted).",
+                format: 'table' as const,
+                items: [
+                    { fr: "Je suis enchanté", en: "I'm pleased / Nice to meet you (masc.)" },
+                    { fr: "Je suis enchantée", en: "I'm pleased (fem.)" },
+                    { fr: "Enchanté(e)", en: "Nice to meet you" },
+                    { fr: "Il est enchanté", en: "He's pleased" },
+                    { fr: "Elle est enchantée", en: "She's pleased" },
+                    { fr: "Nous sommes enchantés/ées", en: "We're delighted" },
+                    { fr: "Enchanté(e)(s)", en: "Nice to meet you (plural/formal)" }
+                ],
+                notesFr: "Ajoutez Enchanté(e) juste après vous être présenté. 👉 « Je m'appelle Alex. Enchanté ! » Variante plus formelle : Ravi(e) de vous rencontrer.",
+                notesEn: "Add Enchanté(e) right after introducing yourself. 👉 \"Je m'appelle Alex. Enchanté!\" More formal alternative: Ravi(e) de vous rencontrer."
+            },
+            {
+                subtitle: "Notes d'usage et style (Usage notes and style)",
+                format: 'table' as const,
+                items: [
+                    { fr: "Utilisez tu avec les amis, les collègues proches, ou les personnes de votre âge.", en: "Use tu with friends, close colleagues, or people your age." },
+                    { fr: "Utilisez vous pour un professeur, un client, un supérieur, ou une personne plus âgée.", en: "Use vous for teachers, clients, superiors, or older people." },
+                    { fr: "À l'écrit (email, CV, entretien), préférez les formes formelles : Bonjour, comment allez-vous ? Je suis enchanté(e) de faire votre connaissance.", en: "In writing (email, CV, interview), prefer formal forms: Bonjour, comment allez-vous ? Je suis enchanté(e) de faire votre connaissance." }
                 ]
             }
         ]

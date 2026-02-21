@@ -149,6 +149,20 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
                 {section.title}
             </h2>
 
+            {section.descriptionFr && (
+                <p style={{ color: 'var(--success-color)', marginBottom: '0.5rem', fontWeight: 500 }}>
+                    {section.descriptionFr}
+                    <button onClick={() => speakFrench(section.descriptionFr!)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--success-color)', marginLeft: '0.5rem', verticalAlign: 'middle' }}>
+                        <Volume2 size={16} />
+                    </button>
+                </p>
+            )}
+            {section.descriptionEn && (
+                <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontStyle: 'italic' }}>
+                    {section.descriptionEn}
+                </p>
+            )}
+
             {/* Flat items (simple vocabulary sections) */}
             {section.items && section.items.length > 0 && (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
@@ -171,6 +185,21 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
                     }}>
                         {sub.subtitle}
                     </h3>
+
+                    {sub.descriptionFr && (
+                        <p style={{ color: 'var(--success-color)', marginBottom: '0.25rem', fontWeight: 500, fontSize: '1rem' }}>
+                            {sub.descriptionFr}
+                            <button onClick={() => speakFrench(sub.descriptionFr!)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--success-color)', marginLeft: '0.5rem', verticalAlign: 'middle' }}>
+                                <Volume2 size={16} />
+                            </button>
+                        </p>
+                    )}
+                    {sub.descriptionEn && (
+                        <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', fontStyle: 'italic', fontSize: '0.95rem' }}>
+                            {sub.descriptionEn}
+                        </p>
+                    )}
+
                     {sub.format === 'table' ? (
                         <div style={{ overflowX: 'auto' }}>
                             <table style={{
@@ -193,8 +222,8 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
                                             background: idx % 2 === 0 ? 'var(--bg-primary)' : 'var(--bg-secondary)',
                                             borderBottom: '1px solid var(--border-color)'
                                         }}>
-                                            <td style={{ padding: '0.65rem 1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{item.fr}</td>
-                                            <td style={{ padding: '0.65rem 1rem', color: 'var(--text-secondary)' }}>{item.en}</td>
+                                            <td style={{ padding: '0.65rem 1rem', fontWeight: 600, color: 'var(--text-primary)', whiteSpace: 'pre-wrap' }}>{item.fr}</td>
+                                            <td style={{ padding: '0.65rem 1rem', color: 'var(--text-secondary)', whiteSpace: 'pre-wrap' }}>{item.en}</td>
                                             <td style={{ padding: '0.4rem 0.5rem', textAlign: 'center' }}>
                                                 <button onClick={() => speakFrench(item.fr)} title="Écouter en français" style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--success-color)', padding: '0.3rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}>
                                                     <Volume2 size={16} />
@@ -211,6 +240,20 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
                                 <VocabularyItemCard key={idx} item={item} />
                             ))}
                         </div>
+                    )}
+
+                    {sub.notesFr && (
+                        <p style={{ marginTop: '1rem', color: 'var(--text-primary)', fontWeight: 600, borderLeft: '3px solid var(--success-color)', paddingLeft: '1rem' }}>
+                            {sub.notesFr}
+                            <button onClick={() => speakFrench(sub.notesFr!)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--success-color)', marginLeft: '0.5rem', verticalAlign: 'middle' }}>
+                                <Volume2 size={16} />
+                            </button>
+                        </p>
+                    )}
+                    {sub.notesEn && (
+                        <p style={{ color: 'var(--text-secondary)', paddingLeft: '1rem', marginLeft: '3px', fontStyle: 'italic' }}>
+                            {sub.notesEn}
+                        </p>
                     )}
                 </div>
             ))}
