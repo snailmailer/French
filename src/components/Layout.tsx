@@ -44,11 +44,11 @@ const Layout = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                background: 'linear-gradient(135deg, rgba(0, 120, 212, 0.12) 0%, rgba(155, 89, 182, 0.1) 50%, rgba(0, 188, 212, 0.08) 100%)',
+                background: 'var(--bg-primary)',
                 position: 'sticky',
                 top: 0,
                 zIndex: 1000,
-                boxShadow: '0 2px 10px rgba(0,0,0,0.1)' // Added shadow for better visibility when scrolling
+                boxShadow: '0 4px 15px rgba(0,0,0,0.5)'
             }}>
                 <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '3.5rem', fontWeight: 800, textDecoration: 'none' }}>
                     <BookOpen size={48} color="var(--primary-color)" />
