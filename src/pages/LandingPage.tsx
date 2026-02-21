@@ -94,7 +94,9 @@ const LandingPage = () => {
                                 flexDirection: 'column',
                                 alignItems: 'center',
                                 textAlign: 'center',
-                                textDecoration: 'none'
+                                textDecoration: 'none',
+                                padding: '2.5rem 2rem',
+                                fontFamily: "'Segoe UI', system-ui, sans-serif"
                             }}
                             className="command-card-style"
                         >
@@ -115,7 +117,8 @@ const LandingPage = () => {
                                 color: 'var(--secondary-color)',
                                 fontSize: '1.4rem',
                                 fontWeight: 700,
-                                fontFamily: "'Cascadia Code', 'Fira Code', 'Courier New', monospace"
+                                fontFamily: "'Segoe UI', system-ui, sans-serif",
+                                textTransform: 'uppercase'
                             }}>
                                 {frTitle}
                             </h3>
