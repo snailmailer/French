@@ -47,27 +47,14 @@ const ResourcesPage = () => {
                         href={res.url}
                         target="_blank"
                         rel="noopener noreferrer"
+                        className="command-card-style"
                         style={{
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            background: 'var(--bg-secondary)',
-                            padding: '2rem',
-                            borderRadius: '16px',
                             textDecoration: 'none',
-                            color: 'var(--text-primary)',
-                            boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-                            transition: 'transform 0.2s, box-shadow 0.2s',
-                            borderLeft: '6px solid var(--primary-color)'
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.transform = 'translateY(-3px)';
-                            e.currentTarget.style.boxShadow = '0 8px 15px rgba(0,0,0,0.1)';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.transform = 'translateY(0)';
-                            e.currentTarget.style.boxShadow = '0 4px 6px rgba(0,0,0,0.05)';
+                            color: 'var(--text-primary)'
                         }}
                     >
                         <div style={{

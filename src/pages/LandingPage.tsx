@@ -90,33 +90,13 @@ const LandingPage = () => {
                             to={feature.path}
                             key={feature.id}
                             style={{
-                                background: feature.color,
-                                padding: '2rem',
-                                borderRadius: '16px',
-                                textDecoration: 'none',
-                                color: feature.textColor,
-                                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
                                 textAlign: 'center',
-                                border: '1px solid var(--border-color)',
-                                position: 'relative',
-                                overflow: 'hidden'
+                                textDecoration: 'none'
                             }}
-                            className="command-card-style" // Reusing PowerShell style via index.css
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.transform = 'translateY(-8px)';
-                                e.currentTarget.style.boxShadow = 'var(--shadow-hover)';
-                                e.currentTarget.style.borderColor = 'var(--primary-color)';
-                                e.currentTarget.style.background = 'var(--card-hover)';
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.transform = 'translateY(0)';
-                                e.currentTarget.style.boxShadow = 'none';
-                                e.currentTarget.style.borderColor = 'var(--border-color)';
-                                e.currentTarget.style.background = 'var(--card-bg)';
-                            }}
+                            className="command-card-style"
                         >
                             <div style={{
                                 color: 'var(--primary-color)',

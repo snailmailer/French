@@ -1,10 +1,12 @@
 @import './mobile.css';
 
 :root {
-  /* New Palette - PowerShell Dark Mode */
+  /* PowerShell Dark Mode Full Palette */
   --primary-color: #0078d4;
   --secondary-color: #40a9ff;
   --dark-bg: #0a0e1a;
+  --card-bg: #141b2d;
+  --card-hover: #1c2640;
 
   --bg-primary: #0a0e1a;
   --bg-secondary: #141b2d;
@@ -17,6 +19,20 @@
   --accent-hover: #40a9ff;
   --success-color: #00c853;
   --border-color: #1e2a45;
+
+  --accent-purple: #9b59b6;
+  --accent-blue: #2979ff;
+  --accent-cyan: #00bcd4;
+  --accent-green: #00c853;
+  --accent-orange: #ff7043;
+  --accent-pink: #ff4081;
+  --accent-yellow: #ffd600;
+  --accent-teal: #009688;
+  --accent-red: #ef5350;
+  --accent-indigo: #5c6bc0;
+
+  --shadow: 0 8px 32px rgba(0, 120, 212, 0.1);
+  --shadow-hover: 0 12px 48px rgba(0, 120, 212, 0.2);
 
   --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
@@ -107,24 +123,44 @@ button:focus-visible {
 }
 
 .level-card {
-  background-color: var(--bg-secondary);
-  border-left: 6px solid #E0E2D2;
-  border-radius: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   min-height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.level-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-purple) 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.level-card:hover::before {
+  transform: scaleX(1);
 }
 
 .level-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  border-color: var(--accent-color);
+  background: var(--card-hover);
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-8px);
 }
 
 .level-title {
@@ -163,6 +199,15 @@ button:focus-visible {
 }
 
 /* PowerShell Card Hover Effect */
+.command-card-style {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
 .command-card-style::before {
   content: '';
   position: absolute;
@@ -174,6 +219,13 @@ button:focus-visible {
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.4s ease;
+}
+
+.command-card-style:hover {
+  background: var(--card-hover);
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-8px);
 }
 
 .command-card-style:hover::before {

@@ -12,15 +12,16 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
     const HeaderTag = level === 0 ? 'h2' : 'h3';
 
     return (
-        <div style={{
-            marginBottom: '2rem',
-            background: level === 0 ? 'var(--bg-secondary)' : 'rgba(0,0,0,0.02)',
-            padding: '1.5rem',
-            borderRadius: '12px',
-            borderLeft: '4px solid var(--primary-color)',
-            marginLeft: level === 0 ? '0' : '1rem', // Reduced margin for mobile
-            boxShadow: level === 0 ? 'var(--shadow-hover)' : 'none'
-        }}>
+        <div
+            className={level === 0 ? "command-card-style" : ""}
+            style={{
+                marginBottom: '2rem',
+                background: level === 0 ? undefined : 'rgba(0,0,0,0.02)',
+                padding: '1.5rem',
+                borderLeft: '4px solid var(--primary-color)',
+                marginLeft: level === 0 ? '0' : '1rem' // Reduced margin for mobile
+            }}
+        >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
                 <HeaderTag style={{ color: 'var(--accent-color)', margin: 0 }}>{section.title}</HeaderTag>
                 <button
@@ -110,7 +111,7 @@ const VocabularyItemCard: React.FC<{ item: { fr: string; en: string } }> = ({ it
         padding: '0.8rem',
         background: 'var(--bg-primary)',
         borderRadius: '8px',
-        borderLeft: '4px solid #E0E2D2'
+        borderLeft: '4px solid var(--primary-color)'
     }}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{item.fr}</span>
@@ -139,13 +140,10 @@ const VocabularyItemCard: React.FC<{ item: { fr: string; en: string } }> = ({ it
 
 const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ section }) => {
     return (
-        <div style={{
+        <div className="command-card-style" style={{
             marginBottom: '2rem',
-            background: 'var(--bg-secondary)',
             padding: '1.5rem',
-            borderRadius: '12px',
-            borderLeft: '4px solid var(--primary-color)',
-            boxShadow: 'var(--shadow-hover)'
+            borderLeft: '4px solid var(--primary-color)'
         }}>
             <h2 style={{ color: 'var(--accent-color)', marginTop: 0, borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem', marginBottom: '1rem' }}>
                 {section.title}

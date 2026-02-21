@@ -289,23 +289,14 @@ const SpeakingPage = () => {
                                 <div
                                     key={cat}
                                     onClick={() => handleCategorySelect(cat)}
+                                    className="command-card-style"
                                     style={{
-                                        ...cardStyle,
                                         cursor: 'pointer',
-                                        transition: 'transform 0.2s, box-shadow 0.2s',
                                         display: 'flex',
                                         flexDirection: 'column',
                                         alignItems: 'center',
                                         textAlign: 'center',
                                         padding: '2rem'
-                                    }}
-                                    onMouseEnter={(e) => {
-                                        e.currentTarget.style.transform = 'translateY(-5px)';
-                                        e.currentTarget.style.boxShadow = 'var(--shadow-hover)';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        e.currentTarget.style.transform = 'translateY(0)';
-                                        e.currentTarget.style.boxShadow = 'none';
                                     }}
                                 >
                                     <div style={{
@@ -335,23 +326,14 @@ const SpeakingPage = () => {
                                 <div
                                     key={topic.id}
                                     onClick={() => handleExamSelect(topic.id)}
+                                    className="command-card-style"
                                     style={{
-                                        ...cardStyle,
                                         cursor: 'pointer',
-                                        transition: 'transform 0.2s, box-shadow 0.2s',
                                         display: 'flex',
                                         flexDirection: 'column',
                                         alignItems: 'center',
                                         textAlign: 'center',
                                         padding: '2rem'
-                                    }}
-                                    onMouseEnter={(e) => {
-                                        e.currentTarget.style.transform = 'translateY(-5px)';
-                                        e.currentTarget.style.boxShadow = 'var(--shadow-hover)';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        e.currentTarget.style.transform = 'translateY(0)';
-                                        e.currentTarget.style.boxShadow = 'none';
                                     }}
                                 >
                                     <div style={{
@@ -378,23 +360,14 @@ const SpeakingPage = () => {
                         {sectionHeading('📊 Guide des Niveaux (Level Guide)')}
                         <div
                             onClick={handleLevelGuideLink}
+                            className="command-card-style"
                             style={{
-                                ...cardStyle,
                                 cursor: 'pointer',
-                                transition: 'transform 0.2s, box-shadow 0.2s',
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: '2rem',
                                 padding: '2rem',
                                 borderLeft: '8px solid var(--accent-color)'
-                            }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.transform = 'translateY(-5px)';
-                                e.currentTarget.style.boxShadow = 'var(--shadow-hover)';
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.transform = 'translateY(0)';
-                                e.currentTarget.style.boxShadow = 'none';
                             }}
                         >
                             <div style={{
@@ -774,21 +747,13 @@ const SpeakingPage = () => {
                         <div
                             key={q.id}
                             onClick={() => handleQuestionSelect(q.id)}
+                            className="command-card-style"
                             style={{
-                                ...cardStyle,
                                 cursor: 'pointer',
-                                transition: 'transform 0.2s, box-shadow 0.2s',
                                 display: 'flex',
+                                padding: '1.5rem',
                                 alignItems: 'center',
                                 justifyContent: 'space-between'
-                            }}
-                            onMouseEnter={(e) => {
-                                e.currentTarget.style.transform = 'translateX(5px)';
-                                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
-                            }}
-                            onMouseLeave={(e) => {
-                                e.currentTarget.style.transform = 'translateX(0)';
-                                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.05)';
                             }}
                         >
                             <span style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: 500 }}>{q.question}</span>
