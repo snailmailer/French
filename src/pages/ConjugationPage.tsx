@@ -86,7 +86,7 @@ const ConjugationPage = () => {
                 </p>
 
                 {/* Filters */}
-                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
+                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
                     <div style={{ flex: 1, position: 'relative' }}>
                         <select
                             value={categoryFilter}
@@ -128,7 +128,7 @@ const ConjugationPage = () => {
                 </div>
 
                 {/* Tense Filter */}
-                <div style={{ flex: 1, position: 'relative' }}>
+                <div style={{ position: 'relative', marginBottom: '1rem' }}>
                     <select
                         value={tenseFilter}
                         onChange={(e) => setTenseFilter(e.target.value)}
@@ -153,9 +153,8 @@ const ConjugationPage = () => {
                     )}
                 </div>
 
-
                 {/* Search Bar */}
-                <div style={{ position: 'relative', marginBottom: '3rem' }}>
+                <div style={{ position: 'relative', marginBottom: '2rem' }}>
                     <input
                         type="text"
                         placeholder="Search verb (e.g., aimer, être)..."
@@ -181,8 +180,6 @@ const ConjugationPage = () => {
                             size={20}
                             onClick={() => {
                                 setSearchTerm('');
-                                // Optional: Reset selection if you want clearing search to clear result
-                                // setSelectedVerb(null); 
                             }}
                             style={{
                                 position: 'absolute',
