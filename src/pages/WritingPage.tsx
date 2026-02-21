@@ -51,7 +51,7 @@ const WritingPage = () => {
     };
 
     const selectedTense = initialTense || writingData[0].name;
-    const selectedLevel = searchParams.get('level') || getLevelFromTense(selectedTense) || (groupsWithItems.length > 0 ? groupsWithItems[0][0] : 'A2');
+    const selectedLevel = searchParams.get('level') || getLevelFromTense(selectedTense) || 'Themes';
 
     const direction = (searchParams.get('dir') as 'en-to-fr' | 'fr-to-en') || 'en-to-fr';
 
