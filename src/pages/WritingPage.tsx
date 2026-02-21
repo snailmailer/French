@@ -9,44 +9,6 @@ import { speakFrench, speakEnglish } from '../utils/tts';
 const WritingPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
 
-    // Initial selection logic
-    const initialTense = searchParams.get('tense');
-    const getLevelFromTense = (tenseName: string | null) => {
-        if (!tenseName) return null;
-        const category = writingData.find(c => c.name === tenseName);
-        if (!category) return null;
-        return getLevel(category.name);
-    };
-
-    const selectedTense = initialTense || writingData[0].name;
-    const selectedLevel = searchParams.get('level') || getLevelFromTense(selectedTense) || 'A2';
-
-    const direction = (searchParams.get('dir') as 'en-to-fr' | 'fr-to-en') || 'en-to-fr';
-
-    const updateParams = (updates: Record<string, string>) => {
-        const params = new URLSearchParams(searchParams);
-        Object.entries(updates).forEach(([key, val]) => params.set(key, val));
-        setSearchParams(params);
-    };
-
-    const handleLevelChange = (level: string) => {
-        // Find first tense in that level
-        const levelGroup = groupsWithItems.find(([l]) => l === level);
-        if (levelGroup && levelGroup[1].length > 0) {
-            updateParams({ level, tense: levelGroup[1][0].name });
-        } else {
-            updateParams({ level });
-        }
-    };
-
-    const setSelectedTense = (val: string) => updateParams({ tense: val });
-    const setDirection = (val: 'en-to-fr' | 'fr-to-en') => updateParams({ dir: val });
-    const [currentPrompt, setCurrentPrompt] = useState<WritingPrompt | null>(null);
-    const [userInput, setUserInput] = useState('');
-    const [showAnswer, setShowAnswer] = useState(false);
-    const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
-    const textareaRef = useRef<HTMLTextAreaElement>(null);
-
     // Helper to extract level from name
     const getLevel = (name: string) => {
         const match = name.match(/\(([A-Z][1-2])(?:.*)?\)/);
@@ -78,6 +40,46 @@ const WritingPage = () => {
                 return a.localeCompare(b);
             });
     }, []);
+
+    // Initial selection logic
+    const initialTense = searchParams.get('tense');
+    const getLevelFromTense = (tenseName: string | null) => {
+        if (!tenseName) return null;
+        const category = writingData.find(c => c.name === tenseName);
+        if (!category) return null;
+        return getLevel(category.name);
+    };
+
+    const selectedTense = initialTense || writingData[0].name;
+    const selectedLevel = searchParams.get('level') || getLevelFromTense(selectedTense) || (groupsWithItems.length > 0 ? groupsWithItems[0][0] : 'A2');
+
+    const direction = (searchParams.get('dir') as 'en-to-fr' | 'fr-to-en') || 'en-to-fr';
+
+    const updateParams = (updates: Record<string, string>) => {
+        const params = new URLSearchParams(searchParams);
+        Object.entries(updates).forEach(([key, val]) => params.set(key, val));
+        setSearchParams(params);
+    };
+
+    const handleLevelChange = (level: string) => {
+        // Find first tense in that level
+        const levelGroup = groupsWithItems.find(([l]) => l === level);
+        if (levelGroup && levelGroup[1].length > 0) {
+            updateParams({ level, tense: levelGroup[1][0].name });
+        } else {
+            updateParams({ level });
+        }
+    };
+
+    const setSelectedTense = (val: string) => updateParams({ tense: val });
+    const setDirection = (val: 'en-to-fr' | 'fr-to-en') => updateParams({ dir: val });
+    const [currentPrompt, setCurrentPrompt] = useState<WritingPrompt | null>(null);
+    const [userInput, setUserInput] = useState('');
+    const [showAnswer, setShowAnswer] = useState(false);
+    const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+
 
     const availableTensesForLevel = useMemo(() => {
         const group = groupsWithItems.find(([level]) => level === selectedLevel);
