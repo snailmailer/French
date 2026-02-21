@@ -3,7 +3,7 @@ import { useState, useMemo, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ArrowRight, Check, X, RefreshCw, Volume2 } from 'lucide-react';
 import { writingData } from '../data/writingPrompts';
-import type { WritingPrompt } from '../data/writingPrompts';
+import type { WritingPrompt, TenseCategory } from '../data/writingPrompts';
 import { speakFrench, speakEnglish } from '../utils/tts';
 
 const WritingPage = () => {
@@ -25,6 +25,39 @@ const WritingPage = () => {
     const [showAnswer, setShowAnswer] = useState(false);
     const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+    // Helper to extract level from name
+    const getLevel = (name: string) => {
+        const match = name.match(/\(([A-Z][1-2])(?:.*)?\)/);
+        return match ? match[1] : 'Themes';
+    };
+
+    // Group categories
+    const categorizedData = useMemo(() => {
+        const groups: Record<string, TenseCategory[]> = {
+            'A1': [],
+            'A2': [],
+            'B1': [],
+            'B2': [],
+            'C1': [],
+            'C2': [],
+            'Themes': []
+        };
+
+        writingData.forEach(cat => {
+            const level = getLevel(cat.name);
+            groups[level].push(cat);
+        });
+
+        // Filter out empty groups and sort within groups
+        return Object.entries(groups)
+            .filter(([_, items]) => items.length > 0)
+            .sort(([a], [b]) => {
+                if (a === 'Themes') return 1;
+                if (b === 'Themes') return -1;
+                return a.localeCompare(b);
+            });
+    }, []);
 
     const frenchChars = ['é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'ù', 'û', 'ô', 'î', 'ï', 'œ'];
 
@@ -115,8 +148,12 @@ const WritingPage = () => {
                             fontSize: '1rem'
                         }}
                     >
-                        {writingData.sort((a, b) => a.name.localeCompare(b.name)).map(cat => (
-                            <option key={cat.name} value={cat.name}>{cat.name}</option>
+                        {categorizedData.map(([level, items]) => (
+                            <optgroup key={level} label={level === 'Themes' ? 'THEMES (VOCABULARY)' : `LEVEL ${level}`}>
+                                {items.sort((a, b) => a.name.localeCompare(b.name)).map(cat => (
+                                    <option key={cat.name} value={cat.name}>{cat.name}</option>
+                                ))}
+                            </optgroup>
                         ))}
                     </select>
                 </div>
