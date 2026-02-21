@@ -218,25 +218,6 @@ export const vocabularyData: VocabularySection[] = [
         ].sort((a, b) => a.en.localeCompare(b.en))
     },
     {
-        title: "Les Lieux (Places)",
-        items: [
-            { en: "Airport", fr: "l'aéroport" },
-            { en: "Beach", fr: "la plage" },
-            { en: "Bus stop", fr: "l'arrêt de bus" },
-            { en: "Cinema", fr: "le cinéma" },
-            { en: "City hall", fr: "la mairie" },
-            { en: "Clinic", fr: "la clinique" },
-            { en: "Convenience store", fr: "le dépanneur / la supérette" },
-            { en: "Market", fr: "le marché" },
-            { en: "Museum", fr: "le musée" },
-            { en: "Park", fr: "le parc" },
-            { en: "Parking lot", fr: "le parking / le stationnement" },
-            { en: "Pedestrian lane", fr: "le passage piéton / la voie piétonne" },
-            { en: "Pharmacy", fr: "la pharmacie" },
-            { en: "Train station", fr: "la gare" }
-        ].sort((a, b) => a.en.localeCompare(b.en))
-    },
-    {
         title: "Les Literies (Bedding Essentials)",
         items: [
             { en: "Blanket", fr: "la couverture" },
