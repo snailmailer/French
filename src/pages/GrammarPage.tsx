@@ -422,23 +422,6 @@ const GrammarPage = () => {
                     {sidebarTitle}
                 </h3>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.5rem' }}>
-                    <button
-                        onClick={() => { setSelectedTopic('All'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                        style={{
-                            textAlign: 'left',
-                            padding: '0.6rem 1rem',
-                            borderRadius: '8px',
-                            border: '1px solid transparent',
-                            background: selectedTopic === 'All' ? 'rgba(0, 120, 212, 0.2)' : 'transparent',
-                            color: selectedTopic === 'All' ? 'var(--accent-color)' : 'var(--text-primary)',
-                            cursor: 'pointer',
-                            transition: 'all 0.2s',
-                            fontSize: '0.95rem',
-                            fontWeight: selectedTopic === 'All' ? 700 : 400
-                        }}
-                    >
-                        Tout afficher (Show All)
-                    </button>
                     {sidebarTopics.map((topic) => {
                         const isActive = selectedTopic === topic;
                         return (
@@ -472,7 +455,7 @@ const GrammarPage = () => {
                     }
                 }
             `}</style>
-        </div>
+        </div >
     );
 };
 
