@@ -8,9 +8,9 @@ const features = [
         desc: 'Master French rules, vocabulary, pronouns, and sentence structures.',
         icon: <Book size={32} />,
         path: '/grammar',
-        color: '#4a4d5e', // Dark Grey/Blue background
-        textColor: '#E0E2D2', // Cream
-        borderColor: '#575A6C'
+        color: 'var(--card-bg)',
+        textColor: 'var(--text-primary)',
+        borderColor: 'var(--border-color)'
     },
     {
         id: 'conjugation',
@@ -18,9 +18,9 @@ const features = [
         desc: 'Explore 100+ verbs with tenses, usage guides, and audio.',
         icon: <BookOpen size={32} />,
         path: '/conjugation',
-        color: '#4a4d5e',
-        textColor: '#E0E2D2',
-        borderColor: '#575A6C'
+        color: 'var(--card-bg)',
+        textColor: 'var(--text-primary)',
+        borderColor: 'var(--border-color)'
     },
     {
         id: 'reading',
@@ -28,9 +28,9 @@ const features = [
         desc: 'Practice reading comprehension with engaging stories.',
         icon: <Book size={32} />,
         path: '/reading',
-        color: '#4a4d5e',
-        textColor: '#E0E2D2',
-        borderColor: '#575A6C'
+        color: 'var(--card-bg)',
+        textColor: 'var(--text-primary)',
+        borderColor: 'var(--border-color)'
     },
     {
         id: 'writing',
@@ -38,9 +38,9 @@ const features = [
         desc: 'Improve your written French with exercises and prompts.',
         icon: <PenTool size={32} />,
         path: '/writing',
-        color: '#4a4d5e',
-        textColor: '#E0E2D2',
-        borderColor: '#575A6C'
+        color: 'var(--card-bg)',
+        textColor: 'var(--text-primary)',
+        borderColor: 'var(--border-color)'
     },
     {
         id: 'speaking',
@@ -48,9 +48,9 @@ const features = [
         desc: 'Enhance pronunciation and speaking confidence.',
         icon: <Mic size={32} />,
         path: '/speaking',
-        color: '#4a4d5e',
-        textColor: '#E0E2D2',
-        borderColor: '#575A6C'
+        color: 'var(--card-bg)',
+        textColor: 'var(--text-primary)',
+        borderColor: 'var(--border-color)'
     },
     {
         id: 'resources',
@@ -58,9 +58,9 @@ const features = [
         desc: 'External tools, news, and practice materials.',
         icon: <BookOpen size={32} />,
         path: '/resources',
-        color: '#4a4d5e',
-        textColor: '#E0E2D2',
-        borderColor: '#575A6C'
+        color: 'var(--card-bg)',
+        textColor: 'var(--text-primary)',
+        borderColor: 'var(--border-color)'
     },
 ];
 
@@ -70,7 +70,7 @@ const LandingPage = () => {
             <h1 style={{ fontSize: '3rem', fontWeight: 800, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
                 BIENVENUE !
             </h1>
-            <p style={{ fontSize: '1.4rem', color: '#B4C540', fontWeight: 'bold', marginBottom: '4rem' }}>
+            <p style={{ fontSize: '1.4rem', color: 'var(--accent-cyan)', fontWeight: 'bold', marginBottom: '4rem' }}>
                 (Welcome!)
             </p>
 
@@ -95,26 +95,32 @@ const LandingPage = () => {
                                 borderRadius: '16px',
                                 textDecoration: 'none',
                                 color: feature.textColor,
-                                transition: 'transform 0.2s, box-shadow 0.2s',
+                                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
                                 textAlign: 'center',
-                                borderLeft: '6px solid #E0E2D2',
-                                boxShadow: '0 4px 12px rgba(54, 134, 201, 0.3)'
+                                border: '1px solid var(--border-color)',
+                                position: 'relative',
+                                overflow: 'hidden'
                             }}
+                            className="command-card-style" // Reusing PowerShell style via index.css
                             onMouseEnter={(e) => {
-                                e.currentTarget.style.transform = 'translateY(-5px)';
-                                e.currentTarget.style.boxShadow = '0 10px 20px rgba(54, 134, 201, 0.5)';
+                                e.currentTarget.style.transform = 'translateY(-8px)';
+                                e.currentTarget.style.boxShadow = 'var(--shadow-hover)';
+                                e.currentTarget.style.borderColor = 'var(--primary-color)';
+                                e.currentTarget.style.background = 'var(--card-hover)';
                             }}
                             onMouseLeave={(e) => {
                                 e.currentTarget.style.transform = 'translateY(0)';
-                                e.currentTarget.style.boxShadow = '0 4px 12px rgba(54, 134, 201, 0.3)';
+                                e.currentTarget.style.boxShadow = 'none';
+                                e.currentTarget.style.borderColor = 'var(--border-color)';
+                                e.currentTarget.style.background = 'var(--card-bg)';
                             }}
                         >
                             <div style={{
-                                color: '#B4C540',
-                                background: 'rgba(255,255,255,0.05)',
+                                color: 'var(--primary-color)',
+                                background: 'rgba(0, 120, 212, 0.2)',
                                 padding: '1rem',
                                 borderRadius: '50%',
                                 marginBottom: '1rem',
@@ -126,7 +132,7 @@ const LandingPage = () => {
                             </div>
                             <h3 style={{
                                 margin: '0.25rem 0 0',
-                                color: '#E0E2D2',
+                                color: 'var(--secondary-color)',
                                 fontSize: '1.4rem',
                                 fontWeight: 700,
                                 textTransform: 'uppercase',
@@ -135,11 +141,11 @@ const LandingPage = () => {
                                 {frTitle}
                             </h3>
                             {cleanedEnTitle && (
-                                <p style={{ margin: '0 0 1rem', color: '#3686C9', fontSize: '1.1rem', fontWeight: 'bold' }}>
+                                <p style={{ margin: '0 0 1rem', color: 'var(--accent-cyan)', fontSize: '1.1rem', fontWeight: 'bold' }}>
                                     ({cleanedEnTitle})
                                 </p>
                             )}
-                            <p style={{ color: '#E0E2D2', opacity: 0.9, lineHeight: 1.6, marginTop: 'auto' }}>{feature.desc}</p>
+                            <p style={{ color: 'var(--text-secondary)', opacity: 0.9, lineHeight: 1.6, marginTop: 'auto' }}>{feature.desc}</p>
                         </Link>
                     );
                 })}

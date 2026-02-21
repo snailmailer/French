@@ -243,29 +243,31 @@ const ConjugationPage = () => {
                                         </span>
                                     </h2>
                                     <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
-                                        <span className="badge" style={{ background: '#2c3e50', padding: '0.2rem 0.8rem', borderRadius: '4px', fontSize: '0.9rem' }}>
+                                        <span className="badge" style={{ background: 'rgba(0, 120, 212, 0.2)', color: 'var(--primary-color)', border: '1px solid var(--primary-color)', padding: '0.2rem 0.8rem', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>
                                             Group {selectedVerb.group}
                                         </span>
-                                        <span className="badge" style={{ background: '#2c3e50', padding: '0.2rem 0.8rem', borderRadius: '4px', fontSize: '0.9rem' }}>
+                                        <span className="badge" style={{ background: 'rgba(0, 120, 212, 0.2)', color: 'var(--primary-color)', border: '1px solid var(--primary-color)', padding: '0.2rem 0.8rem', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>
                                             Auxiliary: {selectedVerb.auxiliary}
                                         </span>
-                                        <span className="badge" style={{ background: '#2c3e50', padding: '0.2rem 0.8rem', borderRadius: '4px', fontSize: '0.9rem' }}>
-                                            Gérondif: {selectedVerb.gerund || (selectedVerb.conjugations.Participe?.Présent?.[0]?.form ? `en ${selectedVerb.conjugations.Participe.Présent[0].form}` : 'N/A')}
+                                        <span className="badge" style={{ background: 'rgba(0, 120, 212, 0.2)', color: 'var(--primary-color)', border: '1px solid var(--primary-color)', padding: '0.2rem 0.8rem', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>
+                                            Gérondif: {selectedVerb.conjugations.Participe.Présent[0]?.form || 'N/A'}
                                         </span>
                                         <button
                                             onClick={() => setShowPractice(true)}
                                             style={{
-                                                padding: '0.4rem 1rem',
-                                                borderRadius: '8px',
-                                                border: '1px solid #4CAF50',
-                                                background: 'rgba(76, 175, 80, 0.15)',
-                                                color: '#4CAF50',
+                                                padding: '0.5rem 1.2rem',
+                                                borderRadius: '50px',
+                                                border: 'none',
+                                                background: 'linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%)',
+                                                color: '#ffffff',
                                                 cursor: 'pointer',
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 gap: '0.4rem',
-                                                fontSize: '0.9rem',
-                                                fontWeight: 600
+                                                fontSize: '0.95rem',
+                                                fontWeight: 600,
+                                                boxShadow: '0 4px 16px rgba(0, 120, 212, 0.35)',
+                                                transition: 'transform 0.2s, box-shadow 0.2s'
                                             }}
                                         >
                                             <PenLine size={16} />
@@ -436,7 +438,7 @@ const ConjugationPage = () => {
                                 }}
                             >
                                 <span>{verbName}</span>
-                                {verbObj && <span style={{ fontSize: '0.8rem', color: '#3686C9', fontWeight: 600 }}>({verbObj.translation})</span>}
+                                {verbObj && <span style={{ fontSize: '0.8rem', color: 'var(--accent-cyan)', fontWeight: 600 }}>({verbObj.translation})</span>}
                             </button>
                         );
                     })}

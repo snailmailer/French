@@ -44,15 +44,21 @@ const Layout = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                background: 'var(--bg-secondary)',
+                background: 'linear-gradient(135deg, rgba(0, 120, 212, 0.12) 0%, rgba(155, 89, 182, 0.1) 50%, rgba(0, 188, 212, 0.08) 100%)',
                 position: 'sticky',
                 top: 0,
                 zIndex: 1000,
                 boxShadow: '0 2px 10px rgba(0,0,0,0.1)' // Added shadow for better visibility when scrolling
             }}>
-                <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '3.5rem', fontWeight: 800, color: 'var(--text-primary)', textDecoration: 'none' }}>
-                    <BookOpen size={48} color="var(--accent-color)" />
-                    <span style={{ letterSpacing: '-1px' }}>Le Français</span>
+                <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '3.5rem', fontWeight: 800, textDecoration: 'none' }}>
+                    <BookOpen size={48} color="var(--primary-color)" />
+                    <span style={{
+                        letterSpacing: '-1px',
+                        background: 'linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 40%, var(--accent-cyan) 70%, var(--accent-purple) 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text'
+                    }}>Le Français</span>
                 </Link>
 
                 <div ref={menuRef} style={{ position: 'relative' }}>

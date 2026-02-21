@@ -142,10 +142,11 @@ const WritingPage = () => {
                             display: 'inline-block',
                             padding: '0.25rem 0.75rem',
                             borderRadius: '20px',
-                            background: 'rgba(54, 134, 201, 0.2)',
-                            color: '#3686C9',
+                            background: 'rgba(0, 188, 212, 0.2)',
+                            color: 'var(--accent-cyan)',
                             fontSize: '0.875rem',
-                            marginBottom: '1rem'
+                            marginBottom: '1rem',
+                            fontWeight: 600
                         }}>
                             {direction === 'en-to-fr' ? 'Translate to French' : 'Translate to English'}
                         </span>
@@ -160,7 +161,7 @@ const WritingPage = () => {
                                     background: 'none',
                                     border: 'none',
                                     cursor: 'pointer',
-                                    color: '#4CAF50',
+                                    color: 'var(--success-color)',
                                     padding: '0.5rem',
                                     borderRadius: '50%',
                                     display: 'flex',
@@ -184,7 +185,7 @@ const WritingPage = () => {
                                 width: '100%',
                                 padding: '1rem',
                                 borderRadius: '8px',
-                                border: `2px solid ${feedback === 'correct' ? '#4CAF50' : feedback === 'incorrect' ? '#FF5252' : 'var(--border-color)'}`,
+                                border: `2px solid ${feedback === 'correct' ? 'var(--success-color)' : feedback === 'incorrect' ? '#FF5252' : 'var(--border-color)'}`,
                                 background: 'var(--bg-primary)',
                                 color: 'var(--text-primary)',
                                 fontSize: '1.1rem',
@@ -208,10 +209,10 @@ const WritingPage = () => {
                                 marginBottom: '1.5rem',
                                 padding: '1rem',
                                 borderRadius: '8px',
-                                background: feedback === 'correct' ? 'rgba(76, 175, 80, 0.1)' : 'rgba(255, 82, 82, 0.1)',
-                                borderLeft: '6px solid #E0E2D2'
+                                background: feedback === 'correct' ? 'rgba(0, 200, 83, 0.1)' : 'rgba(255, 82, 82, 0.1)',
+                                borderLeft: `6px solid ${feedback === 'correct' ? 'var(--success-color)' : '#FF5252'}`
                             }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', fontWeight: 'bold', color: feedback === 'correct' ? '#4CAF50' : '#FF5252' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', fontWeight: 'bold', color: feedback === 'correct' ? 'var(--success-color)' : '#FF5252' }}>
                                     {feedback === 'correct' ? <Check size={20} /> : <X size={20} />}
                                     {feedback === 'correct' ? 'Correct!' : 'Incorrect'}
                                 </div>
@@ -230,7 +231,7 @@ const WritingPage = () => {
                                                     background: 'none',
                                                     border: 'none',
                                                     cursor: 'pointer',
-                                                    color: '#4CAF50',
+                                                    color: 'var(--success-color)',
                                                     padding: '0.25rem',
                                                     display: 'flex',
                                                     alignItems: 'center',

@@ -1,35 +1,34 @@
 @import './mobile.css';
 
 :root {
-  /* New Palette - Dark Mode */
-  --bg-primary: #575A6C;
-  /* Dark Grey/Blue Background */
-  --bg-secondary: #4a4d5e;
-  /* Slightly lighter for cards */
-  --bg-tertiary: #3e4152;
-  /* Even darker for inputs/headers */
-  --text-primary: #E0E2D2;
-  /* Beige Text */
-  --text-secondary: #b0b2c2;
-  --accent-color: #3686C9;
-  /* Blue */
-  --accent-hover: #5DA3E0;
-  --success-color: #B4C540;
-  /* Lime Green */
-  --border-color: #6a6d80;
-  --font-family: 'Check it out', 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* New Palette - PowerShell Dark Mode */
+  --primary-color: #0078d4;
+  --secondary-color: #40a9ff;
+  --dark-bg: #0a0e1a;
+
+  --bg-primary: #0a0e1a;
+  --bg-secondary: #141b2d;
+  --bg-tertiary: #1c2640;
+
+  --text-primary: #ffffff;
+  --text-secondary: #a0b0cc;
+
+  --accent-color: #0078d4;
+  --accent-hover: #40a9ff;
+  --success-color: #00c853;
+  --border-color: #1e2a45;
+
+  --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 body {
   margin: 0;
-  /* display: flex; REMOVE THIS IF IT BREAKS LAYOUT */
-  /* place-items: center; REMOVE THIS IF IT BREAKS LAYOUT */
   min-width: 320px;
   min-height: 100vh;
-  background-color: var(--bg-primary);
+  background: linear-gradient(135deg, var(--bg-primary) 0%, #0d1225 50%, #0a0f1f 100%);
   color: var(--text-primary);
   font-family: var(--font-family);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 #root {
@@ -142,4 +141,22 @@ button:focus-visible {
 
 .conjugation-row:hover {
   background-color: var(--bg-tertiary);
+}
+
+/* PowerShell Card Hover Effect */
+.command-card-style::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-purple) 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.command-card-style:hover::before {
+  transform: scaleX(1);
 }
