@@ -55,24 +55,43 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: var(--bg-secondary);
+  padding: 0.6rem 1.2rem;
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 50px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.3s ease;
+  outline: none;
+  font-family: 'Inter', sans-serif;
 }
 
 button:hover {
-  border-color: var(--accent-color);
+  background: var(--card-hover);
+  border-color: var(--primary-color);
+  color: var(--text-primary);
+  transform: translateY(-2px);
 }
 
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 120, 212, 0.15);
+}
+
+/* Primary "Active" Button Style */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  border-color: var(--primary-color);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 120, 212, 0.35);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+  color: #ffffff;
 }
 
 /* Custom Utilities */

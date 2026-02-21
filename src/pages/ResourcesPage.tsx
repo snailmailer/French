@@ -30,10 +30,10 @@ const resources = [
 const ResourcesPage = () => {
     return (
         <div className="container" style={{ maxWidth: '900px', padding: '3rem 1rem', margin: '0 auto' }}>
-            <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '0.25rem', color: '#E0E2D2', textTransform: 'uppercase' }}>
+            <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '0.25rem', color: 'var(--text-primary)', textTransform: 'uppercase' }}>
                 Ressources Externes
             </h1>
-            <p style={{ textAlign: 'center', fontSize: '1.25rem', color: '#3686C9', fontWeight: 'bold', marginBottom: '2rem' }}>
+            <p style={{ textAlign: 'center', fontSize: '1.25rem', color: 'var(--accent-cyan)', fontWeight: 'bold', marginBottom: '2rem' }}>
                 (External Resources)
             </p>
             <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginBottom: '4rem' }}>
@@ -59,7 +59,7 @@ const ResourcesPage = () => {
                             color: 'var(--text-primary)',
                             boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
                             transition: 'transform 0.2s, box-shadow 0.2s',
-                            borderLeft: '6px solid #E0E2D2'
+                            borderLeft: '6px solid var(--primary-color)'
                         }}
                         onMouseEnter={(e) => {
                             e.currentTarget.style.transform = 'translateY(-3px)';
@@ -89,7 +89,7 @@ const ResourcesPage = () => {
                             <p style={{ margin: 0, color: 'var(--text-secondary)', lineHeight: 1.5 }}>
                                 {res.desc}
                             </p>
-                            <div style={{ marginTop: '0.8rem', fontSize: '0.9rem', color: '#95a5a6', display: 'flex', alignItems: 'center', gap: '0.3rem', justifyContent: 'center' }}>
+                            <div style={{ marginTop: '0.8rem', fontSize: '0.9rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.3rem', justifyContent: 'center' }}>
                                 <ExternalLink size={14} /> {new URL(res.url).hostname}
                             </div>
                         </div>

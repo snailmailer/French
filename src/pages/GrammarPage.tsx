@@ -17,9 +17,9 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
             background: level === 0 ? 'var(--bg-secondary)' : 'rgba(0,0,0,0.02)',
             padding: '1.5rem',
             borderRadius: '12px',
-            borderLeft: '4px solid #E0E2D2',
+            borderLeft: '4px solid var(--primary-color)',
             marginLeft: level === 0 ? '0' : '1rem', // Reduced margin for mobile
-            boxShadow: level === 0 ? '0 4px 12px rgba(0,0,0,0.05)' : 'none'
+            boxShadow: level === 0 ? 'var(--shadow-hover)' : 'none'
         }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
                 <HeaderTag style={{ color: 'var(--accent-color)', margin: 0 }}>{section.title}</HeaderTag>
@@ -39,21 +39,21 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
                     </div>
                 )}
                 <div>
-                    <strong style={{ color: '#B4C540' }}>Use (FR):</strong> {section.useFr}
-                    <button onClick={() => speakFrench(section.useFr)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#B4C540', marginLeft: '0.5rem', verticalAlign: 'middle' }}>
+                    <strong style={{ color: 'var(--success-color)' }}>Use (FR):</strong> {section.useFr}
+                    <button onClick={() => speakFrench(section.useFr)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--success-color)', marginLeft: '0.5rem', verticalAlign: 'middle' }}>
                         <Volume2 size={16} />
                     </button>
                 </div>
                 <div>
-                    <strong style={{ color: '#3686C9' }}>Use (EN):</strong> {section.useEn}
+                    <strong style={{ color: 'var(--secondary-color)' }}>Use (EN):</strong> {section.useEn}
                 </div>
                 <div>
-                    <strong style={{ color: '#B4C540' }}>Structure:</strong> <span style={{ fontStyle: 'italic', fontFamily: 'monospace', background: 'rgba(0,0,0,0.05)', padding: '0.2rem 0.4rem', borderRadius: '4px' }}>{section.structure}</span>
+                    <strong style={{ color: 'var(--success-color)' }}>Structure:</strong> <span style={{ fontStyle: 'italic', fontFamily: 'monospace', background: 'rgba(0,0,0,0.05)', padding: '0.2rem 0.4rem', borderRadius: '4px', color: 'var(--text-primary)' }}>{section.structure}</span>
                 </div>
                 {section.forms && (
                     <div>
                         <strong>Forms:</strong> {section.forms}
-                        <button onClick={() => speakFrench(section.forms!)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#B4C540', marginLeft: '0.5rem', verticalAlign: 'middle' }}>
+                        <button onClick={() => speakFrench(section.forms!)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--success-color)', marginLeft: '0.5rem', verticalAlign: 'middle' }}>
                             <Volume2 size={16} />
                         </button>
                     </div>
@@ -61,22 +61,22 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
             </div>
 
             {section.examples && section.examples.length > 0 && (
-                <div style={{ background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
-                    <strong style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', opacity: 0.8, color: '#B4C540' }}>EXAMPLES</strong>
+                <div style={{ background: 'var(--bg-primary)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+                    <strong style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', opacity: 0.8, color: 'var(--accent-cyan)' }}>EXAMPLES</strong>
                     <ul style={{ margin: 0, paddingLeft: '0', listStyle: 'none' }}>
                         {section.examples.map((ex, idx) => (
                             <li key={idx} style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
                                 <div>
                                     <strong style={{ color: 'var(--text-primary)' }}>{ex.fr}</strong> <br />
-                                    <span style={{ opacity: 0.7, fontSize: '0.9rem' }}>→ {ex.en}</span>
+                                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>→ {ex.en}</span>
                                 </div>
                                 <button
                                     onClick={() => speakFrench(ex.fr)}
                                     style={{
-                                        background: 'rgba(76, 175, 80, 0.1)',
+                                        background: 'rgba(0, 200, 83, 0.1)',
                                         border: 'none',
                                         cursor: 'pointer',
-                                        color: '#4CAF50',
+                                        color: 'var(--success-color)',
                                         padding: '0.4rem',
                                         borderRadius: '50%',
                                         flexShrink: 0
@@ -124,7 +124,7 @@ const VocabularyItemCard: React.FC<{ item: { fr: string; en: string } }> = ({ it
                 background: 'transparent',
                 border: 'none',
                 cursor: 'pointer',
-                color: '#4CAF50',
+                color: 'var(--success-color)',
                 padding: '0.4rem',
                 borderRadius: '50%',
                 display: 'flex',
@@ -144,8 +144,8 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
             background: 'var(--bg-secondary)',
             padding: '1.5rem',
             borderRadius: '12px',
-            borderLeft: '4px solid #E0E2D2',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
+            borderLeft: '4px solid var(--primary-color)',
+            boxShadow: 'var(--shadow-hover)'
         }}>
             <h2 style={{ color: 'var(--accent-color)', marginTop: 0, borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem', marginBottom: '1rem' }}>
                 {section.title}
@@ -164,7 +164,7 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
             {section.subsections && section.subsections.map((sub, subIdx) => (
                 <div key={subIdx} style={{ marginBottom: subIdx < section.subsections!.length - 1 ? '1.5rem' : 0 }}>
                     <h3 style={{
-                        color: '#B4C540',
+                        color: 'var(--accent-cyan)',
                         fontSize: '1.15rem',
                         marginTop: subIdx === 0 ? 0 : '1.5rem',
                         marginBottom: '0.75rem',
@@ -183,9 +183,9 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
                                 fontSize: '1rem'
                             }}>
                                 <thead>
-                                    <tr style={{ background: 'rgba(76, 175, 80, 0.08)' }}>
-                                        <th style={{ padding: '0.75rem 1rem', textAlign: 'left', color: 'var(--accent-color)', fontWeight: 700, borderBottom: '2px solid var(--border-color)' }}>Français</th>
-                                        <th style={{ padding: '0.75rem 1rem', textAlign: 'left', color: '#3686C9', fontWeight: 700, borderBottom: '2px solid var(--border-color)' }}>English</th>
+                                    <tr style={{ background: 'rgba(0, 120, 212, 0.1)' }}>
+                                        <th style={{ padding: '0.75rem 1rem', textAlign: 'left', color: 'var(--primary-color)', fontWeight: 700, borderBottom: '2px solid var(--border-color)' }}>Français</th>
+                                        <th style={{ padding: '0.75rem 1rem', textAlign: 'left', color: 'var(--secondary-color)', fontWeight: 700, borderBottom: '2px solid var(--border-color)' }}>English</th>
                                         <th style={{ padding: '0.75rem 0.5rem', textAlign: 'center', borderBottom: '2px solid var(--border-color)', width: '80px' }}>🔊</th>
                                     </tr>
                                 </thead>
@@ -198,7 +198,7 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
                                             <td style={{ padding: '0.65rem 1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{item.fr}</td>
                                             <td style={{ padding: '0.65rem 1rem', color: 'var(--text-secondary)' }}>{item.en}</td>
                                             <td style={{ padding: '0.4rem 0.5rem', textAlign: 'center' }}>
-                                                <button onClick={() => speakFrench(item.fr)} title="Écouter en français" style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50', padding: '0.3rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}>
+                                                <button onClick={() => speakFrench(item.fr)} title="Écouter en français" style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--success-color)', padding: '0.3rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}>
                                                     <Volume2 size={16} />
                                                 </button>
                                             </td>
@@ -269,46 +269,24 @@ const GrammarPage = () => {
 
     return (
         <div className="container" style={{ maxWidth: '1000px' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '0.25rem', color: '#E0E2D2', textTransform: 'uppercase' }}>
+            <h1 style={{ textAlign: 'center', marginBottom: '0.25rem', color: 'var(--text-primary)', textTransform: 'uppercase' }}>
                 Grammaire et Vocabulaire
             </h1>
-            <p style={{ textAlign: 'center', fontSize: '1.25rem', color: '#3686C9', fontWeight: 'bold', marginBottom: '2rem' }}>
+            <p style={{ textAlign: 'center', fontSize: '1.25rem', color: 'var(--accent-cyan)', fontWeight: 'bold', marginBottom: '2rem' }}>
                 (Grammar & Vocabulary)
             </p>
 
             {/* Toggle Tabs */}
             <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem', gap: '1rem' }}>
                 <button
+                    className={`filter-btn ${activeTab === 'grammar' ? 'active' : ''}`}
                     onClick={() => { setActiveTab('grammar'); setSelectedTopic('All'); setSearchTerm(''); }}
-                    style={{
-                        padding: '0.8rem 2rem',
-                        fontSize: '1.1rem',
-                        borderRadius: '25px',
-                        border: 'none',
-                        background: activeTab === 'grammar' ? 'var(--accent-color)' : 'var(--bg-secondary)',
-                        color: activeTab === 'grammar' ? 'white' : 'var(--text-secondary)',
-                        cursor: 'pointer',
-                        fontWeight: 600,
-                        transition: 'all 0.2s ease',
-                        boxShadow: activeTab === 'grammar' ? '0 4px 10px rgba(52, 152, 219, 0.3)' : 'none'
-                    }}
                 >
                     Grammaire (Grammar)
                 </button>
                 <button
+                    className={`filter-btn ${activeTab === 'vocabulary' ? 'active' : ''}`}
                     onClick={() => { setActiveTab('vocabulary'); setSelectedTopic('All'); setSearchTerm(''); }}
-                    style={{
-                        padding: '0.8rem 2rem',
-                        fontSize: '1.1rem',
-                        borderRadius: '25px',
-                        border: 'none',
-                        background: activeTab === 'vocabulary' ? '#88BEEC' : 'var(--bg-secondary)', // Lighter blue button
-                        color: activeTab === 'vocabulary' ? 'white' : 'var(--text-secondary)',
-                        cursor: 'pointer',
-                        fontWeight: 600,
-                        transition: 'all 0.2s ease',
-                        boxShadow: activeTab === 'vocabulary' ? '0 4px 10px rgba(136, 190, 236, 0.3)' : 'none'
-                    }}
                 >
                     Vocabulaire (Vocabulary)
                 </button>

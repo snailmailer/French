@@ -36,7 +36,7 @@ const LevelPage = () => {
                     {levelData.title}
                     <button
                         onClick={() => speak(levelData.title)}
-                        style={{ background: 'transparent', border: '1px solid #4CAF50', borderRadius: '50%', cursor: 'pointer', padding: '0.4rem', color: '#4CAF50', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        style={{ background: 'transparent', border: '1px solid var(--success-color)', borderRadius: '50%', cursor: 'pointer', padding: '0.4rem', color: 'var(--success-color)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                         title="Listen"
                     >
                         <span style={{ fontSize: '1.2rem' }}>🔊</span>
@@ -47,13 +47,13 @@ const LevelPage = () => {
 
             <div className="topics-list">
                 {levelData.topics.map((topic) => (
-                    <section key={topic.id} style={{ marginBottom: '4rem', background: 'var(--bg-secondary)', padding: '2rem', borderRadius: '16px', borderLeft: '6px solid #E0E2D2' }}>
+                    <section key={topic.id} style={{ marginBottom: '4rem', background: 'var(--bg-secondary)', padding: '2rem', borderRadius: '16px', borderLeft: '6px solid var(--primary-color)' }}>
                         <h2 style={{ borderLeft: '4px solid var(--accent-color)', paddingLeft: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <span style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                 {topic.title}
                                 <button
                                     onClick={() => speak(topic.title)}
-                                    style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50', padding: 0 }}
+                                    style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--success-color)', padding: 0 }}
                                     title="Listen"
                                 >
                                     🔊
@@ -64,9 +64,9 @@ const LevelPage = () => {
 
                         {/* Topic-level Formula */}
                         {topic.formula && (
-                            <div style={{ background: '#1e1e1e', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid #E0E2D2', marginBottom: '1.5rem' }}>
-                                <h4 style={{ margin: '0 0 0.5rem 0', color: '#B4C540', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Formula</h4>
-                                <div style={{ fontFamily: 'monospace', fontSize: '1.1rem', color: '#e0e0e0' }}>{topic.formula}</div>
+                            <div style={{ background: 'var(--bg-primary)', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid var(--primary-color)', marginBottom: '1.5rem' }}>
+                                <h4 style={{ margin: '0 0 0.5rem 0', color: 'var(--accent-cyan)', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Formula</h4>
+                                <div style={{ fontFamily: 'monospace', fontSize: '1.1rem', color: 'var(--text-primary)' }}>{topic.formula}</div>
                             </div>
                         )}
 
@@ -84,8 +84,8 @@ const LevelPage = () => {
                                 );
                             } else if (block.type === 'formula') {
                                 return (
-                                    <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1.5rem', background: '#1e1e1e', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid #E0E2D2' }}>
-                                        <h4 style={{ margin: 0, color: '#B4C540' }}>Structure</h4>
+                                    <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1.5rem', background: 'var(--bg-primary)', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid var(--primary-color)' }}>
+                                        <h4 style={{ margin: 0, color: 'var(--accent-cyan)' }}>Structure</h4>
                                         {block.items.map((item, i) => (
                                             <div key={i} style={{ fontFamily: 'monospace', fontSize: '1.1rem' }}>{item}</div>
                                         ))}
@@ -105,7 +105,7 @@ const LevelPage = () => {
                                                             <button
                                                                 onClick={() => speak(`${row.pronoun} ${row.form}`)}
                                                                 title="Listen"
-                                                                style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50' }}
+                                                                style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--success-color)' }}
                                                             >
                                                                 🔊
                                                             </button>
@@ -118,8 +118,8 @@ const LevelPage = () => {
                                 );
                             } else if (block.type === 'examples') {
                                 return (
-                                    <div key={idx} style={{ background: 'rgba(255,255,255,0.05)', padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem', borderLeft: '4px solid #E0E2D2' }}>
-                                        <h4 style={{ color: '#B4C540' }}>Examples</h4>
+                                    <div key={idx} style={{ background: 'var(--bg-primary)', padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem', borderLeft: '4px solid var(--primary-color)' }}>
+                                        <h4 style={{ color: 'var(--accent-cyan)' }}>Examples</h4>
                                         <ul style={{ listStyle: 'none', padding: 0 }}>
                                             {block.list.map((ex, eIdx) => (
                                                 <li key={eIdx} style={{ marginBottom: '1rem', display: 'flex', flexDirection: 'column' }}>
@@ -127,7 +127,7 @@ const LevelPage = () => {
                                                         <span style={{ fontWeight: '500', fontSize: '1.1em' }}>{ex.french}</span>
                                                         <button
                                                             onClick={() => speak(ex.french)}
-                                                            style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, color: '#4CAF50' }}
+                                                            style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0, color: 'var(--success-color)' }}
                                                         >
                                                             🔊
                                                         </button>

@@ -134,8 +134,8 @@ const WritingPage = () => {
                     background: 'var(--bg-secondary)',
                     padding: '2rem',
                     borderRadius: '16px',
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
-                    borderLeft: '6px solid #E0E2D2'
+                    boxShadow: 'var(--shadow-hover)',
+                    borderLeft: '6px solid var(--primary-color)'
                 }}>
                     <div style={{ marginBottom: '1.5rem' }}>
                         <span style={{
@@ -251,9 +251,9 @@ const WritingPage = () => {
                                     style={{
                                         padding: '0.5rem 1rem',
                                         borderRadius: '8px',
-                                        border: '1px solid #4CAF50',
-                                        background: 'rgba(76, 175, 80, 0.1)',
-                                        color: '#4CAF50',
+                                        border: '1px solid var(--success-color)',
+                                        background: 'rgba(0, 200, 83, 0.1)',
+                                        color: 'var(--success-color)',
                                         cursor: 'pointer',
                                         display: 'flex',
                                         alignItems: 'center',
@@ -269,9 +269,9 @@ const WritingPage = () => {
                                     style={{
                                         padding: '0.5rem 1rem',
                                         borderRadius: '8px',
-                                        border: '1px solid #3686C9',
+                                        border: '1px solid var(--accent-cyan)',
                                         background: 'rgba(54, 134, 201, 0.1)',
-                                        color: '#3686C9',
+                                        color: 'var(--accent-cyan)',
                                         cursor: 'pointer',
                                         display: 'flex',
                                         alignItems: 'center',
@@ -290,17 +290,11 @@ const WritingPage = () => {
                     <div className="writing-actions" style={{ display: 'flex', gap: '1rem' }}>
                         {!showAnswer ? (
                             <button
+                                className="btn-primary"
                                 onClick={handleCheck}
                                 disabled={!userInput.trim()}
                                 style={{
                                     flex: 1,
-                                    padding: '1rem',
-                                    borderRadius: '8px',
-                                    border: 'none',
-                                    background: '#4CAF50',
-                                    color: 'white',
-                                    fontSize: '1rem',
-                                    fontWeight: '600',
                                     cursor: userInput.trim() ? 'pointer' : 'not-allowed',
                                     opacity: userInput.trim() ? 1 : 0.7,
                                     display: 'flex',
@@ -314,16 +308,10 @@ const WritingPage = () => {
                             </button>
                         ) : (
                             <button
+                                className="btn-primary"
                                 onClick={pickRandomPrompt}
                                 style={{
                                     flex: 1,
-                                    padding: '1rem',
-                                    borderRadius: '8px',
-                                    border: 'none',
-                                    background: '#3686C9',
-                                    color: 'white',
-                                    fontSize: '1rem',
-                                    fontWeight: '600',
                                     cursor: 'pointer',
                                     display: 'flex',
                                     alignItems: 'center',

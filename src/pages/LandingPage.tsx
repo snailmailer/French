@@ -131,21 +131,32 @@ const LandingPage = () => {
                                 {feature.icon}
                             </div>
                             <h3 style={{
-                                margin: '0.25rem 0 0',
+                                margin: '0.25rem 0 1rem',
                                 color: 'var(--secondary-color)',
                                 fontSize: '1.4rem',
                                 fontWeight: 700,
-                                textTransform: 'uppercase',
-                                letterSpacing: '1px'
+                                fontFamily: "'Cascadia Code', 'Fira Code', 'Courier New', monospace"
                             }}>
                                 {frTitle}
                             </h3>
                             {cleanedEnTitle && (
-                                <p style={{ margin: '0 0 1rem', color: 'var(--accent-cyan)', fontSize: '1.1rem', fontWeight: 'bold' }}>
-                                    ({cleanedEnTitle})
+                                <p style={{
+                                    padding: '0.35rem 0.75rem',
+                                    background: 'rgba(0, 120, 212, 0.2)',
+                                    border: '1px solid var(--primary-color)',
+                                    borderRadius: '20px',
+                                    fontSize: '0.7rem',
+                                    fontWeight: 600,
+                                    color: 'var(--primary-color)',
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '0.5px',
+                                    whiteSpace: 'nowrap',
+                                    margin: '0 0 1.5rem',
+                                }}>
+                                    {cleanedEnTitle}
                                 </p>
                             )}
-                            <p style={{ color: 'var(--text-secondary)', opacity: 0.9, lineHeight: 1.6, marginTop: 'auto' }}>{feature.desc}</p>
+                            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, marginTop: 'auto' }}>{feature.desc}</p>
                         </Link>
                     );
                 })}

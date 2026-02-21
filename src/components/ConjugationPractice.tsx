@@ -184,13 +184,6 @@ const ConjugationPractice = ({ verb, onClose }: ConjugationPracticeProps) => {
                                 type="button"
                                 style={{
                                     padding: '0.4rem 0.7rem',
-                                    borderRadius: '6px',
-                                    border: '1px solid var(--border-color)',
-                                    background: 'var(--bg-secondary)',
-                                    color: 'var(--text-primary)',
-                                    cursor: 'pointer',
-                                    fontSize: '1rem',
-                                    fontWeight: 600,
                                     minWidth: '2.2rem',
                                     textAlign: 'center'
                                 }}
@@ -209,7 +202,7 @@ const ConjugationPractice = ({ verb, onClose }: ConjugationPracticeProps) => {
                                 <th style={{ textAlign: 'left', padding: '1rem', borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)', width: '20%' }}>Pronoun</th>
                                 <th style={{ textAlign: 'left', padding: '1rem', borderBottom: '1px solid var(--border-color)', color: 'var(--text-secondary)', width: showResults ? '35%' : '80%' }}>Your Answer</th>
                                 {showResults && (
-                                    <th style={{ textAlign: 'left', padding: '1rem', paddingLeft: '2rem', borderBottom: '1px solid var(--border-color)', color: '#4CAF50', width: '45%' }}>Correct Answer</th>
+                                    <th style={{ textAlign: 'left', padding: '1rem', paddingLeft: '2rem', borderBottom: '1px solid var(--border-color)', color: 'var(--success-color)', width: '45%' }}>Correct Answer</th>
                                 )}
                             </tr>
                         </thead>
@@ -237,10 +230,10 @@ const ConjugationPractice = ({ verb, onClose }: ConjugationPracticeProps) => {
                                                     borderRadius: '6px',
                                                     boxSizing: 'border-box',
                                                     border: showResults
-                                                        ? `1px solid ${isCorrect ? '#4CAF50' : '#FF5252'}`
+                                                        ? `1px solid ${isCorrect ? 'var(--success-color)' : '#FF5252'}`
                                                         : '1px solid var(--border-color)',
                                                     background: showResults
-                                                        ? (isCorrect ? 'rgba(76, 175, 80, 0.1)' : 'rgba(255, 82, 82, 0.1)')
+                                                        ? (isCorrect ? 'rgba(0, 200, 83, 0.1)' : 'rgba(255, 82, 82, 0.1)')
                                                         : 'var(--bg-primary)',
                                                     color: 'var(--text-primary)',
                                                     fontSize: '1rem'
@@ -248,7 +241,7 @@ const ConjugationPractice = ({ verb, onClose }: ConjugationPracticeProps) => {
                                             />
                                         </td>
                                         {showResults && (
-                                            <td style={{ padding: '1rem', paddingLeft: '2rem', color: isCorrect ? '#4CAF50' : '#FF5252' }}>
+                                            <td style={{ padding: '1rem', paddingLeft: '2rem', color: isCorrect ? 'var(--success-color)' : '#FF5252' }}>
                                                 {!isCorrect && (
                                                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                                         <span style={{ fontWeight: 'bold' }}>{c.form}</span>
@@ -268,22 +261,15 @@ const ConjugationPractice = ({ verb, onClose }: ConjugationPracticeProps) => {
                 <div className="practice-footer" style={{ display: 'flex', gap: '1rem', alignItems: 'center', justifyContent: 'flex-end' }}>
                     {showResults && (
                         <div style={{ marginRight: 'auto', fontSize: '1.2rem', fontWeight: 'bold' }}>
-                            Score: <span style={{ color: score.correct === score.total ? '#4CAF50' : '#FF5252' }}>{score.correct} / {score.total}</span>
+                            Score: <span style={{ color: score.correct === score.total ? 'var(--success-color)' : '#FF5252' }}>{score.correct} / {score.total}</span>
                         </div>
                     )}
 
                     {!showResults ? (
                         <button
+                            className="btn-primary"
                             onClick={handleCheck}
                             style={{
-                                padding: '1rem 2rem',
-                                background: '#4CAF50',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '8px',
-                                fontSize: '1rem',
-                                fontWeight: 'bold',
-                                cursor: 'pointer',
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: '0.5rem'
@@ -295,13 +281,6 @@ const ConjugationPractice = ({ verb, onClose }: ConjugationPracticeProps) => {
                         <button
                             onClick={handleRetry}
                             style={{
-                                padding: '1rem 2rem',
-                                background: 'transparent',
-                                border: '1px solid var(--text-secondary)',
-                                color: 'var(--text-primary)',
-                                borderRadius: '8px',
-                                fontSize: '1rem',
-                                cursor: 'pointer',
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: '0.5rem'

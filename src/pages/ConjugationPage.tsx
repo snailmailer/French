@@ -253,22 +253,8 @@ const ConjugationPage = () => {
                                             Gérondif: {selectedVerb.conjugations.Participe.Présent[0]?.form || 'N/A'}
                                         </span>
                                         <button
+                                            className="btn-primary"
                                             onClick={() => setShowPractice(true)}
-                                            style={{
-                                                padding: '0.5rem 1.2rem',
-                                                borderRadius: '50px',
-                                                border: 'none',
-                                                background: 'linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%)',
-                                                color: '#ffffff',
-                                                cursor: 'pointer',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                gap: '0.4rem',
-                                                fontSize: '0.95rem',
-                                                fontWeight: 600,
-                                                boxShadow: '0 4px 16px rgba(0, 120, 212, 0.35)',
-                                                transition: 'transform 0.2s, box-shadow 0.2s'
-                                            }}
                                         >
                                             <PenLine size={16} />
                                             Practice
@@ -277,7 +263,7 @@ const ConjugationPage = () => {
                                 </div>
 
                                 {/* Rules Box */}
-                                <div style={{ background: 'rgba(100, 108, 255, 0.1)', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid var(--accent-color)', maxWidth: '300px' }}>
+                                <div style={{ background: 'rgba(0, 188, 212, 0.1)', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid var(--accent-cyan)', maxWidth: '300px' }}>
                                     <h4 style={{ margin: '0 0 0.5rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                         <Info size={16} /> Rules & Notes
                                     </h4>
@@ -292,7 +278,7 @@ const ConjugationPage = () => {
                             {/* Examples Section */}
                             {selectedVerb.examples && selectedVerb.examples.length > 0 && (
                                 <div style={{ marginBottom: '2rem', background: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: '12px' }}>
-                                    <h3 style={{ color: '#B4C540', marginBottom: '1rem' }}>Examples</h3>
+                                    <h3 style={{ color: 'var(--accent-green)', marginBottom: '1rem' }}>Examples</h3>
                                     <ul style={{ listStyle: 'none', padding: 0 }}>
                                         {selectedVerb.examples.map((ex, idx) => (
                                             <li key={idx} style={{ marginBottom: '0.8rem', display: 'flex', flexDirection: 'column' }}>

@@ -301,15 +301,15 @@ const SpeakingPage = () => {
                                     }}
                                     onMouseEnter={(e) => {
                                         e.currentTarget.style.transform = 'translateY(-5px)';
-                                        e.currentTarget.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                                        e.currentTarget.style.boxShadow = 'var(--shadow-hover)';
                                     }}
                                     onMouseLeave={(e) => {
                                         e.currentTarget.style.transform = 'translateY(0)';
-                                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.05)';
+                                        e.currentTarget.style.boxShadow = 'none';
                                     }}
                                 >
                                     <div style={{
-                                        color: '#3686C9',
+                                        color: 'var(--accent-cyan)',
                                         background: 'rgba(54, 134, 201, 0.08)',
                                         padding: '1rem',
                                         borderRadius: '50%',
@@ -320,7 +320,7 @@ const SpeakingPage = () => {
                                     }}>
                                         <Mic size={32} />
                                     </div>
-                                    <h3 style={{ margin: '0.5rem 0 0.5rem', fontSize: '1.2rem', color: '#3686C9' }}>{cat}</h3>
+                                    <h3 style={{ margin: '0.5rem 0 0.5rem', fontSize: '1.2rem', color: 'var(--accent-cyan)' }}>{cat}</h3>
                                     <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                                         {speakingQuestions.filter(q => q.category === cat).length} Questions
                                     </span>
@@ -347,15 +347,15 @@ const SpeakingPage = () => {
                                     }}
                                     onMouseEnter={(e) => {
                                         e.currentTarget.style.transform = 'translateY(-5px)';
-                                        e.currentTarget.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                                        e.currentTarget.style.boxShadow = 'var(--shadow-hover)';
                                     }}
                                     onMouseLeave={(e) => {
                                         e.currentTarget.style.transform = 'translateY(0)';
-                                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.05)';
+                                        e.currentTarget.style.boxShadow = 'none';
                                     }}
                                 >
                                     <div style={{
-                                        color: '#3686C9',
+                                        color: 'var(--accent-cyan)',
                                         background: 'rgba(54, 134, 201, 0.08)',
                                         padding: '1rem',
                                         borderRadius: '50%',
@@ -366,7 +366,7 @@ const SpeakingPage = () => {
                                     }}>
                                         <GraduationCap size={32} />
                                     </div>
-                                    <h3 style={{ margin: '0.5rem 0 0.5rem', fontSize: '1.2rem', color: '#3686C9' }}>{topic.title}</h3>
+                                    <h3 style={{ margin: '0.5rem 0 0.5rem', fontSize: '1.2rem', color: 'var(--accent-cyan)' }}>{topic.title}</h3>
                                     <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                                         {topic.scenarios.length} Scénarios
                                     </span>
@@ -390,11 +390,11 @@ const SpeakingPage = () => {
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.transform = 'translateY(-5px)';
-                                e.currentTarget.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                                e.currentTarget.style.boxShadow = 'var(--shadow-hover)';
                             }}
                             onMouseLeave={(e) => {
                                 e.currentTarget.style.transform = 'translateY(0)';
-                                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.05)';
+                                e.currentTarget.style.boxShadow = 'none';
                             }}
                         >
                             <div style={{
@@ -494,18 +494,18 @@ const SpeakingPage = () => {
 
                 <div style={cardStyle}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
-                        <GraduationCap size={28} style={{ color: '#3686C9' }} />
+                        <GraduationCap size={28} style={{ color: 'var(--accent-cyan)' }} />
                         <h2 style={{ margin: 0, color: 'var(--text-primary)', fontSize: '1.8rem' }}>{topic.title}</h2>
                     </div>
                     <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', lineHeight: 1.6, fontSize: '1.1rem' }}>{topic.description}</p>
 
                     <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
                         {topic.prepTime > 0 && (
-                            <span style={{ fontSize: '1rem', background: 'rgba(54, 134, 201, 0.1)', color: '#3686C9', padding: '0.5rem 1rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <span style={{ fontSize: '1rem', background: 'rgba(54, 134, 201, 0.1)', color: 'var(--accent-cyan)', padding: '0.5rem 1rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                 <Clock size={18} /> Préparation: {formatTime(topic.prepTime)}
                             </span>
                         )}
-                        <span style={{ fontSize: '1rem', background: 'rgba(76, 175, 80, 0.1)', color: '#4CAF50', padding: '0.5rem 1rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <span style={{ fontSize: '1rem', background: 'rgba(76, 175, 80, 0.1)', color: 'var(--success-color)', padding: '0.5rem 1rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <Mic size={18} /> Parole: {formatTime(topic.speakTime)}
                         </span>
                     </div>
@@ -532,26 +532,19 @@ const SpeakingPage = () => {
                                         <div style={{ display: 'flex', gap: '0.75rem', flexShrink: 0 }}>
                                             <button
                                                 onClick={() => speakFrench(scenario)}
-                                                style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50', padding: '0.5rem' }}
+                                                style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--success-color)', padding: '0.5rem' }}
                                                 title="Écouter"
                                             >
                                                 <Volume2 size={24} />
                                             </button>
                                             {!isActive ? (
                                                 <button
+                                                    className="btn-primary"
                                                     onClick={() => startExamTimer(topic, scenario)}
                                                     style={{
-                                                        background: 'var(--accent-color)',
-                                                        color: 'white',
-                                                        border: 'none',
-                                                        borderRadius: '8px',
-                                                        padding: '0.6rem 1.2rem',
-                                                        cursor: 'pointer',
-                                                        fontSize: '1rem',
                                                         display: 'flex',
                                                         alignItems: 'center',
-                                                        gap: '0.5rem',
-                                                        fontWeight: 'bold'
+                                                        gap: '0.5rem'
                                                     }}
                                                 >
                                                     <Play size={18} /> Commencer
@@ -560,7 +553,7 @@ const SpeakingPage = () => {
                                                 <button
                                                     onClick={resetExam}
                                                     style={{
-                                                        background: '#e74c3c',
+                                                        background: 'var(--accent-orange)',
                                                         color: 'white',
                                                         border: 'none',
                                                         borderRadius: '8px',
@@ -585,13 +578,13 @@ const SpeakingPage = () => {
                                             background: examPhase === 'prep' ? 'rgba(54, 134, 201, 0.1)' : examPhase === 'speak' ? 'rgba(76, 175, 80, 0.1)' : 'rgba(155, 89, 182, 0.1)',
                                             borderRadius: '12px',
                                             textAlign: 'center',
-                                            border: `1px dashed ${examPhase === 'prep' ? '#3686C9' : '#4CAF50'}`
+                                            border: `1px dashed ${examPhase === 'prep' ? 'var(--accent-cyan)' : 'var(--success-color)'}`
                                         }}>
-                                            <div style={{ fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '2px', color: examPhase === 'prep' ? '#3686C9' : examPhase === 'speak' ? '#4CAF50' : '#9B59B6', fontWeight: 'bold', marginBottom: '1rem' }}>
+                                            <div style={{ fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '2px', color: examPhase === 'prep' ? 'var(--accent-cyan)' : examPhase === 'speak' ? 'var(--success-color)' : '#9B59B6', fontWeight: 'bold', marginBottom: '1rem' }}>
                                                 {examPhase === 'prep' ? '⏳ Temps de Préparation' : examPhase === 'speak' ? '🎤 Parlez maintenant !' : '✅ Exercice Terminé'}
                                             </div>
                                             {examPhase !== 'done' && (
-                                                <div style={{ fontSize: '4rem', fontFamily: 'monospace', fontWeight: 'bold', color: examPhase === 'prep' ? '#3686C9' : '#4CAF50' }}>
+                                                <div style={{ fontSize: '4rem', fontFamily: 'monospace', fontWeight: 'bold', color: examPhase === 'prep' ? 'var(--accent-cyan)' : 'var(--success-color)' }}>
                                                     {formatTime(examTimer)}
                                                 </div>
                                             )}
@@ -629,7 +622,7 @@ const SpeakingPage = () => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', marginBottom: '4rem' }}>
                     {levelStructures.map(level => {
                         const levelColors: Record<string, string> = {
-                            'A1': '#4CAF50', 'A2': '#8BC34A',
+                            'A1': 'var(--success-color)', 'A2': '#8BC34A',
                             'B1': '#FF9800', 'B2': '#F57C00',
                             'C1': '#E91E63', 'C2': '#9C27B0'
                         };
@@ -838,7 +831,7 @@ const SpeakingPage = () => {
                     </h2>
                     <button
                         onClick={() => speakFrench(currentQuestion.question)}
-                        style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50' }}
+                        style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--success-color)' }}
                         aria-label="Speak question"
                     >
                         <Volume2 size={24} />
@@ -848,30 +841,24 @@ const SpeakingPage = () => {
                 {isCountingDown ? (
                     <div style={{ marginBottom: '2.5rem' }}>
                         <div style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>Enregistrement dans...</div>
-                        <div style={{ fontSize: '5rem', fontWeight: 'bold', color: '#e74c3c' }}>{countdown}</div>
+                        <div style={{ fontSize: '5rem', fontWeight: 'bold', color: 'var(--accent-orange)' }}>{countdown}</div>
                     </div>
                 ) : (
-                    <div style={{ fontSize: '3.5rem', fontFamily: 'monospace', color: isRecording ? '#e74c3c' : 'var(--text-primary)', marginBottom: '2.5rem', fontWeight: 'bold' }}>
+                    <div style={{ fontSize: '3.5rem', fontFamily: 'monospace', color: isRecording ? 'var(--accent-orange)' : 'var(--text-primary)', marginBottom: '2.5rem', fontWeight: 'bold' }}>
                         {formatTime(timer)}
                     </div>
                 )}
 
                 {!isRecording && !showResult && !isCountingDown && (
                     <button
+                        className="btn-primary"
                         onClick={handleStartClick}
                         style={{
-                            background: 'var(--bg-secondary)',
-                            color: 'var(--text-primary)',
-                            border: '2px solid var(--accent-color)',
                             padding: '1rem 3rem',
-                            borderRadius: '50px',
                             fontSize: '1.2rem',
-                            cursor: 'pointer',
                             display: 'inline-flex',
                             alignItems: 'center',
-                            gap: '0.8rem',
-                            transition: 'all 0.2s',
-                            boxShadow: '0 4px 6px rgba(0,0,0,0.05)'
+                            gap: '0.8rem'
                         }}
                     >
                         <Mic size={24} /> Commencer
@@ -882,7 +869,7 @@ const SpeakingPage = () => {
                     <button
                         onClick={stopRecording}
                         style={{
-                            background: '#e74c3c',
+                            background: 'var(--accent-orange)',
                             color: 'white',
                             border: 'none',
                             padding: '1rem 3rem',
