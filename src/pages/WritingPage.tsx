@@ -8,18 +8,39 @@ import { speakFrench, speakEnglish } from '../utils/tts';
 
 const WritingPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const selectedTense = searchParams.get('tense') || writingData[0].name;
+
+    // Initial selection logic
+    const initialTense = searchParams.get('tense');
+    const getLevelFromTense = (tenseName: string | null) => {
+        if (!tenseName) return null;
+        const category = writingData.find(c => c.name === tenseName);
+        if (!category) return null;
+        return getLevel(category.name);
+    };
+
+    const selectedTense = initialTense || writingData[0].name;
+    const selectedLevel = searchParams.get('level') || getLevelFromTense(selectedTense) || 'A2';
+
     const direction = (searchParams.get('dir') as 'en-to-fr' | 'fr-to-en') || 'en-to-fr';
-    const setSelectedTense = (val: string) => {
+
+    const updateParams = (updates: Record<string, string>) => {
         const params = new URLSearchParams(searchParams);
-        params.set('tense', val);
+        Object.entries(updates).forEach(([key, val]) => params.set(key, val));
         setSearchParams(params);
     };
-    const setDirection = (val: 'en-to-fr' | 'fr-to-en') => {
-        const params = new URLSearchParams(searchParams);
-        params.set('dir', val);
-        setSearchParams(params);
+
+    const handleLevelChange = (level: string) => {
+        // Find first tense in that level
+        const levelGroup = groupsWithItems.find(([l]) => l === level);
+        if (levelGroup && levelGroup[1].length > 0) {
+            updateParams({ level, tense: levelGroup[1][0].name });
+        } else {
+            updateParams({ level });
+        }
     };
+
+    const setSelectedTense = (val: string) => updateParams({ tense: val });
+    const setDirection = (val: 'en-to-fr' | 'fr-to-en') => updateParams({ dir: val });
     const [currentPrompt, setCurrentPrompt] = useState<WritingPrompt | null>(null);
     const [userInput, setUserInput] = useState('');
     const [showAnswer, setShowAnswer] = useState(false);
@@ -33,7 +54,7 @@ const WritingPage = () => {
     };
 
     // Group categories
-    const categorizedData = useMemo(() => {
+    const groupsWithItems = useMemo(() => {
         const groups: Record<string, TenseCategory[]> = {
             'A1': [],
             'A2': [],
@@ -49,7 +70,6 @@ const WritingPage = () => {
             groups[level].push(cat);
         });
 
-        // Filter out empty groups and sort within groups
         return Object.entries(groups)
             .filter(([_, items]) => items.length > 0)
             .sort(([a], [b]) => {
@@ -58,6 +78,11 @@ const WritingPage = () => {
                 return a.localeCompare(b);
             });
     }, []);
+
+    const availableTensesForLevel = useMemo(() => {
+        const group = groupsWithItems.find(([level]) => level === selectedLevel);
+        return group ? group[1].sort((a, b) => a.name.localeCompare(b.name)) : [];
+    }, [groupsWithItems, selectedLevel]);
 
     const frenchChars = ['é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'ù', 'û', 'ô', 'î', 'ï', 'œ'];
 
@@ -129,11 +154,37 @@ const WritingPage = () => {
             </p>
 
             {/* Controls Container */}
-            <div className="writing-controls" style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
-                {/* Tense Selection */}
-                <div style={{ flex: 2, minWidth: '200px' }}>
+            <div className="writing-controls" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+                {/* Level Selection */}
+                <div>
                     <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
-                        Select Tense / Mood:
+                        Select Level:
+                    </label>
+                    <select
+                        value={selectedLevel}
+                        onChange={(e) => handleLevelChange(e.target.value)}
+                        style={{
+                            width: '100%',
+                            padding: '1rem',
+                            borderRadius: '12px',
+                            border: '1px solid var(--border-color)',
+                            background: 'var(--bg-secondary)',
+                            color: 'var(--text-primary)',
+                            fontSize: '1rem'
+                        }}
+                    >
+                        {groupsWithItems.map(([level]) => (
+                            <option key={level} value={level}>
+                                {level === 'Themes' ? 'Themes' : `Level ${level}`}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                {/* Tense Selection */}
+                <div>
+                    <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
+                        Select Topic:
                     </label>
                     <select
                         value={selectedTense}
@@ -148,18 +199,14 @@ const WritingPage = () => {
                             fontSize: '1rem'
                         }}
                     >
-                        {categorizedData.map(([level, items]) => (
-                            <optgroup key={level} label={level === 'Themes' ? 'THEMES (VOCABULARY)' : `LEVEL ${level}`}>
-                                {items.sort((a, b) => a.name.localeCompare(b.name)).map(cat => (
-                                    <option key={cat.name} value={cat.name}>{cat.name}</option>
-                                ))}
-                            </optgroup>
+                        {availableTensesForLevel.map(cat => (
+                            <option key={cat.name} value={cat.name}>{cat.name}</option>
                         ))}
                     </select>
                 </div>
 
                 {/* Direction Toggle */}
-                <div style={{ flex: 1, minWidth: '200px' }}>
+                <div>
                     <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
                         Direction:
                     </label>
@@ -167,7 +214,8 @@ const WritingPage = () => {
                         onClick={() => setDirection(direction === 'en-to-fr' ? 'fr-to-en' : 'en-to-fr')}
                         style={{
                             width: '100%',
-                            padding: '1rem',
+                            height: '54px', // Align with select height
+                            padding: '0 1rem',
                             borderRadius: '12px',
                             border: '1px solid var(--border-color)',
                             background: 'var(--bg-secondary)',
@@ -181,7 +229,7 @@ const WritingPage = () => {
                         }}
                     >
                         <RefreshCw size={18} />
-                        {direction === 'en-to-fr' ? 'English → French' : 'French → English'}
+                        {direction === 'en-to-fr' ? 'EN → FR' : 'FR → EN'}
                     </button>
                 </div>
             </div>
