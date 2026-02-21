@@ -785,7 +785,7 @@ export const vocabularyData: VocabularySection[] = [
         ]
     },
     {
-        title: "Les salutations (Greetings)",
+        title: "Les Salutations (Greetings)",
         descriptionFr: "En français, les salutations ne se conjuguent pas selon les pronoms personnels (je, tu, il/elle, nous, vous, ils/elles). Elles dépendent surtout de la situation (formelle ou informelle) et du moment de la journée.",
         descriptionEn: "In French, greetings don't conjugate according to personal pronouns (je, tu, il/elle, nous, vous, ils/elles). They mainly depend on the situation (formal or informal) and time of day.",
         subsections: [
