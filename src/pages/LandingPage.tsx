@@ -114,7 +114,7 @@ const LandingPage = () => {
                             </div>
                             <h3 style={{
                                 margin: '0.25rem 0 1rem',
-                                color: 'var(--secondary-color)',
+                                color: 'var(--text-primary)',
                                 fontSize: '1.4rem',
                                 fontWeight: 700,
                                 fontFamily: "'Segoe UI', system-ui, sans-serif",
