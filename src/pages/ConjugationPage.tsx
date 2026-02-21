@@ -8,8 +8,8 @@ import ConjugationPractice from '../components/ConjugationPractice';
 import { tenseUsageData } from '../data/tenseUsage';
 
 const topVerbs = [
-    'Être', 'Avoir', 'Pouvoir', 'Faire', 'Mettre', 'Dire', 'Devoir', 'Prendre', 'Donner', 'Aller',
-    'Vouloir', 'Savoir', 'Falloir', 'Voir', 'Demander', 'Trouver', 'Rendre', 'Venir', 'Passer', 'Comprendre'
+    'Aller', 'Avoir', 'Comprendre', 'Demander', 'Devoir', 'Dire', 'Donner', 'Être', 'Faire', 'Falloir',
+    'Mettre', 'Passer', 'Pouvoir', 'Prendre', 'Rendre', 'Savoir', 'Trouver', 'Venir', 'Voir', 'Vouloir'
 ];
 
 const ConjugationPage = () => {
