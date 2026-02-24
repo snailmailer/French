@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Book, PenTool, Mic, BookOpen } from 'lucide-react';
+import { Book, PenTool, Mic, BookOpen, GraduationCap } from 'lucide-react';
 
 const features = [
     {
@@ -73,6 +73,44 @@ const LandingPage = () => {
             <p style={{ fontSize: '1.4rem', color: 'var(--accent-cyan)', fontWeight: 'bold', marginBottom: '4rem' }}>
                 (Welcome!)
             </p>
+
+            {/* BIG BUTTON FOR LEVEL GUIDE */}
+            <div style={{ maxWidth: '1200px', margin: '0 auto 4rem' }}>
+                <Link
+                    to="/level-guide"
+                    className="command-card-style"
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '2rem',
+                        padding: '2.5rem 2rem',
+                        textDecoration: 'none',
+                        borderLeft: '8px solid var(--accent-color)',
+                        background: 'var(--bg-secondary)',
+                    }}
+                >
+                    <div style={{
+                        color: 'var(--accent-color)',
+                        background: 'rgba(76, 175, 80, 0.08)',
+                        padding: '1.5rem',
+                        borderRadius: '12px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}>
+                        <GraduationCap size={48} />
+                    </div>
+                    <div style={{ textAlign: 'left' }}>
+                        <h2 style={{ margin: '0 0 0.5rem', fontSize: '2rem', color: 'var(--text-primary)' }}>
+                            Guide des Niveaux CECR
+                        </h2>
+                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '1.2rem', fontStyle: 'italic' }}>
+                            (French CEFR Level Guide)
+                        </p>
+                    </div>
+                </Link>
+            </div>
 
             <div className="feature-grid" style={{
                 display: 'grid',
