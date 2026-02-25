@@ -6,7 +6,7 @@ import ConjugationPage from './pages/ConjugationPage';
 import GrammarPage from './pages/GrammarPage';
 import SpeakingPage from './pages/SpeakingPage';
 import ResourcesPage from './pages/ResourcesPage';
-import PlaceholderPage from './pages/PlaceholderPage';
+import ReadingPage from './pages/ReadingPage';
 import LevelGuidePage from './pages/LevelGuidePage';
 import TranslatePage from './pages/TranslatePage';
 import WritingPage from './pages/WritingPage';
@@ -20,7 +20,7 @@ function App() {
           <Route path="level/:levelId" element={<LevelPage />} />
           <Route path="conjugation" element={<ConjugationPage />} />
           <Route path="grammar" element={<GrammarPage />} />
-          <Route path="reading" element={<PlaceholderPage />} />
+          <Route path="reading" element={<ReadingPage />} />
           <Route path="writing" element={<WritingPage />} />
           <Route path="speaking" element={<SpeakingPage />} />
           <Route path="resources" element={<ResourcesPage />} />
