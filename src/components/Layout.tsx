@@ -95,10 +95,10 @@ const Layout = () => {
                             borderRadius: '16px',
                             boxShadow: '0 4px 20px rgba(0,0,0,0.4)',
                             padding: '1rem',
-                            width: '320px',
+                            width: 'min(320px, calc(100vw - 4rem))',
                             display: 'grid',
-                            gridTemplateColumns: 'repeat(3, 1fr)',
-                            gap: '1rem',
+                            gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+                            gap: '0.5rem',
                             zIndex: 1000
                         }}>
                             {navItems.map((item) => (
@@ -110,12 +110,14 @@ const Layout = () => {
                                         flexDirection: 'column',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        padding: '1rem 0.5rem',
+                                        padding: '0.75rem 0.25rem',
                                         borderRadius: '12px',
                                         textDecoration: 'none',
                                         color: 'var(--text-primary)',
                                         transition: 'background 0.2s',
-                                        textAlign: 'center'
+                                        textAlign: 'center',
+                                        wordBreak: 'break-word',
+                                        hyphens: 'auto'
                                     }}
                                     onMouseEnter={(e) => e.currentTarget.style.background = 'var(--bg-tertiary)'}
                                     onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
