@@ -253,8 +253,9 @@ const ConjugationPage = () => {
                                         <button
                                             className="btn-primary"
                                             onClick={() => setShowPractice(true)}
+                                            style={{ padding: '0.8rem 1.5rem', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
                                         >
-                                            <PenLine size={16} />
+                                            <PenLine size={24} />
                                             Practice
                                         </button>
                                     </div>

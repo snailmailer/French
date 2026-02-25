@@ -74,10 +74,11 @@ const TranslatePage = () => {
             </h1>
 
             {/* Translation Box */}
-            <div style={{
+            <div className="translate-box-container" style={{
                 background: 'var(--bg-secondary)',
                 borderRadius: '16px',
                 border: '1px solid var(--border-color)',
+                borderLeft: '8px solid var(--accent-purple)',
                 boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
                 padding: '2rem',
                 marginBottom: '4rem'

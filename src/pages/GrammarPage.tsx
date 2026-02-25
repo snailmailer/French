@@ -335,16 +335,18 @@ const GrammarPage = () => {
                 </p>
 
                 {/* Toggle Tabs */}
-                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem', gap: '1rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem', gap: '1rem', flexWrap: 'wrap' }}>
                     <button
                         className={`filter-btn ${activeTab === 'grammar' ? 'active' : ''}`}
                         onClick={() => { setActiveTab('grammar'); setSelectedTopic('All'); setSearchTerm(''); }}
+                        style={{ padding: '1rem 2rem', fontSize: '1.2rem', flex: '1', minWidth: '220px', maxWidth: '350px' }}
                     >
                         Grammaire (Grammar)
                     </button>
                     <button
                         className={`filter-btn ${activeTab === 'vocabulary' ? 'active' : ''}`}
                         onClick={() => { setActiveTab('vocabulary'); setSelectedTopic('All'); setSearchTerm(''); }}
+                        style={{ padding: '1rem 2rem', fontSize: '1.2rem', flex: '1', minWidth: '220px', maxWidth: '350px' }}
                     >
                         Vocabulaire (Vocabulary)
                     </button>
