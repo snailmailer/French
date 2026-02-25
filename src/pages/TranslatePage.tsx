@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { RefreshCw, Volume2, Book, CheckSquare, Square, Trash2 } from 'lucide-react';
+import { RefreshCw, Volume2, Book, CheckSquare, Trash2 } from 'lucide-react';
+import { speakFrench, speakEnglish } from '../utils/tts';
 
 const TranslatePage = () => {
     const [sourceText, setSourceText] = useState('');
@@ -37,24 +38,19 @@ const TranslatePage = () => {
         }
     };
 
-    const handleStopTTS = () => {
-        window.speechSynthesis.cancel();
-    };
-
     const handleTTS = (text: string, lang: 'en-US' | 'fr-FR') => {
         if (!text) return;
-        handleStopTTS(); // Stop any currently playing audio first
-        const synth = window.speechSynthesis;
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = lang;
-        utterance.rate = 0.9;
-        synth.speak(utterance);
+        if (lang === 'fr-FR') {
+            speakFrench(text);
+        } else {
+            speakEnglish(text);
+        }
     };
 
     const handleClear = () => {
         setSourceText('');
         setTranslatedText('');
-        handleStopTTS();
+        window.speechSynthesis.cancel();
     };
 
     // MOCK DATA for CEFR Comparisons
@@ -294,26 +290,6 @@ const TranslatePage = () => {
                         }}
                     >
                         {isTranslating ? 'Traduction en cours...' : 'Translate'}
-                    </button>
-
-                    <button
-                        onClick={handleStopTTS}
-                        style={{
-                            background: 'transparent',
-                            color: 'var(--text-secondary)',
-                            border: '2px solid var(--border-color)',
-                            padding: '0.8rem 1.5rem',
-                            fontSize: '1.1rem',
-                            fontWeight: 'bold',
-                            borderRadius: '30px',
-                            cursor: 'pointer',
-                            transition: 'all 0.2s',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.5rem'
-                        }}
-                    >
-                        <Square size={20} fill="currentColor" /> Stop
                     </button>
                 </div>
             </div>

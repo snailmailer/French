@@ -143,7 +143,7 @@ const LandingPage = () => {
                             Traduction
                         </h2>
                         <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '1.2rem', fontStyle: 'italic' }}>
-                            (Reverso Translation Tool)
+                            (Translation Tool)
                         </p>
                     </div>
                 </Link>
