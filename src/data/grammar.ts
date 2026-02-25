@@ -903,4 +903,104 @@ export const grammarData: PronounSection[] = [
             }
         ]
     },
+    {
+        title: "Le Subjonctif (The Subjunctive Mood)",
+        useFr: "exprime ce qui n'est pas certain : obligation, émotion, volonté ou doute.",
+        useEn: "expresses what is not certain: obligation, emotion, will, or doubt.",
+        structure: "Main clause + que + sujet différent + subjonctif",
+        examples: [],
+        subSections: [
+            {
+                title: "1️⃣ L’Obligation / La Nécessité (Obligation / Necessity)",
+                useFr: "Quand une action est obligatoire ou nécessaire.",
+                useEn: "When an action is required or necessary.",
+                structure: "Il faut que + sujet différent + subjonctif\n(It's necessary that + different subject + subjunctive)",
+                examples: [
+                    { fr: "Il faut que tu fasses tes devoirs.", en: "You must do your homework." },
+                    { fr: "Il est nécessaire que nous soyons à l'heure.", en: "It's necessary that we be on time." },
+                    { fr: "Il est important que tu saches la vérité.", en: "It's important that you know the truth." },
+                    { fr: "Il vaut mieux que tu restes ici.", en: "It's better that you stay here." },
+                    { fr: "Il est temps que tu te lèves.", en: "It's time you got up." }
+                ],
+                forms: "Expressions déclenchantes :\n- Il faut que\n- Il est nécessaire que\n- Il est important que\n- Il vaut mieux que\n- Il est temps que"
+            },
+            {
+                title: "2️⃣ L'Émotion / Le Sentiment (Emotion / Feeling)",
+                useFr: "Quand le locuteur exprime une réaction personnelle (joie, peur, tristesse, surprise).",
+                useEn: "When the speaker expresses a personal reaction (joy, fear, sadness, surprise).",
+                structure: "Émotion + que + sujet différent + subjonctif\n(Emotion + that + different subject + subjunctive)",
+                examples: [
+                    { fr: "Je suis content que tu viennes.", en: "I'm happy that you're coming." },
+                    { fr: "Nous sommes tristes qu'elle soit malade.", en: "We're sad that she's sick." },
+                    { fr: "J'ai peur qu'il ne parte sans nous.", en: "I'm afraid he might leave without us." },
+                    { fr: "Je regrette que tu ne puisses pas venir.", en: "I regret that you can't come." },
+                    { fr: "Je suis surpris qu'elle sache la réponse.", en: "I'm surprised she knows the answer." },
+                    { fr: "C'est dommage que tu ne puisses pas venir.", en: "It's a pity you can't come." }
+                ],
+                forms: "Expressions déclenchantes :\n- Être content(e) que\n- Être triste que\n- Avoir peur que\n- Regretter que\n- Être surpris(e) que\n- C'est dommage que"
+            },
+            {
+                title: "3️⃣ La Volonté / Le Souhait (Will / Desire)",
+                useFr: "Quand quelqu'un veut ou désire qu'une autre personne fasse quelque chose.",
+                useEn: "When someone wants or desires someone else to do something.",
+                structure: "Volonté + que + sujet différent + subjonctif\n(Will + that + different subject + subjunctive)",
+                examples: [
+                    { fr: "Je veux que tu réussisses.", en: "I want you to succeed." },
+                    { fr: "Elle souhaite que nous partions bientôt.", en: "She hopes that we leave soon." },
+                    { fr: "Mes parents veulent que je fasse mes études à Montréal.", en: "My parents want me to study in Montreal." },
+                    { fr: "Elle préfère que ses enfants dorment tôt.", en: "She prefers that her kids go to bed early." },
+                    { fr: "Le patron exige que nous finissions ce projet.", en: "The boss demands that we finish this project." }
+                ],
+                forms: "Expressions déclenchantes :\n- Vouloir que\n- Souhaiter que\n- Préférer que\n- Exiger que"
+            },
+            {
+                title: "4️⃣ Le Doute / L'Incertitude (Doubt / Uncertainty)",
+                useFr: "Quand le locuteur n'est pas sûr d'un fait.",
+                useEn: "When the speaker is not sure about a fact.",
+                structure: "Doute + que + sujet + subjonctif\n(Doubt + that + subject + subjunctive)\n*Note: indicatif si certain, subjonctif si douteux",
+                examples: [
+                    { fr: "Je doute qu'il vienne.", en: "I doubt that he's coming." },
+                    { fr: "Il est possible qu'elle ait oublié.", en: "It's possible that she forgot." },
+                    { fr: "Je ne pense pas que tu aies raison.", en: "I don't think that you're right." },
+                    { fr: "Il est peu probable qu'ils arrivent à l'heure.", en: "It's unlikely that they'll arrive on time." },
+                    { fr: "Je ne crois pas que tu dises la vérité.", en: "I don't believe you're telling the truth." },
+                    { fr: "Il semble qu'elle soit en retard.", en: "It seems that she's late." },
+                    { fr: "Il est rare qu'il fasse beau en février.", en: "It's rare that it's nice in February." }
+                ],
+                forms: "Expressions déclenchantes :\n- Douter que\n- Il est possible que\n- Il est peu probable que\n- Ne pas croire que\n- Ne pas penser que\n- Il semble que\n- Il est rare que"
+            },
+            {
+                title: "🔧 Formation du Subjonctif Présent (Générale)",
+                useFr: "Règle générale : 3ᵉ personne pluriel (ils) du présent indicatif → enlève -ent → ajoute terminaisons.",
+                useEn: "General rule: 3rd person plural (ils) present indicative → remove -ent → add endings.",
+                structure: "Structure universelle : Main clause + que + sujet différent + subjonctif\n(Universal structure: Main clause + that + different subject + subjunctive)",
+                examples: [],
+                conjugationHeaders: ['Pronom', 'Terminaison', 'Ex: parler'],
+                conjugations: [
+                    { pronoun: "que je", form: "-e", example: "parle", exampleEn: "that I speak", ttsText: "que je parle" },
+                    { pronoun: "que tu", form: "-es", example: "parles", exampleEn: "that you speak", ttsText: "que tu parles" },
+                    { pronoun: "qu'il", form: "-e", example: "parle", exampleEn: "that he speaks", ttsText: "qu'il parle" },
+                    { pronoun: "que nous", form: "-ions", example: "parlions", exampleEn: "that we speak", ttsText: "que nous parlions" },
+                    { pronoun: "que vous", form: "-iez", example: "parliez", exampleEn: "that you speak", ttsText: "que vous parliez" },
+                    { pronoun: "qu'ils", form: "-ent", example: "parlent", exampleEn: "that they speak", ttsText: "qu'ils parlent" }
+                ],
+                subSections: [
+                    {
+                        title: "Verbes irréguliers principaux",
+                        useFr: "Formes irrégulières du subjonctif.",
+                        useEn: "Irregular subjunctive forms.",
+                        structure: "Irrégulier",
+                        examples: [],
+                        conjugationHeaders: ['Verbe', 'que je', 'Exemple (catégorie)'],
+                        conjugations: [
+                            { pronoun: "être", form: "sois", example: "Il faut que je sois patient.", exampleEn: "I must be patient. (Obligation)", ttsText: "Il faut que je sois patient." },
+                            { pronoun: "avoir", form: "aie", example: "Je doute que j'aie raison.", exampleEn: "I doubt that I'm right. (Doute)", ttsText: "Je doute que j'aie raison." },
+                            { pronoun: "aller", form: "aille", example: "Je veux que tu ailles au magasin.", exampleEn: "I want you to go to the store. (Volonté)", ttsText: "Je veux que tu ailles au magasin." },
+                            { pronoun: "faire", form: "fasse", example: "Il faut que tu fasses attention.", exampleEn: "You must be careful. (Obligation)", ttsText: "Il faut que tu fasses attention." }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
 ];

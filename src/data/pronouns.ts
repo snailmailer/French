@@ -8,6 +8,14 @@ export interface PronounSection {
     examples: { fr: string; en: string }[];
     subSections?: PronounSection[]; // For 2a, 2b etc
     image?: string; // Path to an illustrative image
+    conjugationHeaders?: string[];
+    conjugations?: {
+        pronoun: string;
+        form: string;
+        example?: string;
+        exampleEn?: string;
+        ttsText?: string;
+    }[];
 }
 
 export const pronounsData: PronounSection[] = [

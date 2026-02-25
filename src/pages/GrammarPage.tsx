@@ -49,17 +49,53 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
                     <strong style={{ color: 'var(--secondary-color)' }}>Use (EN):</strong> {section.useEn}
                 </div>
                 <div>
-                    <strong style={{ color: 'var(--success-color)' }}>Structure:</strong> <span style={{ fontStyle: 'italic', fontFamily: 'monospace', background: 'rgba(0,0,0,0.05)', padding: '0.2rem 0.4rem', borderRadius: '4px', color: 'var(--text-primary)' }}>{section.structure}</span>
+                    <strong style={{ color: 'var(--success-color)' }}>Structure:</strong> <span style={{ fontStyle: 'italic', fontFamily: 'monospace', background: 'rgba(0,0,0,0.05)', padding: '0.2rem 0.4rem', borderRadius: '4px', color: 'var(--text-primary)', whiteSpace: 'pre-line', display: 'inline-block', verticalAlign: 'top', marginTop: '0.2rem' }}>{section.structure}</span>
                 </div>
                 {section.forms && (
                     <div>
-                        <strong>Forms:</strong> {section.forms}
-                        <button onClick={() => speakFrench(section.forms!)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--success-color)', marginLeft: '0.5rem', verticalAlign: 'middle' }}>
+                        <strong style={{ verticalAlign: 'top' }}>Forms:</strong> <span style={{ whiteSpace: 'pre-line', display: 'inline-block', marginLeft: '0.2rem' }}>{section.forms}</span>
+                        <button onClick={() => speakFrench(section.forms!)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--success-color)', marginLeft: '0.5rem', verticalAlign: 'top', marginTop: '0.2rem' }}>
                             <Volume2 size={16} />
                         </button>
                     </div>
                 )}
             </div>
+
+            {section.conjugations && section.conjugations.length > 0 && (
+                <div style={{ marginTop: '1.5rem', marginBottom: '1.5rem', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+                    <table className="conjugation-table" style={{ width: '100%', borderCollapse: 'collapse', minWidth: '300px', background: 'var(--bg-secondary)', borderRadius: '8px', overflow: 'hidden' }}>
+                        <thead style={{ background: 'rgba(0, 120, 212, 0.1)' }}>
+                            <tr>
+                                <th style={{ textAlign: 'left', padding: '0.75rem', color: 'var(--primary-color)' }}>{section.conjugationHeaders?.[0] || 'Pronoun'}</th>
+                                <th style={{ textAlign: 'left', padding: '0.75rem', color: 'var(--primary-color)' }}>{section.conjugationHeaders?.[1] || 'Form'}</th>
+                                <th style={{ textAlign: 'left', padding: '0.75rem', color: 'var(--primary-color)' }}>{section.conjugationHeaders?.[2] || 'Example'}</th>
+                                <th style={{ textAlign: 'right', padding: '0.75rem', color: 'var(--primary-color)' }}>🔊</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {section.conjugations.map((item, index) => (
+                                <tr key={index} style={{ borderBottom: '1px solid var(--border-color)' }}>
+                                    <td style={{ fontWeight: 'bold', color: 'var(--accent-color)', padding: '0.75rem' }}>{item.pronoun}</td>
+                                    <td style={{ padding: '0.75rem' }}>{item.form}</td>
+                                    <td style={{ padding: '0.75rem' }}>
+                                        <div style={{ color: 'var(--text-primary)', fontWeight: 500 }}>{item.example}</div>
+                                        {item.exampleEn && <div style={{ fontSize: '0.9em', fontStyle: 'italic', color: 'var(--text-secondary)' }}>{item.exampleEn}</div>}
+                                    </td>
+                                    <td style={{ textAlign: 'right', padding: '0.75rem' }}>
+                                        <button
+                                            onClick={() => speakFrench(item.ttsText || `${item.pronoun} ${item.form}`)}
+                                            style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#4CAF50' }}
+                                            aria-label="Listen"
+                                        >
+                                            <Volume2 size={18} />
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
 
             {section.examples && section.examples.length > 0 && (
                 <div style={{ background: 'var(--bg-primary)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
