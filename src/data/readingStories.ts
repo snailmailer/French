@@ -4,6 +4,13 @@ export interface DialogueLine {
     english?: string;
 }
 
+import story_a1_img from '../assets/images/story_a1.png';
+import story_a2_img from '../assets/images/story_a2.png';
+import story_b1_img from '../assets/images/story_b1.png';
+import story_b2_img from '../assets/images/story_b2.png';
+import story_c1_img from '../assets/images/story_c1.png';
+import story_c2_img from '../assets/images/story_c2.png';
+
 export interface ReadingStory {
     id: string;
     level: string;
@@ -64,7 +71,7 @@ export const readingStories: ReadingStory[] = [
             'Où est Mimi ?',
             'Que fait Léa ensuite ?'
         ],
-        image: '/images/story_a1.png',
+        image: story_a1_img,
         comicDialogue: 'Bonjour, maman !'
     },
     {
@@ -106,7 +113,7 @@ export const readingStories: ReadingStory[] = [
             'Que vont-ils manger ?',
             'Que demande Lila ?'
         ],
-        image: '/images/story_a2.png',
+        image: story_a2_img,
         comicDialogue: 'Salut Karim !'
     },
     {
@@ -154,7 +161,7 @@ export const readingStories: ReadingStory[] = [
             'Quel est son poste précédent ?',
             'Comment se sent-elle ?'
         ],
-        image: '/images/story_b1.png',
+        image: story_b1_img,
         comicDialogue: 'Enchantée !'
     },
     {
@@ -200,7 +207,7 @@ export const readingStories: ReadingStory[] = [
             'Qu’a-t-elle appris ?',
             'Quelle est sa conclusion ?'
         ],
-        image: '/images/story_b2.png',
+        image: story_b2_img,
         comicDialogue: "C'était incroyable !"
     },
     {
@@ -246,7 +253,7 @@ export const readingStories: ReadingStory[] = [
             'Quelle peur évoque Élise ?',
             'Quelle est la philosophie de Camille à la fin ?'
         ],
-        image: '/images/story_c1.png',
+        image: story_c1_img,
         comicDialogue: "Je lance ma start-up !"
     },
     {
@@ -290,7 +297,7 @@ export const readingStories: ReadingStory[] = [
             'Quel point de vue exprime Aïcha ?',
             'Quelle conclusion donne l’écrivain à la fin ?'
         ],
-        image: '/images/story_c2.png',
+        image: story_c2_img,
         comicDialogue: "Le pouvoir des mots !"
     }
 ];
