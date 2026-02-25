@@ -232,45 +232,67 @@ const ConjugationPage = () => {
                 {
                     selectedVerb ? (
                         <div className="verb-details">
-                            <div className="verb-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
-                                <div>
-                                    <h2 style={{ fontSize: '2.5rem', margin: 0 }}>
-                                        {selectedVerb.infinitive}
-                                        <span style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', marginLeft: '1rem', fontWeight: 'normal' }}>
-                                            ({selectedVerb.translation})
-                                        </span>
-                                    </h2>
-                                    <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
-                                        <span className="badge" style={{ background: 'rgba(0, 120, 212, 0.2)', color: 'var(--primary-color)', border: '1px solid var(--primary-color)', padding: '0.2rem 0.8rem', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>
-                                            Group {selectedVerb.group}
-                                        </span>
-                                        <span className="badge" style={{ background: 'rgba(0, 120, 212, 0.2)', color: 'var(--primary-color)', border: '1px solid var(--primary-color)', padding: '0.2rem 0.8rem', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>
-                                            Auxiliary: {selectedVerb.auxiliary}
-                                        </span>
-                                        <span className="badge" style={{ background: 'rgba(0, 120, 212, 0.2)', color: 'var(--primary-color)', border: '1px solid var(--primary-color)', padding: '0.2rem 0.8rem', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase' }}>
-                                            Gérondif: {selectedVerb.conjugations.Participe.Présent[0]?.form || 'N/A'}
-                                        </span>
+                            <div className="verb-header" style={{ marginBottom: '2.5rem' }}>
+                                <h2 style={{ fontSize: '2.5rem', margin: '0 0 1.5rem 0' }}>
+                                    {selectedVerb.infinitive}
+                                    <span style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', marginLeft: '1rem', fontWeight: 'normal' }}>
+                                        ({selectedVerb.translation})
+                                    </span>
+                                </h2>
+
+                                <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', alignItems: 'stretch' }}>
+                                    {/* Rules Box */}
+                                    <div style={{
+                                        flex: 1,
+                                        minWidth: '280px',
+                                        background: 'rgba(0, 188, 212, 0.08)',
+                                        padding: '1.5rem',
+                                        borderRadius: '12px',
+                                        borderLeft: '4px solid var(--accent-cyan)',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: '1rem',
+                                        boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
+                                    }}>
+                                        <h4 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent-cyan)', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                            <Info size={18} /> Rules & Notes
+                                        </h4>
+                                        <div style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap' }}>
+                                            <span style={{ background: 'var(--bg-primary)', padding: '0.35rem 0.85rem', borderRadius: '6px', fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}>
+                                                Auxiliary: <span style={{ color: 'var(--accent-color)' }}>{selectedVerb.auxiliary}</span>
+                                            </span>
+                                            <span style={{ background: 'var(--bg-primary)', padding: '0.35rem 0.85rem', borderRadius: '6px', fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}>
+                                                Gérondif: <span style={{ color: 'var(--accent-cyan)' }}>{selectedVerb.conjugations.Participe.Présent[0]?.form || 'N/A'}</span>
+                                            </span>
+                                        </div>
+                                        <ul style={{ margin: 0, paddingLeft: '1.5rem', fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                                            {selectedVerb.rules.map((rule, idx) => (
+                                                <li key={idx} style={{ marginBottom: '0.4rem' }}>{rule}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
+                                    {/* Practice Button */}
+                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                         <button
                                             className="btn-primary"
                                             onClick={() => setShowPractice(true)}
-                                            style={{ padding: '0.8rem 1.5rem', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+                                            style={{
+                                                padding: '1.2rem 2.5rem',
+                                                fontSize: '1.3rem',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '0.8rem',
+                                                borderRadius: '30px',
+                                                height: 'fit-content',
+                                                boxShadow: '0 6px 20px rgba(54, 134, 201, 0.4)',
+                                                whiteSpace: 'nowrap'
+                                            }}
                                         >
-                                            <PenLine size={24} />
+                                            <PenLine size={28} />
                                             Practice
                                         </button>
                                     </div>
-                                </div>
-
-                                {/* Rules Box */}
-                                <div style={{ background: 'rgba(0, 188, 212, 0.1)', padding: '1rem', borderRadius: '8px', borderLeft: '4px solid var(--accent-cyan)', maxWidth: '300px' }}>
-                                    <h4 style={{ margin: '0 0 0.5rem 0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                        <Info size={16} /> Rules & Notes
-                                    </h4>
-                                    <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-                                        {selectedVerb.rules.map((rule, idx) => (
-                                            <li key={idx}>{rule}</li>
-                                        ))}
-                                    </ul>
                                 </div>
                             </div>
 
