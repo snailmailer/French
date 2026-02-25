@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { grammarData } from '../data/grammar';
 import { vocabularyData, type VocabularySection } from '../data/vocabulary';
 import type { PronounSection } from '../data/pronouns';
-import { Search, X, BookOpen, Volume2 } from 'lucide-react';
+import { Search, X, BookOpen, Volume2, ArrowUp } from 'lucide-react';
 import { speakFrench } from '../utils/tts';
 import GrammarDragDropQuiz from '../components/GrammarDragDropQuiz';
 import VocabularyFillBlankQuiz from '../components/VocabularyFillBlankQuiz';
@@ -310,6 +310,20 @@ const GrammarPage = () => {
     };
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedTopic, setSelectedTopic] = useState<string>('All');
+    const [showBackToTop, setShowBackToTop] = useState(false);
+    const [selectedPracticeLevel, setSelectedPracticeLevel] = useState<string>('A1');
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setShowBackToTop(window.scrollY > 300);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     // -- Derived State for Grammar --
     const filteredGrammarTopics = grammarData.filter(topic =>
@@ -378,23 +392,23 @@ const GrammarPage = () => {
                     <button
                         className={`filter-btn ${activeTab === 'grammar' ? 'active' : ''}`}
                         onClick={() => { setActiveTab('grammar'); setSelectedTopic('All'); setSearchTerm(''); }}
-                        style={{ padding: '0.75rem 1.5rem', fontSize: '1.2rem', flex: '1', minWidth: '200px', maxWidth: '300px' }}
+                        style={{ padding: '1rem 2.5rem', fontSize: '1.25rem', flex: '1', minWidth: '250px', maxWidth: '350px' }}
                     >
-                        Grammaire (Grammar)
+                        Grammaire<br /><small style={{ fontSize: '0.75em', fontWeight: 'normal' }}>(Grammar)</small>
                     </button>
                     <button
                         className={`filter-btn ${activeTab === 'vocabulary' ? 'active' : ''}`}
                         onClick={() => { setActiveTab('vocabulary'); setSelectedTopic('All'); setSearchTerm(''); }}
-                        style={{ padding: '0.75rem 1.5rem', fontSize: '1.2rem', flex: '1', minWidth: '200px', maxWidth: '300px' }}
+                        style={{ padding: '1rem 2.5rem', fontSize: '1.25rem', flex: '1', minWidth: '250px', maxWidth: '350px' }}
                     >
-                        Vocabulaire (Vocabulary)
+                        Vocabulaire<br /><small style={{ fontSize: '0.75em', fontWeight: 'normal' }}>(Vocabulary)</small>
                     </button>
                     <button
                         className={`filter-btn ${activeTab === 'practice' ? 'active' : ''}`}
                         onClick={() => { setActiveTab('practice'); setSelectedTopic('All'); setSearchTerm(''); }}
-                        style={{ padding: '0.75rem 1.5rem', fontSize: '1.2rem', flex: '1', minWidth: '200px', maxWidth: '300px' }}
+                        style={{ padding: '1rem 2.5rem', fontSize: '1.25rem', flex: '1', minWidth: '250px', maxWidth: '350px', color: activeTab === 'practice' ? 'white' : 'var(--primary-color)' }}
                     >
-                        Pratique (Practice)
+                        Pratique<br /><small style={{ fontSize: '0.75em', fontWeight: 'normal' }}>(Practice)</small>
                     </button>
                 </div>
 
@@ -466,17 +480,49 @@ const GrammarPage = () => {
                     </>
                 )}
 
+                {/* Mobile Top Navigation for Levels */}
+                {activeTab === 'practice' && (
+                    <div className="mobile-level-nav" style={{ display: 'none', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }}>
+                        {['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Vocabulaire'].map(level => (
+                            <button
+                                key={level}
+                                onClick={() => { setSelectedPracticeLevel(level); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                                style={{
+                                    padding: '0.5rem 1rem',
+                                    borderRadius: '12px',
+                                    border: `2px solid ${selectedPracticeLevel === level ? 'var(--primary-color)' : 'var(--border-color)'}`,
+                                    background: selectedPracticeLevel === level ? 'rgba(54, 134, 201, 0.1)' : 'var(--bg-secondary)',
+                                    color: selectedPracticeLevel === level ? 'var(--primary-color)' : 'var(--text-primary)',
+                                    cursor: 'pointer',
+                                    fontSize: '0.9rem',
+                                    fontWeight: 'bold',
+                                    transition: 'all 0.2s',
+                                    flex: '1 1 auto'
+                                }}
+                            >
+                                {level}
+                            </button>
+                        ))}
+                    </div>
+                )}
+
                 {/* Content Display */}
                 <div className="content-area" style={{ width: '100%' }}>
                     {activeTab === 'practice' ? (
                         <div style={{ marginTop: '2rem' }}>
-                            <h2 style={{ color: 'var(--primary-color)', textAlign: 'center', marginBottom: '2rem', fontSize: '1.8rem' }}>Grammar Quizzes</h2>
-                            {grammarQuizData.map((levelData) => (
-                                <GrammarDragDropQuiz key={levelData.id} levelData={levelData} />
-                            ))}
-
-                            <h2 style={{ color: 'var(--primary-color)', textAlign: 'center', marginBottom: '2rem', fontSize: '1.8rem', marginTop: '4rem' }}>Vocabulary Quizzes</h2>
-                            <VocabularyFillBlankQuiz />
+                            {selectedPracticeLevel === 'Vocabulaire' ? (
+                                <>
+                                    <h2 style={{ color: 'var(--primary-color)', textAlign: 'center', marginBottom: '2rem', fontSize: '1.8rem' }}>Vocabulary Quizzes</h2>
+                                    <VocabularyFillBlankQuiz />
+                                </>
+                            ) : (
+                                <>
+                                    <h2 style={{ color: 'var(--primary-color)', textAlign: 'center', marginBottom: '2rem', fontSize: '1.8rem' }}>Grammaire Niveau {selectedPracticeLevel}</h2>
+                                    {grammarQuizData.filter(d => d.level === selectedPracticeLevel).map((levelData) => (
+                                        <GrammarDragDropQuiz key={levelData.id} levelData={levelData} />
+                                    ))}
+                                </>
+                            )}
                         </div>
                     ) : activeTab === 'grammar' ? (
                         <>
@@ -512,8 +558,8 @@ const GrammarPage = () => {
                 </div>
             </div>
 
-            {/* Right Sidebar — Topic Shortcuts */}
-            {activeTab !== 'practice' && (
+            {/* Right Sidebar */}
+            {activeTab !== 'practice' ? (
                 <div style={{
                     width: '300px',
                     background: 'var(--bg-secondary)',
@@ -553,12 +599,92 @@ const GrammarPage = () => {
                         })}
                     </div>
                 </div>
+            ) : (
+                <div style={{
+                    width: '300px',
+                    background: 'var(--bg-secondary)',
+                    borderRadius: '12px',
+                    padding: '1.5rem',
+                    border: '1px solid var(--border-color)',
+                    position: 'sticky',
+                    top: '5rem',
+                    display: 'none',
+                    flexDirection: 'column',
+                    gap: '0.75rem',
+                    boxShadow: 'var(--shadow-sm)'
+                }} className="practice-sidebar">
+                    <h3 style={{ textAlign: 'center', color: 'var(--primary-color)', marginBottom: '1rem', fontSize: '1.4rem' }}>
+                        Niveaux (Levels)
+                    </h3>
+                    {['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Vocabulaire'].map(level => (
+                        <button
+                            key={level}
+                            onClick={() => { setSelectedPracticeLevel(level); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                            style={{
+                                textAlign: 'left',
+                                padding: '1rem',
+                                borderRadius: '12px',
+                                border: `2px solid ${selectedPracticeLevel === level ? 'var(--primary-color)' : 'transparent'}`,
+                                background: selectedPracticeLevel === level ? 'rgba(54, 134, 201, 0.1)' : 'var(--bg-primary)',
+                                color: selectedPracticeLevel === level ? 'var(--primary-color)' : 'var(--text-primary)',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '0.25rem'
+                            }}
+                        >
+                            <span style={{ fontWeight: 800, fontSize: '1.1rem' }}>{level}</span>
+                            <span style={{ fontSize: '0.9rem', opacity: 0.9 }}>
+                                {level === 'Vocabulaire' ? 'Pratique du vocabulaire' : `Grammaire niveau ${level}`}
+                            </span>
+                        </button>
+                    ))}
+                </div>
+            )}
+
+            {/* Back to Top Button */}
+            {showBackToTop && activeTab !== 'practice' && (
+                <button
+                    onClick={scrollToTop}
+                    style={{
+                        position: 'fixed',
+                        bottom: '2rem',
+                        right: '2rem',
+                        background: 'var(--primary-color)',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '50%',
+                        width: '50px',
+                        height: '50px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        boxShadow: '0 4px 10px rgba(0,0,0,0.2)',
+                        zIndex: 1000,
+                        transition: 'all 0.2s',
+                    }}
+                    aria-label="Back to Top"
+                    onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
+                    onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                >
+                    <ArrowUp size={24} />
+                </button>
             )}
 
             <style>{`
                 @media (min-width: 1024px) {
                     .grammar-sidebar {
                         display: block !important;
+                    }
+                    .practice-sidebar {
+                        display: flex !important;
+                    }
+                }
+                @media (max-width: 1023px) {
+                    .mobile-level-nav {
+                        display: flex !important;
                     }
                 }
             `}</style>

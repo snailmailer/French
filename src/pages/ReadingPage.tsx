@@ -37,16 +37,16 @@ const ReadingPage = () => {
                 <button
                     className={`filter-btn ${mode === 'reading' ? 'active' : ''}`}
                     onClick={() => { setMode('reading'); setUserAnswers({}); setShowTranscript(false); }}
-                    style={{ padding: '0.75rem 2rem', fontSize: '1.1rem', flex: '1', minWidth: '200px', maxWidth: '300px' }}
+                    style={{ padding: '1rem 2.5rem', fontSize: '1.25rem', flex: '1', minWidth: '250px', maxWidth: '350px' }}
                 >
-                    Lecture (Reading)
+                    Lecture<br /><small style={{ fontSize: '0.75em', fontWeight: 'normal' }}>(Reading)</small>
                 </button>
                 <button
                     className={`filter-btn ${mode === 'listening' ? 'active' : ''}`}
                     onClick={() => { setMode('listening'); setUserAnswers({}); setShowTranscript(false); }}
-                    style={{ padding: '0.75rem 2rem', fontSize: '1.1rem', flex: '1', minWidth: '200px', maxWidth: '300px' }}
+                    style={{ padding: '1rem 2.5rem', fontSize: '1.25rem', flex: '1', minWidth: '250px', maxWidth: '350px' }}
                 >
-                    Écoute (Listening)
+                    Écoute<br /><small style={{ fontSize: '0.75em', fontWeight: 'normal' }}>(Listening)</small>
                 </button>
             </div>
 
@@ -83,30 +83,8 @@ const ReadingPage = () => {
                             <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', fontStyle: 'italic', fontSize: '1.1rem', textAlign: 'center' }}>Personnages : {currentReadingStory.characters}</p>
 
                             {/* Comic Strip Image */}
-                            <div style={{ position: 'relative', width: '100%', maxWidth: '600px', margin: '0 auto 3rem auto', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 8px 16px rgba(0,0,0,0.2)' }}>
+                            <div style={{ width: '100%', maxWidth: '600px', margin: '0 auto 3rem auto', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 8px 16px rgba(0,0,0,0.2)' }}>
                                 <img src={currentReadingStory.image} alt={currentReadingStory.title} style={{ width: '100%', display: 'block' }} />
-                                <div style={{
-                                    /* Speech bubble styling */
-                                    position: 'absolute',
-                                    top: '15%',
-                                    right: '10%',
-                                    background: 'white',
-                                    color: 'black',
-                                    padding: '1rem 1.5rem',
-                                    borderRadius: '30px',
-                                    fontWeight: 'bold',
-                                    fontSize: '1.2rem',
-                                    boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
-                                    maxWidth: '50%',
-                                    textAlign: 'center',
-                                    border: '3px solid black',
-                                    zIndex: 10
-                                }}>
-                                    {currentReadingStory.comicDialogue}
-                                    {/* CSS triangle for speech bubble tail */}
-                                    <div style={{ position: 'absolute', bottom: '-15px', right: '40px', width: '0', height: '0', borderLeft: '15px solid transparent', borderRight: '15px solid transparent', borderTop: '20px solid black' }} />
-                                    <div style={{ position: 'absolute', bottom: '-10px', right: '42px', width: '0', height: '0', borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderTop: '16px solid white' }} />
-                                </div>
                             </div>
                         </div>
 
@@ -261,27 +239,11 @@ const ReadingPage = () => {
                             <h2 style={{ color: 'var(--primary-color)', marginBottom: '1.5rem', fontSize: '1.8rem', textAlign: 'center' }}>{currentListeningStory.title}</h2>
 
                             {/* Listening Audio & Transcript Box - Matched to Reading Dialogue Format */}
-                            <div style={{ padding: '1.5rem', background: 'var(--bg-primary)', borderRadius: '8px', borderLeft: '4px solid var(--primary-color)', marginBottom: '2.5rem' }}>
+                            <div style={{ padding: '1.5rem', background: 'var(--bg-primary)', borderRadius: '8px', borderLeft: '4px solid var(--primary-color)', marginBottom: '2.5rem', display: 'flex', flexDirection: 'column' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem', flexWrap: 'wrap', gap: '1rem' }}>
                                     <strong style={{ color: 'var(--accent-cyan)', fontSize: '1.2rem' }}>Piste Audio : {currentListeningStory.title}</strong>
 
                                     <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                                        <button
-                                            onClick={() => setShowTranscript(!showTranscript)}
-                                            style={{
-                                                display: 'flex', alignItems: 'center', gap: '0.35rem',
-                                                background: 'none', border: 'none', color: 'var(--text-secondary)',
-                                                cursor: 'pointer', fontSize: '0.85rem', opacity: 0.6,
-                                                transition: 'opacity 0.2s', padding: '0.5rem'
-                                            }}
-                                            onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
-                                            onMouseLeave={(e) => e.currentTarget.style.opacity = '0.6'}
-                                            title={showTranscript ? 'Cacher la transcription' : 'Afficher la transcription'}
-                                        >
-                                            {showTranscript ? <EyeOff size={16} /> : <Eye size={16} />}
-                                            <span className="hide-on-mobile">{showTranscript ? 'Cacher' : 'Afficher'}</span>
-                                        </button>
-
                                         <button
                                             onClick={() => speakFrench(currentListeningStory.script, 0.9)}
                                             title="Écouter (Vitesse Naturelle)"
@@ -304,11 +266,29 @@ const ReadingPage = () => {
                                 {showTranscript && (
                                     <div style={{
                                         color: 'var(--text-primary)', fontSize: '1.1rem', lineHeight: 1.6, whiteSpace: 'pre-wrap',
-                                        marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px dashed var(--border-color)'
+                                        marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px dashed var(--border-color)', marginBottom: '1rem'
                                     }}>
                                         {currentListeningStory.script}
                                     </div>
                                 )}
+
+                                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'auto', paddingTop: '1rem' }}>
+                                    <button
+                                        onClick={() => setShowTranscript(!showTranscript)}
+                                        style={{
+                                            display: 'flex', alignItems: 'center', gap: '0.35rem',
+                                            background: 'none', border: 'none', color: 'var(--text-secondary)',
+                                            cursor: 'pointer', fontSize: '0.85rem', opacity: 0.8,
+                                            transition: 'opacity 0.2s', padding: '0.5rem'
+                                        }}
+                                        onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+                                        onMouseLeave={(e) => e.currentTarget.style.opacity = '0.8'}
+                                        title={showTranscript ? 'Cacher la transcription' : 'Afficher la transcription'}
+                                    >
+                                        {showTranscript ? <EyeOff size={16} /> : <Eye size={16} />}
+                                        <span>{showTranscript ? 'Cacher la transcription' : 'Afficher la transcription'}</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
