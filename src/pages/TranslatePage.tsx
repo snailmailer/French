@@ -18,12 +18,14 @@ const TranslatePage = () => {
         setIsTranslating(true);
 
         try {
-            const langpair = direction === 'EN_TO_FR' ? 'en|fr' : 'fr|en';
-            const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(sourceText)}&langpair=${langpair}`);
+            const sl = direction === 'EN_TO_FR' ? 'en' : 'fr';
+            const tl = direction === 'EN_TO_FR' ? 'fr' : 'en';
+            const response = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q=${encodeURIComponent(sourceText)}`);
             const data = await response.json();
 
-            if (data && data.responseData && data.responseData.translatedText) {
-                setTranslatedText(data.responseData.translatedText);
+            if (data && data[0]) {
+                const translated = data[0].map((item: any) => item[0]).join('');
+                setTranslatedText(translated);
             } else {
                 setTranslatedText('Erreur de traduction. Veuillez réessayer.');
             }
@@ -40,11 +42,11 @@ const TranslatePage = () => {
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = lang;
-        utterance.rate = 0.9; // Slightly slower for language learning
+        utterance.rate = 0.9;
         synth.speak(utterance);
     };
 
-    // MOCK DATA for CEFR/IELTS Comparisons
+    // MOCK DATA for CEFR Comparisons
     const cefrComparisons = [
         { level: 'A1', type: 'Written', sentence: 'Voici un chat.' },
         { level: 'A1', type: 'Spoken', sentence: 'C\'est un chat.' },
@@ -56,17 +58,6 @@ const TranslatePage = () => {
         { level: 'B2', type: 'Spoken', sentence: 'Même si c\'est un chat assez indépendant, il aime bien être avec nous.' },
         { level: 'C1', type: 'Written', sentence: 'La nature intrinsèquement solitaire du félin contraste singulièrement avec son besoin d\'affection sporadique.' },
         { level: 'C1', type: 'Spoken', sentence: 'Le côté solitaire du chat contraste pas mal avec ses moments où il est hyper affectueux.' },
-    ];
-
-    const ieltsComparisons = [
-        { level: 'Band 4.0-5.0', type: 'Written', sentence: 'This is a cat.' },
-        { level: 'Band 4.0-5.0', type: 'Spoken', sentence: 'It is a cat.' },
-        { level: 'Band 5.5-6.5', type: 'Written', sentence: 'I see a small black cat walking in the street.' },
-        { level: 'Band 5.5-6.5', type: 'Spoken', sentence: 'Look at that little black cat over there.' },
-        { level: 'Band 7.0-8.0', type: 'Written', sentence: 'Despite being a fiercely independent creature, the cat occasionally seeks out human companionship.' },
-        { level: 'Band 7.0-8.0', type: 'Spoken', sentence: 'Even though they are super independent, cats still kind of want to hang out sometimes.' },
-        { level: 'Band 8.5-9.0', type: 'Written', sentence: 'The inherently solitary disposition of the feline stands in stark contrast to its sporadic yearning for affection.' },
-        { level: 'Band 8.5-9.0', type: 'Spoken', sentence: 'The cat\'s inherent solitary nature really contrasts with the times it randomly just craves attention.' },
     ];
 
     return (
@@ -95,7 +86,9 @@ const TranslatePage = () => {
                     gap: '1rem',
                     marginBottom: '2rem'
                 }}>
-                    <span style={{ fontSize: '1.2rem', fontWeight: 'bold', color: direction === 'EN_TO_FR' ? 'var(--primary-color)' : 'var(--text-secondary)' }}>English</span>
+                    <span style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--primary-color)' }}>
+                        {direction === 'EN_TO_FR' ? 'English' : 'Français'}
+                    </span>
                     <button
                         onClick={handleSwapLanguages}
                         style={{
@@ -116,33 +109,39 @@ const TranslatePage = () => {
                     >
                         <RefreshCw size={24} />
                     </button>
-                    <span style={{ fontSize: '1.2rem', fontWeight: 'bold', color: direction === 'FR_TO_EN' ? 'var(--primary-color)' : 'var(--text-secondary)' }}>Français</span>
+                    <span style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--primary-color)' }}>
+                        {direction === 'EN_TO_FR' ? 'Français' : 'English'}
+                    </span>
                 </div>
 
                 {/* Text Areas */}
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                    gap: '2rem'
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+                    gap: '2rem',
+                    alignItems: 'stretch'
                 }}>
                     {/* Source Container */}
-                    <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                        <div style={{ position: 'relative' }}>
+                    <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: '0.5rem', flex: 1 }}>
+                        <div style={{ position: 'relative', flex: 1, display: 'flex', flexDirection: 'column' }}>
                             <textarea
                                 value={sourceText}
                                 onChange={(e) => setSourceText(e.target.value)}
                                 placeholder={direction === 'EN_TO_FR' ? 'Enter English text...' : 'Entrez le texte en français...'}
                                 style={{
                                     width: '100%',
-                                    minHeight: '200px',
+                                    minHeight: '220px',
+                                    flex: 1,
                                     padding: '1rem',
+                                    paddingBottom: '3.5rem',
                                     borderRadius: '12px',
                                     border: '2px solid var(--border-color)',
                                     background: 'var(--bg-primary)',
                                     color: 'var(--text-primary)',
                                     fontSize: '1.1rem',
-                                    resize: 'vertical',
-                                    fontFamily: 'inherit'
+                                    resize: 'none',
+                                    fontFamily: 'inherit',
+                                    boxSizing: 'border-box'
                                 }}
                             />
                             <button
@@ -197,23 +196,26 @@ const TranslatePage = () => {
                     </div>
 
                     {/* Translation Container */}
-                    <div style={{ position: 'relative' }}>
+                    <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', flex: 1 }}>
                         <textarea
                             value={translatedText}
                             readOnly
                             placeholder={direction === 'EN_TO_FR' ? 'La traduction apparaîtra ici...' : 'Translation will appear here...'}
                             style={{
                                 width: '100%',
-                                minHeight: '200px',
+                                minHeight: '220px',
+                                flex: 1,
                                 padding: '1rem',
+                                paddingBottom: '3.5rem',
                                 borderRadius: '12px',
                                 border: '2px solid transparent',
                                 background: 'var(--bg-tertiary)',
                                 color: 'var(--text-primary)',
                                 fontSize: '1.1rem',
-                                resize: 'vertical',
+                                resize: 'none',
                                 outline: 'none',
-                                fontFamily: 'inherit'
+                                fontFamily: 'inherit',
+                                boxSizing: 'border-box'
                             }}
                         />
                         {translatedText && (
@@ -260,7 +262,7 @@ const TranslatePage = () => {
             </div>
 
             {/* Comparisons Section */}
-            {translatedText && (
+            {translatedText && direction === 'EN_TO_FR' && (
                 <div>
                     <h2 style={{ fontSize: '2rem', marginBottom: '2rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <Book size={32} color="var(--accent-purple)" />
@@ -273,7 +275,7 @@ const TranslatePage = () => {
                         gap: '2rem'
                     }}>
                         {/* Comparison Box */}
-                        {(direction === 'EN_TO_FR' ? cefrComparisons : ieltsComparisons).map((item, index) => (
+                        {cefrComparisons.map((item, index) => (
                             <div key={index} style={{
                                 background: 'var(--bg-secondary)',
                                 border: '1px solid var(--border-color)',
@@ -299,7 +301,7 @@ const TranslatePage = () => {
                                         fontWeight: 'bold',
                                         color: 'var(--text-primary)'
                                     }}>
-                                        {direction === 'EN_TO_FR' ? `CEFR ${item.level}` : `IELTS ${item.level}`}
+                                        CEFR {item.level}
                                     </span>
                                     <span style={{
                                         fontSize: '0.85rem',
@@ -310,14 +312,14 @@ const TranslatePage = () => {
                                         gap: '0.25rem'
                                     }}>
                                         <CheckSquare size={16} />
-                                        {item.type} {direction === 'EN_TO_FR' ? 'French' : 'English'}
+                                        {item.type} French
                                     </span>
                                 </div>
                                 <p style={{ fontSize: '1.1rem', color: 'var(--text-primary)', lineHeight: 1.5, margin: 0 }}>
                                     "{item.sentence}"
                                 </p>
                                 <button
-                                    onClick={() => handleTTS(item.sentence, direction === 'EN_TO_FR' ? 'fr-FR' : 'en-US')}
+                                    onClick={() => handleTTS(item.sentence, 'fr-FR')}
                                     style={{
                                         marginTop: '1rem',
                                         background: 'transparent',
