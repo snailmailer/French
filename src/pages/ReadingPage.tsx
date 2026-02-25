@@ -260,61 +260,56 @@ const ReadingPage = () => {
                         <div style={{ background: 'var(--bg-secondary)', borderRadius: '16px', padding: '2rem', boxShadow: 'var(--shadow-hover)' }}>
                             <h2 style={{ color: 'var(--primary-color)', marginBottom: '1.5rem', fontSize: '1.8rem', textAlign: 'center' }}>{currentListeningStory.title}</h2>
 
-                            {/* Audio Controls */}
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', marginBottom: '2.5rem' }}>
-                                <button
-                                    onClick={() => speakFrench(currentListeningStory.script, 0.9)}
-                                    style={{
-                                        display: 'flex', alignItems: 'center', gap: '0.75rem',
-                                        padding: '1rem 2rem', background: 'var(--primary-color)', color: 'white',
-                                        borderRadius: '50px', border: 'none', fontSize: '1.1rem', fontWeight: 'bold',
-                                        cursor: 'pointer', boxShadow: '0 4px 10px rgba(0,0,0,0.2)', transition: 'all 0.2s'
-                                    }}
-                                >
-                                    <PlayCircle size={24} /> Écouter (Vitesse Naturelle)
-                                </button>
-                                <button
-                                    onClick={() => speakFrench(currentListeningStory.script, 0.6)}
-                                    style={{
-                                        display: 'flex', alignItems: 'center', gap: '0.75rem',
-                                        padding: '0.75rem 1.5rem', background: 'transparent', color: 'var(--accent-cyan)',
-                                        borderRadius: '50px', border: '2px solid var(--accent-cyan)', fontSize: '1rem', fontWeight: 'bold',
-                                        cursor: 'pointer', transition: 'all 0.2s'
-                                    }}
-                                >
-                                    <Volume2 size={20} /> Écouter Lentement (Version Lente)
-                                </button>
-                            </div>
+                            {/* Listening Audio & Transcript Box - Matched to Reading Dialogue Format */}
+                            <div style={{ padding: '1.5rem', background: 'var(--bg-primary)', borderRadius: '8px', borderLeft: '4px solid var(--primary-color)', marginBottom: '2.5rem' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem', flexWrap: 'wrap', gap: '1rem' }}>
+                                    <strong style={{ color: 'var(--accent-cyan)', fontSize: '1.2rem' }}>Piste Audio : {currentListeningStory.title}</strong>
 
-                            {/* Transcript Toggle */}
-                            <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-                                <button
-                                    onClick={() => setShowTranscript(!showTranscript)}
-                                    style={{
-                                        display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
-                                        background: 'none', border: 'none', color: 'var(--text-secondary)',
-                                        cursor: 'pointer', fontSize: '0.75rem', opacity: 0.5,
-                                        transition: 'opacity 0.2s', padding: '0.5rem'
-                                    }}
-                                    onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
-                                    onMouseLeave={(e) => e.currentTarget.style.opacity = '0.5'}
-                                    title={showTranscript ? 'Cacher la transcription' : 'Afficher la transcription'}
-                                >
-                                    {showTranscript ? <EyeOff size={14} /> : <Eye size={14} />}
-                                    {showTranscript ? 'Cacher la transcription' : 'Afficher la transcription'}
-                                </button>
-                            </div>
+                                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                                        <button
+                                            onClick={() => setShowTranscript(!showTranscript)}
+                                            style={{
+                                                display: 'flex', alignItems: 'center', gap: '0.35rem',
+                                                background: 'none', border: 'none', color: 'var(--text-secondary)',
+                                                cursor: 'pointer', fontSize: '0.85rem', opacity: 0.6,
+                                                transition: 'opacity 0.2s', padding: '0.5rem'
+                                            }}
+                                            onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+                                            onMouseLeave={(e) => e.currentTarget.style.opacity = '0.6'}
+                                            title={showTranscript ? 'Cacher la transcription' : 'Afficher la transcription'}
+                                        >
+                                            {showTranscript ? <EyeOff size={16} /> : <Eye size={16} />}
+                                            <span className="hide-on-mobile">{showTranscript ? 'Cacher' : 'Afficher'}</span>
+                                        </button>
 
-                            {/* Transcript Content */}
-                            {showTranscript && (
-                                <div style={{
-                                    background: 'rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '1.5rem',
-                                    border: '1px solid var(--border-color)', marginBottom: '2rem',
-                                    color: 'var(--text-primary)', fontSize: '1.1rem', lineHeight: 1.6, whiteSpace: 'pre-wrap'
-                                }}>
-                                    {currentListeningStory.script}
+                                        <button
+                                            onClick={() => speakFrench(currentListeningStory.script, 0.9)}
+                                            title="Écouter (Vitesse Naturelle)"
+                                            style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(0, 200, 83, 0.1)', border: '1px solid var(--success-color)', borderRadius: '20px', padding: '0.4rem 0.8rem', cursor: 'pointer', color: 'var(--success-color)', fontSize: '0.9rem', fontWeight: 'bold' }}
+                                        >
+                                            <Volume2 size={18} /> <span className="hide-on-mobile">Naturelle</span>
+                                        </button>
+
+                                        <button
+                                            onClick={() => speakFrench(currentListeningStory.script, 0.6)}
+                                            title="Écouter Lentement (Version Lente)"
+                                            style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(54, 134, 201, 0.1)', border: '1px solid var(--accent-cyan)', borderRadius: '20px', padding: '0.4rem 0.8rem', cursor: 'pointer', color: 'var(--accent-cyan)', fontSize: '0.9rem', fontWeight: 'bold' }}
+                                        >
+                                            <PlayCircle size={18} /> <span className="hide-on-mobile">Lente</span>
+                                        </button>
+                                    </div>
                                 </div>
-                            )}
+
+                                {/* Transcript Content */}
+                                {showTranscript && (
+                                    <div style={{
+                                        color: 'var(--text-primary)', fontSize: '1.1rem', lineHeight: 1.6, whiteSpace: 'pre-wrap',
+                                        marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px dashed var(--border-color)'
+                                    }}>
+                                        {currentListeningStory.script}
+                                    </div>
+                                )}
+                            </div>
                         </div>
 
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem' }}>
@@ -430,6 +425,11 @@ const ReadingPage = () => {
             @media (max-width: 1023px) {
                 .mobile-level-nav {
                     display: flex !important;
+                }
+            }
+            @media (max-width: 600px) {
+                .hide-on-mobile {
+                    display: none;
                 }
             }
         `}</style>
