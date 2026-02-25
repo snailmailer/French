@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Volume2 } from 'lucide-react';
-import { speakFrench, speakEnglish } from '../utils/tts';
+import { speakFrench } from '../utils/tts';
 import { readingStories } from '../data/readingStories';
 
 const ReadingPage = () => {
@@ -88,11 +88,6 @@ const ReadingPage = () => {
                                         <button onClick={() => speakFrench(line.french)} title="Listen in French" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--success-color)' }}>
                                             <Volume2 size={20} />
                                         </button>
-                                        {line.english && (
-                                            <button onClick={() => speakEnglish(line.english!)} title="Listen in English" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--accent-cyan)' }}>
-                                                <Volume2 size={20} />
-                                            </button>
-                                        )}
                                     </div>
                                 </div>
                                 <div style={{ fontSize: '1.1rem', marginBottom: '0.25rem', color: 'var(--text-primary)', lineHeight: 1.5 }}>{line.french}</div>
@@ -152,7 +147,12 @@ const ReadingPage = () => {
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                                 {currentStory.openQuestions.map((q, idx) => (
                                     <div key={`open-${idx}`}>
-                                        <div style={{ marginBottom: '0.75rem', fontWeight: 500, color: 'var(--text-primary)', fontSize: '1.05rem', lineHeight: 1.4 }}>{idx + 1}. {q}</div>
+                                        <div style={{ marginBottom: '0.75rem', fontWeight: 500, color: 'var(--text-primary)', fontSize: '1.05rem', lineHeight: 1.4, display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                                            <span style={{ flex: 1 }}>{idx + 1}. {q}</span>
+                                            <button onClick={() => speakFrench(q)} title="Listen to question" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--accent-cyan)', padding: 0, marginTop: '2px' }}>
+                                                <Volume2 size={18} />
+                                            </button>
+                                        </div>
                                         <textarea
                                             placeholder="→ Answer here..."
                                             value={userAnswers[`open-${idx}`] || ''}
@@ -181,7 +181,12 @@ const ReadingPage = () => {
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                                 {currentStory.infoQuestions.map((q, idx) => (
                                     <div key={`info-${idx}`}>
-                                        <div style={{ marginBottom: '0.75rem', fontWeight: 500, color: 'var(--text-primary)', fontSize: '1.05rem', lineHeight: 1.4 }}>{idx + 1}. {q}</div>
+                                        <div style={{ marginBottom: '0.75rem', fontWeight: 500, color: 'var(--text-primary)', fontSize: '1.05rem', lineHeight: 1.4, display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                                            <span style={{ flex: 1 }}>{idx + 1}. {q}</span>
+                                            <button onClick={() => speakFrench(q)} title="Listen to question" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--success-color)', padding: 0, marginTop: '2px' }}>
+                                                <Volume2 size={18} />
+                                            </button>
+                                        </div>
                                         <textarea
                                             placeholder="→ Answer here..."
                                             value={userAnswers[`info-${idx}`] || ''}
