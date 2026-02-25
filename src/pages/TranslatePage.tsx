@@ -15,24 +15,51 @@ const TranslatePage = () => {
     };
 
     const handleTranslate = async () => {
-        if (!sourceText.trim()) return;
+        // Validation: Must not be empty and should have a reasonable length limit
+        const trimmedText = sourceText.trim();
+        if (!trimmedText) return;
+
+        // Prevent extremely long payloads from being sent to avoid denial of service or abuse
+        if (trimmedText.length > 500) {
+            setTranslatedText('Input text is too long. Please limit to 500 characters.');
+            return;
+        }
+
         setIsTranslating(true);
 
         try {
             const sl = direction === 'EN_TO_FR' ? 'en' : 'fr';
             const tl = direction === 'EN_TO_FR' ? 'fr' : 'en';
-            const response = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q=${encodeURIComponent(sourceText)}`);
+
+            // Access the URL securely from the environment
+            const apiUrl = import.meta.env.VITE_TRANSLATE_API_URL;
+
+            // If the environment variable isn't configured, error gracefully without revealing configuration details
+            if (!apiUrl) {
+                setTranslatedText('Translation service is temporarily unavailable.');
+                return;
+            }
+
+            const response = await fetch(`${apiUrl}?client=gtx&sl=${sl}&tl=${tl}&dt=t&q=${encodeURIComponent(trimmedText)}`);
+
+            if (!response.ok) {
+                // If API throws an error, don't pass the raw error text to the client UI
+                setTranslatedText('Translation service error. Please try again later.');
+                return;
+            }
+
             const data = await response.json();
 
             if (data && data[0]) {
                 const translated = data[0].map((item: any) => item[0]).join('');
                 setTranslatedText(translated);
             } else {
-                setTranslatedText('Erreur de traduction. Veuillez réessayer.');
+                setTranslatedText('Translation format error. Please try again.');
             }
         } catch (error) {
-            console.error('Translation error:', error);
-            setTranslatedText('Error connecting to translation service.');
+            // Log for internal debugging, but show a sanitized message to the user
+            console.error('Translation error encountered.');
+            setTranslatedText('Error connecting to translation service. Check your connection.');
         } finally {
             setIsTranslating(false);
         }
