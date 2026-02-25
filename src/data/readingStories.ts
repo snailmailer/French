@@ -25,8 +25,8 @@ export interface ReadingStory {
         french: string;
         english: string;
     }[];
-    openQuestions: string[];
-    infoQuestions: string[];
+    openQuestions: { french: string; english: string; }[];
+    infoQuestions: { french: string; english: string; }[];
     image: string;
     comicDialogue: string;
 }
@@ -35,7 +35,7 @@ export const readingStories: ReadingStory[] = [
     {
         id: 'a1-petit-dej',
         level: 'A1',
-        title: 'Le petit déjeuner de Léa',
+        title: 'Le Petit Déjeuner De Léa',
         characters: 'Léa et sa mère',
         dialogue: [
             { speaker: 'Léa', french: 'Bonjour, maman !', english: 'Good morning, mom!' },
@@ -58,18 +58,18 @@ export const readingStories: ReadingStory[] = [
             { french: 'Bonne journée !', english: 'Have a nice day!' }
         ],
         openQuestions: [
-            'Que manges-tu le matin ?',
-            'À quelle heure te lèves-tu ?',
-            'Aimes-tu le café ?',
-            'As-tu un animal de compagnie ?',
-            'Que fais-tu avant de sortir ?'
+            { french: 'Que manges-tu le matin ?', english: 'What do you eat in the morning?' },
+            { french: 'À quelle heure te lèves-tu ?', english: 'What time do you get up?' },
+            { french: 'Aimes-tu le café ?', english: 'Do you like coffee?' },
+            { french: 'As-tu un animal de compagnie ?', english: 'Do you have a pet?' },
+            { french: 'Que fais-tu avant de sortir ?', english: 'What do you do before leaving?' }
         ],
         infoQuestions: [
-            'Qui prépare le petit déjeuner ?',
-            'Que boit la maman ?',
-            'Comment s’appelle le chat ?',
-            'Où est Mimi ?',
-            'Que fait Léa ensuite ?'
+            { french: 'Qui prépare le petit déjeuner ?', english: 'Who makes breakfast?' },
+            { french: 'Que boit la maman ?', english: 'What does the mom drink?' },
+            { french: 'Comment s’appelle le chat ?', english: 'What is the cat’s name?' },
+            { french: 'Où est Mimi ?', english: 'Where is Mimi?' },
+            { french: 'Que fait Léa ensuite ?', english: 'What does Léa do next?' }
         ],
         image: story_a1_img,
         comicDialogue: 'Bonjour, maman !'
@@ -77,7 +77,7 @@ export const readingStories: ReadingStory[] = [
     {
         id: 'a2-karim',
         level: 'A2',
-        title: 'Le week-end de Karim',
+        title: 'Le Week-end De Karim',
         characters: 'Karim et Lila',
         dialogue: [
             { speaker: 'Lila', french: 'Salut Karim ! Tu fais quoi ce week-end ?', english: 'Hi Karim! What are you doing this weekend?' },
@@ -100,18 +100,18 @@ export const readingStories: ReadingStory[] = [
             { french: 'Prends des photos !', english: 'Take pictures!' }
         ],
         openQuestions: [
-            'Où aimes-tu aller le week-end ?',
-            'Préfères-tu la mer ou la montagne ?',
-            'Aimes-tu voyager en hiver ?',
-            'Que fais-tu quand il fait froid ?',
-            'Quelle est ta nourriture préférée en hiver ?'
+            { french: 'Où aimes-tu aller le week-end ?', english: 'Where do you like to go on weekends?' },
+            { french: 'Préfères-tu la mer ou la montagne ?', english: 'Do you prefer the sea or the mountains?' },
+            { french: 'Aimes-tu voyager en hiver ?', english: 'Do you like to travel in winter?' },
+            { french: 'Que fais-tu quand il fait froid ?', english: 'What do you do when it\'s cold?' },
+            { french: 'Quelle est ta nourriture préférée en hiver ?', english: 'What is your favorite winter food?' }
         ],
         infoQuestions: [
-            'Où va Karim ?',
-            'Avec qui ?',
-            'Quel temps fera-t-il ?',
-            'Que vont-ils manger ?',
-            'Que demande Lila ?'
+            { french: 'Où va Karim ?', english: 'Where is Karim going?' },
+            { french: 'Avec qui ?', english: 'With whom?' },
+            { french: 'Quel temps fera-t-il ?', english: 'What will the weather be like?' },
+            { french: 'Que vont-ils manger ?', english: 'What are they going to eat?' },
+            { french: 'Que demande Lila ?', english: 'What does Lila ask?' }
         ],
         image: story_a2_img,
         comicDialogue: 'Salut Karim !'
@@ -119,7 +119,7 @@ export const readingStories: ReadingStory[] = [
     {
         id: 'b1-collegue',
         level: 'B1',
-        title: 'Une nouvelle collègue',
+        title: 'Une Nouvelle Collègue',
         characters: 'Emma, Julien et M. Lemoine (le chef)',
         dialogue: [
             { speaker: 'Julien', french: 'Salut, tu dois être Emma ?', english: 'Hi, you must be Emma?' },
@@ -148,18 +148,18 @@ export const readingStories: ReadingStory[] = [
             { french: 'Pas de souci !', english: 'No worries!' }
         ],
         openQuestions: [
-            'Que ressens-tu le premier jour de travail ?',
-            'Pourquoi est-il important d’être accueillant ?',
-            'Comment t’intègres-tu dans une nouvelle équipe ?',
-            'As-tu déjà eu un premier jour stressant ?',
-            'Quelle a été ta meilleure expérience professionnelle ?'
+            { french: 'Que ressens-tu le premier jour de travail ?', english: 'How do you feel on your first day of work?' },
+            { french: 'Pourquoi est-il important d’être accueillant ?', english: 'Why is it important to be welcoming?' },
+            { french: 'Comment t’intègres-tu dans une nouvelle équipe ?', english: 'How do you integrate into a new team?' },
+            { french: 'As-tu déjà eu un premier jour stressant ?', english: 'Have you ever had a stressful first day?' },
+            { french: 'Quelle a été ta meilleure expérience professionnelle ?', english: 'What was your best professional experience?' }
         ],
         infoQuestions: [
-            'Où travaille Emma ?',
-            'Qui est son chef ?',
-            'Combien d’années d’expérience a-t-elle ?',
-            'Quel est son poste précédent ?',
-            'Comment se sent-elle ?'
+            { french: 'Où travaille Emma ?', english: 'Where does Emma work?' },
+            { french: 'Qui est son chef ?', english: 'Who is her boss?' },
+            { french: 'Combien d’années d’expérience a-t-elle ?', english: 'How many years of experience does she have?' },
+            { french: 'Quel est son poste précédent ?', english: 'What was her previous position?' },
+            { french: 'Comment se sent-elle ?', english: 'How does she feel?' }
         ],
         image: story_b1_img,
         comicDialogue: 'Enchantée !'
@@ -167,7 +167,7 @@ export const readingStories: ReadingStory[] = [
     {
         id: 'b2-lisbonne',
         level: 'B2',
-        title: 'Un été à Lisbonne',
+        title: 'Un Été À Lisbonne',
         characters: 'Sophie, Carlos et Maria',
         dialogue: [
             { speaker: 'Carlos', french: 'Salut Sophie ! Comment s’est passé ton été à Lisbonne ?' },
@@ -194,18 +194,18 @@ export const readingStories: ReadingStory[] = [
             { french: 'Une expérience enrichissante', english: 'enriching experience' }
         ],
         openQuestions: [
-            'Qu’apprend-on d’un stage à l’étranger ?',
-            'Quelle ville aimerais-tu visiter ?',
-            'Pourquoi est-ce utile d’apprendre des langues ?',
-            'Que peut changer un voyage dans ta vie ?',
-            'Comment un stage peut influencer ton futur travail ?'
+            { french: 'Qu’apprend-on d’un stage à l’étranger ?', english: 'What do you learn from an internship abroad?' },
+            { french: 'Quelle ville aimerais-tu visiter ?', english: 'Which city would you like to visit?' },
+            { french: 'Pourquoi est-ce utile d’apprendre des langues ?', english: 'Why is it useful to learn languages?' },
+            { french: 'Que peut changer un voyage dans ta vie ?', english: 'What can a trip change in your life?' },
+            { french: 'Comment un stage peut influencer ton futur travail ?', english: 'How can an internship influence your future work?' }
         ],
         infoQuestions: [
-            'Où Sophie a-t-elle travaillé ?',
-            'Pendant combien de temps ?',
-            'Avec qui parle-t-elle ?',
-            'Qu’a-t-elle appris ?',
-            'Quelle est sa conclusion ?'
+            { french: 'Où Sophie a-t-elle travaillé ?', english: 'Where did Sophie work?' },
+            { french: 'Pendant combien de temps ?', english: 'For how long?' },
+            { french: 'Avec qui parle-t-elle ?', english: 'Who is she talking to?' },
+            { french: 'Qu’a-t-elle appris ?', english: 'What did she learn?' },
+            { french: 'Quelle est sa conclusion ?', english: 'What is her conclusion?' }
         ],
         image: story_b2_img,
         comicDialogue: "C'était incroyable !"
@@ -213,7 +213,7 @@ export const readingStories: ReadingStory[] = [
     {
         id: 'c1-camille',
         level: 'C1',
-        title: 'Le choix de Camille',
+        title: 'Le Choix De Camille',
         characters: 'Camille, Thomas et Élise',
         dialogue: [
             { speaker: 'Thomas', french: 'Tu as quitté ton emploi, vraiment ?' },
@@ -240,18 +240,18 @@ export const readingStories: ReadingStory[] = [
             { french: 'Le risque, c’est de ne rien tenter', english: 'The risk is to not try anything' }
         ],
         openQuestions: [
-            'Pourquoi certaines personnes quittent-elles un emploi stable ?',
-            'Quelles sont les qualités nécessaires pour créer une start-up ?',
-            'Qu’est-ce que le "risque" signifie pour toi ?',
-            'As-tu déjà fait un choix difficile dans ta carrière ?',
-            'Penses-tu qu’il faut suivre la passion ou la sécurité ?'
+            { french: 'Pourquoi certaines personnes quittent-elles un emploi stable ?', english: 'Why do some people leave a stable job?' },
+            { french: 'Quelles sont les qualités nécessaires pour créer une start-up ?', english: 'What qualities are needed to start a startup?' },
+            { french: 'Qu’est-ce que le "risque" signifie pour toi ?', english: 'What does "risk" mean to you?' },
+            { french: 'As-tu déjà fait un choix difficile dans ta carrière ?', english: 'Have you ever made a difficult choice in your career?' },
+            { french: 'Penses-tu qu’il faut suivre la passion ou la sécurité ?', english: 'Do you think you should follow passion or security?' }
         ],
         infoQuestions: [
-            'Combien de temps Camille a-t-elle travaillé dans son ancienne entreprise ?',
-            'Pourquoi a-t-elle décidé de partir ?',
-            'Dans quel domaine veut-elle créer son entreprise ?',
-            'Quelle peur évoque Élise ?',
-            'Quelle est la philosophie de Camille à la fin ?'
+            { french: 'Combien de temps Camille a-t-elle travaillé dans son ancienne entreprise ?', english: 'How long did Camille work in her old company?' },
+            { french: 'Pourquoi a-t-elle décidé de partir ?', english: 'Why did she decide to leave?' },
+            { french: 'Dans quel domaine veut-elle créer son entreprise ?', english: 'In what field does she want to start her company?' },
+            { french: 'Quelle peur évoque Élise ?', english: 'What fear does Elise mention?' },
+            { french: 'Quelle est la philosophie de Camille à la fin ?', english: 'What is Camille\'s philosophy at the end?' }
         ],
         image: story_c1_img,
         comicDialogue: "Je lance ma start-up !"
@@ -259,7 +259,7 @@ export const readingStories: ReadingStory[] = [
     {
         id: 'c2-ecrivain',
         level: 'C2',
-        title: 'Le discours de l’écrivain',
+        title: 'Le Discours De L’Écrivain',
         characters: 'L’écrivain (M. Delcourt), la journaliste, Marc et Aïcha',
         dialogue: [
             { speaker: 'Journaliste', french: 'Votre discours sur la littérature a captivé l’audience. Pouvez-vous expliquer votre vision ?' },
@@ -284,18 +284,18 @@ export const readingStories: ReadingStory[] = [
             { french: 'Lire, c’est élargir sa liberté', english: 'Reading is broadening one’s freedom' }
         ],
         openQuestions: [
-            'Selon toi, quel est le rôle de la littérature aujourd’hui ?',
-            'Comment la lecture peut-elle changer notre manière de penser ?',
-            'Les mots ont-ils encore de l’influence dans la société moderne ?',
-            'Est-ce que la technologie a remplacé la réflexion selon toi ?',
-            'As-tu déjà lu un livre qui a modifié ta vision du monde ?'
+            { french: 'Selon toi, quel est le rôle de la littérature aujourd’hui ?', english: 'In your opinion, what is the role of literature today?' },
+            { french: 'Comment la lecture peut-elle changer notre manière de penser ?', english: 'How can reading change the way we think?' },
+            { french: 'Les mots ont-ils encore de l’influence dans la société moderne ?', english: 'Do words still have influence in modern society?' },
+            { french: 'Est-ce que la technologie a remplacé la réflexion selon toi ?', english: 'Has technology replaced thinking according to you?' },
+            { french: 'As-tu déjà lu un livre qui a modifié ta vision du monde ?', english: 'Have you ever read a book that changed your view of the world?' }
         ],
         infoQuestions: [
-            'Quel est le sujet du discours ?',
-            'Que dit l’écrivain sur les mots ?',
-            'Quelle question pose Marc ?',
-            'Quel point de vue exprime Aïcha ?',
-            'Quelle conclusion donne l’écrivain à la fin ?'
+            { french: 'Quel est le sujet du discours ?', english: 'What is the subject of the speech?' },
+            { french: 'Que dit l’écrivain sur les mots ?', english: 'What does the writer say about words?' },
+            { french: 'Quelle question pose Marc ?', english: 'What question does Marc ask?' },
+            { french: 'Quel point de vue exprime Aïcha ?', english: 'What point of view does Aïcha express?' },
+            { french: 'Quelle conclusion donne l’écrivain à la fin ?', english: 'What conclusion does the writer give at the end?' }
         ],
         image: story_c2_img,
         comicDialogue: "Le pouvoir des mots !"
