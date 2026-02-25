@@ -13,18 +13,26 @@ const TranslatePage = () => {
         setTranslatedText(sourceText);
     };
 
-    const handleTranslate = () => {
+    const handleTranslate = async () => {
         if (!sourceText.trim()) return;
         setIsTranslating(true);
-        // MOCK API CALL for translation
-        setTimeout(() => {
-            if (direction === 'EN_TO_FR') {
-                setTranslatedText(`(Traduction française de "${sourceText}")\n\nMocked Response: Bonjour le monde !`);
+
+        try {
+            const langpair = direction === 'EN_TO_FR' ? 'en|fr' : 'fr|en';
+            const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(sourceText)}&langpair=${langpair}`);
+            const data = await response.json();
+
+            if (data && data.responseData && data.responseData.translatedText) {
+                setTranslatedText(data.responseData.translatedText);
             } else {
-                setTranslatedText(`(English translation of "${sourceText}")\n\nMocked Response: Hello world!`);
+                setTranslatedText('Erreur de traduction. Veuillez réessayer.');
             }
+        } catch (error) {
+            console.error('Translation error:', error);
+            setTranslatedText('Error connecting to translation service.');
+        } finally {
             setIsTranslating(false);
-        }, 1000);
+        }
     };
 
     const handleTTS = (text: string, lang: 'en-US' | 'fr-FR') => {
@@ -118,39 +126,74 @@ const TranslatePage = () => {
                     gap: '2rem'
                 }}>
                     {/* Source Container */}
-                    <div style={{ position: 'relative' }}>
-                        <textarea
-                            value={sourceText}
-                            onChange={(e) => setSourceText(e.target.value)}
-                            placeholder={direction === 'EN_TO_FR' ? 'Enter English text...' : 'Entrez le texte en français...'}
-                            style={{
-                                width: '100%',
-                                minHeight: '200px',
-                                padding: '1rem',
-                                borderRadius: '12px',
-                                border: '2px solid var(--border-color)',
-                                background: 'var(--bg-primary)',
-                                color: 'var(--text-primary)',
-                                fontSize: '1.1rem',
-                                resize: 'vertical',
-                                fontFamily: 'inherit'
-                            }}
-                        />
-                        <button
-                            onClick={() => handleTTS(sourceText, direction === 'EN_TO_FR' ? 'en-US' : 'fr-FR')}
-                            style={{
-                                position: 'absolute',
-                                bottom: '1rem',
-                                right: '1rem',
-                                background: 'transparent',
-                                border: 'none',
-                                cursor: 'pointer',
-                                color: 'var(--text-secondary)',
-                            }}
-                            title="Listen"
-                        >
-                            <Volume2 size={24} />
-                        </button>
+                    <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                        <div style={{ position: 'relative' }}>
+                            <textarea
+                                value={sourceText}
+                                onChange={(e) => setSourceText(e.target.value)}
+                                placeholder={direction === 'EN_TO_FR' ? 'Enter English text...' : 'Entrez le texte en français...'}
+                                style={{
+                                    width: '100%',
+                                    minHeight: '200px',
+                                    padding: '1rem',
+                                    borderRadius: '12px',
+                                    border: '2px solid var(--border-color)',
+                                    background: 'var(--bg-primary)',
+                                    color: 'var(--text-primary)',
+                                    fontSize: '1.1rem',
+                                    resize: 'vertical',
+                                    fontFamily: 'inherit'
+                                }}
+                            />
+                            <button
+                                onClick={() => handleTTS(sourceText, direction === 'EN_TO_FR' ? 'en-US' : 'fr-FR')}
+                                style={{
+                                    position: 'absolute',
+                                    bottom: '1rem',
+                                    right: '1rem',
+                                    background: 'transparent',
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    color: 'var(--text-secondary)',
+                                }}
+                                title="Listen"
+                            >
+                                <Volume2 size={24} />
+                            </button>
+                        </div>
+                        {direction === 'FR_TO_EN' && (
+                            <div style={{
+                                display: 'flex',
+                                flexWrap: 'wrap',
+                                gap: '0.5rem',
+                                justifyContent: 'center',
+                                padding: '0.5rem',
+                                background: 'var(--bg-tertiary)',
+                                borderRadius: '8px',
+                                border: '1px solid var(--border-color)'
+                            }}>
+                                {['é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'ù', 'û', 'ô', 'î', 'ï', 'œ'].map((char) => (
+                                    <button
+                                        key={char}
+                                        onClick={() => setSourceText(prev => prev + char)}
+                                        style={{
+                                            padding: '0.5rem 0.8rem',
+                                            fontSize: '1.1rem',
+                                            cursor: 'pointer',
+                                            backgroundColor: 'var(--bg-primary)',
+                                            color: 'var(--text-primary)',
+                                            border: '1px solid var(--border-color)',
+                                            borderRadius: '6px',
+                                            transition: 'all 0.2s',
+                                        }}
+                                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--primary-color)'}
+                                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--bg-primary)'}
+                                    >
+                                        {char}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     {/* Translation Container */}
