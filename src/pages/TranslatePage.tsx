@@ -62,12 +62,9 @@ const TranslatePage = () => {
 
     return (
         <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto', fontFamily: "'Segoe UI', system-ui, sans-serif" }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '1rem', color: 'var(--text-primary)', fontSize: '2.5rem' }}>
+            <h1 style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--text-primary)', fontSize: '2.5rem' }}>
                 Traduction & Comparaison
             </h1>
-            <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginBottom: '3rem', fontSize: '1.1rem' }}>
-                Translate texts and compare sentence structures across different language learning levels.
-            </p>
 
             {/* Translation Box */}
             <div style={{
@@ -263,79 +260,135 @@ const TranslatePage = () => {
 
             {/* Comparisons Section */}
             {translatedText && direction === 'EN_TO_FR' && (
-                <div>
-                    <h2 style={{ fontSize: '2rem', marginBottom: '2rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div style={{ marginTop: 'auto', paddingTop: '4rem' }}>
+                    <h2 style={{ fontSize: '2rem', marginBottom: '2rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
                         <Book size={32} color="var(--accent-purple)" />
                         Level Comparisons
                     </h2>
 
                     <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-                        gap: '2rem'
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '2rem',
+                        maxWidth: '900px',
+                        margin: '0 auto'
                     }}>
-                        {/* Comparison Box */}
-                        {cefrComparisons.map((item, index) => (
-                            <div key={index} style={{
-                                background: 'var(--bg-secondary)',
-                                border: '1px solid var(--border-color)',
-                                borderRadius: '12px',
-                                padding: '1.5rem',
-                                position: 'relative',
-                                overflow: 'hidden'
-                            }}>
-                                <div style={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                    width: '6px',
-                                    height: '100%',
-                                    background: item.type === 'Written' ? 'var(--primary-color)' : 'var(--accent-cyan)'
-                                }}></div>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                                    <span style={{
-                                        background: 'var(--bg-tertiary)',
-                                        padding: '0.25rem 0.75rem',
-                                        borderRadius: '20px',
-                                        fontSize: '0.9rem',
-                                        fontWeight: 'bold',
-                                        color: 'var(--text-primary)'
+                        {/* Grouped by Level for 2-column layout */}
+                        {Array.from(new Set(cefrComparisons.map(c => c.level))).sort().map(level => {
+                            const written = cefrComparisons.find(c => c.level === level && c.type === 'Written');
+                            const spoken = cefrComparisons.find(c => c.level === level && c.type === 'Spoken');
+
+                            if (!written && !spoken) return null;
+
+                            return (
+                                <div key={level} style={{
+                                    background: 'var(--bg-secondary)',
+                                    border: '1px solid var(--border-color)',
+                                    borderRadius: '12px',
+                                    padding: '1.5rem',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: '1.5rem',
+                                    position: 'relative',
+                                    overflow: 'hidden'
+                                }}>
+                                    <div style={{
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                        width: '6px',
+                                        height: '100%',
+                                        background: 'linear-gradient(to bottom, var(--primary-color), var(--accent-cyan))'
+                                    }}></div>
+
+                                    <h3 style={{ margin: 0, fontSize: '1.5rem', color: 'var(--text-primary)', textAlign: 'center', borderBottom: '1px solid var(--border-color)', paddingBottom: '1rem' }}>
+                                        Niveau CEFR {level}
+                                    </h3>
+
+                                    <div style={{
+                                        display: 'grid',
+                                        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                                        gap: '2rem'
                                     }}>
-                                        CEFR {item.level}
-                                    </span>
-                                    <span style={{
-                                        fontSize: '0.85rem',
-                                        color: item.type === 'Written' ? 'var(--primary-color)' : 'var(--accent-cyan)',
-                                        fontWeight: 600,
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '0.25rem'
-                                    }}>
-                                        <CheckSquare size={16} />
-                                        {item.type} French
-                                    </span>
+                                        {/* Written Column */}
+                                        {written && (
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                                <span style={{
+                                                    fontSize: '0.95rem',
+                                                    color: 'var(--primary-color)',
+                                                    fontWeight: 600,
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: '0.35rem',
+                                                    textTransform: 'uppercase',
+                                                    letterSpacing: '0.5px'
+                                                }}>
+                                                    <CheckSquare size={18} /> Written French
+                                                </span>
+                                                <p style={{ fontSize: '1.1rem', color: 'var(--text-primary)', lineHeight: 1.5, margin: 0, flex: 1 }}>
+                                                    "{written.sentence}"
+                                                </p>
+                                                <button
+                                                    onClick={() => handleTTS(written.sentence, 'fr-FR')}
+                                                    style={{
+                                                        background: 'transparent',
+                                                        border: 'none',
+                                                        cursor: 'pointer',
+                                                        color: 'var(--text-secondary)',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '0.5rem',
+                                                        fontSize: '0.9rem',
+                                                        padding: 0,
+                                                        marginTop: 'auto'
+                                                    }}
+                                                >
+                                                    <Volume2 size={18} /> Écouter
+                                                </button>
+                                            </div>
+                                        )}
+
+                                        {/* Spoken Column */}
+                                        {spoken && (
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                                <span style={{
+                                                    fontSize: '0.95rem',
+                                                    color: 'var(--accent-cyan)',
+                                                    fontWeight: 600,
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: '0.35rem',
+                                                    textTransform: 'uppercase',
+                                                    letterSpacing: '0.5px'
+                                                }}>
+                                                    <CheckSquare size={18} /> Spoken French
+                                                </span>
+                                                <p style={{ fontSize: '1.1rem', color: 'var(--text-primary)', lineHeight: 1.5, margin: 0, flex: 1 }}>
+                                                    "{spoken.sentence}"
+                                                </p>
+                                                <button
+                                                    onClick={() => handleTTS(spoken.sentence, 'fr-FR')}
+                                                    style={{
+                                                        background: 'transparent',
+                                                        border: 'none',
+                                                        cursor: 'pointer',
+                                                        color: 'var(--text-secondary)',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '0.5rem',
+                                                        fontSize: '0.9rem',
+                                                        padding: 0,
+                                                        marginTop: 'auto'
+                                                    }}
+                                                >
+                                                    <Volume2 size={18} /> Écouter
+                                                </button>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
-                                <p style={{ fontSize: '1.1rem', color: 'var(--text-primary)', lineHeight: 1.5, margin: 0 }}>
-                                    "{item.sentence}"
-                                </p>
-                                <button
-                                    onClick={() => handleTTS(item.sentence, 'fr-FR')}
-                                    style={{
-                                        marginTop: '1rem',
-                                        background: 'transparent',
-                                        border: 'none',
-                                        cursor: 'pointer',
-                                        color: 'var(--text-secondary)',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '0.5rem',
-                                        fontSize: '0.9rem'
-                                    }}
-                                >
-                                    <Volume2 size={18} /> Écouter (Listen)
-                                </button>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             )}
