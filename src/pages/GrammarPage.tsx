@@ -5,6 +5,9 @@ import { vocabularyData, type VocabularySection } from '../data/vocabulary';
 import type { PronounSection } from '../data/pronouns';
 import { Search, X, BookOpen, Volume2 } from 'lucide-react';
 import { speakFrench } from '../utils/tts';
+import GrammarDragDropQuiz from '../components/GrammarDragDropQuiz';
+import VocabularyFillBlankQuiz from '../components/VocabularyFillBlankQuiz';
+import { grammarQuizData } from '../data/grammarQuiz';
 
 // --- Components ---
 
@@ -468,6 +471,16 @@ const GrammarPage = () => {
                                     <p>No grammar topics found.</p>
                                 </div>
                             )}
+
+                            {/* Render Grammar Quiz at the bottom if "All" is selected or no specific search that hides it */}
+                            {(selectedTopic === 'All' && !searchTerm) && (
+                                <div style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '2px dashed var(--border-color)' }}>
+                                    <h2 style={{ color: 'var(--primary-color)', textAlign: 'center', marginBottom: '2rem', fontSize: '1.8rem' }}>Practice Quizzes</h2>
+                                    {grammarQuizData.map((levelData) => (
+                                        <GrammarDragDropQuiz key={levelData.id} levelData={levelData} />
+                                    ))}
+                                </div>
+                            )}
                         </>
                     ) : (
                         <>
@@ -481,6 +494,14 @@ const GrammarPage = () => {
                                 <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>
                                     <BookOpen size={48} style={{ opacity: 0.5, marginBottom: '1rem' }} />
                                     <p>No vocabulary words found.</p>
+                                </div>
+                            )}
+
+                            {/* Render Vocabulary Quiz at the bottom */}
+                            {(selectedTopic === 'All' && !searchTerm) && (
+                                <div style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '2px dashed var(--border-color)' }}>
+                                    <h2 style={{ color: 'var(--primary-color)', textAlign: 'center', marginBottom: '2rem', fontSize: '1.8rem' }}>Practice Quiz</h2>
+                                    <VocabularyFillBlankQuiz />
                                 </div>
                             )}
                         </>
