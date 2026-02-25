@@ -262,7 +262,7 @@ const ConjugationPage = () => {
                                                 Auxiliary: <span style={{ color: 'var(--accent-color)' }}>{selectedVerb.auxiliary}</span>
                                             </span>
                                             <span style={{ background: 'var(--bg-primary)', padding: '0.35rem 0.85rem', borderRadius: '6px', fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}>
-                                                Gérondif: <span style={{ color: 'var(--accent-cyan)' }}>{selectedVerb.conjugations.Participe.Présent[0]?.form || 'N/A'}</span>
+                                                Gérondif: <span style={{ color: 'var(--accent-cyan)' }}>{selectedVerb.conjugations.Participe?.Présent?.[0]?.form || 'N/A'}</span>
                                             </span>
                                         </div>
                                         <ul style={{ margin: 0, paddingLeft: '1.5rem', fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
