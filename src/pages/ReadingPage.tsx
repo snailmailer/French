@@ -291,12 +291,16 @@ const ReadingPage = () => {
                                 <button
                                     onClick={() => setShowTranscript(!showTranscript)}
                                     style={{
-                                        display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                                        display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
                                         background: 'none', border: 'none', color: 'var(--text-secondary)',
-                                        cursor: 'pointer', fontSize: '1rem', textDecoration: 'underline'
+                                        cursor: 'pointer', fontSize: '0.75rem', opacity: 0.5,
+                                        transition: 'opacity 0.2s', padding: '0.5rem'
                                     }}
+                                    onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+                                    onMouseLeave={(e) => e.currentTarget.style.opacity = '0.5'}
+                                    title={showTranscript ? 'Cacher la transcription' : 'Afficher la transcription'}
                                 >
-                                    {showTranscript ? <EyeOff size={18} /> : <Eye size={18} />}
+                                    {showTranscript ? <EyeOff size={14} /> : <Eye size={14} />}
                                     {showTranscript ? 'Cacher la transcription' : 'Afficher la transcription'}
                                 </button>
                             </div>
