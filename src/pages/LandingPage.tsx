@@ -24,8 +24,8 @@ const features = [
     },
     {
         id: 'reading',
-        title: 'Lecture (Reading)',
-        desc: 'Practice reading comprehension with engaging stories.',
+        title: 'Lecture et Écoute (Reading & Listening)',
+        desc: 'Practice reading comprehension and listening skills with engaging stories.',
         icon: <Book size={32} />,
         path: '/reading',
         color: 'var(--card-bg)',

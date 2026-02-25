@@ -20,7 +20,7 @@ if (window.speechSynthesis) {
 const activeUtterances: SpeechSynthesisUtterance[] = [];
 
 // Shared speak helper with a small delay after cancel to prevent truncation
-const speakWithLang = (text: string, lang: string, langPrefix: string) => {
+const speakWithLang = (text: string, lang: string, langPrefix: string, customRate?: number) => {
     if (!window.speechSynthesis) {
         console.error("Speech synthesis not supported");
         return;
@@ -46,7 +46,7 @@ const speakWithLang = (text: string, lang: string, langPrefix: string) => {
         }
 
         utterance.lang = lang;
-        utterance.rate = 0.9; // Slightly slower for learning
+        utterance.rate = customRate !== undefined ? customRate : 0.9; // Slightly slower default for learning
 
         utterance.onerror = (e) => console.error("TTS Error:", e);
 
@@ -63,8 +63,8 @@ const speakWithLang = (text: string, lang: string, langPrefix: string) => {
     }, 100);
 };
 
-export const speakFrench = (text: string) => {
-    speakWithLang(text, 'fr-FR', 'fr');
+export const speakFrench = (text: string, rate?: number) => {
+    speakWithLang(text, 'fr-FR', 'fr', rate);
 };
 
 export const speakEnglish = (text: string) => {
