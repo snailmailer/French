@@ -16,13 +16,16 @@ interface ConjugationProps {
     };
 }
 
-const ConjugationTable: React.FC<ConjugationProps> = ({ verb, tense, conjugations, tenseUsage }) => {
+const ConjugationTable: React.FC<ConjugationProps> = ({ verb, translation, tense, conjugations, tenseUsage }) => {
     const speak = (text: string) => speakFrench(text);
 
     return (
         <div className="conjugation-container" style={{ margin: '2rem 0', background: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: '12px', border: tenseUsage ? '2px solid #2ecc71' : 'none' }}>
-            <h3 style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: 'var(--accent-color)' }}>
-                {tense}
+            <h3 style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', color: 'var(--accent-color)' }}>
+                <span>{tense}</span>
+                <span style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', fontWeight: 'normal' }}>
+                    {verb} ({translation})
+                </span>
                 <button onClick={() => speak(verb)} title="Listen to verb" style={{ padding: '0.4rem', borderRadius: '50%', color: '#4CAF50', border: '1px solid #4CAF50', background: 'transparent', cursor: 'pointer' }}>
                     <Volume2 size={16} />
                 </button>
@@ -36,10 +39,30 @@ const ConjugationTable: React.FC<ConjugationProps> = ({ verb, tense, conjugation
                     <div style={{ marginBottom: '0.5rem' }}>
                         <strong style={{ color: '#2980b9' }}>Use (EN):</strong> {tenseUsage.useEn}
                     </div>
-                    <div style={{ marginBottom: '0.5rem' }}>
+                    <div style={{ marginBottom: '1rem' }}>
                         <strong>Structure:</strong> <span style={{ fontStyle: 'italic', color: 'var(--text-secondary)', whiteSpace: 'pre-line', display: 'block', marginTop: '0.5rem' }}>{tenseUsage.structure}</span>
                     </div>
-                    {/* Examples could be collapsible or small text to save space, but user asked for them. */}
+
+                    {tenseUsage.examples && tenseUsage.examples.length > 0 && (
+                        <div style={{ marginTop: '1rem', borderTop: '1px dashed rgba(46, 204, 113, 0.4)', paddingTop: '1rem' }}>
+                            <strong style={{ color: 'var(--text-primary)', marginBottom: '0.5rem', display: 'block' }}>Examples:</strong>
+                            <ul style={{ margin: 0, paddingLeft: '1.5rem', listStyle: 'disc', color: 'var(--text-secondary)' }}>
+                                {tenseUsage.examples.map((ex, idx) => (
+                                    <li key={idx} style={{ marginBottom: '0.5rem' }}>
+                                        <div style={{ color: 'var(--text-primary)', fontWeight: 500 }}>
+                                            {ex.fr}
+                                            <button onClick={() => speak(ex.fr)} title="Listen" style={{ marginLeft: '0.5rem', padding: '0.2rem', borderRadius: '50%', color: '#4CAF50', border: 'none', background: 'transparent', cursor: 'pointer', verticalAlign: 'middle' }}>
+                                                <Volume2 size={14} />
+                                            </button>
+                                        </div>
+                                        <div style={{ fontSize: '0.9em', fontStyle: 'italic', color: 'var(--text-secondary)' }}>
+                                            {ex.en}
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </div>
             )}
 
