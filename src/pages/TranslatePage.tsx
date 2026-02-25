@@ -31,14 +31,9 @@ const TranslatePage = () => {
             const sl = direction === 'EN_TO_FR' ? 'en' : 'fr';
             const tl = direction === 'EN_TO_FR' ? 'fr' : 'en';
 
-            // Access the URL securely from the environment
-            const apiUrl = import.meta.env.VITE_TRANSLATE_API_URL;
-
-            // If the environment variable isn't configured, error gracefully without revealing configuration details
-            if (!apiUrl) {
-                setTranslatedText('Translation service is temporarily unavailable.');
-                return;
-            }
+            // The translation URL is a public Google endpoint that doesn't use an API key.
+            // It is safe to keep in the frontend code.
+            const apiUrl = 'https://translate.googleapis.com/translate_a/single';
 
             const response = await fetch(`${apiUrl}?client=gtx&sl=${sl}&tl=${tl}&dt=t&q=${encodeURIComponent(trimmedText)}`);
 
