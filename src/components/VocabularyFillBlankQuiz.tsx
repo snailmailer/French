@@ -116,8 +116,6 @@ const VocabularyFillBlankQuiz: React.FC = () => {
         }, 0);
     }, [answers, quizItems, showResults]); // Only re-calc when these change
 
-    const isComplete = quizItems.length > 0 && Object.keys(answers).length === quizItems.length;
-
     if (quizItems.length === 0) return <div>Loading quiz...</div>;
 
     return (
@@ -233,18 +231,20 @@ const VocabularyFillBlankQuiz: React.FC = () => {
                 {!showResults ? (
                     <button
                         onClick={checkAnswers}
-                        disabled={!isComplete && Object.keys(answers).length < 5} // Allow checking if mostly done
                         style={{
                             padding: '0.8rem 2rem',
-                            background: (isComplete || Object.keys(answers).length >= 5) ? 'var(--primary-color)' : 'var(--text-secondary)',
+                            background: 'var(--primary-color)',
                             color: 'white',
                             border: 'none',
                             borderRadius: '8px',
                             fontSize: '1.1rem',
                             fontWeight: 'bold',
-                            cursor: (isComplete || Object.keys(answers).length >= 5) ? 'pointer' : 'not-allowed',
-                            transition: 'background 0.2s'
+                            cursor: 'pointer',
+                            transition: 'background 0.2s',
+                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
                         }}
+                        onMouseEnter={(e) => e.currentTarget.style.filter = 'brightness(1.1)'}
+                        onMouseLeave={(e) => e.currentTarget.style.filter = 'brightness(1)'}
                     >
                         Check Answers
                     </button>

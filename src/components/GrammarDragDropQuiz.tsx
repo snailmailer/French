@@ -72,8 +72,6 @@ const GrammarDragDropQuiz: React.FC<Props> = ({ levelData }) => {
         return acc + (answers[index] === sentence.answer ? 1 : 0);
     }, 0);
 
-    const isComplete = Object.keys(answers).length === levelData.sentences.length;
-
     // Filter out words that are already correctly used? No, keep all available or just cross them out
     // Let's just keep them all available so they can change their mind, but maybe visually indicate if used.
     const usedAnswers = Object.values(answers);
@@ -188,18 +186,20 @@ const GrammarDragDropQuiz: React.FC<Props> = ({ levelData }) => {
                 {!showResults ? (
                     <button
                         onClick={checkAnswers}
-                        disabled={!isComplete}
                         style={{
                             padding: '0.8rem 2rem',
-                            background: isComplete ? 'var(--primary-color)' : 'var(--text-secondary)',
+                            background: 'var(--primary-color)',
                             color: 'white',
                             border: 'none',
                             borderRadius: '8px',
                             fontSize: '1.1rem',
                             fontWeight: 'bold',
-                            cursor: isComplete ? 'pointer' : 'not-allowed',
-                            transition: 'background 0.2s'
+                            cursor: 'pointer',
+                            transition: 'background 0.2s',
+                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
                         }}
+                        onMouseEnter={(e) => e.currentTarget.style.filter = 'brightness(1.1)'}
+                        onMouseLeave={(e) => e.currentTarget.style.filter = 'brightness(1)'}
                     >
                         Check Answers
                     </button>
