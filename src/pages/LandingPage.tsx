@@ -74,8 +74,8 @@ const LandingPage = () => {
                 (Welcome!)
             </p>
 
-            {/* BIG BUTTON FOR LEVEL GUIDE */}
-            <div style={{ maxWidth: '1200px', margin: '0 auto 4rem' }}>
+            {/* BIG BUTTON FOR LEVEL GUIDE & TRANSLATE */}
+            <div style={{ maxWidth: '1200px', margin: '0 auto 4rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
                 <Link
                     to="/level-guide"
                     className="command-card-style"
@@ -88,6 +88,7 @@ const LandingPage = () => {
                         textDecoration: 'none',
                         borderLeft: '8px solid var(--accent-color)',
                         background: 'var(--bg-secondary)',
+                        flex: 1
                     }}
                 >
                     <div style={{
@@ -107,6 +108,42 @@ const LandingPage = () => {
                         </h2>
                         <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '1.2rem', fontStyle: 'italic' }}>
                             (French CEFR Level Guide)
+                        </p>
+                    </div>
+                </Link>
+
+                <Link
+                    to="/translate"
+                    className="command-card-style"
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '2rem',
+                        padding: '2.5rem 2rem',
+                        textDecoration: 'none',
+                        borderLeft: '8px solid var(--accent-purple)',
+                        background: 'var(--bg-secondary)',
+                        flex: 1
+                    }}
+                >
+                    <div style={{
+                        color: 'var(--accent-purple)',
+                        background: 'rgba(156, 39, 176, 0.08)',
+                        padding: '1.5rem',
+                        borderRadius: '12px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}>
+                        <Book size={48} />
+                    </div>
+                    <div style={{ textAlign: 'left' }}>
+                        <h2 style={{ margin: '0 0 0.5rem', fontSize: '2rem', color: 'var(--text-primary)' }}>
+                            Traduction
+                        </h2>
+                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '1.2rem', fontStyle: 'italic' }}>
+                            (Reverso Translation Tool)
                         </p>
                     </div>
                 </Link>

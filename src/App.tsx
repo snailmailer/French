@@ -8,7 +8,7 @@ import SpeakingPage from './pages/SpeakingPage';
 import ResourcesPage from './pages/ResourcesPage';
 import PlaceholderPage from './pages/PlaceholderPage';
 import LevelGuidePage from './pages/LevelGuidePage';
-
+import TranslatePage from './pages/TranslatePage';
 import WritingPage from './pages/WritingPage';
 
 function App() {
@@ -25,6 +25,7 @@ function App() {
           <Route path="speaking" element={<SpeakingPage />} />
           <Route path="resources" element={<ResourcesPage />} />
           <Route path="level-guide" element={<LevelGuidePage />} />
+          <Route path="translate" element={<TranslatePage />} />
         </Route>
       </Routes>
     </Router>

@@ -34,6 +34,8 @@ const Layout = () => {
         { path: '/writing', label: 'Écriture (Writing)', icon: <PenTool size={24} />, color: '#3686C9' },
         { path: '/speaking', label: 'Expression orale (Speaking)', icon: <Mic size={24} />, color: '#B4C540' },
         { path: '/resources', label: 'Ressources (Resources)', icon: <BookOpen size={24} />, color: '#E67E22' },
+        { path: '/level-guide', label: 'Guide CEFR (Level Guide)', icon: <BookOpen size={24} />, color: '#4CAF50' },
+        { path: '/translate', label: 'Traduction (Translate)', icon: <Book size={24} />, color: '#9C27B0' },
     ];
 
     return (
