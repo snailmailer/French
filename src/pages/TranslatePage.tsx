@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { RefreshCw, Volume2, Book, CheckSquare } from 'lucide-react';
+import { RefreshCw, Volume2, Book, CheckSquare, Square, Trash2 } from 'lucide-react';
 
 const TranslatePage = () => {
     const [sourceText, setSourceText] = useState('');
@@ -37,13 +37,24 @@ const TranslatePage = () => {
         }
     };
 
+    const handleStopTTS = () => {
+        window.speechSynthesis.cancel();
+    };
+
     const handleTTS = (text: string, lang: 'en-US' | 'fr-FR') => {
         if (!text) return;
+        handleStopTTS(); // Stop any currently playing audio first
         const synth = window.speechSynthesis;
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = lang;
         utterance.rate = 0.9;
         synth.speak(utterance);
+    };
+
+    const handleClear = () => {
+        setSourceText('');
+        setTranslatedText('');
+        handleStopTTS();
     };
 
     // MOCK DATA for CEFR Comparisons
@@ -235,7 +246,36 @@ const TranslatePage = () => {
                     </div>
                 </div>
 
-                <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '1rem',
+                    flexWrap: 'wrap',
+                    marginTop: '2rem'
+                }}>
+                    <button
+                        onClick={handleClear}
+                        disabled={!sourceText && !translatedText}
+                        style={{
+                            background: 'transparent',
+                            color: 'var(--text-secondary)',
+                            border: '2px solid var(--border-color)',
+                            padding: '0.8rem 1.5rem',
+                            fontSize: '1.1rem',
+                            fontWeight: 'bold',
+                            borderRadius: '30px',
+                            cursor: (!sourceText && !translatedText) ? 'not-allowed' : 'pointer',
+                            opacity: (!sourceText && !translatedText) ? 0.5 : 1,
+                            transition: 'all 0.2s',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem'
+                        }}
+                    >
+                        <Trash2 size={20} /> Clear
+                    </button>
+
                     <button
                         onClick={handleTranslate}
                         disabled={isTranslating || !sourceText.trim()}
@@ -255,11 +295,31 @@ const TranslatePage = () => {
                     >
                         {isTranslating ? 'Traduction en cours...' : 'Translate'}
                     </button>
+
+                    <button
+                        onClick={handleStopTTS}
+                        style={{
+                            background: 'transparent',
+                            color: 'var(--text-secondary)',
+                            border: '2px solid var(--border-color)',
+                            padding: '0.8rem 1.5rem',
+                            fontSize: '1.1rem',
+                            fontWeight: 'bold',
+                            borderRadius: '30px',
+                            cursor: 'pointer',
+                            transition: 'all 0.2s',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem'
+                        }}
+                    >
+                        <Square size={20} fill="currentColor" /> Stop
+                    </button>
                 </div>
             </div>
 
-            {/* Comparisons Section */}
-            {translatedText && direction === 'EN_TO_FR' && (
+            {/* Comparisons Section (Always Pinned when translating to French) */}
+            {direction === 'EN_TO_FR' && (
                 <div style={{ marginTop: 'auto', paddingTop: '4rem' }}>
                     <h2 style={{ fontSize: '2rem', marginBottom: '2rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center' }}>
                         <Book size={32} color="var(--accent-purple)" />
