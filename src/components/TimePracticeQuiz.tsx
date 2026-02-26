@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CheckCircle2, XCircle, Type, Volume2 } from 'lucide-react';
 import { speakFrench } from '../utils/tts';
 
@@ -9,25 +9,82 @@ interface TimeQuestion {
     answer: string;
 }
 
-// Generate simple time ranges for the quiz
-const timeQuestions: TimeQuestion[] = [
+// Generate a large bank of time questions
+const timeQuestionBank: TimeQuestion[] = [
     { digital: '01:00', answer: 'il est une heure' },
     { digital: '02:00', answer: 'il est deux heures' },
+    { digital: '03:00', answer: 'il est trois heures' },
+    { digital: '04:00', answer: 'il est quatre heures' },
+    { digital: '05:00', answer: 'il est cinq heures' },
+    { digital: '06:00', answer: 'il est six heures' },
+    { digital: '07:00', answer: 'il est sept heures' },
+    { digital: '08:00', answer: 'il est huit heures' },
+    { digital: '09:00', answer: 'il est neuf heures' },
+    { digital: '10:00', answer: 'il est dix heures' },
+    { digital: '11:00', answer: 'il est onze heures' },
     { digital: '12:00', answer: 'il est midi' },
+    { digital: '13:00', answer: 'il est treize heures' },
+    { digital: '14:00', answer: 'il est quatorze heures' },
+    { digital: '15:00', answer: 'il est quinze heures' },
+    { digital: '16:00', answer: 'il est seize heures' },
+    { digital: '17:00', answer: 'il est dix-sept heures' },
+    { digital: '18:00', answer: 'il est dix-huit heures' },
+    { digital: '19:00', answer: 'il est dix-neuf heures' },
+    { digital: '20:00', answer: 'il est vingt heures' },
+    { digital: '21:00', answer: 'il est vingt et une heures' },
+    { digital: '22:00', answer: 'il est vingt-deux heures' },
+    { digital: '23:00', answer: 'il est vingt-trois heures' },
     { digital: '00:00', answer: 'il est minuit' },
+
+    // Minutes and specials
     { digital: '10:15', answer: 'il est dix heures et quart' },
+    { digital: '10:30', answer: 'il est dix heures et demie' },
     { digital: '15:30', answer: 'il est quinze heures trente' },
     { digital: '08:45', answer: 'il est neuf heures moins le quart' },
     { digital: '07:10', answer: 'il est sept heures dix' },
     { digital: '18:50', answer: 'il est dix-neuf heures moins dix' },
-    { digital: '20:00', answer: 'il est vingt heures' },
+    { digital: '09:05', answer: 'il est neuf heures cinq' },
+    { digital: '11:20', answer: 'il est onze heures vingt' },
+    { digital: '14:40', answer: 'il est quatorze heures quarante' },
+    { digital: '16:15', answer: 'il est seize heures quinze' }, // 24h format generally skips et quart for pure military
+    { digital: '03:45', answer: 'il est quatre heures moins le quart' },
+    { digital: '12:30', answer: 'il est midi et demi' },
+    { digital: '00:15', answer: 'il est minuit et quart' },
+    { digital: '00:30', answer: 'il est minuit et demi' },
+    { digital: '19:45', answer: 'il est dix-neuf heures quarante-cinq' },
+    { digital: '22:10', answer: 'il est vingt-deux heures dix' },
+    { digital: '23:55', answer: 'il est minuit moins cinq' },
 ];
 
+const shuffleArray = <T,>(array: T[]): T[] => {
+    const newArr = [...array];
+    for (let i = newArr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+    }
+    return newArr;
+};
+
 export const TimePracticeQuiz: React.FC = () => {
+    const [currentQuestions, setCurrentQuestions] = useState<TimeQuestion[]>([]);
     const [answers, setAnswers] = useState<Record<number, string>>({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [score, setScore] = useState(0);
     const [focusedInput, setFocusedInput] = useState<number | null>(null);
+
+    const generateQuiz = () => {
+        const randomQuestions = shuffleArray(timeQuestionBank).slice(0, 10);
+        setCurrentQuestions(randomQuestions);
+        setAnswers({});
+        setIsSubmitted(false);
+        setScore(0);
+        setFocusedInput(null);
+    };
+
+    // Generate initial quiz on mount
+    useEffect(() => {
+        generateQuiz();
+    }, []);
 
     const handleInputChange = (index: number, value: string) => {
         setAnswers({
@@ -59,7 +116,7 @@ export const TimePracticeQuiz: React.FC = () => {
 
     const checkAnswers = () => {
         let currentScore = 0;
-        timeQuestions.forEach((q, index) => {
+        currentQuestions.forEach((q, index) => {
             const userAnswer = answers[index] || '';
             if (normalizeString(userAnswer) === normalizeString(q.answer)) {
                 currentScore += 1;
@@ -116,7 +173,7 @@ export const TimePracticeQuiz: React.FC = () => {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '2rem' }}>
-                {timeQuestions.map((q, index) => {
+                {currentQuestions.map((q, index) => {
                     const userAnswer = answers[index] || '';
                     const isCorrect = isSubmitted && normalizeString(userAnswer) === normalizeString(q.answer);
                     const isWrong = isSubmitted && !isCorrect && userAnswer.trim() !== '';
@@ -200,39 +257,60 @@ export const TimePracticeQuiz: React.FC = () => {
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-                <button
-                    onClick={checkAnswers}
-                    style={{
-                        padding: '1rem 2rem',
-                        fontSize: '1.1rem',
-                        background: 'var(--primary-color)',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '12px',
-                        cursor: 'pointer',
-                        fontWeight: 'bold',
-                        transition: 'background-color 0.2s, transform 0.1s',
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--accent-hover)'}
-                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--primary-color)'}
-                    onMouseDown={(e) => e.currentTarget.style.transform = 'scale(0.98)'}
-                    onMouseUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                >
-                    Vérifier les réponses (Check Answers)
-                </button>
-
-                {isSubmitted && (
-                    <div style={{
-                        fontSize: '1.2rem',
-                        fontWeight: 'bold',
-                        color: score === timeQuestions.length ? 'var(--success-color)' : 'var(--text-primary)',
-                        background: 'var(--bg-primary)',
-                        padding: '0.75rem 1.5rem',
-                        borderRadius: '12px',
-                        border: `2px solid ${score === timeQuestions.length ? 'var(--success-color)' : 'var(--border-color)'}`
-                    }}>
-                        Score : {score} / {timeQuestions.length}
-                    </div>
+                {!isSubmitted ? (
+                    <button
+                        onClick={checkAnswers}
+                        style={{
+                            padding: '1rem 2rem',
+                            fontSize: '1.1rem',
+                            background: 'var(--primary-color)',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '12px',
+                            cursor: 'pointer',
+                            fontWeight: 'bold',
+                            transition: 'background-color 0.2s, transform 0.1s',
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--accent-hover)'}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--primary-color)'}
+                        onMouseDown={(e) => e.currentTarget.style.transform = 'scale(0.98)'}
+                        onMouseUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
+                    >
+                        Vérifier les réponses (Check Answers)
+                    </button>
+                ) : (
+                    <>
+                        <div style={{
+                            fontSize: '1.2rem',
+                            fontWeight: 'bold',
+                            color: score >= 7 ? 'var(--success-color)' : 'var(--error-color)',
+                            background: score >= 7 ? 'rgba(0, 200, 83, 0.1)' : 'rgba(211, 47, 47, 0.1)',
+                            padding: '0.75rem 1.5rem',
+                            borderRadius: '12px',
+                            border: `2px solid ${score >= 7 ? 'var(--success-color)' : 'var(--error-color)'}`
+                        }}>
+                            Score : {score} / 10
+                        </div>
+                        <button
+                            onClick={generateQuiz}
+                            style={{
+                                padding: '0.8rem 1.5rem',
+                                background: 'transparent',
+                                color: 'var(--primary-color)',
+                                border: '2px solid var(--primary-color)',
+                                borderRadius: '8px',
+                                fontSize: '1.1rem',
+                                fontWeight: 'bold',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.5rem',
+                                transition: 'all 0.2s'
+                            }}
+                        >
+                            Generate New Quiz
+                        </button>
+                    </>
                 )}
             </div>
         </div>
