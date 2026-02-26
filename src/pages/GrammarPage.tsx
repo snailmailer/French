@@ -518,7 +518,7 @@ const GrammarPage = () => {
                             ) : (
                                 <>
                                     <h2 style={{ color: 'var(--primary-color)', textAlign: 'center', marginBottom: '2rem', fontSize: '1.8rem' }}>Grammaire Niveau {selectedPracticeLevel}</h2>
-                                    {grammarQuizData.filter(d => d.level === selectedPracticeLevel).map((levelData) => (
+                                    {grammarQuizData.filter(d => d.id === selectedPracticeLevel).map((levelData) => (
                                         <GrammarDragDropQuiz key={levelData.id} levelData={levelData} />
                                     ))}
                                 </>
