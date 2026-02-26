@@ -36,7 +36,7 @@ const ConjugationPractice = ({ verb, onClose }: ConjugationPracticeProps) => {
     const [score, setScore] = useState({ correct: 0, total: 0 });
     const [focusedPronoun, setFocusedPronoun] = useState<string | null>(null);
 
-    const frenchChars = ['é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'ù', 'û', 'ô', 'î', 'ï', 'œ'];
+    const frenchChars = ['é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'ù', 'û', 'ô', 'î', 'ï', 'œ', 'É', 'È', 'Ê', 'Ë', 'À', 'Â', 'Ç', 'Ù', 'Û', 'Ô', 'Î', 'Ï', 'Œ'];
 
     // Reset when tense changes
     useEffect(() => {

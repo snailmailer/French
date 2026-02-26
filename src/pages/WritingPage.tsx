@@ -86,7 +86,7 @@ const WritingPage = () => {
         return group ? group[1].sort((a, b) => a.name.localeCompare(b.name)) : [];
     }, [groupsWithItems, selectedLevel]);
 
-    const frenchChars = ['é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'ù', 'û', 'ô', 'î', 'ï', 'œ'];
+    const frenchChars = ['é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'ù', 'û', 'ô', 'î', 'ï', 'œ', 'É', 'È', 'Ê', 'Ë', 'À', 'Â', 'Ç', 'Ù', 'Û', 'Ô', 'Î', 'Ï', 'Œ'];
 
     const insertChar = (char: string) => {
         if (textareaRef.current) {

@@ -198,7 +198,7 @@ const TranslatePage = () => {
                                 borderRadius: '8px',
                                 border: '1px solid var(--border-color)'
                             }}>
-                                {['é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'ù', 'û', 'ô', 'î', 'ï', 'œ'].map((char) => (
+                                {['é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'ù', 'û', 'ô', 'î', 'ï', 'œ', 'É', 'È', 'Ê', 'Ë', 'À', 'Â', 'Ç', 'Ù', 'Û', 'Ô', 'Î', 'Ï', 'Œ'].map((char) => (
                                     <button
                                         key={char}
                                         onClick={() => setSourceText(prev => prev + char)}

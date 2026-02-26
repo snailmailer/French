@@ -7,6 +7,7 @@ import { Search, X, BookOpen, Volume2, ArrowUp } from 'lucide-react';
 import { speakFrench } from '../utils/tts';
 import GrammarDragDropQuiz from '../components/GrammarDragDropQuiz';
 import VocabularyFillBlankQuiz from '../components/VocabularyFillBlankQuiz';
+import { TimePracticeQuiz } from '../components/TimePracticeQuiz';
 import { grammarQuizData } from '../data/grammarQuiz';
 
 // --- Components ---
@@ -483,7 +484,7 @@ const GrammarPage = () => {
                 {/* Mobile Top Navigation for Levels */}
                 {activeTab === 'practice' && (
                     <div className="mobile-level-nav" style={{ display: 'none', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem' }}>
-                        {['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Vocabulaire'].map(level => (
+                        {['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Vocabulaire', "L'heure"].map(level => (
                             <button
                                 key={level}
                                 onClick={() => { setSelectedPracticeLevel(level); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
@@ -514,6 +515,11 @@ const GrammarPage = () => {
                                 <>
                                     <h2 style={{ color: 'var(--primary-color)', textAlign: 'center', marginBottom: '2rem', fontSize: '1.8rem' }}>Vocabulary Quizzes</h2>
                                     <VocabularyFillBlankQuiz />
+                                </>
+                            ) : selectedPracticeLevel === "L'heure" ? (
+                                <>
+                                    <h2 style={{ color: 'var(--primary-color)', textAlign: 'center', marginBottom: '2rem', fontSize: '1.8rem' }}>Telling Time Practice</h2>
+                                    <TimePracticeQuiz />
                                 </>
                             ) : (
                                 <>
@@ -616,7 +622,7 @@ const GrammarPage = () => {
                     <h3 style={{ textAlign: 'center', color: 'var(--primary-color)', marginBottom: '1rem', fontSize: '1.4rem' }}>
                         Niveaux (Levels)
                     </h3>
-                    {['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Vocabulaire'].map(level => (
+                    {['A1', 'A2', 'B1', 'B2', 'C1', 'C2', "L'heure", 'Vocabulaire'].map(level => (
                         <button
                             key={level}
                             onClick={() => { setSelectedPracticeLevel(level); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
@@ -636,7 +642,7 @@ const GrammarPage = () => {
                         >
                             <span style={{ fontWeight: 800, fontSize: '1.1rem' }}>{level}</span>
                             <span style={{ fontSize: '0.9rem', opacity: 0.9 }}>
-                                {level === 'Vocabulaire' ? 'Pratique du vocabulaire' : `Grammaire niveau ${level}`}
+                                {level === 'Vocabulaire' ? 'Pratique du vocabulaire' : level === "L'heure" ? 'Lire l\'heure' : `Grammaire niveau ${level}`}
                             </span>
                         </button>
                     ))}
