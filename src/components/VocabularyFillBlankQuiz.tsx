@@ -26,7 +26,7 @@ const getAllVocabItems = (): VocabularyItem[] => {
     return unique;
 };
 
-const CHARACTERS = ['é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'î', 'ï', 'ô', 'ù', 'û', 'ü', 'œ', 'æ'];
+const CHARACTERS = ['é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'î', 'ï', 'ô', 'ù', 'û', 'ü', 'œ', 'æ', 'É', 'È', 'Ê', 'Ë', 'À', 'Â', 'Ç', 'Î', 'Ï', 'Ô', 'Ù', 'Û', 'Ü', 'Œ', 'Æ'];
 
 const shuffleArray = <T,>(array: T[]): T[] => {
     const newArr = [...array];
@@ -181,8 +181,24 @@ const VocabularyFillBlankQuiz: React.FC = () => {
                             borderLeft: `4px solid ${showResults ? (isCorrect ? 'var(--success-color)' : 'var(--error-color)') : 'var(--primary-color)'}`,
                             boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
                         }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem', alignItems: 'center' }}>
                                 <strong style={{ fontSize: '1.1rem', color: 'var(--text-primary)' }}>{item.en}</strong>
+                                <button
+                                    onClick={() => speakFrench(item.fr)}
+                                    style={{
+                                        background: 'none',
+                                        border: 'none',
+                                        cursor: 'pointer',
+                                        color: 'var(--accent-color)',
+                                        padding: '0.2rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}
+                                    title="Écouter en français"
+                                >
+                                    <Volume2 size={20} />
+                                </button>
                             </div>
 
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%' }}>

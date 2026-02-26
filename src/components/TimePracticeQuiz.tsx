@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { CheckCircle2, XCircle } from 'lucide-react';
+import { CheckCircle2, XCircle, Type, Volume2 } from 'lucide-react';
+import { speakFrench } from '../utils/tts';
+
+const CHARACTERS = ['é', 'è', 'ê', 'ë', 'à', 'â', 'ç', 'î', 'ï', 'ô', 'ù', 'û', 'ü', 'œ', 'æ', 'É', 'È', 'Ê', 'Ë', 'À', 'Â', 'Ç', 'Î', 'Ï', 'Ô', 'Ù', 'Û', 'Ü', 'Œ', 'Æ'];
 
 interface TimeQuestion {
     digital: string;
@@ -24,6 +27,7 @@ export const TimePracticeQuiz: React.FC = () => {
     const [answers, setAnswers] = useState<Record<number, string>>({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [score, setScore] = useState(0);
+    const [focusedInput, setFocusedInput] = useState<number | null>(null);
 
     const handleInputChange = (index: number, value: string) => {
         setAnswers({
@@ -31,6 +35,17 @@ export const TimePracticeQuiz: React.FC = () => {
             [index]: value
         });
         if (isSubmitted) setIsSubmitted(false);
+    };
+
+    const insertCharacter = (char: string) => {
+        if (focusedInput !== null && !isSubmitted) {
+            const currentVal = answers[focusedInput] || '';
+            setAnswers(prev => ({ ...prev, [focusedInput]: currentVal + char }));
+            const inputEl = document.getElementById(`time-input-${focusedInput}`);
+            if (inputEl) {
+                inputEl.focus();
+            }
+        }
     };
 
     const normalizeString = (str: string) => {
@@ -76,6 +91,30 @@ export const TimePracticeQuiz: React.FC = () => {
                 <em style={{ fontSize: '0.9em', color: 'var(--accent-cyan)' }}>Ex: 08:30 → il est huit heures trente</em>
             </p>
 
+            {/* Special Characters Keyboard */}
+            <div style={{ background: 'var(--bg-primary)', padding: '0.75rem', borderRadius: '8px', marginBottom: '2rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center', border: '1px solid var(--border-color)' }}>
+                <Type size={18} color="var(--text-secondary)" />
+                <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginRight: '0.5rem' }}>Accents:</span>
+                {CHARACTERS.map(char => (
+                    <button
+                        key={char}
+                        onClick={(e) => { e.preventDefault(); insertCharacter(char); }}
+                        disabled={isSubmitted || focusedInput === null}
+                        style={{
+                            padding: '0.4rem 0.8rem',
+                            background: (isSubmitted || focusedInput === null) ? 'rgba(0,0,0,0.05)' : 'var(--bg-secondary)',
+                            border: '1px solid var(--border-color)',
+                            borderRadius: '4px',
+                            cursor: (isSubmitted || focusedInput === null) ? 'not-allowed' : 'pointer',
+                            fontSize: '1.1rem',
+                            color: 'var(--text-primary)'
+                        }}
+                    >
+                        {char}
+                    </button>
+                ))}
+            </div>
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '2rem' }}>
                 {timeQuestions.map((q, index) => {
                     const userAnswer = answers[index] || '';
@@ -108,9 +147,11 @@ export const TimePracticeQuiz: React.FC = () => {
                                 </div>
 
                                 <input
+                                    id={`time-input-${index}`}
                                     type="text"
                                     value={userAnswer}
                                     onChange={(e) => handleInputChange(index, e.target.value)}
+                                    onFocus={() => setFocusedInput(index)}
                                     placeholder="il est..."
                                     style={{
                                         flex: 1,
@@ -142,9 +183,15 @@ export const TimePracticeQuiz: React.FC = () => {
                                     marginTop: '0.5rem',
                                     padding: '0.5rem',
                                     background: 'rgba(0, 200, 83, 0.1)',
-                                    borderRadius: '6px'
+                                    borderRadius: '6px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.5rem'
                                 }}>
                                     Réponse attendue : <strong>{q.answer}</strong>
+                                    <button onClick={() => speakFrench(q.answer)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--success-color)', padding: 0, display: 'flex' }} title="Écouter la réponse">
+                                        <Volume2 size={16} />
+                                    </button>
                                 </div>
                             )}
                         </div>
