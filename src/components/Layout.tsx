@@ -1,17 +1,25 @@
 import { useState, useRef, useEffect } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { BookOpen, Grid, Book, PenTool, Mic } from 'lucide-react';
+import { BookOpen, Grid, Book, PenTool, Mic, Moon, Sun, Monitor } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const Layout = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
+    const themeMenuRef = useRef<HTMLDivElement>(null);
     const location = useLocation();
+    const { theme, setTheme, activeTheme } = useTheme();
 
     // Close menu when clicking outside
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+            const target = event.target as Node;
+            if (menuRef.current && !menuRef.current.contains(target)) {
                 setIsMenuOpen(false);
+            }
+            if (themeMenuRef.current && !themeMenuRef.current.contains(target)) {
+                setIsThemeMenuOpen(false);
             }
         };
 
@@ -24,6 +32,7 @@ const Layout = () => {
     // Close menu on route change
     useEffect(() => {
         setIsMenuOpen(false);
+        setIsThemeMenuOpen(false);
     }, [location]);
 
     const navItems = [
@@ -63,79 +72,161 @@ const Layout = () => {
                     }}>Le Français</span>
                 </Link>
 
-                <div ref={menuRef} style={{ position: 'relative' }}>
-                    <button
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        style={{
-                            background: 'transparent',
-                            border: 'none',
-                            cursor: 'pointer',
-                            padding: '0.8rem',
-                            borderRadius: '50%',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            color: 'var(--text-primary)',
-                            transition: 'background 0.2s',
-                        }}
-                        onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.05)'}
-                        onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
-                        aria-label="App Launcher"
-                    >
-                        <Grid size={48} />
-                    </button>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    {/* Theme Toggle */}
+                    <div ref={themeMenuRef} style={{ position: 'relative' }}>
+                        <button
+                            onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
+                            style={{
+                                background: 'transparent',
+                                border: 'none',
+                                cursor: 'pointer',
+                                padding: '0.8rem',
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: 'var(--text-primary)',
+                                transition: 'background 0.2s',
+                            }}
+                            onMouseEnter={(e) => e.currentTarget.style.background = 'var(--bg-tertiary)'}
+                            onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                            aria-label="Toggle Theme"
+                        >
+                            {theme === 'system' ? <Monitor size={24} /> : activeTheme === 'dark' ? <Moon size={24} /> : <Sun size={24} />}
+                        </button>
 
-                    {isMenuOpen && (
-                        <div style={{
-                            position: 'absolute',
-                            top: '120%',
-                            right: 0,
-                            background: 'var(--bg-secondary)',
-                            border: '1px solid var(--border-color)',
-                            borderRadius: '16px',
-                            boxShadow: '0 4px 20px rgba(0,0,0,0.4)',
-                            padding: '1rem',
-                            width: 'min(320px, calc(100vw - 4rem))',
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
-                            gap: '0.5rem',
-                            zIndex: 1000
-                        }}>
-                            {navItems.map((item) => (
-                                <Link
-                                    key={item.path}
-                                    to={item.path}
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        padding: '0.75rem 0.25rem',
-                                        borderRadius: '12px',
-                                        textDecoration: 'none',
-                                        color: 'var(--text-primary)',
-                                        transition: 'background 0.2s',
-                                        textAlign: 'center',
-                                        wordBreak: 'break-word',
-                                        hyphens: 'auto'
-                                    }}
-                                    onMouseEnter={(e) => e.currentTarget.style.background = 'var(--bg-tertiary)'}
-                                    onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
-                                >
-                                    <div style={{
-                                        color: item.color,
-                                        marginBottom: '0.5rem',
-                                        background: 'rgba(255,255,255,0.05)',
-                                        padding: '0.8rem',
-                                        borderRadius: '50%'
-                                    }}>
-                                        {item.icon}
-                                    </div>
-                                    <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>{item.label}</span>
-                                </Link>
-                            ))}
-                        </div>
-                    )}
+                        {isThemeMenuOpen && (
+                            <div style={{
+                                position: 'absolute',
+                                top: '120%',
+                                right: 0,
+                                background: 'var(--bg-secondary)',
+                                border: '1px solid var(--border-color)',
+                                borderRadius: '12px',
+                                boxShadow: '0 4px 20px rgba(0,0,0,0.4)',
+                                padding: '0.5rem',
+                                minWidth: '150px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '0.25rem',
+                                zIndex: 1000
+                            }}>
+                                {[
+                                    { value: 'light', label: 'Light', icon: <Sun size={18} /> },
+                                    { value: 'dark', label: 'Dark', icon: <Moon size={18} /> },
+                                    { value: 'system', label: 'System', icon: <Monitor size={18} /> }
+                                ].map((t) => (
+                                    <button
+                                        key={t.value}
+                                        onClick={() => {
+                                            setTheme(t.value as 'light' | 'dark' | 'system');
+                                            setIsThemeMenuOpen(false);
+                                        }}
+                                        style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '0.75rem',
+                                            padding: '0.75rem 1rem',
+                                            background: theme === t.value ? 'var(--bg-tertiary)' : 'transparent',
+                                            border: 'none',
+                                            borderRadius: '8px',
+                                            color: 'var(--text-primary)',
+                                            width: '100%',
+                                            textAlign: 'left',
+                                            cursor: 'pointer',
+                                            transition: 'background 0.2s'
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            if (theme !== t.value) e.currentTarget.style.background = 'var(--bg-tertiary)'
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            if (theme !== t.value) e.currentTarget.style.background = 'transparent'
+                                        }}
+                                    >
+                                        {t.icon}
+                                        <span>{t.label}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* App Launcher */}
+                    <div ref={menuRef} style={{ position: 'relative' }}>
+                        <button
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            style={{
+                                background: 'transparent',
+                                border: 'none',
+                                cursor: 'pointer',
+                                padding: '0.8rem',
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: 'var(--text-primary)',
+                                transition: 'background 0.2s',
+                            }}
+                            onMouseEnter={(e) => e.currentTarget.style.background = 'var(--bg-tertiary)'}
+                            onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                            aria-label="App Launcher"
+                        >
+                            <Grid size={48} />
+                        </button>
+
+                        {isMenuOpen && (
+                            <div style={{
+                                position: 'absolute',
+                                top: '120%',
+                                right: 0,
+                                background: 'var(--bg-secondary)',
+                                border: '1px solid var(--border-color)',
+                                borderRadius: '16px',
+                                boxShadow: '0 4px 20px rgba(0,0,0,0.4)',
+                                padding: '1rem',
+                                width: 'min(320px, calc(100vw - 4rem))',
+                                display: 'grid',
+                                gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+                                gap: '0.5rem',
+                                zIndex: 1000
+                            }}>
+                                {navItems.map((item) => (
+                                    <Link
+                                        key={item.path}
+                                        to={item.path}
+                                        style={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            padding: '0.75rem 0.25rem',
+                                            borderRadius: '12px',
+                                            textDecoration: 'none',
+                                            color: 'var(--text-primary)',
+                                            transition: 'background 0.2s',
+                                            textAlign: 'center',
+                                            wordBreak: 'break-word',
+                                            hyphens: 'auto'
+                                        }}
+                                        onMouseEnter={(e) => e.currentTarget.style.background = 'var(--bg-tertiary)'}
+                                        onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                                    >
+                                        <div style={{
+                                            color: item.color,
+                                            marginBottom: '0.5rem',
+                                            background: activeTheme === 'light' ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.05)',
+                                            padding: '0.8rem',
+                                            borderRadius: '50%'
+                                        }}>
+                                            {item.icon}
+                                        </div>
+                                        <span style={{ fontSize: '0.85rem', fontWeight: 600 }}>{item.label}</span>
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </header>
             <main className="container">

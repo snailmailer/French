@@ -11,6 +11,7 @@
   --bg-primary: #0a0e1a;
   --bg-secondary: #141b2d;
   --bg-tertiary: #1c2640;
+  --page-bg-gradient: linear-gradient(135deg, var(--bg-primary) 0%, #0d1225 50%, #0a0f1f 100%);
 
   --text-primary: #F8F1EE;
   /* Cream color */
@@ -38,11 +39,34 @@
   --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
+:root[data-theme="light"] {
+  --primary-color: #0060a8;
+  --secondary-color: #0078d4;
+  --card-bg: #ffffff;
+  --card-hover: #f1f5f9;
+
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e2e8f0;
+  --page-bg-gradient: var(--bg-primary);
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+
+  --accent-color: #0284c7;
+  --accent-hover: #0369a1;
+  --border-color: #cbd5e1;
+
+  /* Keep accents the same for light mode or slightly tweak if needed, mostly fine */
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--bg-primary) 0%, #0d1225 50%, #0a0f1f 100%);
+  background: var(--page-bg-gradient);
   color: var(--text-primary);
   font-family: var(--font-family);
   line-height: 1.6;
