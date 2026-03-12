@@ -2,6 +2,8 @@ export interface ConjugationRow {
     pronoun: string;
     form: string;
     example?: string; // Sentence using this specific form
+    exampleEn?: string; // English translation of the example
+    ttsText?: string; // Audio-friendly version (e.g., no slashes)
 }
 
 export interface VerbMood {

@@ -13,12 +13,12 @@ export const etre: VerbDefinition = {
     conjugations: {
         Indicatif: {
             'Présent': [
-                { pronoun: 'je', form: 'suis', example: 'Je suis étudiant.' },
-                { pronoun: 'tu', form: 'es', example: 'Tu es gentil.' },
-                { pronoun: 'il/elle', form: 'est', example: 'Il est grand.' },
-                { pronoun: 'nous', form: 'sommes', example: 'Nous sommes ici.' },
-                { pronoun: 'vous', form: 'êtes', example: 'Vous êtes les bienvenus.' },
-                { pronoun: 'ils/elles', form: 'sont', example: 'Elles sont parties.' }
+                { pronoun: 'je', form: 'suis', example: 'Je suis étudiant.', exampleEn: 'I am a student.' },
+                { pronoun: 'tu', form: 'es', example: 'Tu es gentil.', exampleEn: 'You are nice.' },
+                { pronoun: 'il/elle', form: 'est', example: 'Il est grand.', exampleEn: 'He is tall.' },
+                { pronoun: 'nous', form: 'sommes', example: 'Nous sommes ici.', exampleEn: 'We are here.' },
+                { pronoun: 'vous', form: 'êtes', example: 'Vous êtes les bienvenus.', exampleEn: 'You are welcome.' },
+                { pronoun: 'ils/elles', form: 'sont', example: 'Elles sont parties.', exampleEn: 'They have left.' }
             ],
             'Passé Composé': [
                 { pronoun: 'j\'', form: 'ai été' }, { pronoun: 'tu', form: 'as été' }, { pronoun: 'il/elle', form: 'a été' },
