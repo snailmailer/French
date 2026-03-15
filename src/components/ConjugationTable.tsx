@@ -19,6 +19,22 @@ interface ConjugationProps {
 const ConjugationTable: React.FC<ConjugationProps> = ({ verb, translation, tense, conjugations, tenseUsage }) => {
     const speak = (text: string) => speakFrench(text);
 
+    const sanitizeForTTS = (text: string) => {
+        if (!text) return '';
+        return text.replace(/\(.*\)/g, '').replace(/\//g, ' ').trim();
+    };
+
+    const dynamicExamples = conjugations
+        .filter(c => c.example)
+        .slice(0, 3)
+        .map(c => ({
+            fr: c.example!,
+            en: c.exampleEn,
+            ttsText: c.ttsText || c.example!
+        }));
+    
+    const examplesToShow = dynamicExamples.length > 0 && tenseUsage ? dynamicExamples : (tenseUsage?.examples || []);
+
     return (
         <div className="conjugation-container" style={{ margin: '2rem 0', background: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: '12px', border: tenseUsage ? '2px solid #2ecc71' : 'none' }}>
             <h3 style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', color: 'var(--accent-color)' }}>
@@ -43,21 +59,23 @@ const ConjugationTable: React.FC<ConjugationProps> = ({ verb, translation, tense
                         <strong>Structure:</strong> <span style={{ fontStyle: 'italic', color: 'var(--text-secondary)', whiteSpace: 'pre-line', display: 'block', marginTop: '0.5rem' }}>{tenseUsage.structure}</span>
                     </div>
 
-                    {tenseUsage.examples && tenseUsage.examples.length > 0 && (
+                    {examplesToShow.length > 0 && (
                         <div style={{ marginTop: '1rem', borderTop: '1px dashed rgba(46, 204, 113, 0.4)', paddingTop: '1rem' }}>
                             <strong style={{ color: 'var(--text-primary)', marginBottom: '0.5rem', display: 'block' }}>Examples:</strong>
                             <ul style={{ margin: 0, paddingLeft: '1.5rem', listStyle: 'disc', color: 'var(--text-secondary)' }}>
-                                {tenseUsage.examples.map((ex, idx) => (
+                                {examplesToShow.map((ex, idx) => (
                                     <li key={idx} style={{ marginBottom: '0.5rem' }}>
                                         <div style={{ color: 'var(--text-primary)', fontWeight: 500 }}>
                                             {ex.fr}
-                                            <button onClick={() => speak(ex.fr)} title="Listen" style={{ marginLeft: '0.5rem', padding: '0.2rem', borderRadius: '50%', color: '#4CAF50', border: 'none', background: 'transparent', cursor: 'pointer', verticalAlign: 'middle' }}>
+                                            <button onClick={() => speak(sanitizeForTTS((ex as any).ttsText || ex.fr))} title="Listen" style={{ marginLeft: '0.5rem', padding: '0.2rem', borderRadius: '50%', color: '#4CAF50', border: 'none', background: 'transparent', cursor: 'pointer', verticalAlign: 'middle' }}>
                                                 <Volume2 size={14} />
                                             </button>
                                         </div>
-                                        <div style={{ fontSize: '0.9em', fontStyle: 'italic', color: 'var(--text-secondary)' }}>
-                                            {ex.en}
-                                        </div>
+                                        {ex.en && (
+                                            <div style={{ fontSize: '0.9em', fontStyle: 'italic', color: 'var(--text-secondary)' }}>
+                                                {ex.en}
+                                            </div>
+                                        )}
                                     </li>
                                 ))}
                             </ul>
