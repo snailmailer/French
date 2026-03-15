@@ -24,16 +24,28 @@ const ConjugationTable: React.FC<ConjugationProps> = ({ verb, translation, tense
         return text.replace(/\(.*\)/g, '').replace(/\//g, ' ').trim();
     };
 
+    const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
     const dynamicExamples = conjugations
-        .filter(c => c.example)
-        .slice(0, 3)
-        .map(c => ({
+        .filter(c => c.example && c.example.trim().length > 0)
+        .slice(0, 6)
+        .map((c, idx) => ({
+            level: levels[Math.min(idx, levels.length - 1)],
             fr: c.example!,
             en: c.exampleEn,
-            ttsText: c.ttsText || c.example!
+            ttsText: (c as any).ttsText || c.example!
         }));
-    
-    const examplesToShow = dynamicExamples.length > 0 && tenseUsage ? dynamicExamples : (tenseUsage?.examples || []);
+
+    const getLevelColor = (level: string) => {
+        switch (level) {
+            case 'A1': return '#4CAF50';
+            case 'A2': return '#8BC34A';
+            case 'B1': return '#FFC107';
+            case 'B2': return '#FF9800';
+            case 'C1': return '#F44336';
+            case 'C2': return '#9C27B0';
+            default: return 'var(--text-secondary)';
+        }
+    };
 
     return (
         <div className="conjugation-container" style={{ margin: '2rem 0', background: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: '12px', border: tenseUsage ? '2px solid #2ecc71' : 'none' }}>
@@ -59,23 +71,37 @@ const ConjugationTable: React.FC<ConjugationProps> = ({ verb, translation, tense
                         <strong>Structure:</strong> <span style={{ fontStyle: 'italic', color: 'var(--text-secondary)', whiteSpace: 'pre-line', display: 'block', marginTop: '0.5rem' }}>{tenseUsage.structure}</span>
                     </div>
 
-                    {examplesToShow.length > 0 && (
+                    {dynamicExamples.length > 0 && (
                         <div style={{ marginTop: '1rem', borderTop: '1px dashed rgba(46, 204, 113, 0.4)', paddingTop: '1rem' }}>
-                            <strong style={{ color: 'var(--text-primary)', marginBottom: '0.5rem', display: 'block' }}>Examples:</strong>
-                            <ul style={{ margin: 0, paddingLeft: '1.5rem', listStyle: 'disc', color: 'var(--text-secondary)' }}>
-                                {examplesToShow.map((ex, idx) => (
-                                    <li key={idx} style={{ marginBottom: '0.5rem' }}>
-                                        <div style={{ color: 'var(--text-primary)', fontWeight: 500 }}>
-                                            {ex.fr}
-                                            <button onClick={() => speak(sanitizeForTTS((ex as any).ttsText || ex.fr))} title="Listen" style={{ marginLeft: '0.5rem', padding: '0.2rem', borderRadius: '50%', color: '#4CAF50', border: 'none', background: 'transparent', cursor: 'pointer', verticalAlign: 'middle' }}>
-                                                <Volume2 size={14} />
-                                            </button>
-                                        </div>
-                                        {ex.en && (
-                                            <div style={{ fontSize: '0.9em', fontStyle: 'italic', color: 'var(--text-secondary)' }}>
-                                                {ex.en}
+                            <strong style={{ color: 'var(--text-primary)', marginBottom: '0.75rem', display: 'block' }}>Examples ({tense}):</strong>
+                            <ul style={{ margin: 0, paddingLeft: '0', listStyle: 'none' }}>
+                                {dynamicExamples.map((ex, idx) => (
+                                    <li key={idx} style={{ marginBottom: '0.75rem', display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                                        <span style={{
+                                            background: getLevelColor(ex.level),
+                                            color: '#fff',
+                                            padding: '0.15rem 0.45rem',
+                                            borderRadius: '4px',
+                                            fontSize: '0.75rem',
+                                            fontWeight: 'bold',
+                                            minWidth: '30px',
+                                            textAlign: 'center',
+                                            flexShrink: 0,
+                                            marginTop: '0.15rem'
+                                        }}>{ex.level}</span>
+                                        <div>
+                                            <div style={{ color: 'var(--text-primary)', fontWeight: 500 }}>
+                                                {ex.fr}
+                                                <button onClick={() => speak(sanitizeForTTS(ex.ttsText || ex.fr))} title="Listen" style={{ marginLeft: '0.5rem', padding: '0.2rem', borderRadius: '50%', color: '#4CAF50', border: 'none', background: 'transparent', cursor: 'pointer', verticalAlign: 'middle' }}>
+                                                    <Volume2 size={14} />
+                                                </button>
                                             </div>
-                                        )}
+                                            {ex.en && (
+                                                <div style={{ fontSize: '0.85em', fontStyle: 'italic', color: 'var(--text-secondary)' }}>
+                                                    {ex.en}
+                                                </div>
+                                            )}
+                                        </div>
                                     </li>
                                 ))}
                             </ul>
