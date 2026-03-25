@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { speakingQuestions, examTopics, speakingTips, levelStructures } from '../data/speakingQuestions';
 import { Mic, Square, RotateCcw, ChevronLeft, Volume2, BookOpen, GraduationCap, Wrench, Clock, Play } from 'lucide-react';
-import { speakFrench } from '../utils/tts';
+import { speakFrench, speakFrenchMale, speakFrenchFemale } from '../utils/tts';
 
 // Type definition for SpeechRecognition
 interface IWindow extends Window {
@@ -41,6 +41,9 @@ const SpeakingPage = () => {
     const timerIntervalRef = useRef<any>(null);
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
     const audioChunksRef = useRef<Blob[]>([]);
+
+    // UI state
+    const [showEnglish, setShowEnglish] = useState(false);
 
     // Get unique categories
     const categories = Array.from(new Set(speakingQuestions.map(q => q.category)));
@@ -243,6 +246,8 @@ const SpeakingPage = () => {
         setExamPhase('idle');
         setExamTimer(0);
         setSelectedScenario(null);
+        if (isRecording) stopRecording();
+        setAudioUrl(null);
     };
 
     // Common styles
@@ -320,7 +325,7 @@ const SpeakingPage = () => {
                         </div>
 
                         {/* === Exam Practice Grid === */}
-                        {sectionHeading('🎓 Pratique d\'examen (Exam Practice)')}
+                        {sectionHeading('🎓 Préparation au TEF')}
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '4rem' }}>
                             {examTopics.map(topic => (
                                 <div
@@ -350,7 +355,7 @@ const SpeakingPage = () => {
                                     </div>
                                     <h3 style={{ margin: '0.5rem 0 0.5rem', fontSize: '1.2rem', color: 'var(--accent-cyan)' }}>{topic.title}</h3>
                                     <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                                        {topic.scenarios.length} Scénarios
+                                        {topic.situations?.length ? `${topic.situations.length} Situations` : `${topic.scenarios?.length || 0} Scénarios`}
                                     </span>
                                 </div>
                             ))}
@@ -485,12 +490,14 @@ const SpeakingPage = () => {
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         <h4 style={{ color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.9rem', marginBottom: '0.5rem' }}>
-                            Choisissez un scénario (Select a Scenario):
+                            {topic.situations?.length ? 'Choisissez une situation (Select a Situation):' : 'Choisissez un scénario (Select a Scenario):'}
                         </h4>
-                        {topic.scenarios.map((scenario, idx) => {
+                        
+                        {/* Render Scenarios if they exist */}
+                        {topic.scenarios && topic.scenarios.map((scenario, idx) => {
                             const isActive = selectedExamTopic === topic.id && selectedScenario === scenario;
                             return (
-                                <div key={idx} style={{
+                                <div key={`scen-${idx}`} style={{
                                     background: isActive ? 'rgba(76, 175, 80, 0.08)' : 'var(--bg-primary)',
                                     border: isActive ? '2px solid var(--accent-color)' : '1px solid var(--border-color)',
                                     borderRadius: '12px',
@@ -514,11 +521,7 @@ const SpeakingPage = () => {
                                                 <button
                                                     className="btn-primary"
                                                     onClick={() => startExamTimer(topic, scenario)}
-                                                    style={{
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        gap: '0.5rem'
-                                                    }}
+                                                    style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
                                                 >
                                                     <Play size={18} /> Commencer
                                                 </button>
@@ -561,6 +564,170 @@ const SpeakingPage = () => {
                                                     {formatTime(examTimer)}
                                                 </div>
                                             )}
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        })}
+
+                        {/* Render Situations if they exist */}
+                        {topic.situations && topic.situations.map((situation, idx) => {
+                            const isActive = selectedExamTopic === topic.id && selectedScenario === situation.title;
+                            return (
+                                <div key={`sit-${idx}`} style={{
+                                    background: isActive ? 'rgba(76, 175, 80, 0.04)' : 'var(--bg-primary)',
+                                    border: isActive ? '2px solid var(--accent-color)' : '1px solid var(--border-color)',
+                                    borderRadius: '12px',
+                                    padding: '1.5rem',
+                                }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1.5rem' }}>
+                                        <div style={{ flex: 1 }}>
+                                            <h5 style={{ margin: '0 0 0.5rem', color: 'var(--text-primary)', lineHeight: 1.4, fontSize: '1.15rem', fontWeight: 'bold' }}>
+                                                {situation.title}
+                                            </h5>
+                                            <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem', fontStyle: 'italic' }}>
+                                                {situation.titleEn}
+                                            </p>
+                                        </div>
+                                        <div style={{ display: 'flex', gap: '0.75rem', flexShrink: 0 }}>
+                                            {!isActive ? (
+                                                <button
+                                                    className="btn-primary"
+                                                    onClick={() => startExamTimer(topic, situation.title)}
+                                                    style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+                                                >
+                                                    <Play size={18} /> Commencer
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    onClick={resetExam}
+                                                    style={{
+                                                        background: 'var(--accent-orange)',
+                                                        color: 'white',
+                                                        border: 'none',
+                                                        borderRadius: '8px',
+                                                        padding: '0.6rem 1.2rem',
+                                                        cursor: 'pointer',
+                                                        fontSize: '1rem',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '0.5rem',
+                                                        fontWeight: 'bold'
+                                                    }}
+                                                >
+                                                    <RotateCcw size={18} /> Réinitialiser
+                                                </button>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {isActive && examPhase !== 'idle' && (
+                                        <div style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                                            
+                                            {/* Instructions */}
+                                            <div style={{ padding: '1rem 1.5rem', background: 'rgba(255, 165, 0, 0.08)', borderLeft: '4px solid var(--accent-orange)', borderRadius: '0 8px 8px 0' }}>
+                                                <h5 style={{ margin: '0 0 0.5rem', color: 'var(--accent-orange)', fontSize: '0.95rem', textTransform: 'uppercase', letterSpacing: '1px' }}>INSTRUCTION :</h5>
+                                                <p style={{ margin: 0, color: 'var(--text-primary)', fontSize: '0.95rem', lineHeight: 1.5 }}>
+                                                    Vous avez 5 minutes pour vous préparer, parler, et poser 10 questions.<br/>
+                                                    Prévoyez environ 1 minute pour vous préparer mentalement, puis 3 à 4 minutes pour parler et poser des questions.
+                                                </p>
+                                            </div>
+
+                                            {/* Timer & Recording Box */}
+                                            <div style={{
+                                                padding: '2rem',
+                                                background: examPhase === 'prep' ? 'rgba(54, 134, 201, 0.05)' : examPhase === 'speak' ? 'rgba(76, 175, 80, 0.05)' : 'rgba(155, 89, 182, 0.05)',
+                                                borderRadius: '12px',
+                                                textAlign: 'center',
+                                                border: `1px dashed ${examPhase === 'prep' ? 'var(--accent-cyan)' : 'var(--success-color)'}`
+                                            }}>
+                                                <div style={{ fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px', color: examPhase === 'prep' ? 'var(--accent-cyan)' : examPhase === 'speak' ? 'var(--success-color)' : '#9B59B6', fontWeight: 'bold', marginBottom: '1rem' }}>
+                                                    {examPhase === 'prep' ? '⏳ Temps de Préparation' : examPhase === 'speak' ? '🎤 Parlez maintenant !' : '✅ Exercice Terminé'}
+                                                </div>
+                                                {examPhase !== 'done' && (
+                                                    <div style={{ 
+                                                        fontSize: '4.5rem', 
+                                                        fontFamily: 'monospace', 
+                                                        fontWeight: 'bold', 
+                                                        color: (examPhase === 'speak' && examTimer <= 60) ? 'red' : (examPhase === 'prep' ? 'var(--accent-cyan)' : 'var(--success-color)')
+                                                    }}>
+                                                        {formatTime(examTimer)}
+                                                    </div>
+                                                )}
+                                                
+                                                {/* Recording Controls */}
+                                                <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                                                    {!isRecording && !audioUrl && (
+                                                        <button onClick={startActualRecording} style={{ background: 'var(--accent-cyan)', color: 'white', border: 'none', padding: '0.6rem 1.2rem', borderRadius: '24px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem', fontWeight: 600 }}>
+                                                            <Mic size={18} /> Commencer l'enregistrement
+                                                        </button>
+                                                    )}
+                                                    {isRecording && (
+                                                        <button onClick={stopRecording} style={{ background: '#f44336', color: 'white', border: 'none', padding: '0.6rem 1.2rem', borderRadius: '24px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem', fontWeight: 600, animation: 'pulse 2s infinite' }}>
+                                                            <Square size={18} /> Arrêter l'enregistrement
+                                                        </button>
+                                                    )}
+                                                    {audioUrl && (
+                                                        <div style={{ width: '100%', maxWidth: '300px' }}>
+                                                            <audio src={audioUrl} controls style={{ width: '100%', height: '40px' }} />
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+
+                                            {/* QA List */}
+                                            <div style={{ marginTop: '1rem' }}>
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                                                    <h5 style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '1rem' }}>Questions et Réponses :</h5>
+                                                    <button 
+                                                        onClick={() => setShowEnglish(!showEnglish)}
+                                                        style={{ background: 'transparent', border: '1px solid var(--border-color)', borderRadius: '20px', padding: '0.4rem 1rem', fontSize: '0.85rem', cursor: 'pointer', color: 'var(--text-primary)' }}
+                                                    >
+                                                        {showEnglish ? 'Cacher la traduction' : 'Afficher la traduction'}
+                                                    </button>
+                                                </div>
+                                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                                    {situation.qaList.map((qa, qIdx) => (
+                                                        <div key={qIdx} style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '1.25rem' }}>
+                                                            
+                                                            {/* Question (Male) */}
+                                                            <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', marginBottom: '1rem' }}>
+                                                                <div>
+                                                                    <p style={{ margin: '0 0 0.25rem', color: 'var(--text-primary)', fontWeight: 600, fontSize: '1.05rem' }}>
+                                                                        <span style={{ color: 'var(--accent-color)' }}>Q:</span> {qa.qFr}
+                                                                    </p>
+                                                                    {showEnglish && (
+                                                                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85em', fontStyle: 'italic' }}>
+                                                                            {qa.qEn}
+                                                                        </p>
+                                                                    )}
+                                                                </div>
+                                                                <button onClick={() => speakFrenchMale(qa.qFr)} style={{ background: 'rgba(54, 134, 201, 0.1)', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--accent-cyan)', flexShrink: 0 }} title="Voix masculine">
+                                                                    <Volume2 size={18} />
+                                                                </button>
+                                                            </div>
+
+                                                            {/* Answer (Female) */}
+                                                            <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', paddingLeft: '1rem', borderLeft: '2px solid rgba(76, 175, 80, 0.3)' }}>
+                                                                <div>
+                                                                    <p style={{ margin: '0 0 0.25rem', color: 'var(--text-primary)', fontSize: '1rem' }}>
+                                                                        <span style={{ color: 'var(--success-color)', fontWeight: 600 }}>R:</span> {qa.aFr}
+                                                                    </p>
+                                                                    {showEnglish && (
+                                                                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85em', fontStyle: 'italic' }}>
+                                                                            {qa.aEn}
+                                                                        </p>
+                                                                    )}
+                                                                </div>
+                                                                <button onClick={() => speakFrenchFemale(qa.aFr)} style={{ background: 'rgba(76, 175, 80, 0.1)', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--success-color)', flexShrink: 0 }} title="Voix féminine">
+                                                                    <Volume2 size={18} />
+                                                                </button>
+                                                            </div>
+
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
                                         </div>
                                     )}
                                 </div>

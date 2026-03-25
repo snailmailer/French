@@ -20,7 +20,7 @@ if (window.speechSynthesis) {
 const activeUtterances: SpeechSynthesisUtterance[] = [];
 
 // Shared speak helper with a small delay after cancel to prevent truncation
-const speakWithLang = (text: string, lang: string, langPrefix: string, customRate?: number) => {
+const speakWithLang = (text: string, lang: string, langPrefix: string, customRate?: number, gender?: 'male' | 'female') => {
     if (!window.speechSynthesis) {
         console.error("Speech synthesis not supported");
         return;
@@ -38,8 +38,23 @@ const speakWithLang = (text: string, lang: string, langPrefix: string, customRat
             voices = window.speechSynthesis.getVoices();
         }
 
-        const voice = voices.find(v => v.lang === lang || v.lang === lang.replace('-', '_')) ||
-            voices.find(v => v.lang.startsWith(langPrefix));
+        let validVoices = voices.filter(v => v.lang === lang || v.lang === lang.replace('-', '_')) || voices.filter(v => v.lang.startsWith(langPrefix));
+
+        let voice = undefined;
+        if (gender) {
+            if (gender === 'female') {
+                const femaleKeywords = ['female', 'hortense', 'amélie', 'aurélie', 'margot', 'alice', 'sylvie', 'google'];
+                voice = validVoices.find(v => femaleKeywords.some(k => v.name.toLowerCase().includes(k)));
+            } else if (gender === 'male') {
+                const maleKeywords = ['male', 'paul', 'thomas', 'nicolas', 'bernard', 'claude'];
+                voice = validVoices.find(v => maleKeywords.some(k => v.name.toLowerCase().includes(k)));
+            }
+        }
+        
+        if (!voice) {
+             voice = validVoices.find(v => v.lang === lang || v.lang === lang.replace('-', '_')) ||
+                 voices.find(v => v.lang.startsWith(langPrefix));
+        }
 
         if (voice) {
             utterance.voice = voice;
@@ -65,6 +80,14 @@ const speakWithLang = (text: string, lang: string, langPrefix: string, customRat
 
 export const speakFrench = (text: string, rate?: number) => {
     speakWithLang(text, 'fr-FR', 'fr', rate);
+};
+
+export const speakFrenchMale = (text: string, rate?: number) => {
+    speakWithLang(text, 'fr-FR', 'fr', rate, 'male');
+};
+
+export const speakFrenchFemale = (text: string, rate?: number) => {
+    speakWithLang(text, 'fr-FR', 'fr', rate, 'female');
 };
 
 export const speakEnglish = (text: string) => {
