@@ -267,7 +267,7 @@ const SpeakingPage = () => {
     );
 
     // ========================
-    // 1. CATEGORIES HOME VIEW
+    // 1. MAIN MENU VIEW
     // ========================
     if (view === 'categories') {
         return (
@@ -278,54 +278,107 @@ const SpeakingPage = () => {
                 <p style={{ textAlign: 'center', fontSize: '1.25rem', color: '#B4C540', fontWeight: 'bold', marginBottom: '1rem' }}>
                     (Speaking Practice)
                 </p>
-                <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '3rem', maxWidth: '700px', margin: '0 auto 3rem' }}>
-                    Pratiquez votre expression orale avec des questions par catégorie, des examens TEF/TCF, et un guide de niveaux CECR.
+                <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '3rem', maxWidth: '700px', margin: '0 auto' }}>
+                    Choisissez votre type d'entraînement vocal.
                 </p>
 
-                {/* Two-column layout: main content + toolbox sidebar */}
-                <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
-                    {/* === Left: Main Content === */}
-                    <div style={{ flex: '1 1 650px', minWidth: 0 }}>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap' }}>
+                    <div
+                        onClick={() => setSearchParams({ view: 'exam-categories' })}
+                        className="command-card-style"
+                        style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '3rem', width: '350px', textAlign: 'center', background: 'var(--bg-secondary)', borderRadius: '12px' }}
+                    >
+                        <div style={{ color: 'var(--accent-cyan)', background: 'rgba(54, 134, 201, 0.08)', padding: '1.5rem', borderRadius: '50%', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <GraduationCap size={48} />
+                        </div>
+                        <h2 style={{ color: 'var(--accent-cyan)', marginBottom: '1rem', fontSize: '1.5rem' }}>🎓 Pratique d'examen<br/>(Exam Practice)</h2>
+                        <p style={{ color: 'var(--text-secondary)' }}>Préparez-vous aux examens TEF et TCF avec des situations et chronomètres officiels.</p>
+                    </div>
 
-                        {/* === Question Categories === */}
-                        {sectionHeading('📋 Catégories de questions (Question Categories)')}
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '4rem' }}>
-                            {categories.map(cat => (
-                                <div
-                                    key={cat}
-                                    onClick={() => handleCategorySelect(cat)}
-                                    className="command-card-style"
+                    <div
+                        onClick={() => setSearchParams({ view: 'question-categories' })}
+                        className="command-card-style"
+                        style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '3rem', width: '350px', textAlign: 'center', background: 'var(--bg-secondary)', borderRadius: '12px' }}
+                    >
+                        <div style={{ color: 'var(--accent-color)', background: 'rgba(76, 175, 80, 0.08)', padding: '1.5rem', borderRadius: '50%', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <Mic size={48} />
+                        </div>
+                        <h2 style={{ color: 'var(--accent-color)', marginBottom: '1rem', fontSize: '1.5rem' }}>📋 Catégories<br/>(Question Categories)</h2>
+                        <p style={{ color: 'var(--text-secondary)' }}>Pratiquez des centaines de questions classées par thèmes pour la vie de tous les jours.</p>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    const renderToolbox = () => (
+        <div style={{ flex: '0 0 320px', position: 'sticky', top: '5rem', alignSelf: 'flex-start' }}>
+            <h2 style={{ color: 'var(--accent-color)', fontSize: '1.4rem', marginBottom: '1.5rem', paddingBottom: '0.5rem', borderBottom: '2px solid var(--border-color)' }}>
+                🧰 Boîte à Outils
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '1.5rem' }}>(Speaking Toolbox)</p>
+
+            <h4 style={{ color: 'var(--text-primary)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.95rem' }}>
+                <Wrench size={16} /> Connecteurs logiques
+            </h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem' }}>
+                {speakingTips.connectors.map((group, idx) => (
+                    <div key={idx} style={{ ...cardStyle, padding: '1rem' }}>
+                        <h5 style={{ margin: '0 0 0.5rem', color: 'var(--accent-color)', fontSize: '0.9rem' }}>{group.category}</h5>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                            {group.phrases.map((phrase, pIdx) => (
+                                <span
+                                    key={pIdx}
+                                    onClick={() => speakFrench(phrase.replace('...', ''))}
                                     style={{
+                                        background: 'var(--bg-primary)',
+                                        border: '1px solid var(--border-color)',
+                                        borderRadius: '16px',
+                                        padding: '0.25rem 0.6rem',
+                                        fontSize: '0.8rem',
+                                        color: 'var(--text-primary)',
                                         cursor: 'pointer',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                        textAlign: 'center',
-                                        padding: '2rem'
+                                        transition: 'background 0.2s'
                                     }}
+                                    title="Cliquez pour écouter"
                                 >
-                                    <div style={{
-                                        color: 'var(--accent-cyan)',
-                                        background: 'rgba(54, 134, 201, 0.08)',
-                                        padding: '1rem',
-                                        borderRadius: '50%',
-                                        marginBottom: '1rem',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center'
-                                    }}>
-                                        <Mic size={32} />
-                                    </div>
-                                    <h3 style={{ margin: '0.5rem 0 0.5rem', fontSize: '1.2rem', color: 'var(--accent-cyan)' }}>{cat}</h3>
-                                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                                        {speakingQuestions.filter(q => q.category === cat).length} Questions
-                                    </span>
-                                </div>
+                                    {phrase}
+                                </span>
                             ))}
                         </div>
+                    </div>
+                ))}
+            </div>
 
-                        {/* === Exam Practice Grid === */}
-                        {sectionHeading('🎓 Préparation au TEF')}
+            <h4 style={{ color: 'var(--text-primary)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.95rem' }}>
+                <BookOpen size={16} /> Conseils (Tips)
+            </h4>
+            <div style={{ ...cardStyle, padding: '1rem' }}>
+                <ul style={{ margin: 0, paddingLeft: '1.2rem', lineHeight: 1.8, fontSize: '0.85rem' }}>
+                    {speakingTips.advice.map((tip, idx) => (
+                        <li key={idx} style={{ color: 'var(--text-primary)' }}>{tip}</li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    );
+
+    // ========================
+    // 1A. EXAM CATEGORIES VIEW
+    // ========================
+    if (view === 'exam-categories') {
+        return (
+            <div className="container" style={{ padding: '3rem 1rem', maxWidth: '1400px', margin: '0 auto' }}>
+                <button
+                    onClick={() => setSearchParams({ view: 'categories' })}
+                    style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', marginBottom: '2rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem' }}
+                >
+                    <ChevronLeft size={20} /> Retour au menu principal
+                </button>
+
+                <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                    <div style={{ flex: '1 1 650px', minWidth: 0 }}>
+                        {sectionHeading('🎓 Préparation au TEF (Exam Practice)')}
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '4rem' }}>
                             {examTopics.map(topic => (
                                 <div
@@ -361,7 +414,6 @@ const SpeakingPage = () => {
                             ))}
                         </div>
 
-                        {/* === CEFR Level Guide Link === */}
                         {sectionHeading('📊 Guide des Niveaux (Level Guide)')}
                         <div
                             onClick={handleLevelGuideLink}
@@ -387,69 +439,70 @@ const SpeakingPage = () => {
                                 <BookOpen size={40} />
                             </div>
                             <div>
-                                <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.5rem', color: 'var(--text-primary)' }}>
-                                    Niveaux CECR : Guide de structure
-                                </h3>
-                                <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '1rem' }}>
-                                    (CEFR Level Guide: How to structure your answers)
-                                </p>
+                                <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.5rem', color: 'var(--text-primary)' }}>Niveaux CECR : Guide de structure</h3>
+                                <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '1rem' }}>(CEFR Level Guide: How to structure your answers)</p>
                             </div>
                         </div>
+                    </div>
+                    {renderToolbox()}
+                </div>
+            </div>
+        );
+    }
 
-                    </div>{/* end main content */}
+    // ========================
+    // 1B. QUESTION CATEGORIES VIEW
+    // ========================
+    if (view === 'question-categories') {
+        return (
+            <div className="container" style={{ padding: '3rem 1rem', maxWidth: '1400px', margin: '0 auto' }}>
+                <button
+                    onClick={() => setSearchParams({ view: 'categories' })}
+                    style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', marginBottom: '2rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem' }}
+                >
+                    <ChevronLeft size={20} /> Retour au menu principal
+                </button>
 
-                    {/* === Right Sidebar: Boîte à Outils === */}
-                    <div style={{ flex: '0 0 320px', position: 'sticky', top: '5rem', alignSelf: 'flex-start' }}>
-                        <h2 style={{ color: 'var(--accent-color)', fontSize: '1.4rem', marginBottom: '1.5rem', paddingBottom: '0.5rem', borderBottom: '2px solid var(--border-color)' }}>
-                            🧰 Boîte à Outils
-                        </h2>
-                        <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginBottom: '1.5rem' }}>(Speaking Toolbox)</p>
-
-                        <h4 style={{ color: 'var(--text-primary)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.95rem' }}>
-                            <Wrench size={16} /> Connecteurs logiques
-                        </h4>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem' }}>
-                            {speakingTips.connectors.map((group, idx) => (
-                                <div key={idx} style={{ ...cardStyle, padding: '1rem' }}>
-                                    <h5 style={{ margin: '0 0 0.5rem', color: 'var(--accent-color)', fontSize: '0.9rem' }}>{group.category}</h5>
-                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-                                        {group.phrases.map((phrase, pIdx) => (
-                                            <span
-                                                key={pIdx}
-                                                onClick={() => speakFrench(phrase.replace('...', ''))}
-                                                style={{
-                                                    background: 'var(--bg-primary)',
-                                                    border: '1px solid var(--border-color)',
-                                                    borderRadius: '16px',
-                                                    padding: '0.25rem 0.6rem',
-                                                    fontSize: '0.8rem',
-                                                    color: 'var(--text-primary)',
-                                                    cursor: 'pointer',
-                                                    transition: 'background 0.2s'
-                                                }}
-                                                title="Cliquez pour écouter"
-                                            >
-                                                {phrase}
-                                            </span>
-                                        ))}
+                <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                    <div style={{ flex: '1 1 650px', minWidth: 0 }}>
+                        {sectionHeading('📋 Catégories de questions (Question Categories)')}
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '4rem' }}>
+                            {categories.map(cat => (
+                                <div
+                                    key={cat}
+                                    onClick={() => handleCategorySelect(cat)}
+                                    className="command-card-style"
+                                    style={{
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'center',
+                                        textAlign: 'center',
+                                        padding: '2rem'
+                                    }}
+                                >
+                                    <div style={{
+                                        color: 'var(--accent-cyan)',
+                                        background: 'rgba(54, 134, 201, 0.08)',
+                                        padding: '1rem',
+                                        borderRadius: '50%',
+                                        marginBottom: '1rem',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}>
+                                        <Mic size={32} />
                                     </div>
+                                    <h3 style={{ margin: '0.5rem 0 0.5rem', fontSize: '1.2rem', color: 'var(--accent-cyan)' }}>{cat}</h3>
+                                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                                        {speakingQuestions.filter(q => q.category === cat).length} Questions
+                                    </span>
                                 </div>
                             ))}
                         </div>
-
-                        <h4 style={{ color: 'var(--text-primary)', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.95rem' }}>
-                            <BookOpen size={16} /> Conseils (Tips)
-                        </h4>
-                        <div style={{ ...cardStyle, padding: '1rem' }}>
-                            <ul style={{ margin: 0, paddingLeft: '1.2rem', lineHeight: 1.8, fontSize: '0.85rem' }}>
-                                {speakingTips.advice.map((tip, idx) => (
-                                    <li key={idx} style={{ color: 'var(--text-primary)' }}>{tip}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>{/* end sidebar */}
-
-                </div>{/* end two-column layout */}
+                    </div>
+                    {renderToolbox()}
+                </div>
             </div>
         );
     }
@@ -464,7 +517,7 @@ const SpeakingPage = () => {
         return (
             <div className="container" style={{ maxWidth: '900px', padding: '3rem 1rem' }}>
                 <button
-                    onClick={handleGoBack}
+                    onClick={() => setSearchParams({ view: 'exam-categories' })}
                     style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', marginBottom: '2rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem' }}
                 >
                     <ChevronLeft size={20} /> Retour aux catégories
@@ -627,10 +680,17 @@ const SpeakingPage = () => {
                                             {/* Instructions */}
                                             <div style={{ padding: '1rem 1.5rem', background: 'rgba(255, 165, 0, 0.08)', borderLeft: '4px solid var(--accent-orange)', borderRadius: '0 8px 8px 0' }}>
                                                 <h5 style={{ margin: '0 0 0.5rem', color: 'var(--accent-orange)', fontSize: '0.95rem', textTransform: 'uppercase', letterSpacing: '1px' }}>INSTRUCTION :</h5>
-                                                <p style={{ margin: 0, color: 'var(--text-primary)', fontSize: '0.95rem', lineHeight: 1.5 }}>
-                                                    Vous avez 5 minutes pour vous préparer, parler, et poser 10 questions.<br/>
-                                                    Prévoyez environ 1 minute pour vous préparer mentalement, puis 3 à 4 minutes pour parler et poser des questions.
-                                                </p>
+                                                {topic.id === 'tef_b' ? (
+                                                    <p style={{ margin: 0, color: 'var(--text-primary)', fontSize: '0.95rem', lineHeight: 1.5 }}>
+                                                        Vous avez 10 minutes pour vous préparer, parler, et poser des questions.<br/>
+                                                        Prévoyez environ 1 minute pour vous préparer mentalement, puis 8 à 9 minutes pour parler et poser des questions.
+                                                    </p>
+                                                ) : (
+                                                    <p style={{ margin: 0, color: 'var(--text-primary)', fontSize: '0.95rem', lineHeight: 1.5 }}>
+                                                        Vous avez 5 minutes pour vous préparer, parler, et poser 10 questions.<br/>
+                                                        Prévoyez environ 1 minute pour vous préparer mentalement, puis 3 à 4 minutes pour parler et poser des questions.
+                                                    </p>
+                                                )}
                                             </div>
 
                                             {/* Timer & Recording Box */}

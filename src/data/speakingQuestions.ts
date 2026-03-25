@@ -169,13 +169,120 @@ export const examTopics: ExamTopic[] = [
     {
         id: 'tef_b',
         title: 'L’expression Orale Section B',
-        description: "Convainquez un ami de participer à une activité ou d’acheter quelque chose à partir d’un document.",
+        description: "Convainquez un ami de participer à une activité ou d’acheter quelque chose à partir d’un document. Vous avez 10 minutes pour vous préparer, parler, et poser des questions.",
         prepTime: 60,
-        speakTime: 300,
-        scenarios: [
-            "Convaincre un ami de faire du covoiturage pour aller au travail.",
-            "Convaincre un ami d'acheter des produits locaux et bio.",
-            "Convaincre un ami de participer à un marathon caritatif."
+        speakTime: 540,
+        situations: [
+            {
+                title: "Concert culturel",
+                titleEn: "Cultural concert",
+                qaList: [
+                    { qFr: "J’ai trouvé une annonce pour un concert de musique classique ce samedi soir. Je pense que ça pourrait vraiment nous plaire.", qEn: "I found an advertisement for a classical music concert this Saturday evening. I think we’d really enjoy it.", aFr: "Ah bon ? Je ne suis pas sûr, je ne vais pas souvent à ce genre d’événement.", aEn: "Really? I’m not sure, I don’t often go to that kind of event." },
+                    { qFr: "Justement, c’est une bonne occasion de découvrir quelque chose de différent. Le programme a l’air varié, et l’ambiance sera sans doute très agréable.", qEn: "Exactly, it’s a good opportunity to discover something different. The program looks varied, and the atmosphere will probably be very pleasant.", aFr: "Oui, mais est-ce que ce n’est pas trop formel ?", aEn: "Yes, but isn’t it too formal?" },
+                    { qFr: "Pas forcément. Au contraire, ce type de concert permet souvent de passer une soirée calme et enrichissante. En plus, le billet n’est pas très cher.", qEn: "Not necessarily. On the contrary, this type of concert often lets you spend a calm and enriching evening. Also, the ticket isn’t very expensive.", aFr: "C’est vrai que ça peut être intéressant.", aEn: "It’s true that it could be interesting." },
+                    { qFr: "Et puis, cela nous permettrait de sortir un peu de la routine. On pourrait même dîner après le concert.", qEn: "And it would also let us get out of our routine a little. We could even have dinner after the concert.", aFr: "Dans ce cas, pourquoi pas ?", aEn: "In that case, why not?" },
+                    { qFr: "Parfait, je pense que ce serait une excellente idée pour passer un bon moment ensemble.", qEn: "Perfect, I think it would be an excellent way to spend a good time together.", aFr: "D'accord, allons-y.", aEn: "Alright, let's go." }
+                ]
+            },
+            {
+                title: "Cours de langue",
+                titleEn: "Language course",
+                qaList: [
+                    { qFr: "J’ai vu une annonce pour un cours de français intensif. Franchement, je pense que c’est une très bonne opportunité.", qEn: "I saw an ad for an intensive French course. Honestly, I think it’s a very good opportunity.", aFr: "Je ne sais pas… j’ai déjà un emploi du temps assez chargé.", aEn: "I don’t know… I already have a pretty busy schedule." },
+                    { qFr: "Je comprends, mais justement, le cours est proposé en soirée, donc il pourrait s’adapter à ton rythme.", qEn: "I understand, but precisely, the course is offered in the evening, so it could fit your schedule.", aFr: "Et est-ce que ce serait vraiment utile ?", aEn: "And would it really be useful?" },
+                    { qFr: "Oui, bien sûr. Ça permettrait de progresser rapidement, surtout si tu veux renforcer ton expression orale et gagner en confiance.", qEn: "Yes, of course. It would help you progress quickly, especially if you want to improve your speaking skills and gain confidence.", aFr: "C’est vrai, j’en aurais bien besoin.", aEn: "True, I could really use that." },
+                    { qFr: "En plus, le groupe est limité, ce qui veut dire un meilleur suivi et plus d’interaction avec le professeur.", qEn: "Plus, the group is limited, which means better follow-up and more interaction with the teacher.", aFr: "Vu comme ça, ça semble intéressant.", aEn: "Seen that way, it sounds interesting." },
+                    { qFr: "Exactement. À mon avis, c’est le bon moment pour s’inscrire.", qEn: "Exactly. In my opinion, it’s the right time to register.", aFr: "D'accord, je vais m'inscrire.", aEn: "Okay, I'll register." }
+                ]
+            },
+            {
+                title: "Voyage de fin de semaine",
+                titleEn: "Weekend trip",
+                qaList: [
+                    { qFr: "J’ai trouvé une offre pour un court séjour à Québec ce week-end. Je pense que ça vaut vraiment la peine.", qEn: "I found an offer for a short stay in Quebec City this weekend. I really think it’s worth it.", aFr: "Pourquoi ce voyage en particulier ?", aEn: "Why this trip in particular?" },
+                    { qFr: "Parce qu’il combine détente et découverte. L’hôtel est bien situé, et le programme inclut une visite guidée de la ville.", qEn: "Because it combines relaxation and discovery. The hotel is well located, and the program includes a guided city tour.", aFr: "Ça a l’air agréable, mais est-ce que ce n’est pas trop fatigant ?", aEn: "It sounds nice, but isn’t it too tiring?" },
+                    { qFr: "Pas du tout. Justement, c’est un séjour de courte durée, donc on peut profiter sans se sentir submergé.", qEn: "Not at all. Precisely, it’s a short stay, so we can enjoy it without feeling overwhelmed.", aFr: "Et le prix ?", aEn: "And the price?" },
+                    { qFr: "Il est raisonnable si on considère le transport, l’hébergement et les activités incluses.", qEn: "It’s reasonable if you consider the transportation, accommodation, and included activities.", aFr: "Je vois.", aEn: "I see." },
+                    { qFr: "Ce serait aussi une belle occasion de changer d’air et de faire une vraie pause.", qEn: "It would also be a great opportunity to get away and take a real break.", aFr: "Dans ce cas, je suis prêt à y réfléchir sérieusement.", aEn: "In that case, I’m ready to think seriously about it." }
+                ]
+            },
+            {
+                title: "Activité sportive",
+                titleEn: "Sports activity",
+                qaList: [
+                    { qFr: "J’ai repéré une annonce pour des cours de badminton en groupe. Je pense que ce serait idéal pour nous.", qEn: "I spotted an ad for group badminton lessons. I think it would be ideal for us.", aFr: "Je ne suis pas très sportif, tu sais.", aEn: "I’m not very sporty, you know." },
+                    { qFr: "Justement, ce n’est pas un programme trop exigeant. Le but est surtout de bouger, de se faire plaisir et d’apprendre dans une ambiance détendue.", qEn: "Exactly, it’s not a very demanding program. The goal is mainly to move, have fun, and learn in a relaxed atmosphere.", aFr: "Et quel est l’intérêt ?", aEn: "And what’s the benefit?" },
+                    { qFr: "Déjà, c’est bon pour la santé. Ensuite, cela permet de rencontrer d’autres personnes et de créer un petit réseau convivial.", qEn: "First, it’s good for your health. Then, it allows you to meet other people and create a friendly social network.", aFr: "C’est vrai que ça change du quotidien.", aEn: "It’s true that it breaks the routine." },
+                    { qFr: "En plus, les séances ont lieu après le travail, donc c’est assez pratique.", qEn: "Also, the sessions take place after work, so it’s quite practical.", aFr: "Oui, ça pourrait fonctionner.", aEn: "Yes, that could work." },
+                    { qFr: "Franchement, je pense que c’est une activité à la fois utile et agréable.", qEn: "Honestly, I think it’s both useful and enjoyable.", aFr: "D'accord, essayons.", aEn: "Alright, let's try." }
+                ]
+            },
+            {
+                title: "Atelier professionnel",
+                titleEn: "Professional workshop",
+                qaList: [
+                    { qFr: "J’ai vu une annonce pour un atelier sur la gestion du temps au travail. Honnêtement, ça me semble très pertinent.", qEn: "I saw an ad for a workshop on time management at work. Honestly, it seems very relevant to me.", aFr: "Tu crois que ce genre d’atelier est vraiment utile ?", aEn: "Do you think that kind of workshop is really useful?" },
+                    { qFr: "Oui, parce qu’il peut aider à mieux organiser ses priorités et à travailler plus efficacement.", qEn: "Yes, because it can help you organize your priorities better and work more efficiently.", aFr: "D’accord, mais est-ce que ce n’est pas trop théorique ?", aEn: "Okay, but isn’t it too theoretical?" },
+                    { qFr: "Non, d’après l’annonce, il y aura des exercices concrets et des exemples pratiques.", qEn: "No, according to the announcement, there will be concrete exercises and practical examples.", aFr: "Ça change tout, en effet.", aEn: "That changes everything, indeed." },
+                    { qFr: "Et puis, ce type de formation peut être utile dans n’importe quel domaine professionnel.", qEn: "Also, this type of training can be useful in any professional field.", aFr: "C’est vrai.", aEn: "That’s true." },
+                    { qFr: "À mon avis, c’est une occasion à ne pas négliger si on veut progresser.", qEn: "In my opinion, it’s an opportunity not to be overlooked if one wants to progress.", aFr: "Je suis d'accord, allons-y.", aEn: "I agree, let's go." }
+                ]
+            },
+            {
+                title: "Projet de bénévolat",
+                titleEn: "Volunteer project",
+                qaList: [
+                    { qFr: "J’ai trouvé un appel à bénévoles pour une association locale. Je pense qu’on pourrait vraiment s’y investir.", qEn: "I found a volunteer call from a local association. I think we could really get involved.", aFr: "Je n’ai jamais fait de bénévolat.", aEn: "I’ve never done volunteer work." },
+                    { qFr: "Justement, ce serait une bonne première expérience. Le projet semble bien encadré et ouvert aux personnes motivées.", qEn: "Precisely, it would be a good first experience. The project seems well supervised and open to motivated people.", aFr: "Et qu’est-ce qu’on ferait exactement ?", aEn: "And what exactly would we do?" },
+                    { qFr: "D’après l’annonce, il s’agirait d’aider à l’organisation d’activités pour des jeunes.", qEn: "According to the announcement, it would involve helping organize activities for young people.", aFr: "Ah, ça peut être intéressant.", aEn: "Ah, that could be interesting." },
+                    { qFr: "Oui, parce que cela permet de se rendre utile tout en développant des compétences humaines et relationnelles.", qEn: "Yes, because it allows you to be useful while developing human and interpersonal skills.", aFr: "Je n’avais pas vu les choses comme ça.", aEn: "I hadn’t seen it that way." },
+                    { qFr: "En plus, cela donne vraiment du sens à son temps libre.", qEn: "Plus, it really gives meaning to your free time.", aFr: "C'est une bonne initiative.", aEn: "It is a good initiative." }
+                ]
+            },
+            {
+                title: "Sortie familiale",
+                titleEn: "Family outing",
+                qaList: [
+                    { qFr: "J’ai vu une activité familiale dans un grand parc éducatif. Je pense que ce serait parfait pour dimanche.", qEn: "I saw a family activity in a large educational park. I think it would be perfect for Sunday.", aFr: "Tu crois que les enfants aimeraient ?", aEn: "Do you think the children would like it?" },
+                    { qFr: "Oui, parce qu’il y a des jeux, des ateliers et des espaces adaptés à différents âges.", qEn: "Yes, because there are games, workshops, and spaces suited to different age groups.", aFr: "Et pour nous, ce serait agréable aussi ?", aEn: "And for us, would it be enjoyable too?" },
+                    { qFr: "Bien sûr. Ce serait l’occasion de passer du temps ensemble dans un cadre calme et amusant.", qEn: "Of course. It would be a chance to spend time together in a calm and fun setting.", aFr: "C’est vrai, on ne sort pas assez en famille.", aEn: "True, we don’t go out as a family enough." },
+                    { qFr: "En plus, l’entrée est abordable et le lieu est facile d’accès.", qEn: "Also, the entrance fee is affordable and the place is easy to get to.", aFr: "Dans ce cas, ça semble être une bonne idée.", aEn: "In that case, it seems like a good idea." },
+                    { qFr: "Je pense que ce serait une journée simple, mais vraiment réussie.", qEn: "I think it would be a simple but really successful day.", aFr: "Allons-y ce dimanche.", aEn: "Let's go this Sunday." }
+                ]
+            },
+            {
+                title: "Service en ligne",
+                titleEn: "Online service",
+                qaList: [
+                    { qFr: "J’ai découvert une plateforme en ligne pour apprendre le français à ton rythme. Je trouve ça très pratique.", qEn: "I discovered an online platform to learn French at your own pace. I find it very practical.", aFr: "Je préfère quand même les cours en présentiel.", aEn: "I still prefer in-person classes." },
+                    { qFr: "Je comprends, mais cette solution offre plus de souplesse. Tu peux travailler quand tu veux, selon ton emploi du temps.", qEn: "I understand, but this solution offers more flexibility. You can work whenever you want, according to your schedule.", aFr: "Et le contenu est sérieux ?", aEn: "And is the content serious?" },
+                    { qFr: "Oui, il y a des exercices structurés, des vidéos et un suivi clair des progrès.", qEn: "Yes, there are structured exercises, videos, and clear progress tracking.", aFr: "Ça peut être utile, surtout quand on manque de temps.", aEn: "That can be useful, especially when you’re short on time." },
+                    { qFr: "Exactement. En plus, on peut revoir les leçons autant de fois qu’on veut.", qEn: "Exactly. Plus, you can review the lessons as many times as you want.", aFr: "Vu comme ça, c’est intéressant.", aEn: "Seen that way, it’s interesting." },
+                    { qFr: "À mon sens, c’est un excellent complément à un apprentissage classique.", qEn: "In my opinion, it’s an excellent complement to traditional learning.", aFr: "Je vais l'essayer.", aEn: "I will try it." }
+                ]
+            },
+            {
+                title: "Programme bien-être",
+                titleEn: "Wellness program",
+                qaList: [
+                    { qFr: "J’ai vu une annonce pour une retraite bien-être d’un week-end. Franchement, ça pourrait nous faire du bien.", qEn: "I saw an ad for a weekend wellness retreat. Honestly, it could do us good.", aFr: "Je ne suis pas certain d’avoir besoin de ce genre de programme.", aEn: "I’m not sure I need that kind of program." },
+                    { qFr: "Parfois, il ne s’agit pas d’un besoin urgent, mais d’un vrai moment pour souffler.", qEn: "Sometimes it’s not about an urgent need, but about a real moment to breathe.", aFr: "C’est vrai…", aEn: "That’s true…" },
+                    { qFr: "Le programme comprend du yoga, de la détente et des activités pour réduire le stress.", qEn: "The program includes yoga, relaxation, and activities to reduce stress.", aFr: "Ça a l’air reposant.", aEn: "It sounds restful." },
+                    { qFr: "Oui, et dans notre rythme actuel, ce serait une belle manière de se recentrer.", qEn: "Yes, and with our current pace, it would be a great way to refocus.", aFr: "Je commence à voir l’intérêt.", aEn: "I’m starting to see the appeal." },
+                    { qFr: "Je pense que c’est exactement le genre de pause dont on peut tous profiter.", qEn: "I think it’s exactly the kind of break we can all benefit from.", aFr: "C'est une bonne idée.", aEn: "It is a good idea." }
+                ]
+            },
+            {
+                title: "Salon de l’emploi",
+                titleEn: "Job fair",
+                qaList: [
+                    { qFr: "J’ai reçu une invitation pour un salon de l’emploi. Je pense qu’on devrait vraiment y aller.", qEn: "I received an invitation to a job fair. I think we should really go.", aFr: "Tu crois qu’on peut y trouver quelque chose d’intéressant ?", aEn: "Do you think we can find something interesting there?" },
+                    { qFr: "Oui, parce qu’il y aura plusieurs employeurs et de nombreuses opportunités dans différents secteurs.", qEn: "Yes, because there will be several employers and many opportunities in different sectors.", aFr: "Et si on n’est pas prêt ?", aEn: "And if we’re not ready?" },
+                    { qFr: "Justement, ce genre d’événement permet de se renseigner, de poser des questions et de mieux préparer sa recherche.", qEn: "Exactly, this kind of event allows you to gather information, ask questions, and better prepare your job search.", aFr: "C’est vrai que ça peut être utile.", aEn: "It’s true that it can be useful." },
+                    { qFr: "En plus, cela permet de faire des contacts directement et de mieux comprendre le marché.", qEn: "Also, it allows you to make direct contacts and better understand the market.", aFr: "Dans ce cas, ça mérite qu’on s’y intéresse.", aEn: "In that case, it deserves our attention." },
+                    { qFr: "Absolument. C’est une démarche à la fois stratégique et concrète.", qEn: "Absolutely. It’s both a strategic and practical step.", aFr: "Allons-y alors.", aEn: "Let's go then." }
+                ]
+            }
         ]
     }
 ];
