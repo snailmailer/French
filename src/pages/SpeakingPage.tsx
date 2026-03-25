@@ -983,7 +983,14 @@ const SpeakingPage = () => {
                                 justifyContent: 'space-between'
                             }}
                         >
-                            <span style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: 500 }}>{q.question}</span>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                                <span style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: 500 }}>{q.question}</span>
+                                {q.questionEn && (
+                                    <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
+                                        {q.questionEn}
+                                    </span>
+                                )}
+                            </div>
                             <ChevronLeft size={20} style={{ transform: 'rotate(180deg)', color: 'var(--accent-color)' }} />
                         </div>
                     ))}
@@ -1017,17 +1024,24 @@ const SpeakingPage = () => {
                     {selectedCategory}
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginBottom: '2.5rem' }}>
-                    <h2 style={{ fontSize: '2.2rem', color: 'var(--text-primary)', margin: 0 }}>
-                        {currentQuestion.question}
-                    </h2>
-                    <button
-                        onClick={() => speakFrench(currentQuestion.question)}
-                        style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--success-color)' }}
-                        aria-label="Speak question"
-                    >
-                        <Volume2 size={24} />
-                    </button>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '2.5rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
+                        <h2 style={{ fontSize: '2.2rem', color: 'var(--text-primary)', margin: 0, textAlign: 'center' }}>
+                            {currentQuestion.question}
+                        </h2>
+                        <button
+                            onClick={() => speakFrench(currentQuestion.question)}
+                            style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--success-color)' }}
+                            aria-label="Speak question"
+                        >
+                            <Volume2 size={24} />
+                        </button>
+                    </div>
+                    {currentQuestion.questionEn && (
+                        <p style={{ margin: 0, fontSize: '1.4rem', color: 'var(--text-secondary)', fontStyle: 'italic', textAlign: 'center' }}>
+                            {currentQuestion.questionEn}
+                        </p>
+                    )}
                 </div>
 
                 {isCountingDown ? (

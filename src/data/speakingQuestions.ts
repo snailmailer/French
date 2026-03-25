@@ -2,6 +2,7 @@ export interface SpeakingQuestion {
     id: string;
     category: string;
     question: string;
+    questionEn?: string;
 }
 
 export interface QA {
@@ -39,40 +40,57 @@ export interface LevelStructure {
 
 export const speakingQuestions: SpeakingQuestion[] = [
     // Information Personnelle
-    { id: 'ip1', category: 'Information Personnelle (Personal Information)', question: "Comment tu t'appelles ?" },
-    { id: 'ip2', category: 'Information Personnelle (Personal Information)', question: "Quel est ton prénom et ton nom ?" },
-    { id: 'ip3', category: 'Information Personnelle (Personal Information)', question: "Quel âge as-tu ?" },
-    { id: 'ip4', category: 'Information Personnelle (Personal Information)', question: "D'où viens-tu ?" },
-    { id: 'ip5', category: 'Information Personnelle (Personal Information)', question: "Où habites-tu ?" },
-    { id: 'ip6', category: 'Information Personnelle (Personal Information)', question: "Quelle est ta nationalité ?" },
+    { id: 'ip1', category: 'Information Personnelle (Personal Information)', question: "Comment tu t'appelles ?", questionEn: "What is your name?" },
+    { id: 'ip2', category: 'Information Personnelle (Personal Information)', question: "Quel est ton prénom et ton nom ?", questionEn: "What is your first and last name?" },
+    { id: 'ip3', category: 'Information Personnelle (Personal Information)', question: "Quel âge as-tu ?", questionEn: "How old are you?" },
+    { id: 'ip4', category: 'Information Personnelle (Personal Information)', question: "D'où viens-tu ?", questionEn: "Where are you from?" },
+    { id: 'ip5', category: 'Information Personnelle (Personal Information)', question: "Où habites-tu ?", questionEn: "Where do you live?" },
+    { id: 'ip6', category: 'Information Personnelle (Personal Information)', question: "Quelle est ta nationalité ?", questionEn: "What is your nationality?" },
 
     // La routine
-    { id: 'rt1', category: 'La routine (Routine)', question: "Que fais-tu dans la vie ?" },
-    { id: 'rt2', category: 'La routine (Routine)', question: "Est-ce que tu travailles ou est-ce que tu étudies ?" },
-    { id: 'rt3', category: 'La routine (Routine)', question: "À quelle heure te lèves-tu ?" },
-    { id: 'rt4', category: 'La routine (Routine)', question: "Que fais-tu le matin / le soir ?" },
-    { id: 'rt5', category: 'La routine (Routine)', question: "Que fais-tu le week-end ?" },
+    { id: 'rt1', category: 'La routine (Routine)', question: "Que fais-tu dans la vie ?", questionEn: "What do you do for a living?" },
+    { id: 'rt2', category: 'La routine (Routine)', question: "Est-ce que tu travailles ou est-ce que tu étudies ?", questionEn: "Do you work or do you study?" },
+    { id: 'rt3', category: 'La routine (Routine)', question: "À quelle heure te lèves-tu ?", questionEn: "What time do you get up?" },
+    { id: 'rt4', category: 'La routine (Routine)', question: "Que fais-tu le matin / le soir ?", questionEn: "What do you do in the morning / evening?" },
+    { id: 'rt5', category: 'La routine (Routine)', question: "Que fais-tu le week-end ?", questionEn: "What do you do on the weekend?" },
 
     // Les gouts et les loisirs
-    { id: 'gl1', category: 'Les goûts et les loisirs (Tastes & Hobbies)', question: "Qu'est-ce que tu aimes ?" },
-    { id: 'gl2', category: 'Les goûts et les loisirs (Tastes & Hobbies)', question: "Qu'est-ce que tu n'aimes pas ?" },
-    { id: 'gl3', category: 'Les goûts et les loisirs (Tastes & Hobbies)', question: "Quel est ton plat préféré ?" },
-    { id: 'gl4', category: 'Les goûts et les loisirs (Tastes & Hobbies)', question: "Quel est ton loisir préféré ?" },
+    { id: 'gl1', category: 'Les goûts et les loisirs (Tastes & Hobbies)', question: "Qu'est-ce que tu aimes ?", questionEn: "What do you like?" },
+    { id: 'gl2', category: 'Les goûts et les loisirs (Tastes & Hobbies)', question: "Qu'est-ce que tu n'aimes pas ?", questionEn: "What do you not like?" },
+    { id: 'gl3', category: 'Les goûts et les loisirs (Tastes & Hobbies)', question: "Quel est ton plat préféré ?", questionEn: "What is your favorite dish?" },
+    { id: 'gl4', category: 'Les goûts et les loisirs (Tastes & Hobbies)', question: "Quel est ton loisir préféré ?", questionEn: "What is your favorite hobby?" },
 
     // La famille et la description physique et psychologique
-    { id: 'fam1', category: 'La famille (Family)', question: "As-tu des frères et sœurs ?" },
-    { id: 'fam2', category: 'La famille (Family)', question: "Combien de personnes y a-t-il dans ta famille ?" },
-    { id: 'fam3', category: 'La famille (Family)', question: "Peux-tu décrire ton ami(e) ?" },
+    { id: 'fam1', category: 'La famille (Family)', question: "As-tu des frères et sœurs ?", questionEn: "Do you have any brothers and sisters?" },
+    { id: 'fam2', category: 'La famille (Family)', question: "Combien de personnes y a-t-il dans ta famille ?", questionEn: "How many people are there in your family?" },
+    { id: 'fam3', category: 'La famille (Family)', question: "Peux-tu décrire ton ami(e) ?", questionEn: "Can you describe your friend?" },
 
     // Parler des événements passés
-    { id: 'pass1', category: 'Parler des événements passés (Past Events)', question: "Qu'est-ce que vous avez fait hier / le week-end dernier ?" },
-    { id: 'pass2', category: 'Parler des événements passés (Past Events)', question: "Est-ce que vous avez voyagé récemment ? Avec qui ? et qu'est-ce que vous avez fait pendant ce voyage ?" },
-    { id: 'pass3', category: 'Parler des événements passés (Past Events)', question: "Qu'est-ce que vous avez fait pendant vos vacances d'hiver ?" },
+    { id: 'pass1', category: 'Parler des événements passés (Past Events)', question: "Qu'est-ce que vous avez fait hier / le week-end dernier ?", questionEn: "What did you do yesterday / last weekend?" },
+    { id: 'pass2', category: 'Parler des événements passés (Past Events)', question: "Est-ce que vous avez voyagé récemment ? Avec qui ? et qu'est-ce que vous avez fait pendant ce voyage ?", questionEn: "Have you traveled recently? With whom? And what did you do during this trip?" },
+    { id: 'pass3', category: 'Parler des événements passés (Past Events)', question: "Qu'est-ce que vous avez fait pendant vos vacances d'hiver ?", questionEn: "What did you do during your winter vacation?" },
 
     // Parler des projets de l'avenir
-    { id: 'fut1', category: "Parler des projets de l’avenir (Future Projects)", question: "Qu'est-ce que vous allez faire ce soir / demain ?" },
-    { id: 'fut2', category: "Parler des projets de l’avenir (Future Projects)", question: "Quels sont vos projets pour le week-end ?" },
-    { id: 'fut3', category: "Parler des projets de l’avenir (Future Projects)", question: "Qu'est-ce que vous allez faire l'année prochaine ?" },
+    { id: 'fut1', category: "Parler des projets de l’avenir (Future Projects)", question: "Qu'est-ce que vous allez faire ce soir / demain ?", questionEn: "What are you going to do tonight / tomorrow?" },
+    { id: 'fut2', category: "Parler des projets de l’avenir (Future Projects)", question: "Quels sont vos projets pour le week-end ?", questionEn: "What are your plans for the weekend?" },
+    { id: 'fut3', category: "Parler des projets de l’avenir (Future Projects)", question: "Qu'est-ce que vous allez faire l'année prochaine ?", questionEn: "What are you going to do next year?" },
+
+    // Parlez de votre ville et de votre pays
+    { id: 'ville1', category: 'Parlez de votre ville et de votre pays (Talk about your city and country)', question: "Décrivez votre ville.", questionEn: "Describe your city." },
+    { id: 'ville2', category: 'Parlez de votre ville et de votre pays (Talk about your city and country)', question: "Comparez votre ville avec une autre ville de votre choix.", questionEn: "Compare your city with another city of your choice." },
+    { id: 'ville3', category: 'Parlez de votre ville et de votre pays (Talk about your city and country)', question: "Comparez le Canada avec votre pays d’origine.", questionEn: "Compare Canada with your country of origin." },
+    { id: 'ville4', category: 'Parlez de votre ville et de votre pays (Talk about your city and country)', question: "Selon vous, quelle est le meilleur pays pour vivre dans le monde et pourquoi ?", questionEn: "In your opinion, what is the best country to live in the world and why?" },
+
+    // Désir / Regret / Hypothèse (Subjonctif / Conditionnel)
+    { id: 'cond1', category: 'Désir / Regret / Hypothèse (Subjonctif / Conditionnel)', question: "Qu’aimeriez-vous changer dans votre vie personnelle et professionnelle ?", questionEn: "What would you like to change in your personal and professional life?" },
+    { id: 'cond2', category: 'Désir / Regret / Hypothèse (Subjonctif / Conditionnel)', question: "Regrettez-vous une décision importante que vous avez prise ?", questionEn: "Do you regret an important decision you have made?" },
+    { id: 'cond3', category: 'Désir / Regret / Hypothèse (Subjonctif / Conditionnel)', question: "Si vous aviez plus de temps libre, que feriez-vous ?", questionEn: "If you had more free time, what would you do?" },
+    { id: 'cond4', category: 'Désir / Regret / Hypothèse (Subjonctif / Conditionnel)', question: "Si vous gagniez à la loterie, que feriez-vous ?", questionEn: "If you won the lottery, what would you do?" },
+
+    // Parler de vous Études, Profession, Compétences
+    { id: 'prof1', category: 'Parler de vous Études, Profession, Compétences (Studies, Profession, Skills)', question: "Parlez de votre parcours scolaire.", questionEn: "Talk about your educational background." },
+    { id: 'prof2', category: 'Parler de vous Études, Profession, Compétences (Studies, Profession, Skills)', question: "Parlez de votre parcours professionnel.", questionEn: "Talk about your professional background." },
+    { id: 'prof3', category: 'Parler de vous Études, Profession, Compétences (Studies, Profession, Skills)', question: "Quelles sont vos qualités et compétences ?", questionEn: "What are your qualities and skills?" },
 ];
 
 // --- TEF/TCF Exam Practice Topics ---
