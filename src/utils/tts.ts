@@ -38,22 +38,40 @@ const speakWithLang = (text: string, lang: string, langPrefix: string, customRat
             voices = window.speechSynthesis.getVoices();
         }
 
-        let validVoices = voices.filter(v => v.lang === lang || v.lang === lang.replace('-', '_')) || voices.filter(v => v.lang.startsWith(langPrefix));
+        let validVoices = voices.filter(v => v.lang === lang || v.lang === lang.replace('-', '_'));
+        if (validVoices.length === 0) {
+            validVoices = voices.filter(v => v.lang.startsWith(langPrefix));
+        }
+
+        // Sort voices to heavily prioritize Premium/Enhanced/Siri/Google voices for better mobile quality
+        validVoices.sort((a, b) => {
+            const getScore = (v: SpeechSynthesisVoice) => {
+                const name = v.name.toLowerCase();
+                const uri = v.voiceURI.toLowerCase();
+                let score = 0;
+                if (name.includes('premium') || uri.includes('premium')) score += 10;
+                if (name.includes('enhanced') || uri.includes('enhanced')) score += 10;
+                if (name.includes('google') || uri.includes('google')) score += 5;
+                if (name.includes('siri') || uri.includes('siri')) score += 5;
+                if (v.localService) score += 2;
+                return score;
+            };
+            return getScore(b) - getScore(a);
+        });
 
         let voice = undefined;
         if (gender) {
             if (gender === 'female') {
-                const femaleKeywords = ['female', 'hortense', 'amélie', 'aurélie', 'margot', 'alice', 'sylvie', 'google'];
+                const femaleKeywords = ['female', 'hortense', 'amélie', 'aurélie', 'margot', 'alice', 'sylvie', 'marie'];
                 voice = validVoices.find(v => femaleKeywords.some(k => v.name.toLowerCase().includes(k)));
             } else if (gender === 'male') {
-                const maleKeywords = ['male', 'paul', 'thomas', 'nicolas', 'bernard', 'claude'];
+                const maleKeywords = ['male', 'paul', 'thomas', 'nicolas', 'bernard', 'claude', 'jacques'];
                 voice = validVoices.find(v => maleKeywords.some(k => v.name.toLowerCase().includes(k)));
             }
         }
         
-        if (!voice) {
-             voice = validVoices.find(v => v.lang === lang || v.lang === lang.replace('-', '_')) ||
-                 voices.find(v => v.lang.startsWith(langPrefix));
+        if (!voice && validVoices.length > 0) {
+             voice = validVoices[0];
         }
 
         if (voice) {

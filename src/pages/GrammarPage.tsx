@@ -12,7 +12,7 @@ import { grammarQuizData } from '../data/grammarQuiz';
 
 // --- Components ---
 
-const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> = ({ section, level = 0 }) => {
+const GrammarSectionView: React.FC<{ section: PronounSection, level?: number, showEnglish: boolean }> = ({ section, level = 0, showEnglish }) => {
     const HeaderTag = level === 0 ? 'h2' : 'h3';
 
     return (
@@ -49,9 +49,11 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
                         <Volume2 size={16} />
                     </button>
                 </div>
-                <div>
-                    <strong style={{ color: 'var(--secondary-color)' }}>Use (EN):</strong> {section.useEn}
-                </div>
+                {showEnglish && section.useEn && (
+                    <div>
+                        <strong style={{ color: 'var(--secondary-color)' }}>Use (EN):</strong> {section.useEn}
+                    </div>
+                )}
                 <div>
                     <strong style={{ color: 'var(--success-color)' }}>Structure:</strong> <span style={{ fontStyle: 'italic', fontFamily: 'monospace', background: 'rgba(0,0,0,0.05)', padding: '0.2rem 0.4rem', borderRadius: '4px', color: 'var(--text-primary)', whiteSpace: 'pre-line', display: 'inline-block', verticalAlign: 'top', marginTop: '0.2rem' }}>{section.structure}</span>
                 </div>
@@ -83,7 +85,7 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
                                     <td style={{ padding: '0.75rem' }}>{item.form}</td>
                                     <td style={{ padding: '0.75rem' }}>
                                         <div style={{ color: 'var(--text-primary)', fontWeight: 500 }}>{item.example}</div>
-                                        {item.exampleEn && <div style={{ fontSize: '0.9em', fontStyle: 'italic', color: 'var(--text-secondary)' }}>{item.exampleEn}</div>}
+                                        {showEnglish && item.exampleEn && <div style={{ fontSize: '0.9em', fontStyle: 'italic', color: 'var(--text-secondary)' }}>{item.exampleEn}</div>}
                                     </td>
                                     <td style={{ textAlign: 'right', padding: '0.75rem' }}>
                                         <button
@@ -109,7 +111,7 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
                             <li key={idx} style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
                                 <div>
                                     <strong style={{ color: 'var(--text-primary)' }}>{ex.fr}</strong> <br />
-                                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>→ {ex.en}</span>
+                                    {showEnglish && <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>→ {ex.en}</span>}
                                 </div>
                                 <button
                                     onClick={() => speakFrench(ex.fr)}
@@ -135,7 +137,7 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
             {section.subSections && (
                 <div style={{ marginTop: '2rem' }}>
                     {section.subSections.map((sub, idx) => (
-                        <GrammarSectionView key={idx} section={sub} level={level + 1} />
+                        <GrammarSectionView key={idx} section={sub} level={level + 1} showEnglish={showEnglish} />
                     ))}
                 </div>
             )}
@@ -143,7 +145,7 @@ const GrammarSectionView: React.FC<{ section: PronounSection, level?: number }> 
     );
 };
 
-const VocabularyItemCard: React.FC<{ item: { fr: string; en: string } }> = ({ item }) => (
+const VocabularyItemCard: React.FC<{ item: { fr: string; en: string }, showEnglish: boolean }> = ({ item, showEnglish }) => (
     <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -155,7 +157,7 @@ const VocabularyItemCard: React.FC<{ item: { fr: string; en: string } }> = ({ it
     }}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)' }}>{item.fr}</span>
-            <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{item.en}</span>
+            {showEnglish && <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{item.en}</span>}
         </div>
         <button
             onClick={() => speakFrench(item.fr)}
@@ -178,7 +180,7 @@ const VocabularyItemCard: React.FC<{ item: { fr: string; en: string } }> = ({ it
     </div>
 );
 
-const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ section }) => {
+const VocabularySectionView: React.FC<{ section: VocabularySection, showEnglish: boolean }> = ({ section, showEnglish }) => {
     return (
         <div className="command-card-style" style={{
             marginBottom: '2rem',
@@ -197,7 +199,7 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
                     </button>
                 </p>
             )}
-            {section.descriptionEn && (
+            {showEnglish && section.descriptionEn && (
                 <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', fontStyle: 'italic' }}>
                     {section.descriptionEn}
                 </p>
@@ -207,7 +209,7 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
             {section.items && section.items.length > 0 && (
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
                     {section.items.map((item, idx) => (
-                        <VocabularyItemCard key={idx} item={item} />
+                        <VocabularyItemCard key={idx} item={item} showEnglish={showEnglish} />
                     ))}
                 </div>
             )}
@@ -234,7 +236,7 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
                             </button>
                         </p>
                     )}
-                    {sub.descriptionEn && (
+                    {showEnglish && sub.descriptionEn && (
                         <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem', fontStyle: 'italic', fontSize: '0.95rem' }}>
                             {sub.descriptionEn}
                         </p>
@@ -263,7 +265,7 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
                                             borderBottom: '1px solid var(--border-color)'
                                         }}>
                                             <td style={{ padding: '0.65rem 1rem', fontWeight: 600, color: 'var(--text-primary)', whiteSpace: 'pre-wrap' }}>{item.fr}</td>
-                                            <td style={{ padding: '0.65rem 1rem', color: 'var(--text-secondary)', whiteSpace: 'pre-wrap' }}>{item.en}</td>
+                                            <td style={{ padding: '0.65rem 1rem', color: 'var(--text-secondary)', whiteSpace: 'pre-wrap' }}>{showEnglish ? item.en : ''}</td>
                                             <td style={{ padding: '0.4rem 0.5rem', textAlign: 'center' }}>
                                                 <button onClick={() => speakFrench(item.fr)} title="Écouter en français" style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--success-color)', padding: '0.3rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto' }}>
                                                     <Volume2 size={16} />
@@ -277,7 +279,7 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
                     ) : (
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
                             {sub.items.map((item, idx) => (
-                                <VocabularyItemCard key={idx} item={item} />
+                                <VocabularyItemCard key={idx} item={item} showEnglish={showEnglish} />
                             ))}
                         </div>
                     )}
@@ -290,7 +292,7 @@ const VocabularySectionView: React.FC<{ section: VocabularySection }> = ({ secti
                             </button>
                         </p>
                     )}
-                    {sub.notesEn && (
+                    {showEnglish && sub.notesEn && (
                         <p style={{ color: 'var(--text-secondary)', paddingLeft: '1rem', marginLeft: '3px', fontStyle: 'italic' }}>
                             {sub.notesEn}
                         </p>
@@ -313,6 +315,7 @@ const GrammarPage = () => {
     const [selectedTopic, setSelectedTopic] = useState<string>('All');
     const [showBackToTop, setShowBackToTop] = useState(false);
     const [selectedPracticeLevel, setSelectedPracticeLevel] = useState<string>('A1');
+    const [showEnglish, setShowEnglish] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -412,6 +415,17 @@ const GrammarPage = () => {
                         Pratique<br /><small style={{ fontSize: '0.75em', fontWeight: 'normal' }}>(Practice)</small>
                     </button>
                 </div>
+                
+                {activeTab !== 'practice' && (
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
+                        <button 
+                            onClick={() => setShowEnglish(!showEnglish)}
+                            style={{ background: 'transparent', border: '1px solid var(--border-color)', borderRadius: '20px', padding: '0.4rem 1rem', fontSize: '0.85rem', cursor: 'pointer', color: 'var(--text-primary)' }}
+                        >
+                            {showEnglish ? 'Cacher la traduction' : 'Afficher la traduction'}
+                        </button>
+                    </div>
+                )}
 
                 {/* Search Bar & Dropdown (Hidden in Practice Mode) */}
                 {activeTab !== 'practice' && (
@@ -536,7 +550,7 @@ const GrammarPage = () => {
                                 filteredGrammarTopics
                                     .filter(t => selectedTopic === 'All' || t.title === selectedTopic)
                                     .map((topic, idx) => (
-                                        <GrammarSectionView key={idx} section={topic} />
+                                        <GrammarSectionView key={idx} section={topic} showEnglish={showEnglish} />
                                     ))
                             ) : (
                                 <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>
@@ -551,7 +565,7 @@ const GrammarPage = () => {
                                 filteredVocabSections
                                     .filter(s => selectedTopic === 'All' || s.title === selectedTopic)
                                     .map((section, idx) => (
-                                        <VocabularySectionView key={idx} section={section} />
+                                        <VocabularySectionView key={idx} section={section} showEnglish={showEnglish} />
                                     ))
                             ) : (
                                 <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-secondary)' }}>

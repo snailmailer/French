@@ -9,6 +9,7 @@ const ReadingPage = () => {
     const [selectedLevel, setSelectedLevel] = useState<string>('A1');
     const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
     const [showTranscript, setShowTranscript] = useState(false);
+    const [showEnglish, setShowEnglish] = useState(false);
 
     // Reading specific data
     const currentReadingStory = readingStories.find(s => s.level === selectedLevel) || readingStories[0];
@@ -47,6 +48,15 @@ const ReadingPage = () => {
                     style={{ padding: '1rem 2.5rem', fontSize: '1.25rem', flex: '1', minWidth: '250px', maxWidth: '350px' }}
                 >
                     Écoute<br /><small style={{ fontSize: '0.75em', fontWeight: 'normal' }}>(Listening)</small>
+                </button>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2.5rem' }}>
+                <button 
+                    onClick={() => setShowEnglish(!showEnglish)}
+                    style={{ background: 'transparent', border: '1px solid var(--border-color)', borderRadius: '20px', padding: '0.4rem 1rem', fontSize: '0.85rem', cursor: 'pointer', color: 'var(--text-primary)' }}
+                >
+                    {showEnglish ? 'Cacher la traduction' : 'Afficher la traduction'}
                 </button>
             </div>
 
@@ -104,7 +114,7 @@ const ReadingPage = () => {
                                             </div>
                                         </div>
                                         <div style={{ fontSize: '1.1rem', marginBottom: '0.25rem', color: 'var(--text-primary)', lineHeight: 1.5 }}>{line.french}</div>
-                                        {line.english && (
+                                        {showEnglish && line.english && (
                                             <div style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', fontStyle: 'italic', marginTop: '0.25rem' }}>{line.english}</div>
                                         )}
                                     </div>
@@ -136,7 +146,7 @@ const ReadingPage = () => {
                                             <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px dashed var(--border-color)', paddingBottom: '0.75rem' }}>
                                                 <div style={{ flex: 1, paddingRight: '1rem' }}>
                                                     <div style={{ fontWeight: 'bold', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>{exp.french}</div>
-                                                    {exp.english && <div style={{ fontSize: '0.95rem', color: 'var(--text-secondary)' }}>{exp.english}</div>}
+                                                    {showEnglish && exp.english && <div style={{ fontSize: '0.95rem', color: 'var(--text-secondary)' }}>{exp.english}</div>}
                                                 </div>
                                                 <button onClick={() => speakFrench(exp.french)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--success-color)', padding: '0.25rem' }}>
                                                     <Volume2 size={20} />
@@ -163,7 +173,7 @@ const ReadingPage = () => {
                                                 <div style={{ marginBottom: '0.75rem', fontWeight: 500, color: 'var(--text-primary)', fontSize: '1.05rem', lineHeight: 1.4, display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexWrap: 'wrap' }}>
                                                     <div style={{ flex: '1 1 auto', minWidth: 'min-content' }}>
                                                         <div>{idx + 1}. {q.french}</div>
-                                                        <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontStyle: 'italic', marginTop: '0.25rem' }}>{q.english}</div>
+                                                        {showEnglish && <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontStyle: 'italic', marginTop: '0.25rem' }}>{q.english}</div>}
                                                     </div>
                                                     <button onClick={() => speakFrench(q.french)} title="Listen to question" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--accent-cyan)', padding: 0, marginTop: '2px', flexShrink: 0 }}>
                                                         <Volume2 size={18} />
@@ -200,7 +210,7 @@ const ReadingPage = () => {
                                                 <div style={{ marginBottom: '0.75rem', fontWeight: 500, color: 'var(--text-primary)', fontSize: '1.05rem', lineHeight: 1.4, display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexWrap: 'wrap' }}>
                                                     <div style={{ flex: '1 1 auto', minWidth: 'min-content' }}>
                                                         <div>{idx + 1}. {q.french}</div>
-                                                        <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontStyle: 'italic', marginTop: '0.25rem' }}>{q.english}</div>
+                                                        {showEnglish && <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontStyle: 'italic', marginTop: '0.25rem' }}>{q.english}</div>}
                                                     </div>
                                                     <button onClick={() => speakFrench(q.french)} title="Listen to question" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--success-color)', padding: 0, marginTop: '2px', flexShrink: 0 }}>
                                                         <Volume2 size={18} />
@@ -304,7 +314,7 @@ const ReadingPage = () => {
                                             <div style={{ marginBottom: '0.75rem', fontWeight: 500, color: 'var(--text-primary)', fontSize: '1.05rem', lineHeight: 1.4, display: 'flex', alignItems: 'flex-start', gap: '0.5rem', flexWrap: 'wrap' }}>
                                                 <div style={{ flex: '1 1 auto', minWidth: 'min-content' }}>
                                                     <div>{idx + 1}. {q.french}</div>
-                                                    <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontStyle: 'italic', marginTop: '0.25rem' }}>{q.english}</div>
+                                                    {showEnglish && <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontStyle: 'italic', marginTop: '0.25rem' }}>{q.english}</div>}
                                                 </div>
                                                 <button onClick={() => speakFrench(q.french)} title="Listen to question" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--accent-cyan)', padding: 0, marginTop: '2px', flexShrink: 0 }}>
                                                     <Volume2 size={18} />
@@ -336,7 +346,7 @@ const ReadingPage = () => {
                                         <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px dashed var(--border-color)', paddingBottom: '0.75rem' }}>
                                             <div style={{ flex: 1, paddingRight: '1rem' }}>
                                                 <div style={{ fontWeight: 'bold', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>{vocab.french}</div>
-                                                {vocab.english && <div style={{ fontSize: '0.95rem', color: 'var(--text-secondary)' }}>{vocab.english}</div>}
+                                                {showEnglish && vocab.english && <div style={{ fontSize: '0.95rem', color: 'var(--text-secondary)' }}>{vocab.english}</div>}
                                             </div>
                                             <button onClick={() => speakFrench(vocab.french)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--success-color)', padding: '0.25rem' }}>
                                                 <Volume2 size={20} />

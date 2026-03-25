@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Volume2 } from 'lucide-react';
 import { speakFrench } from '../utils/tts';
 
@@ -113,6 +114,8 @@ const mainBands = [
 ];
 
 const LevelGuidePage = () => {
+    const [showEnglish, setShowEnglish] = useState(false);
+
     return (
         <div className="container" style={{ padding: '3rem 1rem', maxWidth: '1200px', margin: '0 auto' }}>
             <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '0.25rem', color: '#E0E2D2', textTransform: 'uppercase' }}>
@@ -121,6 +124,15 @@ const LevelGuidePage = () => {
             <p style={{ textAlign: 'center', fontSize: '1.25rem', color: '#B4C540', fontWeight: 'bold', marginBottom: '3rem' }}>
                 (CEFR Level Guide with TCF/TEF Scores)
             </p>
+
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
+                <button 
+                    onClick={() => setShowEnglish(!showEnglish)}
+                    style={{ background: 'transparent', border: '1px solid var(--border-color)', borderRadius: '20px', padding: '0.4rem 1rem', fontSize: '0.85rem', cursor: 'pointer', color: 'var(--text-primary)' }}
+                >
+                    {showEnglish ? 'Cacher la traduction' : 'Afficher la traduction'}
+                </button>
+            </div>
 
             <div style={{
                 background: 'var(--bg-secondary)',
@@ -137,11 +149,13 @@ const LevelGuidePage = () => {
                     </p>
                     <button onClick={() => speakFrench("Le niveau de français se décrit avec l’échelle du CECR (A1 à C2 : débutant à maîtrise).")} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--success-color)' }}><Volume2 size={24} /></button>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '1.1rem', fontStyle: 'italic', flex: 1 }}>
-                        French level is described using the CEFR scale (A1 to C2: beginner to mastery).
-                    </p>
-                </div>
+                {showEnglish && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
+                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '1.1rem', fontStyle: 'italic', flex: 1 }}>
+                            French level is described using the CEFR scale (A1 to C2: beginner to mastery).
+                        </p>
+                    </div>
+                )}
 
                 <h3 style={{ color: 'var(--text-primary)', fontSize: '1.4rem', marginBottom: '1rem' }}>Catégories principales / Main bands</h3>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
@@ -151,9 +165,11 @@ const LevelGuidePage = () => {
                                 <span style={{ color: 'var(--text-primary)', fontSize: '1.05rem', fontWeight: 500 }}>{band.fr}</span>
                                 <button onClick={() => speakFrench(band.fr)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--success-color)' }}><Volume2 size={20} /></button>
                             </div>
-                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                <span style={{ color: 'var(--text-secondary)', fontSize: '1rem', fontStyle: 'italic' }}>{band.en}</span>
-                            </div>
+                            {showEnglish && (
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                    <span style={{ color: 'var(--text-secondary)', fontSize: '1rem', fontStyle: 'italic' }}>{band.en}</span>
+                                </div>
+                            )}
                         </li>
                     ))}
                 </ul>
@@ -166,7 +182,7 @@ const LevelGuidePage = () => {
                             <p style={{ margin: 0, color: 'var(--text-primary)', fontWeight: 'bold' }}>TCF <span style={{ fontWeight: 'normal' }}>: Scores modulaires (écoute/lecture obligatoires ; expression optionnelle) ; valable 2 ans ; adapté immigration Canada.</span></p>
                             <button onClick={() => speakFrench("TCF : Scores modulaires (écoute/lecture obligatoires ; expression optionnelle) ; valable 2 ans ; adapté immigration Canada.")} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--success-color)', flexShrink: 0 }}><Volume2 size={20} /></button>
                         </div>
-                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontStyle: 'italic' }}>Modular scores (listening/reading mandatory; optional speaking/writing); 2-year validity; Canada immigration-friendly.</p>
+                        {showEnglish && <p style={{ margin: 0, color: 'var(--text-secondary)', fontStyle: 'italic' }}>Modular scores (listening/reading mandatory; optional speaking/writing); 2-year validity; Canada immigration-friendly.</p>}
                     </div>
 
                     <div style={{ background: 'var(--bg-primary)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
@@ -174,12 +190,14 @@ const LevelGuidePage = () => {
                             <p style={{ margin: 0, color: 'var(--text-primary)', fontWeight: 'bold' }}>TEF <span style={{ fontWeight: 'normal' }}>: 5 compétences obligatoires ; plus business-oriented ; scores similaires.</span></p>
                             <button onClick={() => speakFrench("TEF : 5 compétences obligatoires ; plus business-oriented ; scores similaires.")} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--success-color)', flexShrink: 0 }}><Volume2 size={20} /></button>
                         </div>
-                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontStyle: 'italic' }}>5 mandatory skills; business-oriented; similar scoring.</p>
+                        {showEnglish && <p style={{ margin: 0, color: 'var(--text-secondary)', fontStyle: 'italic' }}>5 mandatory skills; business-oriented; similar scoring.</p>}
                     </div>
                 </div>
-                <p style={{ marginTop: '1.5rem', color: 'var(--text-secondary)', fontStyle: 'italic', fontSize: '0.95rem' }}>
-                    * TCF often feels easier for practical skills; use official prep for Toronto centers (e.g., Alliance Française).
-                </p>
+                {showEnglish && (
+                    <p style={{ marginTop: '1.5rem', color: 'var(--text-secondary)', fontStyle: 'italic', fontSize: '0.95rem' }}>
+                        * TCF often feels easier for practical skills; use official prep for Toronto centers (e.g., Alliance Française).
+                    </p>
+                )}
             </div>
 
             <h2 style={{ color: 'var(--accent-cyan)', fontSize: '2rem', margin: '4rem 0 2rem', textAlign: 'center' }}>
@@ -227,7 +245,7 @@ const LevelGuidePage = () => {
                                     {lvl.levelFR}
                                 </span>
                                 <div style={{ flex: 1 }}>
-                                    <h3 style={{ margin: '0 0 0.25rem', color: 'var(--text-primary)', fontSize: '1.4rem' }}>{lvl.titleFR} / {lvl.levelEN}</h3>
+                                    <h3 style={{ margin: '0 0 0.25rem', color: 'var(--text-primary)', fontSize: '1.4rem' }}>{lvl.titleFR}{showEnglish ? ` / ${lvl.levelEN}` : ''}</h3>
 
                                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '0.5rem', marginBottom: '1rem' }}>
                                         <div style={{ background: 'rgba(54, 134, 201, 0.1)', border: '1px solid var(--accent-cyan)', padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.9rem' }}>
@@ -242,9 +260,11 @@ const LevelGuidePage = () => {
                                         <p style={{ margin: 0, color: 'var(--text-primary)', fontSize: '0.95rem', flex: 1 }}>{lvl.descFR}</p>
                                         <button onClick={() => speakFrench(lvl.descFR)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--success-color)' }}><Volume2 size={18} /></button>
                                     </div>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '0.25rem' }}>
-                                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.95rem', fontStyle: 'italic', flex: 1 }}>{lvl.descEN}</p>
-                                    </div>
+                                    {showEnglish && (
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '0.25rem' }}>
+                                            <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.95rem', fontStyle: 'italic', flex: 1 }}>{lvl.descEN}</p>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 
@@ -263,16 +283,18 @@ const LevelGuidePage = () => {
                                 ].map((skill, idx) => (
                                     <div key={idx} style={{ background: 'var(--bg-primary)', padding: '1.25rem', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
                                         <h4 style={{ margin: '0 0 1rem', color: color, fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                                            {skill.labelFR} / {skill.labelEN}
+                                            {skill.labelFR}{showEnglish ? ` / ${skill.labelEN}` : ''}
                                         </h4>
                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                                             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.5rem' }}>
                                                 <span style={{ color: 'var(--text-primary)', fontSize: '0.95rem', lineHeight: 1.5 }}>{skill.fr}</span>
                                                 <button onClick={() => speakFrench(skill.fr)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--success-color)', flexShrink: 0 }}><Volume2 size={20} /></button>
                                             </div>
-                                            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.5rem' }}>
-                                                <span style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', fontStyle: 'italic', lineHeight: 1.5 }}>{skill.en}</span>
-                                            </div>
+                                            {showEnglish && (
+                                                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.5rem' }}>
+                                                    <span style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', fontStyle: 'italic', lineHeight: 1.5 }}>{skill.en}</span>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 ))}

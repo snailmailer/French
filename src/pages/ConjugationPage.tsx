@@ -35,6 +35,7 @@ const ConjugationPage = () => {
         setSearchParams(params);
     };
     const [showPractice, setShowPractice] = useState(false);
+    const [showEnglish, setShowEnglish] = useState(false);
 
     // Extract unique categories
     const categories = ['All', ...Array.from(new Set(verbs.map(v => v.category).filter(Boolean)))].sort();
@@ -299,12 +300,20 @@ const ConjugationPage = () => {
                             {/* Examples Section */}
                             {selectedVerb.examples && selectedVerb.examples.length > 0 && (
                                 <div style={{ marginBottom: '2rem', background: 'var(--bg-secondary)', padding: '1.5rem', borderRadius: '12px' }}>
-                                    <h3 style={{ color: 'var(--accent-green)', marginBottom: '1rem' }}>Examples</h3>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                                        <h3 style={{ color: 'var(--accent-green)', margin: 0 }}>Examples</h3>
+                                        <button 
+                                            onClick={() => setShowEnglish(!showEnglish)}
+                                            style={{ background: 'transparent', border: '1px solid var(--border-color)', borderRadius: '20px', padding: '0.4rem 1rem', fontSize: '0.85rem', cursor: 'pointer', color: 'var(--text-primary)' }}
+                                        >
+                                            {showEnglish ? 'Cacher la traduction' : 'Afficher la traduction'}
+                                        </button>
+                                    </div>
                                     <ul style={{ listStyle: 'none', padding: 0 }}>
                                         {selectedVerb.examples.map((ex, idx) => (
                                             <li key={idx} style={{ marginBottom: '0.8rem', display: 'flex', flexDirection: 'column' }}>
                                                 <span style={{ fontSize: '1.1rem', fontWeight: 500 }}>{ex.sentence}</span>
-                                                <span style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', fontStyle: 'italic' }}>{ex.translation}</span>
+                                                {showEnglish && <span style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', fontStyle: 'italic' }}>{ex.translation}</span>}
                                             </li>
                                         ))}
                                     </ul>

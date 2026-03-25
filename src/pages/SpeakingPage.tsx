@@ -965,9 +965,17 @@ const SpeakingPage = () => {
                     <ChevronLeft size={20} /> Retour aux catégories
                 </button>
 
-                <h2 style={{ textAlign: 'center', marginBottom: '2rem', color: 'var(--accent-color)', fontSize: '2rem' }}>
-                    {selectedCategory}
-                </h2>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+                    <h2 style={{ margin: 0, color: 'var(--accent-color)', fontSize: '2rem' }}>
+                        {selectedCategory}
+                    </h2>
+                    <button 
+                        onClick={() => setShowEnglish(!showEnglish)}
+                        style={{ background: 'transparent', border: '1px solid var(--border-color)', borderRadius: '20px', padding: '0.4rem 1rem', fontSize: '0.85rem', cursor: 'pointer', color: 'var(--text-primary)' }}
+                    >
+                        {showEnglish ? 'Cacher la traduction' : 'Afficher la traduction'}
+                    </button>
+                </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     {categoryQuestions.map((q) => (
@@ -985,7 +993,7 @@ const SpeakingPage = () => {
                         >
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
                                 <span style={{ fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: 500 }}>{q.question}</span>
-                                {q.questionEn && (
+                                {showEnglish && q.questionEn && (
                                     <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
                                         {q.questionEn}
                                     </span>
@@ -1006,12 +1014,20 @@ const SpeakingPage = () => {
 
     return (
         <div className="container" style={{ maxWidth: '900px', padding: '3rem 1rem' }}>
-            <button
-                onClick={handleGoBack}
-                style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', marginBottom: '1rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem' }}
-            >
-                <ChevronLeft size={20} /> Retour aux questions
-            </button>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                <button
+                    onClick={handleGoBack}
+                    style={{ background: 'transparent', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem' }}
+                >
+                    <ChevronLeft size={20} /> Retour aux questions
+                </button>
+                <button 
+                    onClick={() => setShowEnglish(!showEnglish)}
+                    style={{ background: 'transparent', border: '1px solid var(--border-color)', borderRadius: '20px', padding: '0.4rem 1rem', fontSize: '0.85rem', cursor: 'pointer', color: 'var(--text-primary)' }}
+                >
+                    {showEnglish ? 'Cacher la traduction' : 'Afficher la traduction'}
+                </button>
+            </div>
 
             <div style={{
                 ...cardStyle,
@@ -1037,7 +1053,7 @@ const SpeakingPage = () => {
                             <Volume2 size={24} />
                         </button>
                     </div>
-                    {currentQuestion.questionEn && (
+                    {showEnglish && currentQuestion.questionEn && (
                         <p style={{ margin: 0, fontSize: '1.4rem', color: 'var(--text-secondary)', fontStyle: 'italic', textAlign: 'center' }}>
                             {currentQuestion.questionEn}
                         </p>
