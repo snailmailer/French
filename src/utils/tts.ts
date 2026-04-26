@@ -27,8 +27,11 @@ const speakWithLang = (text: string, lang: string, langPrefix: string, customRat
         return;
     }
 
-    // Cancel any ongoing speech
-    window.speechSynthesis.cancel();
+    // Cancel any ongoing speech only if currently speaking
+    // This avoids a bug where cancel() immediately swallows the next utterance
+    if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+    }
 
     // Small delay after cancel was previously here, but it breaks iOS Safari user-gesture requirements.
     // We will run this synchronously instead.

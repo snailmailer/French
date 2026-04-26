@@ -162,6 +162,7 @@ const SpeakingPage = () => {
                     setIsCharacterSpeaking(false);
                     if (activeQuestionIndex < situation.qaList.length - 1) {
                         setActiveQuestionIndex(prev => prev + 1);
+                        setAudioUrl(null);
                     }
                 };
                 if (selectedVoiceCharacter === 'marie') {
@@ -896,6 +897,7 @@ const SpeakingPage = () => {
                                                                                         window.speechSynthesis.cancel();
                                                                                         setIsCharacterSpeaking(false);
                                                                                         setActiveQuestionIndex(prev => prev + 1);
+                                                                                        setAudioUrl(null);
                                                                                     }}
                                                                                     style={{ background: 'transparent', border: '1px solid var(--accent-color)', color: 'var(--accent-color)', borderRadius: '20px', padding: '0.4rem 1rem', cursor: 'pointer' }}
                                                                                 >
