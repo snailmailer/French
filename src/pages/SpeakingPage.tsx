@@ -44,6 +44,7 @@ const SpeakingPage = () => {
 
     // UI state
     const [showEnglish, setShowEnglish] = useState(false);
+    const [selectedVoiceCharacter, setSelectedVoiceCharacter] = useState<'marie' | 'napoleon'>('marie');
 
     // Get unique categories
     const categories = Array.from(new Set(speakingQuestions.map(q => q.category)));
@@ -477,6 +478,33 @@ const SpeakingPage = () => {
                     </div>
                     <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', lineHeight: 1.6, fontSize: '1.1rem' }}>{topic.description}</p>
 
+                    {topic.id === 'tef_a' && (
+                        <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+                            <button 
+                                onClick={() => setSelectedVoiceCharacter('marie')}
+                                style={{
+                                    background: selectedVoiceCharacter === 'marie' ? 'rgba(255, 64, 129, 0.2)' : 'var(--bg-primary)',
+                                    borderColor: selectedVoiceCharacter === 'marie' ? '#ff4081' : 'var(--border-color)',
+                                    color: selectedVoiceCharacter === 'marie' ? '#ff4081' : 'var(--text-secondary)',
+                                    display: 'flex', alignItems: 'center', gap: '0.5rem'
+                                }}
+                            >
+                                👱‍♀️ Marie Antoinette (Femme)
+                            </button>
+                            <button 
+                                onClick={() => setSelectedVoiceCharacter('napoleon')}
+                                style={{
+                                    background: selectedVoiceCharacter === 'napoleon' ? 'rgba(0, 150, 136, 0.2)' : 'var(--bg-primary)',
+                                    borderColor: selectedVoiceCharacter === 'napoleon' ? '#009688' : 'var(--border-color)',
+                                    color: selectedVoiceCharacter === 'napoleon' ? '#009688' : 'var(--text-secondary)',
+                                    display: 'flex', alignItems: 'center', gap: '0.5rem'
+                                }}
+                            >
+                                🎩 Napoléon Bonaparte (Homme)
+                            </button>
+                        </div>
+                    )}
+
                     <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
                         {topic.prepTime > 0 && (
                             <span style={{ fontSize: '1rem', background: 'rgba(54, 134, 201, 0.1)', color: 'var(--accent-cyan)', padding: '0.5rem 1rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -675,57 +703,76 @@ const SpeakingPage = () => {
                                                 </div>
                                             </div>
 
-                                            {/* QA List */}
-                                            <div style={{ marginTop: '1rem' }}>
-                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                                                    <h5 style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '1rem' }}>Questions et Réponses :</h5>
-                                                    <button 
-                                                        onClick={() => setShowEnglish(!showEnglish)}
-                                                        style={{ background: 'transparent', border: '1px solid var(--border-color)', borderRadius: '20px', padding: '0.4rem 1rem', fontSize: '0.85rem', cursor: 'pointer', color: 'var(--text-primary)' }}
-                                                    >
-                                                        {showEnglish ? 'Cacher la traduction' : 'Afficher la traduction'}
-                                                    </button>
-                                                </div>
-                                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                                    {situation.qaList.map((qa, qIdx) => (
-                                                        <div key={qIdx} style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '1.25rem' }}>
-                                                            
-                                                            {/* Question (Male) */}
-                                                            <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', marginBottom: '1rem' }}>
-                                                                <div>
-                                                                    <p style={{ margin: '0 0 0.25rem', color: 'var(--text-primary)', fontWeight: 600, fontSize: '1.05rem' }}>
-                                                                        <span style={{ color: 'var(--accent-color)' }}>Q:</span> {qa.qFr}
-                                                                    </p>
-                                                                    {showEnglish && (
-                                                                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85em', fontStyle: 'italic' }}>
-                                                                            {qa.qEn}
-                                                                        </p>
-                                                                    )}
-                                                                </div>
-                                                                <button onClick={() => speakFrenchMale(qa.qFr)} style={{ background: 'rgba(54, 134, 201, 0.1)', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--accent-cyan)', flexShrink: 0 }} title="Voix masculine">
-                                                                    <Volume2 size={18} />
-                                                                </button>
-                                                            </div>
-
-                                                            {/* Answer (Female) */}
-                                                            <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', paddingLeft: '1rem', borderLeft: '2px solid rgba(76, 175, 80, 0.3)' }}>
-                                                                <div>
-                                                                    <p style={{ margin: '0 0 0.25rem', color: 'var(--text-primary)', fontSize: '1rem' }}>
-                                                                        <span style={{ color: 'var(--success-color)', fontWeight: 600 }}>R:</span> {qa.aFr}
-                                                                    </p>
-                                                                    {showEnglish && (
-                                                                        <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85em', fontStyle: 'italic' }}>
-                                                                            {qa.aEn}
-                                                                        </p>
-                                                                    )}
-                                                                </div>
-                                                                <button onClick={() => speakFrenchFemale(qa.aFr)} style={{ background: 'rgba(76, 175, 80, 0.1)', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--success-color)', flexShrink: 0 }} title="Voix féminine">
-                                                                    <Volume2 size={18} />
-                                                                </button>
-                                                            </div>
-
+                                            {/* QA List & Character View */}
+                                            <div style={{ marginTop: '1rem', display: 'flex', flexWrap: 'wrap', gap: '2rem' }}>
+                                                {topic.id === 'tef_a' && (
+                                                    <div style={{ flex: '1 1 250px', maxWidth: '300px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', margin: '0 auto' }}>
+                                                        <img 
+                                                            src={selectedVoiceCharacter === 'marie' ? `${import.meta.env.BASE_URL}images/marie.png` : `${import.meta.env.BASE_URL}images/napoleon.png`} 
+                                                            alt={selectedVoiceCharacter === 'marie' ? 'Marie Antoinette' : 'Napoléon Bonaparte'}
+                                                            style={{ width: '100%', borderRadius: '12px', border: `4px solid ${selectedVoiceCharacter === 'marie' ? '#ff4081' : '#009688'}` }}
+                                                        />
+                                                        <div style={{ background: 'var(--bg-secondary)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border-color)', textAlign: 'center', width: '100%' }}>
+                                                            <h4 style={{ margin: '0 0 0.5rem', color: selectedVoiceCharacter === 'marie' ? '#ff4081' : '#009688' }}>
+                                                                {selectedVoiceCharacter === 'marie' ? 'Marie Antoinette' : 'Napoléon Bonaparte'}
+                                                            </h4>
+                                                            <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                                                                "Je suis à votre écoute. Posez vos questions et je vous répondrai !"
+                                                            </p>
                                                         </div>
-                                                    ))}
+                                                    </div>
+                                                )}
+                                                <div style={{ flex: '2 1 400px' }}>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                                                        <h5 style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '1rem' }}>Questions et Réponses :</h5>
+                                                        <button 
+                                                            onClick={() => setShowEnglish(!showEnglish)}
+                                                            style={{ background: 'transparent', border: '1px solid var(--border-color)', borderRadius: '20px', padding: '0.4rem 1rem', fontSize: '0.85rem', cursor: 'pointer', color: 'var(--text-primary)' }}
+                                                        >
+                                                            {showEnglish ? 'Cacher la traduction' : 'Afficher la traduction'}
+                                                        </button>
+                                                    </div>
+                                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                                        {situation.qaList.map((qa, qIdx) => (
+                                                            <div key={qIdx} style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '1.25rem' }}>
+                                                                
+                                                                {/* Question (User) */}
+                                                                <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', marginBottom: '1rem' }}>
+                                                                    <div>
+                                                                        <p style={{ margin: '0 0 0.25rem', color: 'var(--text-primary)', fontWeight: 600, fontSize: '1.05rem' }}>
+                                                                            <span style={{ color: 'var(--accent-color)' }}>Q:</span> {qa.qFr}
+                                                                        </p>
+                                                                        {showEnglish && (
+                                                                            <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85em', fontStyle: 'italic' }}>
+                                                                                {qa.qEn}
+                                                                            </p>
+                                                                        )}
+                                                                    </div>
+                                                                    <button onClick={() => speakFrenchMale(qa.qFr)} style={{ background: 'rgba(54, 134, 201, 0.1)', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--accent-cyan)', flexShrink: 0 }} title="Écouter la question">
+                                                                        <Volume2 size={18} />
+                                                                    </button>
+                                                                </div>
+
+                                                                {/* Answer (Character) */}
+                                                                <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', paddingLeft: '1rem', borderLeft: `2px solid ${topic.id === 'tef_a' ? (selectedVoiceCharacter === 'marie' ? '#ff4081' : '#009688') : 'rgba(76, 175, 80, 0.3)'}` }}>
+                                                                    <div>
+                                                                        <p style={{ margin: '0 0 0.25rem', color: 'var(--text-primary)', fontSize: '1rem' }}>
+                                                                            <span style={{ color: topic.id === 'tef_a' ? (selectedVoiceCharacter === 'marie' ? '#ff4081' : '#009688') : 'var(--success-color)', fontWeight: 600 }}>R:</span> {qa.aFr}
+                                                                        </p>
+                                                                        {showEnglish && (
+                                                                            <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85em', fontStyle: 'italic' }}>
+                                                                                {qa.aEn}
+                                                                            </p>
+                                                                        )}
+                                                                    </div>
+                                                                    <button onClick={() => topic.id === 'tef_a' ? (selectedVoiceCharacter === 'marie' ? speakFrenchFemale(qa.aFr) : speakFrenchMale(qa.aFr)) : speakFrenchFemale(qa.aFr)} style={{ background: topic.id === 'tef_a' ? (selectedVoiceCharacter === 'marie' ? 'rgba(255, 64, 129, 0.1)' : 'rgba(0, 150, 136, 0.1)') : 'rgba(76, 175, 80, 0.1)', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: topic.id === 'tef_a' ? (selectedVoiceCharacter === 'marie' ? '#ff4081' : '#009688') : 'var(--success-color)', flexShrink: 0 }} title="Écouter la réponse">
+                                                                        <Volume2 size={18} />
+                                                                    </button>
+                                                                </div>
+
+                                                            </div>
+                                                        ))}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
