@@ -45,6 +45,8 @@ const SpeakingPage = () => {
     // UI state
     const [showEnglish, setShowEnglish] = useState(false);
     const [selectedVoiceCharacter, setSelectedVoiceCharacter] = useState<'marie' | 'napoleon'>('marie');
+    const [activeQuestionIndex, setActiveQuestionIndex] = useState<number>(-1);
+    const [, setIsCharacterSpeaking] = useState<boolean>(false);
 
     // Get unique categories
     const categories = Array.from(new Set(speakingQuestions.map(q => q.category)));
