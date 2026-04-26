@@ -46,7 +46,7 @@ const SpeakingPage = () => {
     const [showEnglish, setShowEnglish] = useState(false);
     const [selectedVoiceCharacter, setSelectedVoiceCharacter] = useState<'marie' | 'napoleon'>('marie');
     const [activeQuestionIndex, setActiveQuestionIndex] = useState<number>(-1);
-    const [, setIsCharacterSpeaking] = useState<boolean>(false);
+    const [isCharacterSpeaking, setIsCharacterSpeaking] = useState<boolean>(false);
 
     // Get unique categories
     const categories = Array.from(new Set(speakingQuestions.map(q => q.category)));
@@ -152,25 +152,9 @@ const SpeakingPage = () => {
             mediaRecorderRef.current.stop();
         }
 
-        if (selectedExamTopic === 'tef_a' && activeQuestionIndex >= 0) {
-            const topic = examTopics.find(t => t.id === 'tef_a');
-            const situation = topic?.situations?.find(s => s.title === selectedScenario);
-            if (situation && situation.qaList[activeQuestionIndex]) {
-                const answer = situation.qaList[activeQuestionIndex].aFr;
-                setIsCharacterSpeaking(true);
-                const onEnd = () => {
-                    setIsCharacterSpeaking(false);
-                    if (activeQuestionIndex < situation.qaList.length - 1) {
-                        setActiveQuestionIndex(prev => prev + 1);
-                        setAudioUrl(null);
-                    }
-                };
-                if (selectedVoiceCharacter === 'marie') {
-                    speakFrenchFemale(answer, undefined, onEnd);
-                } else {
-                    speakFrenchMale(answer, undefined, onEnd);
-                }
-            }
+        if (selectedExamTopic === 'tef_a') {
+            // We removed TTS logic from here because tef_a now uses a continuous recording
+            // and the user manually triggers the character response via a button.
         }
     };
 
@@ -220,6 +204,24 @@ const SpeakingPage = () => {
         }
     };
 
+    const startTefASession = () => {
+        setExamPhase('speak');
+        setExamTimer(300); // 5 minutes total
+        setActiveQuestionIndex(0);
+        startActualRecording(); // Starts the continuous recording
+        examTimerRef.current = setInterval(() => {
+            setExamTimer(p => {
+                if (p <= 1) {
+                    clearInterval(examTimerRef.current);
+                    setExamPhase('done');
+                    stopRecording(); // Stop the continuous recording when time is up
+                    return 0;
+                }
+                return p - 1;
+            });
+        }, 1000);
+    };
+
     // --- Exam timer ---
     const startExamTimer = (topic: typeof examTopics[0], scenario: string) => {
         setSelectedExamTopic(topic.id);
@@ -228,13 +230,19 @@ const SpeakingPage = () => {
         if (topic.id === 'tef_a') {
             setActiveQuestionIndex(-1);
             setIsCharacterSpeaking(true);
+            setExamPhase('idle'); // Wait for instructions to finish
+            
             const instructions = "L’expression Orale Section A. Obtenir des informations. Vous avez 5 minutes pour vous préparer, parler, et poser 10 questions. Suggestion: Préparation: 1 minute, Parole: 4 minutes.";
-            const onEnd = () => setIsCharacterSpeaking(false);
+            const onEnd = () => {
+                setIsCharacterSpeaking(false);
+                startTefASession();
+            };
             if (selectedVoiceCharacter === 'marie') {
                 speakFrenchFemale(instructions, undefined, onEnd);
             } else {
                 speakFrenchMale(instructions, undefined, onEnd);
             }
+            return;
         }
 
         if (topic.prepTime > 0) {
@@ -769,13 +777,13 @@ const SpeakingPage = () => {
                                                 border: `1px dashed ${examPhase === 'prep' ? 'var(--accent-cyan)' : 'var(--success-color)'}`
                                             }}>
                                                 <div style={{ fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px', color: examPhase === 'prep' ? 'var(--accent-cyan)' : examPhase === 'speak' ? 'var(--success-color)' : '#9B59B6', fontWeight: 'bold', marginBottom: '1rem' }}>
-                                                    {examPhase === 'prep' ? '⏳ Temps de Préparation' : examPhase === 'speak' ? '🎤 Parlez maintenant !' : '✅ Exercice Terminé'}
+                                                    {topic.id === 'tef_a' ? 'TEF Section A' : (examPhase === 'prep' ? '⏳ Temps de Préparation' : examPhase === 'speak' ? '🎤 Parlez maintenant !' : '✅ Exercice Terminé')}
                                                 </div>
                                                 {examPhase !== 'done' && (
                                                     <div style={{ 
                                                         fontSize: '4.5rem', 
                                                         fontFamily: 'monospace', 
-                                                        fontWeight: 'bold', 
+                                                        fontWeight: (examPhase === 'speak' && examTimer <= 60) ? '900' : 'bold', 
                                                         color: (examPhase === 'speak' && examTimer <= 60) ? 'red' : (examPhase === 'prep' ? 'var(--accent-cyan)' : 'var(--success-color)')
                                                     }}>
                                                         {formatTime(examTimer)}
@@ -783,23 +791,32 @@ const SpeakingPage = () => {
                                                 )}
                                                 
                                                 {/* Recording Controls */}
-                                                <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                                                    {!isRecording && !audioUrl && (
-                                                        <button onClick={startActualRecording} style={{ background: 'var(--accent-cyan)', color: 'white', border: 'none', padding: '0.6rem 1.2rem', borderRadius: '24px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem', fontWeight: 600 }}>
-                                                            <Mic size={18} /> Commencer l'enregistrement
-                                                        </button>
-                                                    )}
-                                                    {isRecording && (
-                                                        <button onClick={stopRecording} style={{ background: '#f44336', color: 'white', border: 'none', padding: '0.6rem 1.2rem', borderRadius: '24px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem', fontWeight: 600, animation: 'pulse 2s infinite' }}>
-                                                            <Square size={18} /> Arrêter l'enregistrement
-                                                        </button>
-                                                    )}
-                                                    {audioUrl && (
+                                                {topic.id !== 'tef_a' && (
+                                                    <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                                                        {!isRecording && !audioUrl && (
+                                                            <button onClick={startActualRecording} style={{ background: 'var(--accent-cyan)', color: 'white', border: 'none', padding: '0.6rem 1.2rem', borderRadius: '24px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem', fontWeight: 600 }}>
+                                                                <Mic size={18} /> Commencer l'enregistrement
+                                                            </button>
+                                                        )}
+                                                        {isRecording && (
+                                                            <button onClick={stopRecording} style={{ background: '#f44336', color: 'white', border: 'none', padding: '0.6rem 1.2rem', borderRadius: '24px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem', fontWeight: 600, animation: 'pulse 2s infinite' }}>
+                                                                <Square size={18} /> Arrêter l'enregistrement
+                                                            </button>
+                                                        )}
+                                                        {audioUrl && (
+                                                            <div style={{ width: '100%', maxWidth: '300px' }}>
+                                                                <audio src={audioUrl} controls style={{ width: '100%', height: '40px' }} />
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                )}
+                                                {topic.id === 'tef_a' && audioUrl && (
+                                                    <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                                                         <div style={{ width: '100%', maxWidth: '300px' }}>
                                                             <audio src={audioUrl} controls style={{ width: '100%', height: '40px' }} />
                                                         </div>
-                                                    )}
-                                                </div>
+                                                    </div>
+                                                )}
                                             </div>
 
                                             {/* QA List & Character View */}
@@ -847,7 +864,7 @@ const SpeakingPage = () => {
                                                                             onClick={() => {
                                                                                 window.speechSynthesis.cancel();
                                                                                 setIsCharacterSpeaking(false);
-                                                                                setActiveQuestionIndex(0);
+                                                                                startTefASession();
                                                                             }} 
                                                                             className="btn-primary" 
                                                                             style={{ fontSize: '1rem', padding: '0.6rem 1.5rem' }}
@@ -894,14 +911,34 @@ const SpeakingPage = () => {
                                                                             {activeQuestionIndex < situation.qaList.length - 1 ? (
                                                                                 <button 
                                                                                     onClick={() => {
-                                                                                        window.speechSynthesis.cancel();
-                                                                                        setIsCharacterSpeaking(false);
-                                                                                        setActiveQuestionIndex(prev => prev + 1);
-                                                                                        setAudioUrl(null);
+                                                                                        const answer = situation.qaList[activeQuestionIndex].aFr;
+                                                                                        setIsCharacterSpeaking(true);
+                                                                                        const onEnd = () => {
+                                                                                            setIsCharacterSpeaking(false);
+                                                                                            if (activeQuestionIndex < situation.qaList.length - 1) {
+                                                                                                setActiveQuestionIndex(prev => prev + 1);
+                                                                                            }
+                                                                                        };
+                                                                                        if (selectedVoiceCharacter === 'marie') {
+                                                                                            speakFrenchFemale(answer, undefined, onEnd);
+                                                                                        } else {
+                                                                                            speakFrenchMale(answer, undefined, onEnd);
+                                                                                        }
                                                                                     }}
-                                                                                    style={{ background: 'transparent', border: '1px solid var(--accent-color)', color: 'var(--accent-color)', borderRadius: '20px', padding: '0.4rem 1rem', cursor: 'pointer' }}
+                                                                                    disabled={isCharacterSpeaking || examPhase === 'done'}
+                                                                                    style={{ 
+                                                                                        background: 'var(--accent-color)', 
+                                                                                        color: 'white', 
+                                                                                        border: 'none', 
+                                                                                        borderRadius: '24px', 
+                                                                                        padding: '0.8rem 1.5rem', 
+                                                                                        cursor: (isCharacterSpeaking || examPhase === 'done') ? 'not-allowed' : 'pointer',
+                                                                                        fontWeight: 'bold',
+                                                                                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                                                                                        opacity: (isCharacterSpeaking || examPhase === 'done') ? 0.6 : 1,
+                                                                                    }}
                                                                                 >
-                                                                                    Question Suivante ➔
+                                                                                    {isCharacterSpeaking ? 'Le personnage parle...' : 'Faire répondre le personnage'}
                                                                                 </button>
                                                                             ) : (
                                                                                 <button 
