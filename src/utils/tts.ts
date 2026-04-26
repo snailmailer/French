@@ -20,9 +20,10 @@ if (window.speechSynthesis) {
 const activeUtterances: SpeechSynthesisUtterance[] = [];
 
 // Shared speak helper with a small delay after cancel to prevent truncation
-const speakWithLang = (text: string, lang: string, langPrefix: string, customRate?: number, gender?: 'male' | 'female') => {
+const speakWithLang = (text: string, lang: string, langPrefix: string, customRate?: number, gender?: 'male' | 'female', onEnd?: () => void) => {
     if (!window.speechSynthesis) {
         console.error("Speech synthesis not supported");
+        if (onEnd) onEnd();
         return;
     }
 
@@ -81,7 +82,10 @@ const speakWithLang = (text: string, lang: string, langPrefix: string, customRat
         utterance.lang = lang;
         utterance.rate = customRate !== undefined ? customRate : 0.9; // Slightly slower default for learning
 
-        utterance.onerror = (e) => console.error("TTS Error:", e);
+        utterance.onerror = (e) => {
+            console.error("TTS Error:", e);
+            if (onEnd) onEnd();
+        };
 
         // GC protection
         activeUtterances.push(utterance);
@@ -90,22 +94,23 @@ const speakWithLang = (text: string, lang: string, langPrefix: string, customRat
             if (index > -1) {
                 activeUtterances.splice(index, 1);
             }
+            if (onEnd) onEnd();
         };
 
         window.speechSynthesis.speak(utterance);
     }, 100);
 };
 
-export const speakFrench = (text: string, rate?: number) => {
-    speakWithLang(text, 'fr-FR', 'fr', rate);
+export const speakFrench = (text: string, rate?: number, onEnd?: () => void) => {
+    speakWithLang(text, 'fr-FR', 'fr', rate, undefined, onEnd);
 };
 
-export const speakFrenchMale = (text: string, rate?: number) => {
-    speakWithLang(text, 'fr-FR', 'fr', rate, 'male');
+export const speakFrenchMale = (text: string, rate?: number, onEnd?: () => void) => {
+    speakWithLang(text, 'fr-FR', 'fr', rate, 'male', onEnd);
 };
 
-export const speakFrenchFemale = (text: string, rate?: number) => {
-    speakWithLang(text, 'fr-FR', 'fr', rate, 'female');
+export const speakFrenchFemale = (text: string, rate?: number, onEnd?: () => void) => {
+    speakWithLang(text, 'fr-FR', 'fr', rate, 'female', onEnd);
 };
 
 export const speakEnglish = (text: string) => {

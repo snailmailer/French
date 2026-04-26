@@ -149,6 +149,26 @@ const SpeakingPage = () => {
         if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
             mediaRecorderRef.current.stop();
         }
+
+        if (selectedExamTopic === 'tef_a' && activeQuestionIndex >= 0) {
+            const topic = examTopics.find(t => t.id === 'tef_a');
+            const situation = topic?.situations?.find(s => s.title === selectedScenario);
+            if (situation && situation.qaList[activeQuestionIndex]) {
+                const answer = situation.qaList[activeQuestionIndex].aFr;
+                setIsCharacterSpeaking(true);
+                const onEnd = () => {
+                    setIsCharacterSpeaking(false);
+                    if (activeQuestionIndex < situation.qaList.length - 1) {
+                        setActiveQuestionIndex(prev => prev + 1);
+                    }
+                };
+                if (selectedVoiceCharacter === 'marie') {
+                    speakFrenchFemale(answer, undefined, onEnd);
+                } else {
+                    speakFrenchMale(answer, undefined, onEnd);
+                }
+            }
+        }
     };
 
     const formatTime = (seconds: number) => {
@@ -201,6 +221,19 @@ const SpeakingPage = () => {
     const startExamTimer = (topic: typeof examTopics[0], scenario: string) => {
         setSelectedExamTopic(topic.id);
         setSelectedScenario(scenario);
+        
+        if (topic.id === 'tef_a') {
+            setActiveQuestionIndex(-1);
+            setIsCharacterSpeaking(true);
+            const instructions = "L’expression Orale Section A. Obtenir des informations. Vous avez 5 minutes pour vous préparer, parler, et poser 10 questions. Suggestion: Préparation: 1 minute, Parole: 4 minutes.";
+            const onEnd = () => setIsCharacterSpeaking(false);
+            if (selectedVoiceCharacter === 'marie') {
+                speakFrenchFemale(instructions, undefined, onEnd);
+            } else {
+                speakFrenchMale(instructions, undefined, onEnd);
+            }
+        }
+
         if (topic.prepTime > 0) {
             setExamPhase('prep');
             setExamTimer(topic.prepTime);
@@ -247,8 +280,11 @@ const SpeakingPage = () => {
         setExamPhase('idle');
         setExamTimer(0);
         setSelectedScenario(null);
+        setActiveQuestionIndex(-1);
+        setIsCharacterSpeaking(false);
         if (isRecording) stopRecording();
         setAudioUrl(null);
+        window.speechSynthesis.cancel();
     };
 
     // Common styles
@@ -793,45 +829,127 @@ const SpeakingPage = () => {
                                                         </button>
                                                     </div>
                                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                                        {situation.qaList.map((qa, qIdx) => (
-                                                            <div key={qIdx} style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '1.25rem' }}>
-                                                                
-                                                                {/* Question (User) */}
-                                                                <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', marginBottom: '1rem' }}>
-                                                                    <div>
-                                                                        <p style={{ margin: '0 0 0.25rem', color: 'var(--text-primary)', fontWeight: 600, fontSize: '1.05rem' }}>
-                                                                            <span style={{ color: 'var(--accent-color)' }}>Q:</span> {qa.qFr}
+                                                        {topic.id === 'tef_a' ? (
+                                                            <>
+                                                                {activeQuestionIndex === -1 && (
+                                                                    <div style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '1.5rem', textAlign: 'center' }}>
+                                                                        <h5 style={{ color: 'var(--text-primary)', marginBottom: '1rem', fontSize: '1.2rem' }}>
+                                                                            L’expression Orale Section A
+                                                                        </h5>
+                                                                        <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem', lineHeight: '1.6' }}>
+                                                                            Obtenir des informations. Vous avez 5 minutes pour vous préparer, parler, et poser 10 questions.<br/>
+                                                                            Suggestion: Préparation: 1:00, Parole: 4:00
                                                                         </p>
-                                                                        {showEnglish && (
-                                                                            <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85em', fontStyle: 'italic' }}>
-                                                                                {qa.qEn}
-                                                                            </p>
-                                                                        )}
+                                                                        <button 
+                                                                            onClick={() => {
+                                                                                window.speechSynthesis.cancel();
+                                                                                setIsCharacterSpeaking(false);
+                                                                                setActiveQuestionIndex(0);
+                                                                            }} 
+                                                                            className="btn-primary" 
+                                                                            style={{ fontSize: '1rem', padding: '0.6rem 1.5rem' }}
+                                                                        >
+                                                                            J'ai compris, poser la première question
+                                                                        </button>
                                                                     </div>
-                                                                    <button onClick={() => speakFrenchMale(qa.qFr)} style={{ background: 'rgba(54, 134, 201, 0.1)', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--accent-cyan)', flexShrink: 0 }} title="Écouter la question">
-                                                                        <Volume2 size={18} />
-                                                                    </button>
-                                                                </div>
+                                                                )}
+                                                                {activeQuestionIndex >= 0 && situation.qaList[activeQuestionIndex] && (
+                                                                    <div style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '1.25rem' }}>
+                                                                        <h5 style={{ margin: '0 0 1rem 0', color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase' }}>
+                                                                            Question {activeQuestionIndex + 1} sur {situation.qaList.length}
+                                                                        </h5>
+                                                                        
+                                                                        {/* Question (User) */}
+                                                                        <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', marginBottom: '1rem' }}>
+                                                                            <div>
+                                                                                <p style={{ margin: '0 0 0.25rem', color: 'var(--text-primary)', fontWeight: 600, fontSize: '1.05rem' }}>
+                                                                                    <span style={{ color: 'var(--accent-color)' }}>Q:</span> {situation.qaList[activeQuestionIndex].qFr}
+                                                                                </p>
+                                                                                {showEnglish && (
+                                                                                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85em', fontStyle: 'italic' }}>
+                                                                                        {situation.qaList[activeQuestionIndex].qEn}
+                                                                                    </p>
+                                                                                )}
+                                                                            </div>
+                                                                        </div>
 
-                                                                {/* Answer (Character) */}
-                                                                <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', paddingLeft: '1rem', borderLeft: `2px solid ${topic.id === 'tef_a' ? (selectedVoiceCharacter === 'marie' ? '#ff4081' : '#009688') : 'rgba(76, 175, 80, 0.3)'}` }}>
-                                                                    <div>
-                                                                        <p style={{ margin: '0 0 0.25rem', color: 'var(--text-primary)', fontSize: '1rem' }}>
-                                                                            <span style={{ color: topic.id === 'tef_a' ? (selectedVoiceCharacter === 'marie' ? '#ff4081' : '#009688') : 'var(--success-color)', fontWeight: 600 }}>R:</span> {qa.aFr}
-                                                                        </p>
-                                                                        {showEnglish && (
-                                                                            <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85em', fontStyle: 'italic' }}>
-                                                                                {qa.aEn}
-                                                                            </p>
-                                                                        )}
+                                                                        {/* Answer (Character) */}
+                                                                        <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', paddingLeft: '1rem', borderLeft: `2px solid ${selectedVoiceCharacter === 'marie' ? '#ff4081' : '#009688'}` }}>
+                                                                            <div>
+                                                                                <p style={{ margin: '0 0 0.25rem', color: 'var(--text-primary)', fontSize: '1rem' }}>
+                                                                                    <span style={{ color: selectedVoiceCharacter === 'marie' ? '#ff4081' : '#009688', fontWeight: 600 }}>R:</span> {situation.qaList[activeQuestionIndex].aFr}
+                                                                                </p>
+                                                                                {showEnglish && (
+                                                                                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85em', fontStyle: 'italic' }}>
+                                                                                        {situation.qaList[activeQuestionIndex].aEn}
+                                                                                    </p>
+                                                                                )}
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'flex-end' }}>
+                                                                            {activeQuestionIndex < situation.qaList.length - 1 ? (
+                                                                                <button 
+                                                                                    onClick={() => {
+                                                                                        window.speechSynthesis.cancel();
+                                                                                        setIsCharacterSpeaking(false);
+                                                                                        setActiveQuestionIndex(prev => prev + 1);
+                                                                                    }}
+                                                                                    style={{ background: 'transparent', border: '1px solid var(--accent-color)', color: 'var(--accent-color)', borderRadius: '20px', padding: '0.4rem 1rem', cursor: 'pointer' }}
+                                                                                >
+                                                                                    Question Suivante ➔
+                                                                                </button>
+                                                                            ) : (
+                                                                                <button 
+                                                                                    onClick={resetExam}
+                                                                                    style={{ background: 'var(--success-color)', border: 'none', color: 'white', borderRadius: '20px', padding: '0.4rem 1rem', cursor: 'pointer' }}
+                                                                                >
+                                                                                    Terminer
+                                                                                </button>
+                                                                            )}
+                                                                        </div>
                                                                     </div>
-                                                                    <button onClick={() => topic.id === 'tef_a' ? (selectedVoiceCharacter === 'marie' ? speakFrenchFemale(qa.aFr) : speakFrenchMale(qa.aFr)) : speakFrenchFemale(qa.aFr)} style={{ background: topic.id === 'tef_a' ? (selectedVoiceCharacter === 'marie' ? 'rgba(255, 64, 129, 0.1)' : 'rgba(0, 150, 136, 0.1)') : 'rgba(76, 175, 80, 0.1)', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: topic.id === 'tef_a' ? (selectedVoiceCharacter === 'marie' ? '#ff4081' : '#009688') : 'var(--success-color)', flexShrink: 0 }} title="Écouter la réponse">
-                                                                        <Volume2 size={18} />
-                                                                    </button>
-                                                                </div>
+                                                                )}
+                                                            </>
+                                                        ) : (
+                                                            situation.qaList.map((qa, qIdx) => (
+                                                                <div key={qIdx} style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '1.25rem' }}>
+                                                                    {/* Question (User) */}
+                                                                    <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', marginBottom: '1rem' }}>
+                                                                        <div>
+                                                                            <p style={{ margin: '0 0 0.25rem', color: 'var(--text-primary)', fontWeight: 600, fontSize: '1.05rem' }}>
+                                                                                <span style={{ color: 'var(--accent-color)' }}>Q:</span> {qa.qFr}
+                                                                            </p>
+                                                                            {showEnglish && (
+                                                                                <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85em', fontStyle: 'italic' }}>
+                                                                                    {qa.qEn}
+                                                                                </p>
+                                                                            )}
+                                                                        </div>
+                                                                        <button onClick={() => speakFrenchMale(qa.qFr)} style={{ background: 'rgba(54, 134, 201, 0.1)', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--accent-cyan)', flexShrink: 0 }} title="Écouter la question">
+                                                                            <Volume2 size={18} />
+                                                                        </button>
+                                                                    </div>
 
-                                                            </div>
-                                                        ))}
+                                                                    {/* Answer (Character) */}
+                                                                    <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', paddingLeft: '1rem', borderLeft: '2px solid rgba(76, 175, 80, 0.3)' }}>
+                                                                        <div>
+                                                                            <p style={{ margin: '0 0 0.25rem', color: 'var(--text-primary)', fontSize: '1rem' }}>
+                                                                                <span style={{ color: 'var(--success-color)', fontWeight: 600 }}>R:</span> {qa.aFr}
+                                                                            </p>
+                                                                            {showEnglish && (
+                                                                                <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.85em', fontStyle: 'italic' }}>
+                                                                                    {qa.aEn}
+                                                                                </p>
+                                                                            )}
+                                                                        </div>
+                                                                        <button onClick={() => speakFrenchFemale(qa.aFr)} style={{ background: 'rgba(76, 175, 80, 0.1)', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--success-color)', flexShrink: 0 }} title="Écouter la réponse">
+                                                                            <Volume2 size={18} />
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            ))
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
