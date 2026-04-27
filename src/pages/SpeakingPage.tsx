@@ -10,6 +10,23 @@ interface IWindow extends Window {
     SpeechRecognition: any;
 }
 
+const getSupportedMimeType = () => {
+    if (typeof MediaRecorder === 'undefined') return '';
+    const types = [
+        'audio/webm;codecs=opus',
+        'audio/webm',
+        'audio/ogg;codecs=opus',
+        'audio/mp4',
+        'audio/aac'
+    ];
+    for (const type of types) {
+        if (MediaRecorder.isTypeSupported(type)) {
+            return type;
+        }
+    }
+    return '';
+};
+
 const SpeakingPage = () => {
     // URL-persisted Navigation State
     const [searchParams, setSearchParams] = useSearchParams();
@@ -82,11 +99,56 @@ const SpeakingPage = () => {
         };
     }, []);
 
+    const startWithStream = (stream: MediaStream) => {
+        const mimeType = getSupportedMimeType();
+        const options = mimeType ? { mimeType } : {};
+        
+        try {
+            const recorder = new MediaRecorder(stream, options);
+            audioChunksRef.current = [];
+            mediaRecorderRef.current = recorder;
+
+            recorder.ondataavailable = (event) => {
+                if (event.data.size > 0) {
+                    audioChunksRef.current.push(event.data);
+                }
+            };
+
+            recorder.onstop = () => {
+                const finalMimeType = recorder.mimeType || mimeType || 'audio/webm';
+                const audioBlob = new Blob(audioChunksRef.current, { type: finalMimeType });
+                const url = URL.createObjectURL(audioBlob);
+                setAudioUrl(url);
+                stream.getTracks().forEach(track => track.stop());
+            };
+
+            // Request chunks every second to keep the stream hot on mobile
+            recorder.start(1000); 
+        } catch (err) {
+            console.error("Failed to start MediaRecorder:", err);
+            // Fallback
+            const recorder = new MediaRecorder(stream);
+            audioChunksRef.current = [];
+            mediaRecorderRef.current = recorder;
+            recorder.ondataavailable = (event) => {
+                if (event.data.size > 0) audioChunksRef.current.push(event.data);
+            };
+            recorder.onstop = () => {
+                const audioBlob = new Blob(audioChunksRef.current, { type: recorder.mimeType || 'audio/webm' });
+                const url = URL.createObjectURL(audioBlob);
+                setAudioUrl(url);
+                stream.getTracks().forEach(track => track.stop());
+            };
+            recorder.start(1000);
+        }
+    };
+
     const handleStartClick = () => {
-        // Pre-request microphone immediately on user click to prevent iOS/Safari blocking later
+        // Pre-request microphone immediately on user click and START RECORDER to prevent stream from going cold
         navigator.mediaDevices.getUserMedia({ audio: true })
             .then(stream => {
                 micStreamRef.current = stream;
+                startWithStream(stream);
             })
             .catch(err => console.error("Mic access denied or ignored:", err));
 
@@ -108,34 +170,19 @@ const SpeakingPage = () => {
             try { recognitionRef.current.start(); } catch { /* already started */ }
         }
 
-        const startWithStream = (stream: MediaStream) => {
-            const recorder = new MediaRecorder(stream);
+        if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
+            // Recorder was pre-started. Just clear the chunks accumulated during prep time!
             audioChunksRef.current = [];
-            mediaRecorderRef.current = recorder;
-
-            recorder.ondataavailable = (event) => {
-                if (event.data.size > 0) {
-                    audioChunksRef.current.push(event.data);
-                }
-            };
-
-            recorder.onstop = () => {
-                const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
-                const url = URL.createObjectURL(audioBlob);
-                setAudioUrl(url);
-                stream.getTracks().forEach(track => track.stop());
-            };
-
-            recorder.start();
-        };
-
-        if (micStreamRef.current) {
+        } else if (micStreamRef.current && micStreamRef.current.active) {
             startWithStream(micStreamRef.current);
-            micStreamRef.current = null; // consume it
+            micStreamRef.current = null;
         } else {
             navigator.mediaDevices.getUserMedia({ audio: true })
                 .then(startWithStream)
-                .catch(() => { /* Permission denied */ });
+                .catch((err) => { 
+                    console.error("Mic permission denied:", err);
+                    setIsRecording(false);
+                });
         }
     };
 
@@ -262,10 +309,11 @@ const SpeakingPage = () => {
             setIsCharacterSpeaking(true);
             setExamPhase('idle'); // Wait for instructions to finish
             
-            // Pre-request microphone immediately on user click to prevent iOS/Safari blocking later
+            // Pre-request microphone immediately on user click and START RECORDER to prevent stream from going cold
             navigator.mediaDevices.getUserMedia({ audio: true })
                 .then(stream => {
                     micStreamRef.current = stream;
+                    startWithStream(stream);
                 })
                 .catch(err => console.error("Mic access denied or ignored:", err));
             
@@ -852,7 +900,11 @@ const SpeakingPage = () => {
                                                         <div style={{ width: '100%', maxWidth: '300px' }}>
                                                             <audio src={audioUrl} controls style={{ width: '100%', height: '40px' }} />
                                                         </div>
-                                                        <a href={audioUrl} download="TEF_Section_A_Recording.webm" style={{ background: 'var(--accent-color)', color: 'white', padding: '0.6rem 1.2rem', borderRadius: '24px', textDecoration: 'none', fontWeight: 600, fontSize: '0.95rem' }}>
+                                                        <a 
+                                                            href={audioUrl} 
+                                                            download={`TEF_Section_A_Recording.${mediaRecorderRef.current?.mimeType?.includes('mp4') ? 'mp4' : 'webm'}`} 
+                                                            style={{ background: 'var(--accent-color)', color: 'white', padding: '0.6rem 1.2rem', borderRadius: '24px', textDecoration: 'none', fontWeight: 600, fontSize: '0.95rem' }}
+                                                        >
                                                             ⬇️ Télécharger l'enregistrement
                                                         </a>
                                                     </div>
