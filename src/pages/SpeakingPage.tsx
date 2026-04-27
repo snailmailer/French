@@ -122,8 +122,10 @@ const SpeakingPage = () => {
                 stream.getTracks().forEach(track => track.stop());
             };
 
-            // Request chunks every second to keep the stream hot on mobile
-            recorder.start(1000); 
+            // Start and immediately pause to keep the mic active without recording the prep time.
+            // This preserves the crucial file header in the first chunk!
+            recorder.start();
+            recorder.pause();
         } catch (err) {
             console.error("Failed to start MediaRecorder:", err);
             // Fallback
@@ -139,7 +141,8 @@ const SpeakingPage = () => {
                 setAudioUrl(url);
                 stream.getTracks().forEach(track => track.stop());
             };
-            recorder.start(1000);
+            recorder.start();
+            recorder.pause();
         }
     };
 
@@ -170,15 +173,24 @@ const SpeakingPage = () => {
             try { recognitionRef.current.start(); } catch { /* already started */ }
         }
 
-        if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
-            // Recorder was pre-started. Just clear the chunks accumulated during prep time!
-            audioChunksRef.current = [];
+        if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'paused') {
+            // Resume the paused recorder to actually start capturing audio!
+            mediaRecorderRef.current.resume();
         } else if (micStreamRef.current && micStreamRef.current.active) {
             startWithStream(micStreamRef.current);
+            // If we are starting it fresh right now, we need to resume it because startWithStream pauses it!
+            if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'paused') {
+                mediaRecorderRef.current.resume();
+            }
             micStreamRef.current = null;
         } else {
             navigator.mediaDevices.getUserMedia({ audio: true })
-                .then(startWithStream)
+                .then(stream => {
+                    startWithStream(stream);
+                    if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'paused') {
+                        mediaRecorderRef.current.resume();
+                    }
+                })
                 .catch((err) => { 
                     console.error("Mic permission denied:", err);
                     setIsRecording(false);
