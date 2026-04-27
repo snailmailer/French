@@ -811,10 +811,13 @@ const SpeakingPage = () => {
                                                     </div>
                                                 )}
                                                 {topic.id === 'tef_a' && audioUrl && (
-                                                    <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                                                    <div style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
                                                         <div style={{ width: '100%', maxWidth: '300px' }}>
                                                             <audio src={audioUrl} controls style={{ width: '100%', height: '40px' }} />
                                                         </div>
+                                                        <a href={audioUrl} download="TEF_Section_A_Recording.webm" style={{ background: 'var(--accent-color)', color: 'white', padding: '0.6rem 1.2rem', borderRadius: '24px', textDecoration: 'none', fontWeight: 600, fontSize: '0.95rem' }}>
+                                                            ⬇️ Télécharger l'enregistrement
+                                                        </a>
                                                     </div>
                                                 )}
                                             </div>
@@ -907,45 +910,48 @@ const SpeakingPage = () => {
                                                                             </div>
                                                                         </div>
 
-                                                                        <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'flex-end' }}>
-                                                                            {activeQuestionIndex < situation.qaList.length - 1 ? (
-                                                                                <button 
-                                                                                    onClick={() => {
-                                                                                        const answer = situation.qaList[activeQuestionIndex].aFr;
-                                                                                        setIsCharacterSpeaking(true);
-                                                                                        const onEnd = () => {
-                                                                                            setIsCharacterSpeaking(false);
-                                                                                            if (activeQuestionIndex < situation.qaList.length - 1) {
-                                                                                                setActiveQuestionIndex(prev => prev + 1);
-                                                                                            }
-                                                                                        };
-                                                                                        if (selectedVoiceCharacter === 'marie') {
-                                                                                            speakFrenchFemale(answer, undefined, onEnd);
+                                                                        <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}>
+                                                                            <button 
+                                                                                onClick={() => {
+                                                                                    const answer = situation.qaList[activeQuestionIndex].aFr;
+                                                                                    setIsCharacterSpeaking(true);
+                                                                                    const onEnd = () => {
+                                                                                        setIsCharacterSpeaking(false);
+                                                                                        if (activeQuestionIndex < situation.qaList.length - 1) {
+                                                                                            setActiveQuestionIndex(prev => prev + 1);
                                                                                         } else {
-                                                                                            speakFrenchMale(answer, undefined, onEnd);
+                                                                                            if (examTimerRef.current) clearInterval(examTimerRef.current);
+                                                                                            setExamPhase('done');
+                                                                                            stopRecording();
                                                                                         }
-                                                                                    }}
-                                                                                    disabled={isCharacterSpeaking || examPhase === 'done'}
-                                                                                    style={{ 
-                                                                                        background: 'var(--accent-color)', 
-                                                                                        color: 'white', 
-                                                                                        border: 'none', 
-                                                                                        borderRadius: '24px', 
-                                                                                        padding: '0.8rem 1.5rem', 
-                                                                                        cursor: (isCharacterSpeaking || examPhase === 'done') ? 'not-allowed' : 'pointer',
-                                                                                        fontWeight: 'bold',
-                                                                                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                                                                                        opacity: (isCharacterSpeaking || examPhase === 'done') ? 0.6 : 1,
-                                                                                    }}
-                                                                                >
-                                                                                    {isCharacterSpeaking ? 'Le personnage parle...' : 'Faire répondre le personnage'}
-                                                                                </button>
-                                                                            ) : (
+                                                                                    };
+                                                                                    if (selectedVoiceCharacter === 'marie') {
+                                                                                        speakFrenchFemale(answer, undefined, onEnd);
+                                                                                    } else {
+                                                                                        speakFrenchMale(answer, undefined, onEnd);
+                                                                                    }
+                                                                                }}
+                                                                                disabled={isCharacterSpeaking || examPhase === 'done'}
+                                                                                style={{ 
+                                                                                    background: 'var(--accent-color)', 
+                                                                                    color: 'white', 
+                                                                                    border: 'none', 
+                                                                                    borderRadius: '24px', 
+                                                                                    padding: '0.8rem 1.5rem', 
+                                                                                    cursor: (isCharacterSpeaking || examPhase === 'done') ? 'not-allowed' : 'pointer',
+                                                                                    fontWeight: 'bold',
+                                                                                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                                                                                    opacity: (isCharacterSpeaking || examPhase === 'done') ? 0.6 : 1,
+                                                                                }}
+                                                                            >
+                                                                                {isCharacterSpeaking ? 'Le personnage parle...' : (activeQuestionIndex < situation.qaList.length - 1 ? 'Faire répondre le personnage' : 'Faire répondre et terminer')}
+                                                                            </button>
+                                                                            {examPhase === 'done' && (
                                                                                 <button 
                                                                                     onClick={resetExam}
                                                                                     style={{ background: 'var(--success-color)', border: 'none', color: 'white', borderRadius: '20px', padding: '0.4rem 1rem', cursor: 'pointer' }}
                                                                                 >
-                                                                                    Terminer
+                                                                                    Recommencer l'exercice
                                                                                 </button>
                                                                             )}
                                                                         </div>
