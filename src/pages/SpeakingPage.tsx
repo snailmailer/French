@@ -59,6 +59,7 @@ const SpeakingPage = () => {
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
     const audioChunksRef = useRef<Blob[]>([]);
     const micStreamRef = useRef<MediaStream | null>(null);
+    const liveAudioRef = useRef<HTMLAudioElement | null>(null); // Hidden audio to keep mic hot
 
     // UI state
     const [showEnglish, setShowEnglish] = useState(false);
@@ -99,59 +100,18 @@ const SpeakingPage = () => {
         };
     }, []);
 
-    const startWithStream = (stream: MediaStream) => {
-        const mimeType = getSupportedMimeType();
-        const options = mimeType ? { mimeType } : {};
-        
-        try {
-            const recorder = new MediaRecorder(stream, options);
-            audioChunksRef.current = [];
-            mediaRecorderRef.current = recorder;
-
-            recorder.ondataavailable = (event) => {
-                if (event.data.size > 0) {
-                    audioChunksRef.current.push(event.data);
-                }
-            };
-
-            recorder.onstop = () => {
-                const finalMimeType = recorder.mimeType || mimeType || 'audio/webm';
-                const audioBlob = new Blob(audioChunksRef.current, { type: finalMimeType });
-                const url = URL.createObjectURL(audioBlob);
-                setAudioUrl(url);
-                stream.getTracks().forEach(track => track.stop());
-            };
-
-            // Start and immediately pause to keep the mic active without recording the prep time.
-            // This preserves the crucial file header in the first chunk!
-            recorder.start();
-            recorder.pause();
-        } catch (err) {
-            console.error("Failed to start MediaRecorder:", err);
-            // Fallback
-            const recorder = new MediaRecorder(stream);
-            audioChunksRef.current = [];
-            mediaRecorderRef.current = recorder;
-            recorder.ondataavailable = (event) => {
-                if (event.data.size > 0) audioChunksRef.current.push(event.data);
-            };
-            recorder.onstop = () => {
-                const audioBlob = new Blob(audioChunksRef.current, { type: recorder.mimeType || 'audio/webm' });
-                const url = URL.createObjectURL(audioBlob);
-                setAudioUrl(url);
-                stream.getTracks().forEach(track => track.stop());
-            };
-            recorder.start();
-            recorder.pause();
-        }
-    };
+        // Removed startWithStream from top level to avoid immediate recording.
+        // We will just keep the mic alive using liveAudioRef.
 
     const handleStartClick = () => {
-        // Pre-request microphone immediately on user click and START RECORDER to prevent stream from going cold
+        // Pre-request microphone immediately and attach to a hidden audio element
+        // to keep the hardware stream hot and prevent the OS from suspending it!
         navigator.mediaDevices.getUserMedia({ audio: true })
             .then(stream => {
                 micStreamRef.current = stream;
-                startWithStream(stream);
+                if (liveAudioRef.current) {
+                    liveAudioRef.current.srcObject = stream;
+                }
             })
             .catch(err => console.error("Mic access denied or ignored:", err));
 
@@ -173,24 +133,55 @@ const SpeakingPage = () => {
             try { recognitionRef.current.start(); } catch { /* already started */ }
         }
 
-        if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'paused') {
-            // Resume the paused recorder to actually start capturing audio!
-            mediaRecorderRef.current.resume();
-        } else if (micStreamRef.current && micStreamRef.current.active) {
-            startWithStream(micStreamRef.current);
-            // If we are starting it fresh right now, we need to resume it because startWithStream pauses it!
-            if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'paused') {
-                mediaRecorderRef.current.resume();
+        const startWithStream = (stream: MediaStream) => {
+            const mimeType = getSupportedMimeType();
+            const options = mimeType ? { mimeType } : {};
+            
+            try {
+                const recorder = new MediaRecorder(stream, options);
+                audioChunksRef.current = [];
+                mediaRecorderRef.current = recorder;
+
+                recorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) audioChunksRef.current.push(event.data);
+                };
+
+                recorder.onstop = () => {
+                    const finalMimeType = recorder.mimeType || mimeType || 'audio/webm';
+                    const audioBlob = new Blob(audioChunksRef.current, { type: finalMimeType });
+                    const url = URL.createObjectURL(audioBlob);
+                    setAudioUrl(url);
+                    stream.getTracks().forEach(track => track.stop());
+                };
+
+                recorder.start();
+            } catch (err) {
+                console.error("Failed to start MediaRecorder:", err);
+                // Fallback
+                const recorder = new MediaRecorder(stream);
+                audioChunksRef.current = [];
+                mediaRecorderRef.current = recorder;
+                recorder.ondataavailable = (event) => {
+                    if (event.data.size > 0) audioChunksRef.current.push(event.data);
+                };
+                recorder.onstop = () => {
+                    const audioBlob = new Blob(audioChunksRef.current, { type: recorder.mimeType || 'audio/webm' });
+                    const url = URL.createObjectURL(audioBlob);
+                    setAudioUrl(url);
+                    stream.getTracks().forEach(track => track.stop());
+                };
+                recorder.start();
             }
+        };
+
+        if (micStreamRef.current && micStreamRef.current.active) {
+            // Stream is hot from the hidden audio element! Start fresh MediaRecorder.
+            startWithStream(micStreamRef.current);
             micStreamRef.current = null;
         } else {
+            // Fallback
             navigator.mediaDevices.getUserMedia({ audio: true })
-                .then(stream => {
-                    startWithStream(stream);
-                    if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'paused') {
-                        mediaRecorderRef.current.resume();
-                    }
-                })
+                .then(stream => startWithStream(stream))
                 .catch((err) => { 
                     console.error("Mic permission denied:", err);
                     setIsRecording(false);
@@ -321,11 +312,13 @@ const SpeakingPage = () => {
             setIsCharacterSpeaking(true);
             setExamPhase('idle'); // Wait for instructions to finish
             
-            // Pre-request microphone immediately on user click and START RECORDER to prevent stream from going cold
+            // Pre-request microphone immediately and attach to hidden audio to keep stream hot
             navigator.mediaDevices.getUserMedia({ audio: true })
                 .then(stream => {
                     micStreamRef.current = stream;
-                    startWithStream(stream);
+                    if (liveAudioRef.current) {
+                        liveAudioRef.current.srcObject = stream;
+                    }
                 })
                 .catch(err => console.error("Mic access denied or ignored:", err));
             
@@ -1497,6 +1490,9 @@ const SpeakingPage = () => {
                 )}
                 {renderPrivacyNote()}
             </div>
+            
+            {/* Hidden audio element to keep the microphone stream active during prep countdowns on mobile */}
+            <audio ref={liveAudioRef} autoPlay muted style={{ display: 'none' }} />
 
             <style>{`
                 @keyframes pulse {
