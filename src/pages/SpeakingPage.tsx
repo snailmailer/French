@@ -178,6 +178,22 @@ const SpeakingPage = () => {
         return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     };
 
+    const renderPrivacyNote = () => (
+        <div style={{ 
+            fontSize: '0.75rem', 
+            color: 'var(--text-secondary)', 
+            marginTop: '1rem', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            gap: '0.4rem',
+            opacity: 0.8
+        }}>
+            <span style={{ fontSize: '1rem' }}>🛡️</span>
+            Confidentialité : Votre audio est traité localement dans votre navigateur et n'est jamais téléchargé sur un serveur.
+        </div>
+    );
+
     // --- Navigation ---
     const handleCategorySelect = (category: string) => {
         setSearchParams({ view: 'questions', category });
@@ -841,6 +857,7 @@ const SpeakingPage = () => {
                                                         </a>
                                                     </div>
                                                 )}
+                                                {renderPrivacyNote()}
                                             </div>
 
                                             {/* QA List & Character View */}
@@ -1414,6 +1431,7 @@ const SpeakingPage = () => {
                         </div>
                     </div>
                 )}
+                {renderPrivacyNote()}
             </div>
 
             <style>{`

@@ -5,6 +5,7 @@ on:
     branches: ['main']
   workflow_dispatch:
 
+# Minimal permissions required for GitHub Pages deployment
 permissions:
   contents: read
   pages: write

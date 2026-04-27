@@ -7,6 +7,7 @@ import { b2Data } from '../data/b2';
 import type { LevelData } from '../data/types';
 
 import { speakFrench } from '../utils/tts';
+import DOMPurify from 'dompurify';
 
 const dataMap: { [key: string]: LevelData } = {
     'A1': a1Data,
@@ -74,10 +75,10 @@ const LevelPage = () => {
                             if (block.type === 'markdown') {
                                 return (
                                     <div key={idx} style={{ display: 'grid', gridTemplateColumns: block.translation ? '1fr 1fr' : '1fr', gap: '2rem', marginBottom: '2rem', alignItems: 'start' }}>
-                                        <div dangerouslySetInnerHTML={{ __html: block.content }} className="topic-content" />
+                                        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(block.content) }} className="topic-content" />
                                         {block.translation && (
                                             <div style={{ color: 'var(--text-secondary)', fontStyle: 'italic', borderLeft: '2px solid var(--border-color)', paddingLeft: '1rem' }}>
-                                                <div dangerouslySetInnerHTML={{ __html: block.translation }} />
+                                                <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(block.translation) }} />
                                             </div>
                                         )}
                                     </div>
