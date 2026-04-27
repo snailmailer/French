@@ -41,6 +41,7 @@ const SpeakingPage = () => {
     const timerIntervalRef = useRef<any>(null);
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
     const audioChunksRef = useRef<Blob[]>([]);
+    const micStreamRef = useRef<MediaStream | null>(null);
 
     // UI state
     const [showEnglish, setShowEnglish] = useState(false);
@@ -101,28 +102,35 @@ const SpeakingPage = () => {
             try { recognitionRef.current.start(); } catch { /* already started */ }
         }
 
-        navigator.mediaDevices.getUserMedia({ audio: true })
-            .then(stream => {
-                const recorder = new MediaRecorder(stream);
-                audioChunksRef.current = [];
-                mediaRecorderRef.current = recorder;
+        const startWithStream = (stream: MediaStream) => {
+            const recorder = new MediaRecorder(stream);
+            audioChunksRef.current = [];
+            mediaRecorderRef.current = recorder;
 
-                recorder.ondataavailable = (event) => {
-                    if (event.data.size > 0) {
-                        audioChunksRef.current.push(event.data);
-                    }
-                };
+            recorder.ondataavailable = (event) => {
+                if (event.data.size > 0) {
+                    audioChunksRef.current.push(event.data);
+                }
+            };
 
-                recorder.onstop = () => {
-                    const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
-                    const url = URL.createObjectURL(audioBlob);
-                    setAudioUrl(url);
-                    stream.getTracks().forEach(track => track.stop());
-                };
+            recorder.onstop = () => {
+                const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+                const url = URL.createObjectURL(audioBlob);
+                setAudioUrl(url);
+                stream.getTracks().forEach(track => track.stop());
+            };
 
-                recorder.start();
-            })
-            .catch(() => { /* Permission denied */ });
+            recorder.start();
+        };
+
+        if (micStreamRef.current) {
+            startWithStream(micStreamRef.current);
+            micStreamRef.current = null; // consume it
+        } else {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(startWithStream)
+                .catch(() => { /* Permission denied */ });
+        }
     };
 
     useEffect(() => {
@@ -231,6 +239,13 @@ const SpeakingPage = () => {
             setActiveQuestionIndex(-1);
             setIsCharacterSpeaking(true);
             setExamPhase('idle'); // Wait for instructions to finish
+            
+            // Pre-request microphone immediately on user click to prevent iOS/Safari blocking later
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    micStreamRef.current = stream;
+                })
+                .catch(err => console.error("Mic access denied or ignored:", err));
             
             const instructions = "L’expression Orale Section A. Obtenir des informations. Vous avez 5 minutes pour vous préparer, parler, et poser 10 questions. Suggestion: Préparation: 1 minute, Parole: 4 minutes.";
             const onEnd = () => {
