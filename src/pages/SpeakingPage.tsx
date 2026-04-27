@@ -894,6 +894,13 @@ const SpeakingPage = () => {
                                                                                     </p>
                                                                                 )}
                                                                             </div>
+                                                                            <button 
+                                                                                onClick={() => speakFrenchFemale(situation.qaList[activeQuestionIndex].qFr)}
+                                                                                style={{ background: 'transparent', border: 'none', color: 'var(--accent-color)', cursor: 'pointer', padding: '0.5rem', display: 'flex', alignItems: 'center' }}
+                                                                                title="Écouter la question"
+                                                                            >
+                                                                                <Volume2 size={20} />
+                                                                            </button>
                                                                         </div>
 
                                                                         {/* Answer (Character) */}
@@ -908,6 +915,19 @@ const SpeakingPage = () => {
                                                                                     </p>
                                                                                 )}
                                                                             </div>
+                                                                            <button 
+                                                                                onClick={() => {
+                                                                                    if (selectedVoiceCharacter === 'marie') {
+                                                                                        speakFrenchFemale(situation.qaList[activeQuestionIndex].aFr);
+                                                                                    } else {
+                                                                                        speakFrenchMale(situation.qaList[activeQuestionIndex].aFr);
+                                                                                    }
+                                                                                }}
+                                                                                style={{ background: 'transparent', border: 'none', color: selectedVoiceCharacter === 'marie' ? '#ff4081' : '#009688', cursor: 'pointer', padding: '0.5rem', display: 'flex', alignItems: 'center' }}
+                                                                                title="Écouter la réponse"
+                                                                            >
+                                                                                <Volume2 size={20} />
+                                                                            </button>
                                                                         </div>
 
                                                                         <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}>
