@@ -82,8 +82,14 @@ const SpeakingPage = () => {
         };
     }, []);
 
-    // --- Recording functions ---
     const handleStartClick = () => {
+        // Pre-request microphone immediately on user click to prevent iOS/Safari blocking later
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(stream => {
+                micStreamRef.current = stream;
+            })
+            .catch(err => console.error("Mic access denied or ignored:", err));
+
         setIsCountingDown(true);
         setCountdown(10);
         setShowResult(false);
@@ -236,7 +242,7 @@ const SpeakingPage = () => {
         setSelectedScenario(scenario);
         
         if (topic.id === 'tef_a') {
-            setActiveQuestionIndex(-1);
+            setActiveQuestionIndex(0); // Show Q1 immediately!
             setIsCharacterSpeaking(true);
             setExamPhase('idle'); // Wait for instructions to finish
             
@@ -764,7 +770,7 @@ const SpeakingPage = () => {
                                         </div>
                                     </div>
 
-                                    {isActive && examPhase !== 'idle' && (
+                                    {isActive && (topic.id === 'tef_a' || examPhase !== 'idle') && (
                                         <div style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                                             
                                             {/* Instructions */}
@@ -869,8 +875,8 @@ const SpeakingPage = () => {
                                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                                         {topic.id === 'tef_a' ? (
                                                             <>
-                                                                {activeQuestionIndex === -1 && (
-                                                                    <div style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '1.5rem', textAlign: 'center' }}>
+                                                                {examPhase === 'idle' && (
+                                                                    <div style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '1.5rem', textAlign: 'center', marginBottom: '1rem' }}>
                                                                         <h5 style={{ color: 'var(--text-primary)', marginBottom: '1rem', fontSize: '1.2rem' }}>
                                                                             L’expression Orale Section A
                                                                         </h5>
@@ -887,12 +893,12 @@ const SpeakingPage = () => {
                                                                             className="btn-primary" 
                                                                             style={{ fontSize: '1rem', padding: '0.6rem 1.5rem' }}
                                                                         >
-                                                                            J'ai compris, poser la première question
+                                                                            Passer les instructions et commencer l'examen
                                                                         </button>
                                                                     </div>
                                                                 )}
                                                                 {activeQuestionIndex >= 0 && situation.qaList[activeQuestionIndex] && (
-                                                                    <div style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '1.25rem' }}>
+                                                                    <div style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '1.25rem', opacity: examPhase === 'idle' ? 0.5 : 1, pointerEvents: examPhase === 'idle' ? 'none' : 'auto', transition: 'all 0.3s ease' }}>
                                                                         <h5 style={{ margin: '0 0 1rem 0', color: 'var(--text-secondary)', fontSize: '0.9rem', textTransform: 'uppercase' }}>
                                                                             Question {activeQuestionIndex + 1} sur {situation.qaList.length}
                                                                         </h5>

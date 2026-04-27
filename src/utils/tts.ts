@@ -52,11 +52,31 @@ const speakWithLang = (text: string, lang: string, langPrefix: string, customRat
             const name = v.name.toLowerCase();
             const uri = v.voiceURI.toLowerCase();
             let score = 0;
-            if (name.includes('premium') || uri.includes('premium')) score += 10;
-            if (name.includes('enhanced') || uri.includes('enhanced')) score += 10;
-            if (name.includes('google') || uri.includes('google')) score += 5;
-            if (name.includes('siri') || uri.includes('siri')) score += 5;
+            
+            // Absolutely highest tier known native voices (Premium/Enhanced specific to French)
+            if ((name.includes('thomas') || name.includes('aurélie') || name.includes('amélie') || name.includes('audrey')) && 
+                (name.includes('enhanced') || name.includes('premium'))) {
+                score += 50;
+            }
+            
+            // High tier Microsoft native voices (Windows / Edge)
+            if (name.includes('microsoft') && name.includes('online')) score += 40; // Edge Natural voices
+            if (name.includes('microsoft')) score += 30;
+            
+            // Google high tier (Android / Chrome)
+            if (name.includes('google') && name.includes('français')) score += 40;
+            
+            // Generic high-quality heuristics
+            if (name.includes('premium') || uri.includes('premium')) score += 20;
+            if (name.includes('enhanced') || uri.includes('enhanced')) score += 20;
+            if (name.includes('google') || uri.includes('google')) score += 15;
+            if (name.includes('siri') || uri.includes('siri')) score += 15;
+            
+            // Penalize very low quality or default generic names if better exist
+            if (name === 'fr-fr' || name === 'french') score -= 10;
+            
             if (v.localService) score += 2;
+            
             return score;
         };
         return getScore(b) - getScore(a);
@@ -65,10 +85,10 @@ const speakWithLang = (text: string, lang: string, langPrefix: string, customRat
     let voice = undefined;
     if (gender) {
         if (gender === 'female') {
-            const femaleKeywords = ['female', 'hortense', 'amélie', 'aurélie', 'margot', 'alice', 'sylvie', 'marie'];
+            const femaleKeywords = ['female', 'hortense', 'amélie', 'aurélie', 'margot', 'alice', 'sylvie', 'marie', 'julie', 'denise', 'chloe', 'chloé', 'audrey', 'claire', 'jeanne', 'google français'];
             voice = validVoices.find(v => femaleKeywords.some(k => v.name.toLowerCase().includes(k)));
         } else if (gender === 'male') {
-            const maleKeywords = ['male', 'paul', 'thomas', 'nicolas', 'bernard', 'claude', 'jacques'];
+            const maleKeywords = ['male', 'paul', 'thomas', 'nicolas', 'bernard', 'claude', 'jacques', 'henri', 'pierre', 'louis', 'michel'];
             voice = validVoices.find(v => maleKeywords.some(k => v.name.toLowerCase().includes(k)));
         }
     }
